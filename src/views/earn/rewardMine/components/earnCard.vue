@@ -32,7 +32,7 @@
           </div>
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.totalPool') }}</span>
-            <span v-if="item.kind === 'multi'" class="value">{{ item.poolValue || '--' }}</span>
+            <span v-if="item.kind === 'multi'" class="value">{{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}</span>
             <span v-if="item.kind === 'single'" class="value">
               {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
             </span>
