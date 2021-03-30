@@ -3,7 +3,10 @@
     <div class="list-item-wrapper">
       <div v-for="(item, index) in data" :key="index" class="list-item">
         <div class="name flex justify-start items-center">
-          <img src="../../../../assets/img/susd48.svg" alt="susd">
+          <div class="img-warpper">
+            <img src="../../../../assets/img/susd48.svg" alt="susd">
+            <img src="../../../../assets/img/susd48.svg" alt="susd" class="imgRight">
+          </div>
           <div class="right">
             <p class="coin">
               {{ item.name }}
@@ -54,8 +57,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-const BigNumber = require('bignumber.js');
+import { mapState } from "vuex";
+const BigNumber = require("bignumber.js");
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 export default {
   props: {
@@ -65,14 +68,14 @@ export default {
   },
   methods: {
     openStake(data) {
-      this.$emit('openStake', data);
+      this.$emit("openStake", data);
     },
   },
   components: {
-    Buttons: () => import('@/components/basic/buttons.vue'),
+    Buttons: () => import("@/components/basic/buttons.vue"),
   },
   computed: {
-    ...mapState(['earnPrice', 'ethAddress', 'scashPrice']),
+    ...mapState(["earnPrice", "ethAddress", "scashPrice"]),
   },
 };
 </script>
@@ -91,6 +94,20 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 16px;
+    .img-warpper {
+      margin-right: 16px;
+      width: 72px;
+      height: 48px;
+      position: relative;
+      img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+      .imgRight {
+        left: 24px;
+      }
+    }
     .name {
       margin-right: 24px;
       word-break: break-all;
@@ -148,7 +165,7 @@ export default {
     .btn-item {
       margin-left: 50px;
       .stakeBtn {
-        background: #FF41A1;
+        background: #ff41a1;
         border-radius: 18px;
         padding: 8px 40px;
         font-size: 16px;
