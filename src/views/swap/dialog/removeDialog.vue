@@ -444,9 +444,9 @@ export default {
           line-height: 47px;
           color: #14171c;
           padding: 16px;
-          caret-color: #0058ff;
+          caret-color: #4C8BF5;
           &:focus {
-            border: 1px solid #0058ff;
+            border: 1px solid #4C8BF5;
             border-radius: 4px;
           }
         }
@@ -501,8 +501,8 @@ export default {
         text-align: center;
       }
       :hover {
-        border-color: #0058ff;
-        color: #0058ff;
+        border-color: #4C8BF5;
+        color: #4C8BF5;
       }
     }
     .price-warpper {

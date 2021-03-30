@@ -131,7 +131,7 @@
   line-height: 50px;
   height: 50px;
   padding-top: 3px;
-  background-color: #0058ff;
+  background-color: #4C8BF5;
   color: #ffffff;
   &:hover {
     background-color: #0547ff;
@@ -220,7 +220,7 @@
         font-size: 12px;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: bold;
-        color: #0058ff;
+        color: #4C8BF5;
         line-height: 17px;
         margin: 15px 0 0;
         display: flex;

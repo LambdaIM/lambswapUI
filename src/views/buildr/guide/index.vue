@@ -42,7 +42,7 @@
     button {
       width: 180px;
       height: 48px;
-      background: #0058ff;
+      background: #4C8BF5;
       border-radius: 6px;
       text-align: center;
       font-size: 16px;

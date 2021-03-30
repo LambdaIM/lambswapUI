@@ -245,7 +245,7 @@ export default {
           display: inline-block;
           height: 28px;
           text-align: center;
-          background: #0058ff;
+          background: #4C8BF5;
           border-radius: 14px;
           font-size: 16px;
           font-weight: 500;
@@ -272,7 +272,7 @@ export default {
         .changeBtn {
           width: 148px;
           height: 40px;
-          border: 1px solid #0058ff;
+          border: 1px solid #4C8BF5;
           font-size: 16px;
           font-weight: 500;
           color: #14171c;
@@ -357,7 +357,7 @@ export default {
   border-radius: 20px;
   line-height: 19px;
   font-size: 16px;
-  color: #0058ff;
-  border: 1px solid #0058ff;
+  color: #4C8BF5;
+  border: 1px solid #4C8BF5;
 }
 </style>

@@ -67,7 +67,7 @@
           font-size: 20px;
           font-family: Gilroy-Medium, Gilroy;
           font-weight: 500;
-          color: #0058ff;
+          color: #4C8BF5;
           line-height: 24px;
           margin-left: 10px;
         }

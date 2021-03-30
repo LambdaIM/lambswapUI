@@ -40,7 +40,7 @@ export default {
     },
     background:{
         type: String,
-        default:'#015afe'
+        default:'#4C8BF5'
     },
     borderRadius:{
         type: String,
