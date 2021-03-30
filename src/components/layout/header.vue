@@ -2,7 +2,7 @@
   <header class="header-wrapper header-wrapper-bg">
     <nav class="nav-wrapper container mx-auto flex justify-between items-center">
       <div class="left-wrapper flex items-center">
-        <img src="../../assets/logo.svg" alt="logo">
+        <img width="150" src="../../assets/img/home/1.svg" alt="logo">
         <div class="menu-wrapper">
           <router-link class="menu-item" to="/exchange" active-class="active">
             {{ $t('header.nav.Exchange') }}

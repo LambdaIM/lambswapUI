@@ -85,9 +85,9 @@ export default {
     liquidity: {
       title: '获取scUSD稳定币',
       subTitle: '为交易对提供流动性赚取交易手续费，移除流动性来赎回流动性及所赚取的收益。',
-      btnBuild: 'SuperCash铸造',
+      btnBuild: 'LambSwap铸造',
       btnGetscusd: '获取scUSD额度',
-      btnExchange: 'SuperCash交易',
+      btnExchange: 'LambSwap交易',
       btnBuyscusd: '购买scUSD',
       pool: {
         title: '注入流动性获取 LP',

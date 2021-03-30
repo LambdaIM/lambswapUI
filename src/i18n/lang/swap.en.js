@@ -90,9 +90,9 @@ export default {
     liquidity: {
       title: 'Where to get scUSD?',
       subTitle: 'Earn a transaction fee by providing liquidity to trade pairs, and can be claimed by removing liquidity.',
-      btnBuild: 'SuperCash Builder',
+      btnBuild: 'LambSwap Builder',
       btnGetscusd: 'Get scUSD Credit Line',
-      btnExchange: 'SuperCash Exchange',
+      btnExchange: 'LambSwap Exchange',
       btnBuyscusd: 'Buy scUSD',
       pool: {
         title: 'Input liquidity, get LP',
