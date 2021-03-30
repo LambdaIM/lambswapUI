@@ -3,7 +3,7 @@
     <div class="footer-content container mx-auto flex justify-between items-center">
       <div class="left-wrapper">
         <div class="logo-wrapper">
-          <img src="../../assets/footlogo.svg" alt="logo">
+          <img src="../../assets/foot.png" alt="logo">
         </div>
         <p>© 2021 LambSwap All rights reserved</p>
       </div>
