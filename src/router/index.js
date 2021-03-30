@@ -6,14 +6,14 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    redirect: '/buildr/guide'
+    redirect: '/earn'
     // component: Home,
   },
-  {
-    path: "/playground",
-    name: "playground",
-    component: () => import("@/views/playground/index.vue"),
-  },
+  // {
+  //   path: "/playground",
+  //   name: "playground",
+  //   component: () => import("@/views/playground/index.vue"),
+  // },
   {
     path: "/exchange",
     // name: "exchange",
@@ -59,43 +59,43 @@ const routes = [
     ]
   },
 
-  {
-    path: "/buildr",
-    // name: "buildr",
-    component: () => import("@/views/buildr/index.vue"),
-    children: [
-      {
-        path: "",
-        name: "balance",
-        component: () => import("@/views/buildr/balance/index.vue"),
-      },
-      {
-        path: "balance",
-        name: "balance",
-        component: () => import("@/views/buildr/balance/index.vue"),
-      },
-      {
-        path: "create",
-        name: "create",
-        component: () => import("@/views/buildr/create/index.vue"),
-      },
-      {
-        path: "history",
-        name: "history",
-        component: () => import("@/views/buildr/history/index.vue")
-      },
-      {
-        path: "guide",
-        name: "guide",
-        component: () => import("@/views/buildr/guide/guide.vue")
-      },
-    ]
-  },
-  {
-    path: "/buildrtest",
-    name: "buildrtest",
-    component: () => import("@/views/playground/buildr.vue"),
-  }
+  // {
+  //   path: "/buildr",
+  //   // name: "buildr",
+  //   component: () => import("@/views/buildr/index.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       name: "balance",
+  //       component: () => import("@/views/buildr/balance/index.vue"),
+  //     },
+  //     {
+  //       path: "balance",
+  //       name: "balance",
+  //       component: () => import("@/views/buildr/balance/index.vue"),
+  //     },
+  //     {
+  //       path: "create",
+  //       name: "create",
+  //       component: () => import("@/views/buildr/create/index.vue"),
+  //     },
+  //     {
+  //       path: "history",
+  //       name: "history",
+  //       component: () => import("@/views/buildr/history/index.vue")
+  //     },
+  //     {
+  //       path: "guide",
+  //       name: "guide",
+  //       component: () => import("@/views/buildr/guide/guide.vue")
+  //     },
+  //   ]
+  // },
+  // {
+  //   path: "/buildrtest",
+  //   name: "buildrtest",
+  //   component: () => import("@/views/playground/buildr.vue"),
+  // }
 ];
 
 const router = new VueRouter({

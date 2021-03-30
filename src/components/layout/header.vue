@@ -4,9 +4,6 @@
       <div class="left-wrapper flex items-center">
         <img src="../../assets/logo.svg" alt="logo">
         <div class="menu-wrapper">
-          <router-link class="menu-item" to="/buildr" active-class="active">
-            {{ $t('header.nav.Buildr') }}
-          </router-link>
           <router-link class="menu-item" to="/exchange" active-class="active">
             {{ $t('header.nav.Exchange') }}
           </router-link>

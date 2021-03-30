@@ -4,7 +4,7 @@
       <loading />
     </div>
     <template v-else>
-      <singeMineList :data="designatedData" />
+      <!-- <singeMineList :data="designatedData" /> -->
       <multiMineList :data="liquidityData" />
     </template>
   </div>
