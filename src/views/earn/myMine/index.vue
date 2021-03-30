@@ -63,8 +63,8 @@ export default {
       this.showLoading = true;
       try {
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
-        // console.log(data);
-        const [scashData] = data.filter(item => item.symbol[0] === 'GOST' && item.symbol[1] === 'LAMB');
+        console.log(data);
+        const [scashData] = data.filter(item => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
         await this.getPriceData(scashData);
         this.data = data;
