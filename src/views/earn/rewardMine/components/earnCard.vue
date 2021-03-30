@@ -148,7 +148,7 @@ export default {
     .btn-item {
       margin-left: 50px;
       .stakeBtn {
-        background: #4C8BF5;
+        background: #FF41A1;
         border-radius: 18px;
         padding: 8px 40px;
         font-size: 16px;

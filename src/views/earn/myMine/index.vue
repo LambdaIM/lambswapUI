@@ -176,11 +176,11 @@ export default {
     .claim {
       margin-right: 12px;
       color: #fff;
-      background: #4C8BF5;
+      background: #FF41A1;
     }
     .stake {
-      border: 1px solid #4C8BF5;
-      color: #4C8BF5;
+      border: 1px solid #FF41A1;
+      color: #FF41A1;
     }
   }
 }

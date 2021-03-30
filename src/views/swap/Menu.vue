@@ -81,10 +81,10 @@ export default {
         margin-right: 48px;
       }
       .active-menu {
-        color: #4C8BF5;
+        color: #FF41A1;
         padding: 4px;
         border-radius: 0px;
-        border-bottom: 2px solid #4C8BF5;
+        border-bottom: 2px solid #FF41A1;
       }
     }
   }

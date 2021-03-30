@@ -319,7 +319,7 @@ export default {
         .input-warpper {
           width: 160px;
           height: 36px;
-          background: #4C8BF5;
+          background: #FF41A1;
           border-radius: 18px;
           button {
             width: 100%;
@@ -334,14 +334,14 @@ export default {
           width: 160px;
           height: 36px;
           border-radius: 18px;
-          border: 1px solid #4C8BF5;
+          border: 1px solid #FF41A1;
           margin-top: 8px;
           button {
             width: 100%;
             height: 100%;
             font-size: 16px;
             font-weight: 500;
-            color: #4C8BF5;
+            color: #FF41A1;
             line-height: 19px;
           }
         }

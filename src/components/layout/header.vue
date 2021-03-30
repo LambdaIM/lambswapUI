@@ -2,7 +2,7 @@
   <header class="header-wrapper header-wrapper-bg">
     <nav class="nav-wrapper container mx-auto flex justify-between items-center">
       <div class="left-wrapper flex items-center">
-        <img width="150" src="../../assets/img/home/1.svg" alt="logo">
+        <img width="150" src="../../assets/img/home/1.png" alt="logo">
         <div class="menu-wrapper">
           <router-link class="menu-item" to="/exchange" active-class="active">
             {{ $t('header.nav.Exchange') }}
@@ -245,7 +245,7 @@ export default {
           display: inline-block;
           height: 28px;
           text-align: center;
-          background: #4C8BF5;
+          background: #FF41A1;
           border-radius: 14px;
           font-size: 16px;
           font-weight: 500;
@@ -272,7 +272,7 @@ export default {
         .changeBtn {
           width: 148px;
           height: 40px;
-          border: 1px solid #4C8BF5;
+          border: 1px solid #FF41A1;
           font-size: 16px;
           font-weight: 500;
           color: #14171c;
@@ -357,7 +357,7 @@ export default {
   border-radius: 20px;
   line-height: 19px;
   font-size: 16px;
-  color: #4C8BF5;
-  border: 1px solid #4C8BF5;
+  color: #FF41A1;
+  border: 1px solid #FF41A1;
 }
 </style>

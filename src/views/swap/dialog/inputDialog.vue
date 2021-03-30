@@ -673,9 +673,9 @@ export default {
           line-height: 47px;
           color: #14171c;
           padding: 16px;
-          caret-color: #4C8BF5;
+          caret-color: #FF41A1;
           &:focus {
-            border: 1px solid #4C8BF5;
+            border: 1px solid #FF41A1;
             border-radius: 4px;
           }
         }
@@ -765,7 +765,7 @@ export default {
         font-size: 14px;
         font-family: Gilroy-Medium, Gilroy;
         font-weight: 500;
-        color: #4C8BF5;
+        color: #FF41A1;
       }
     }
   }

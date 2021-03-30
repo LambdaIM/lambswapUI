@@ -102,7 +102,7 @@
         transform: translateX(-50%);
         width: 48px;
         height: 2px;
-        background: #4C8BF5;
+        background: #FF41A1;
       }
       .create-btn {
         position: absolute;
@@ -113,7 +113,7 @@
         line-height: 32px;
         font-size: 14px;
         font-weight: 500;
-        color: #4C8BF5;
+        color: #FF41A1;
         background: rgba(0, 88, 255, 0.1);
         border-radius: 16px;
         &:hover{

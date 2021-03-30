@@ -92,7 +92,7 @@
       border-left: none;
       border-right: none;
       box-sizing: border-box;
-      color: #4C8BF5;
+      color: #FF41A1;
       font-size: 30px;
       height: 70px;
       outline: none;
@@ -128,20 +128,20 @@
 }
 .input-focus {
   .input-prepend {
-    border: 1px solid #4C8BF5;
+    border: 1px solid #FF41A1;
     border-right: none;
   }
   .input-append {
-    border: 1px solid #4C8BF5;
+    border: 1px solid #FF41A1;
     border-left: none;
   }
   .input-inner {
-    border: 1px solid #4C8BF5;
+    border: 1px solid #FF41A1;
     border-left: none;
     border-right: none;
   }
   .no-title {
-    border-left: 1px solid #4C8BF5;
+    border-left: 1px solid #FF41A1;
   }
 }
 .input-error {

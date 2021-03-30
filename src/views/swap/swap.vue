@@ -515,7 +515,7 @@ export default {
         content: '';
         height: 56px;
         width: 2px;
-        background: #4C8BF5;
+        background: #FF41A1;
         position: absolute;
         left: 0;
         top: 0;
@@ -568,9 +568,9 @@ export default {
           line-height: 47px;
           color: #14171c;
           padding: 16px;
-          caret-color: #4C8BF5;
+          caret-color: #FF41A1;
           &:focus {
-            border: 1px solid #4C8BF5;
+            border: 1px solid #FF41A1;
             border-radius: 4px;
           }
         }
@@ -608,7 +608,7 @@ export default {
         span {
           font-size: 12px;
           font-weight: 500;
-          color: #4C8BF5;
+          color: #FF41A1;
         }
       }
     }
@@ -651,7 +651,7 @@ export default {
       }
     }
     .arrow-active {
-      background: #4C8BF5;
+      background: #FF41A1;
     }
 
     .details-wrapper {

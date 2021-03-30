@@ -230,7 +230,7 @@
         height: 36px;
         line-height: 36px;
         border-radius: 18px;
-        background-color: #4C8BF5;
+        background-color: #FF41A1;
         color: rgb(255, 255, 255);
         &:hover {
           background-color: #0025ff;
