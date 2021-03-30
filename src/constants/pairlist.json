@@ -1,12 +1,14 @@
 [
     {
         "chainId": 256,
-        "pair":["USDT","scUSD"]
+        "pair":["FIL","LAMB"]
     },
     {
         "chainId": 256,
-        "pair":["SCASH","scUSD"]
+        
+        "pair":["GOAT","LAMB"]
     },
+
     {
         "chainId": 4,
         "pair":["USDT","scUSD"]

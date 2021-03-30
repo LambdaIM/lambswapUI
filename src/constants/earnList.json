@@ -1,25 +1,27 @@
 [
   {
-    "name": "scUSD/USDT LP",
-    "address": "0x2E4644128032FB3CD402F91a663A8d5a233efAe5",
+    "name": "FIL/LAMB LP",
+    "address": "0x27D9c0421Dc818ABf351f390A121AFC07430CB22",
     "decimals": 18,
     "chainId": 256,
     "kind": "multi",
     "symbol": [
-      "scUSD",
-      "USDT"
+      "FIL",
+      "LAMB"
     ]
   },
   {
-    "name": "scUSD",
-    "address": "0xAED82BD6a8657cfa0Ee966b6D431AF6E2CbcAbF5",
+    "name": "GOAT/LAMB LP",
+    "address": "0x16a5fA6B61bc7190CA1EDD5dd8B4359b9eE9655B",
     "decimals": 18,
     "chainId": 256,
-    "kind": "single",
+    "kind": "multi",
     "symbol": [
-      "scUSD"
+      "GOAT",
+      "LAMB"
     ]
   },
+  
   {
     "name": "scUSD/USDT LP",
     "address": "0x02Df6b73c1Ee09a20FD339A026813983f59A0a33",

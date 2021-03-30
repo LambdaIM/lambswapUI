@@ -9,7 +9,7 @@
       </div>
       <div class="right-wrapper flex">
         <div class="contact-wrapper flex justify-between items-center">
-          <div class="contact-item mr">
+          <!-- <div class="contact-item mr">
             <a href="/" target="_blank">
               <img src="../../assets/img/telegram.svg" alt="telegram">
             </a>
@@ -23,7 +23,7 @@
             <a href="/" target="_blank">
               <img src="../../assets/img/medium.svg" alt="medium">
             </a>
-          </div>
+          </div> -->
         </div>
         <Select v-model="lang" class="lang-wrapper" style="width: 124px" @on-change="getSelectLang">
           <Option value="zh">
