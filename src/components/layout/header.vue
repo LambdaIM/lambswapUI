@@ -15,7 +15,7 @@
       </div>
 
       <div class="connect-wrapper flex justify-between items-center">
-        <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
+        <!-- <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
             <div class="dot" :class="statusVal" />
             <span>{{ network }}</span>
@@ -33,7 +33,7 @@
               </DropdownItem>
             </template>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> -->
 
         <button v-if="!ethAddress" class="connectBtn" @click="openWalletDialog">
           {{ $t('header.connectWallet') }}
@@ -193,26 +193,26 @@ export default {
       }
       return styleVal;
     },
-    isReady() {
-      return this.ethChainID && this.ethAddress;
-    },
+    // isReady() {
+    //   return this.ethChainID && this.ethAddress;
+    // },
   },
-  watch: {
-    isReady(value) {
-      if (value) {
-        this.getStatus();
-      }
-    },
-  },
-  mounted() {
-    if (this.isReady) {
-      this.getStatus();
-    } else {
-      this.statusVal = 'notConnect';
-      // 设置默认网络
-      this.network = this.netInfo[config.defaultChainID].name;
-    }
-  },
+  // watch: {
+  //   isReady(value) {
+  //     if (value) {
+  //       this.getStatus();
+  //     }
+  //   },
+  // },
+  // mounted() {
+  //   if (this.isReady) {
+  //     this.getStatus();
+  //   } else {
+  //     this.statusVal = 'notConnect';
+  //     // 设置默认网络
+  //     this.network = this.netInfo[config.defaultChainID].name;
+  //   }
+  // },
 };
 </script>
 

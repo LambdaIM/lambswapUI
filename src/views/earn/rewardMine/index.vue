@@ -33,7 +33,7 @@ export default {
       this.showLoading = true;
       try {
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
-        // console.log({data});
+        console.log({data});
         const tempLiquidity = data.filter((item) => item.kind === 'multi');
         // console.log({tempLiquidity});
         const result = [];
