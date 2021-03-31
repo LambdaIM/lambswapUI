@@ -12,8 +12,8 @@
           <Table :loading="loading" :columns="getHistory" :data="list">
             <template slot="Pair" slot-scope="{ row }">
               <div class="Pair flex items-center">
-                <img width="32" :src="getTokenImg(row.show.tokenB)">
-                <p>{{ row.show.tokenB }}/{{ row.show.tokenA }}</p>
+                <img width="32" :src="getTokenImg(getLPName(row.show.tokenB,row.show.tokenA).listSymbol)">
+                <p>{{ getLPName(row.show.tokenB,row.show.tokenA).pairName }}</p>
               </div>
             </template>
             <template slot="Action" slot-scope="{ row }">
@@ -79,6 +79,7 @@
 import { mapState } from "vuex";
 import { readSwapHistory } from "@/contactLogic/history.js";
 import { getTokenImg } from "@/contactLogic/readbalance.js";
+import {getLPName} from "@/contactLogic/readpairpool.js";
 
 export default {
   data() {
@@ -101,6 +102,10 @@ export default {
     };
   },
   methods: {
+    getLPName(a,b){
+      const chainID = this.ethChainID;
+      return getLPName(a,b,chainID);
+    },
     getTokenImg(tokensymbol) {
       const chainID = this.ethChainID;
       return getTokenImg(tokensymbol, chainID);

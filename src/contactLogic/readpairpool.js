@@ -673,3 +673,27 @@ export async function readpariInfoNuminfoEarn(chainID, library, tokensymbolA, to
   };
 
 }
+
+export function getLPName(A,B,chainID){
+  const list = _.where(pairlist, { chainId: chainID });
+  const  target = _.find(list,(one)=>{
+    if(one.pair.indexOf(B)!=-1&&one.pair.indexOf(A)!=-1){
+      return  one;
+    }
+  });
+  if(target){
+    return {
+      pairName:target.pair[0]+"/"+target.pair[1],
+      listSymbol: target.pair[0],
+    };
+
+  }else{
+    return {
+      pairName:'--',
+      listSymbol: '--',
+    }; 
+    
+  }
+  
+
+}

@@ -76,9 +76,9 @@
             </Buttons>
           </template>
 
-          <p class="buy" @click="toExchange">
+          <!-- <p class="buy" @click="toExchange">
             {{ $t('earn.dialog.stakeDialog.buy') }}
-          </p>
+          </p> -->
         </div>
       </div>
 

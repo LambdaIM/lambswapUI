@@ -96,9 +96,9 @@
             <div v-else @click="showConfirmInput">
               <Buttons>{{ $t('swapHistory.inputDialog.button') }}</Buttons>
             </div>
-            <p class="buy" @click="toexchange">
+            <!-- <p class="buy" @click="toexchange">
               {{ $t('swapHistory.inputDialog.buy') }}
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
