@@ -127,7 +127,7 @@ export default {
     getStatus() {
       const targetID = parseInt(jscookie.get('targetNet'));
 
-      this.network = jscookie.get('net');
+      this.network = jscookie.get('net') || 'Heco Main';
 
       // console.log(targetID, this.ethChainID, this.network);
       if (!this.ethAddress) {
