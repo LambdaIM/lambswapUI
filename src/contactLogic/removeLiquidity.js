@@ -42,7 +42,7 @@ export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
         { name: "verifyingContract", type: "address" },
       ];
       const domain = {
-        name: "Uniswap V2",
+        name: "LambSwap",
         version: "1",
         chainId: chainId,
         verifyingContract: pair.liquidityToken.address,

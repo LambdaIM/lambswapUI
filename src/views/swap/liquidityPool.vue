@@ -1,35 +1,5 @@
 <template>
   <div class="pool-warpper">
-    <div class="rewards-warpper">
-      <h2>{{ $t('liquidity.title') }}</h2>
-      <p>
-        {{ $t('liquidity.subTitle') }}
-      </p>
-      <div class="buttonWarpper flex justify-between items-center">
-        <div class="button-item">
-          <div class="border-image">
-            <p @click="tobuilder">
-              {{ $t('liquidity.btnBuild') }}
-            </p>
-            <div>
-              <span>{{ $t('liquidity.btnGetscusd') }}</span>
-              <img src="../../assets/img/rightTop.svg" alt="arrow">
-            </div>
-          </div>
-        </div>
-        <div class="button-item">
-          <div class="border-image">
-            <p @click="toexchange">
-              {{ $t('liquidity.btnExchange') }}
-            </p>
-            <div>
-              <span>{{ $t('liquidity.btnBuyscusd') }}</span>
-              <img src="../../assets/img/rightTop.svg" alt="arrow">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="liquidityPool">
       <h2>{{ $t('liquidity.pool.title') }}</h2>
       <div v-if="pairlistloading" class="demo-spin-container ">

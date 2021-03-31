@@ -10,7 +10,7 @@
           <router-link class="menu-item" to="/earn" active-class="active">
             {{ $t('header.nav.Earn') }}
           </router-link>
-          <a href="http://47.94.197.75:8087/#/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
+          <a href="https://bridge.lambdastorage.com/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
         </div>
       </div>
 

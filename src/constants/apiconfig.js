@@ -1,6 +1,6 @@
 
-
-const baseUrl = 'http://59.110.68.178:8086/' ;
+console.log('**********');
+const baseUrl = window.location.protocol+'//history.lambswap.fi/' ;
 
 const axios = require('axios');
 
@@ -15,8 +15,16 @@ export  async function swapHistory(account,pageNum=1,showNum=10,chainID){
     '0x0CC750e4426D677657409fab33E7957DDA8cC1F1',
     '0x01c06572D6d351863270baC558ca945E2DBB56FE',
   ].join(',');
+    let data;
+   try {
+     data =  await  axios.get(`${baseUrl}api/txs?&category=swap&from=${account}&pageNum=${pageNum}&showNum=${showNum}&pair_addresses=${pair_addresses}`);  
+   } catch (error) {
 
-   const data =  await  axios.get(`${baseUrl}api/txs?&category=swap&from=${account}&pageNum=${pageNum}&showNum=${showNum}&pair_addresses=${pair_addresses}`);
+    data={
+      
+    };
+   }
+   
 
   // console.log(data);
   return data.data;
@@ -74,7 +82,15 @@ export async function coinohlc(id){
 
 
 export async function pairPrice(pair_address){
-  const data =  await  axios.get(`${baseUrl}api/24h_price_info?pair_address=${pair_address}`);
+  let data;
+  try {
+     data =  await  axios.get(`${baseUrl}api/24h_price_info?pair_address=${pair_address}`);  
+  } catch (error) {
+    data={
+      data:''
+    };
+  }
+  
 
 //  console.log(data);
  return data.data;
