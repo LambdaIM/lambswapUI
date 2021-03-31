@@ -336,6 +336,7 @@ export default {
     async getGasFee(trade) {
       const library = this.ethersprovider;
       const account = this.ethAddress;
+      const ChainId = this.ethChainID;
 
       console.log(trade);
       const needApprove = await useNeedApprove(account, library, trade, INITIAL_ALLOWED_SLIPPAGE);

@@ -29,7 +29,7 @@ export default async function buildSwap(recipient,blockTime,trade,ChainId,provid
       const swapMethods = [];
 
       const coinInfo = getChainCoinInfo(ChainId);
-
+     console.log('-----');
       if(trade.inputAmount.currency.symbol==coinInfo.coinName){
         trade.inputAmount.currency=ETHER;
       }

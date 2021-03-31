@@ -6,7 +6,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    redirect: '/earn'
+    redirect: '/exchange'
     // component: Home,
   },
   // {
