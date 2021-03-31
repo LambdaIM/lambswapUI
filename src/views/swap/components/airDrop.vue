@@ -2,18 +2,18 @@
   <div class="airdrop-wrapper mb-6">
     <div class="title-wrapper flex justify-between items-center">
       <div class="left">
-        <span class="title">Vault Airdrop</span>
+        <span class="title">LAMB Airdrop</span>
         <span class="next">Next Airdrop</span>
-        <span class="time">2021.9.1 18:00(UTC+8)</span>
+        <span class="time">2021.4.6 10:00(UTC+8)</span>
       </div>
       <div class="right">
-        Deposit digital assets, get scUSD credit line
+        对LP Token Staking 期间进行不定期快照，根据平均占比获取空投额度
       </div>
     </div>
     <div class="airdrop-content-wrapper flex justify-between items-center">
       <div class="airdrop-item name">
         <img src="../../../assets/img/lambda48.svg" alt="susd">
-        <span>LAMB Vault</span>
+        <span>LAMB</span>
       </div>
 
       <div class="airdrop-item volume">
@@ -21,13 +21,13 @@
           Airdrop Volume
         </p>
         <p class="drop-num">
-          1044
-          <span>SCASH</span>
+          2000000
+          <span>LAMB</span>
         </p>
 
         <p class="tag">
-          <span class="mine font10px">SCash Mining</span>
-          <span class="reward font10px">Fee Rewards</span>
+          <span class="mine font10px">LAMB Airdrop</span>
+          <!-- <span class="reward font10px">LAMB Airdrop</span> -->
         </p>
       </div>
 
@@ -42,7 +42,7 @@
 
       <div class="airdrop-item create">
         <button class="createBtn disableBtn">
-          Start Creating
+          提取
         </button>
       </div>
     </div>

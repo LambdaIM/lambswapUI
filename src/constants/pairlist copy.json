@@ -16,6 +16,11 @@
     {
         "chainId": 128,
         
+        "pair":["GOAT","LAMB"]
+    },
+    {
+        "chainId": 128,
+        
         "pair":["ETH","LAMB"]
     },
     {
