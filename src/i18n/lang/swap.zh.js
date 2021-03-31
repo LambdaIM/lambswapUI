@@ -96,6 +96,14 @@ export default {
         sharePool: '我提供的流动性占比',
         btnInput: '注入',
         btnRemove: '移除'
+      },
+      airdrop: {
+        next: '下次空投时间',
+        subTitle: '对LP Token Staking 期间进行不定期快照，根据平均占比获取空投额度',
+        title1: '空投总量',
+        tag: 'LAMB 空投',
+        count: '倒计时',
+        extract: '提取'
       }
     },
 };

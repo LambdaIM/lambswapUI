@@ -2,12 +2,12 @@
   <div class="airdrop-wrapper mb-6">
     <div class="title-wrapper flex justify-between items-center">
       <div class="left">
-        <span class="title">LAMB Airdrop</span>
-        <span class="next">Next Airdrop</span>
+        <span class="title">LAMB</span>
+        <span class="next">{{ $t('liquidity.airdrop.next') }}</span>
         <span class="time">2021.4.6 10:00(UTC+8)</span>
       </div>
       <div class="right">
-        对LP Token Staking 期间进行不定期快照，根据平均占比获取空投额度
+        {{ $t('liquidity.airdrop.subTitle') }}
       </div>
     </div>
     <div class="airdrop-content-wrapper flex justify-between items-center">
@@ -18,7 +18,7 @@
 
       <div class="airdrop-item volume">
         <p class="drop-title">
-          Airdrop Volume
+          {{ $t('liquidity.airdrop.title1') }}
         </p>
         <p class="drop-num">
           2000000
@@ -26,23 +26,23 @@
         </p>
 
         <p class="tag">
-          <span class="mine font10px">LAMB Airdrop</span>
+          <span class="mine font10px">{{ $t('liquidity.airdrop.tag') }}</span>
           <!-- <span class="reward font10px">LAMB Airdrop</span> -->
         </p>
       </div>
 
       <div class="airdrop-item countdown">
         <p class="drop-title">
-          Countdown
+          {{ $t('liquidity.airdrop.count') }}
         </p>
         <!-- <div class="count"> -->
-        <countDown class="count" date="2021-03-31 10:15:00" />
+        <countDown class="count" date="2021-04-06 10:00:00" />
         <!-- </div> -->
       </div>
 
       <div class="airdrop-item create">
         <button class="createBtn disableBtn">
-          提取
+          {{ $t('liquidity.airdrop.extract') }}
         </button>
       </div>
     </div>
