@@ -4,6 +4,7 @@
       <loading />
     </div>
     <template v-else>
+      <airDrop />
       <!-- <singeMineList :data="designatedData" /> -->
       <multiMineList :data="liquidityData" />
     </template>
@@ -27,6 +28,7 @@ export default {
     singeMineList: () => import('./components/singleMineList.vue'),
     multiMineList: () => import('./components/multiMineList.vue'),
     loading: () => import('@/components/basic/loading.vue'),
+    airDrop: ()=> import('@/components/airDrop.vue'),
   },
   methods: {
     async getListData() {
@@ -59,7 +61,6 @@ export default {
       }
     },
     async getPriceData(item) {
-      // console.log({ item });
       const obj = {};
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];

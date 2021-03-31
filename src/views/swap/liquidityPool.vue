@@ -79,7 +79,7 @@ export default {
     inputDialog: () => import("./dialog/inputDialog.vue"),
     removeDialog: () => import("./dialog/removeDialog.vue"),
     loading: () => import("@/components/basic/loading.vue"),
-    airDrop: ()=> import('./components/airDrop.vue'),
+    airDrop: ()=> import('@/components/airDrop.vue'),
   },
   mounted() {
     //txsuccess

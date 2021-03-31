@@ -12,7 +12,7 @@
     </div>
     <div class="airdrop-content-wrapper flex justify-between items-center">
       <div class="airdrop-item name">
-        <img src="../../../assets/img/lambda48.svg" alt="susd">
+        <img src="../assets/img/lambda48.svg" alt="lambda">
         <span>LAMB</span>
       </div>
 
