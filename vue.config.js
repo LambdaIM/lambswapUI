@@ -1,5 +1,24 @@
+
+let webpack = require("webpack");
+
+var historylambswap = 'history.lambswap.fi' ;
+if(process.env.NODE_ENV == 'production'){
+  historylambswap = 'history.lambswap.fi' ;
+}else{
+  // historylambswap = '59.110.68.178:8086' ;
+  historylambswap = 'history.lambswap.fi' ;
+}
+process.env.VUE_APP_historylambswap= historylambswap;
+
+console.log(process.env)
+
 module.exports = {
   configureWebpack: {
+    // plugins: [
+    //   new webpack.DefinePlugin({
+    //     historylambswap: JSON.stringify(historylambswap)
+    //   })
+    // ],
     module: {
       rules: [
         {
@@ -33,4 +52,5 @@ module.exports = {
     });
     
   },
+
 };

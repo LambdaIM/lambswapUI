@@ -1,6 +1,9 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@webfans/uniswapsdk';
 
 
+export const historyAPIDomine= process.env.VUE_APP_historylambswap;
+
+
 export const ROUTER_ADDRESS = '0x24E3F89d6eb4Bc8f988B8aB5273C7F380975e2BB';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
@@ -34,4 +37,6 @@ export const ALLOWED_PRICE_IMPACT_HIGH = new Percent(JSBI.BigInt(500), BIPS_BASE
 export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN = new Percent(JSBI.BigInt(1000), BIPS_BASE); // 10%
 // for non expert mode disable swaps above this
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT = new Percent(JSBI.BigInt(1500), BIPS_BASE); // 15%
+
+
 

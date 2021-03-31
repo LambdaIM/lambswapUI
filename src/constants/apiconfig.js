@@ -1,8 +1,12 @@
 
-console.log('**********');
-const baseUrl = window.location.protocol+'//history.lambswap.fi/' ;
+
+// const baseUrl = window.location.protocol+'//history.lambswap.fi/' ;
 
 const axios = require('axios');
+import {historyAPIDomine} from './index.js';
+ 
+const baseUrl = `${window.location.protocol}//${historyAPIDomine}/` ;
+
 
 export  async function swapHistory(account,pageNum=1,showNum=10,chainID){
    const method_names =['swapExactTokensForTokens','removeLiquidityWithPermit','addLiquidity',
@@ -10,10 +14,8 @@ export  async function swapHistory(account,pageNum=1,showNum=10,chainID){
   'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens'].join(',');
 
    const pair_addresses=[
-    '0x4B5ea1218Ac0544fb03617ca9780a2b0ed7edef5',
-    '0x51f624116513a9f4606a368f2eC9899c821258B3',
-    '0x0CC750e4426D677657409fab33E7957DDA8cC1F1',
-    '0x01c06572D6d351863270baC558ca945E2DBB56FE',
+    '0x005E0D3157335F4Af22Ea89D7C389AFc6Bd514fc',
+    
   ].join(',');
     let data;
    try {

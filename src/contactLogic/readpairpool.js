@@ -112,7 +112,7 @@ export async function readpairpool(chainID, library) {
       Pair: element,
       price: price.toSignificant(6),
       pairName: `${target.pair[0]}/${target.pair[1]}`,
-      listSymbol: element.tokenAmounts[1].token.symbol,
+      listSymbol: element.tokenAmounts[0].token.symbol,
       pairSymbols: [element.tokenAmounts[0].token.symbol, element.tokenAmounts[1].token.symbol],
       configSymbols: [target.pair[0], target.pair[1]]
 
