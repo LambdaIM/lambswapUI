@@ -125,9 +125,12 @@ export default {
     // },
 
     getStatus() {
-      const targetID = parseInt(jscookie.get('targetNet'));
+      const targetID = parseInt(jscookie.get('targetNet')) || 128;
 
-      this.network = jscookie.get('net') || 'Heco Main';
+      this.network = jscookie.get('net');
+      if(!this.network) {
+        this.network = this.netInfo[config.defaultChainID].name;
+      }
 
       // console.log(targetID, this.ethChainID, this.network);
       if (!this.ethAddress) {
