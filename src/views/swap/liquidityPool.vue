@@ -1,5 +1,8 @@
 <template>
   <div class="pool-warpper">
+    <airDrop />
+
+
     <div class="liquidityPool">
       <h2>{{ $t('liquidity.pool.title') }}</h2>
       <div v-if="pairlistloading" class="demo-spin-container ">
@@ -76,6 +79,7 @@ export default {
     inputDialog: () => import("./dialog/inputDialog.vue"),
     removeDialog: () => import("./dialog/removeDialog.vue"),
     loading: () => import("@/components/basic/loading.vue"),
+    airDrop: ()=> import('./components/airDrop.vue'),
   },
   mounted() {
     //txsuccess
