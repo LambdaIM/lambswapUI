@@ -1,7 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@webfans/uniswapsdk';
 
 
-export const ROUTER_ADDRESS = '0x4513F6bD04d94b6b33E3bd38C3f0781B10Dcc61F';
+export const ROUTER_ADDRESS = '0x24E3F89d6eb4Bc8f988B8aB5273C7F380975e2BB';
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 

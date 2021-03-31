@@ -8,6 +8,11 @@
         
         "pair":["GOAT","LAMB"]
     },
+    {
+        "chainId": 128,
+        
+        "pair":["USDT","LAMB"]
+    },
 
     {
         "chainId": 4,
