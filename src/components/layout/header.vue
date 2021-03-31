@@ -127,7 +127,7 @@ export default {
     getStatus() {
       const targetID = parseInt(jscookie.get('targetNet'));
 
-      this.network = jscookie.get('net') || 'Ethereum';
+      this.network = jscookie.get('net');
 
       // console.log(targetID, this.ethChainID, this.network);
       if (!this.ethAddress) {
