@@ -13,6 +13,21 @@
         
         "pair":["USDT","LAMB"]
     },
+    {
+        "chainId": 128,
+        
+        "pair":["GOAT","LAMB"]
+    },
+    {
+        "chainId": 128,
+        
+        "pair":["ETH","LAMB"]
+    },
+    {
+        "chainId": 128,
+        
+        "pair":["FIL","LAMB"]
+    },
 
     {
         "chainId": 4,

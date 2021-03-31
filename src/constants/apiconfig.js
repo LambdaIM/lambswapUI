@@ -15,6 +15,7 @@ export  async function swapHistory(account,pageNum=1,showNum=10,chainID){
 
    const pair_addresses=[
     '0x005E0D3157335F4Af22Ea89D7C389AFc6Bd514fc',
+    '0x3ef407F05CA26A641E3A3d40B4CA0e7622676E1A'
     
   ].join(',');
     let data;

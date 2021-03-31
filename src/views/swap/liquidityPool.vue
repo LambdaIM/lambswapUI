@@ -8,8 +8,8 @@
       <div v-for="item in dataList" v-else :key="item.pairName" class="poolCon">
         <div class="flex items-center imgWapper">
           <div class="img-warpper flex">
-            <img :src="getTokenImg(item.pairSymbols[0])">
-            <img :src="getTokenImg(item.pairSymbols[1])" class="otherImg">
+            <img width="48" :src="getTokenImg(item.pairSymbols[1])">
+            <img width="48" :src="getTokenImg(item.pairSymbols[0])" class="otherImg">
           </div>
           <div>
             <p>{{ item.pairName }}</p>

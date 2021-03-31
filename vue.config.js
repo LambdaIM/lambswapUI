@@ -1,7 +1,7 @@
 
-let webpack = require("webpack");
+const webpack = require("webpack");
 
-var historylambswap = 'history.lambswap.fi' ;
+let historylambswap = 'history.lambswap.fi' ;
 if(process.env.NODE_ENV == 'production'){
   historylambswap = 'history.lambswap.fi' ;
 }else{
@@ -10,7 +10,7 @@ if(process.env.NODE_ENV == 'production'){
 }
 process.env.VUE_APP_historylambswap= historylambswap;
 
-console.log(process.env)
+console.log(process.env);
 
 module.exports = {
   configureWebpack: {
