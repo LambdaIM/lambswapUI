@@ -11,6 +11,7 @@
             {{ $t('header.nav.Earn') }}
           </router-link>
           <a href="https://bridge.lambdastorage.com/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
+          <a href="https://lamb-swap.gitbook.io/lambswap/" class="menu-item" target="_blank">{{ $t('header.nav.Docs') }}</a>
         </div>
       </div>
 
