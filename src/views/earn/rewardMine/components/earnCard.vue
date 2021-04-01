@@ -28,7 +28,7 @@
         <div class="balance">
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.totalStaked') }}</span>
-            <span class="value">{{ (item.data && item.data.totalSupply) || 0 }}</span>
+            <span class="value">{{ (item.data && item.data.totalSupply) || 0 }}  LP</span>
           </div>
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.totalPool') }}</span>
@@ -39,7 +39,7 @@
           </div>
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.output') }}</span>
-            <span class="value">{{ item.daynum }}</span>
+            <span class="value">{{ item.daynum }} GOAT</span>
           </div>
         </div>
 

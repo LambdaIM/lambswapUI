@@ -534,6 +534,7 @@ export async function sendaddliquidity(chainID, library, account, parameters,eth
 }
 
 export async function getpairPrice(pairaddress, chainID, tokenA, tokenB) {
+  console.log('getpairPrice');
   const data = await pairPrice(pairaddress);
   if (data == '') {
     return null;
@@ -552,8 +553,8 @@ export async function getpairPrice(pairaddress, chainID, tokenA, tokenB) {
   const outnum = new BigNumber(PriceInfo.outamount);
 
   const infoData = {
-    [PriceInfo.tokenA+"/"+PriceInfo.tokenB]:outnum.div(innum).toFixed(3),
-    [PriceInfo.tokenB+"/"+PriceInfo.tokenA]:innum.div(outnum).toFixed(3),
+    [PriceInfo.tokenA+"/"+PriceInfo.tokenB]:outnum.div(innum).toFixed(8),
+    [PriceInfo.tokenB+"/"+PriceInfo.tokenA]:innum.div(outnum).toFixed(8),
   };
   const obj = {};
   obj[tokenA + '/' + tokenB] = infoData[tokenA + '/' + tokenB];

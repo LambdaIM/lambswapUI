@@ -11,17 +11,17 @@
     {
         "chainId": 128,
         
-        "pair":["USDT","LAMB"]
+        "pair":["LAMB","USDT"]
     },
     {
         "chainId": 128,
         
-        "pair":["ETH","LAMB"]
+        "pair":["LAMB","ETH"]
     },
     {
         "chainId": 128,
         
-        "pair":["FIL","LAMB"]
+        "pair":["LAMB","FIL"]
     },
 
     {
