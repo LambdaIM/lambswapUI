@@ -36,7 +36,7 @@
           {{ $t('liquidity.airdrop.count') }}
         </p>
         <!-- <div class="count"> -->
-        <countDown class="count" date="2021-04-06 10:00:00" />
+        <countDown class="count" date="2021-04-06T10:00:00+08:00" />
         <!-- </div> -->
       </div>
 
