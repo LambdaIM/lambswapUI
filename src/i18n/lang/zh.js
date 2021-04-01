@@ -43,11 +43,12 @@ export default {
       Exchange: '交易',
       Earn: '收益挖矿',
       Bridge: '跨链',
-      Docs:'帮助中心'
+      Docs:'教程'
     },
     connectWallet:'连接钱包',
     copyAddress: '复制地址',
     changeWallet: '更换钱包',
     Disconnect: '解除连接',
+    AddLambwallet:'添加至钱包'
   },
 };

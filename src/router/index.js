@@ -20,14 +20,14 @@ const routes = [
     component: () => import("@/views/swap/Menu.vue"),
     children: [
       {
-        path: "",
-        name: "swap",
-        component: () => import("@/views/swap/swap.vue"),
-      },
-      {
         path: "pool",
         name: "pool",
         component: () => import("@/views/swap/liquidityPool.vue"),
+      },
+      {
+        path: "",
+        name: "swap",
+        component: () => import("@/views/swap/swap.vue"),
       },
       {
         path: "history",

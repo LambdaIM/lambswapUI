@@ -4,18 +4,20 @@
       <div class="switch-wrapper flex justify-start items-center">
         <button
           class="menu-item"
-          :class="nameclass === 'swap'? 'active-menu':''"
-          @click="toPage('swap')"
-        >
-          {{ $t('swap.subMenu1') }}
-        </button>
-        <button
-          class="menu-item"
           :class="nameclass === 'pool'? 'active-menu':''"
           @click="toPage('pool')"
         >
           {{ $t('swap.subMenu2') }}
         </button>
+        
+        <button
+          class="menu-item"
+          :class="nameclass === 'swap'? 'active-menu':''"
+          @click="toPage('swap')"
+        >
+          {{ $t('swap.subMenu1') }}
+        </button>
+        
         <button
           class="menu-item"
           :class="nameclass === 'history'? 'active-menu':''"

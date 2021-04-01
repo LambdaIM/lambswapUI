@@ -49,5 +49,6 @@ export default {
     copyAddress:'Copy Address',
     changeWallet:'Change Wallet',
     Disconnect:'Disconnect',
+    AddLambwallet:'Add to Wallet'
   }
 };

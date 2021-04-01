@@ -16,6 +16,10 @@
       </div>
 
       <div class="connect-wrapper flex justify-between items-center">
+        <button v-if="ethAddress" class="connectBtnadd" @click="addtoken">
+          {{ $t('header.AddLambwallet') }}
+        </button>
+
         <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
             <div class="dot" :class="statusVal" />
@@ -74,6 +78,8 @@
 import { mapState } from 'vuex';
 import config from '@/config/config.js';
 import jscookie from 'js-cookie';
+import {  getToken} from '@/contactLogic/readbalance.js';
+
 export default {
   components: {
     walletdialog: () => import('./dialog/walletDialog'),
@@ -89,6 +95,34 @@ export default {
     };
   },
   methods: {
+   async addtoken(){
+      const chainID = this.ethChainID;
+      const TokenA = getToken('LAMB', chainID);
+      try {
+        // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: TokenA.address, // The address that the token is at.
+              symbol: TokenA.symbol, // A ticker symbol or shorthand, up to 5 chars.
+              decimals: TokenA.decimals, // The number of decimals in the token
+              image: 'https://s2.bqiapp.com/logo/1/lambda_72.png?v=64', // A string url of the token logo
+            },
+          },
+        });
+
+        if (wasAdded) {
+          console.log('Thanks for your interest!');
+        } else {
+          console.log('Your loss!');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
     openWalletDialog() {
       this.$refs.wallet.open();
     },
@@ -363,5 +397,18 @@ export default {
   font-size: 16px;
   color: #FF41A1;
   border: 1px solid #FF41A1;
+}
+
+.connectBtnadd{
+  padding-left:5px ;
+  padding-right:5px ;
+  height: 28px;
+  border-radius: 10px;
+  line-height: 19px;
+  
+  color: #FF41A1;
+  border: 1px solid #FF41A1;
+  border-radius: 14px;
+  margin-right: 10px;
 }
 </style>
