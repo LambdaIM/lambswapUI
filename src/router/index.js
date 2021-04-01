@@ -20,12 +20,12 @@ const routes = [
     component: () => import("@/views/swap/Menu.vue"),
     children: [
       {
-        path: "pool",
+        path: "",
         name: "pool",
         component: () => import("@/views/swap/liquidityPool.vue"),
       },
       {
-        path: "",
+        path: "swap",
         name: "swap",
         component: () => import("@/views/swap/swap.vue"),
       },

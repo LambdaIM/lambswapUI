@@ -30,8 +30,8 @@
             <span class="colorText">{{ $t('liquidity.pool.sharePool') }}</span>
           </div>
           <div class="number">
-            <span>{{ item.aTokenbalance }}</span>
-            <span>{{ item.bTokenbalance }}</span>
+            <span>{{ item.aTokenbalance|formatNormalValue }}</span>
+            <span>{{ item.bTokenbalance |formatNormalValue }}</span>
             <span class="colorText">{{ Calculatepercentage(item.balance,item.totalSupply) |formatRate }}</span>
           </div>
         </div>
