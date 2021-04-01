@@ -72,7 +72,9 @@ export default {
       this.openWalletDialog = true;
     },
     connectWallet(name) {
+      
       name === 'metamask' ? this.getEthAuth() : this.getLambAuth();
+      this.openWalletDialog = false;
     },
 
     // 获取metamask授权
