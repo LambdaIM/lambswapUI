@@ -16,7 +16,7 @@
       </div>
 
       <div class="connect-wrapper flex justify-between items-center">
-        <button v-if="ethAddress" class="connectBtnadd" @click="addtoken">
+        <button v-if="ethChainID" class="connectBtnadd" @click="addtoken">
           {{ $t('header.AddLambwallet') }}
         </button>
 
