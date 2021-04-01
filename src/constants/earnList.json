@@ -1,4 +1,39 @@
-[
+[  {
+  "name": "ETH/LAMB LP",
+  "address": "0xD52adC338824b8359AD6ED873A32b68b0c95c38e",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "daynum":"138",
+  "symbol": [
+    "ETH",
+    "LAMB"
+  ]
+},
+{
+  "name": "FIL/LAMB LP",
+  "address": "0xE4ce1D079508DfD8d909D9BA922d4196F1606A65",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "daynum":"111",
+  "symbol": [
+    "FIL",
+    "LAMB"
+  ]
+},
+{
+  "name": "USDT/LAMB LP",
+  "address": "0x795E3881e046c7c7468E4A6bf40CF193a76ad9c3",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "daynum":"167",
+  "symbol": [
+    "USDT",
+    "LAMB"
+  ]
+},
   {
     "name": "FIL/LAMB LP",
     "address": "0x27D9c0421Dc818ABf351f390A121AFC07430CB22",

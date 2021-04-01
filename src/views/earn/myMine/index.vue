@@ -75,19 +75,21 @@ export default {
       }
     },
     async getPriceData(item) {
-      const tokensymbolA = item.symbol[0];
-      const tokensymbolB = item.symbol[1];
-      const pledgeBalance = item.data && item.data.totalSupply;
-      const pledgeBalanceWei = this.web3.utils.toWei(pledgeBalance.toString());
-      const data = await readpariInfoNuminfoEarn(
-        this.ethChainID,
-        this.ethersprovider,
-        tokensymbolA,
-        tokensymbolB,
-        pledgeBalanceWei
-      );
-      const price = data.price && data.price.toSignificant(6);
-      this.$store.commit('changeScashPrice', price);
+      this.$store.commit('changeScashPrice', 100);
+
+      // const tokensymbolA = item.symbol[0];
+      // const tokensymbolB = item.symbol[1];
+      // const pledgeBalance = item.data && item.data.totalSupply;
+      // const pledgeBalanceWei = this.web3.utils.toWei(pledgeBalance.toString());
+      // const data = await readpariInfoNuminfoEarn(
+      //   this.ethChainID,
+      //   this.ethersprovider,
+      //   tokensymbolA,
+      //   tokensymbolB,
+      //   pledgeBalanceWei
+      // );
+      // const price = data.price && data.price.toSignificant(6);
+      // this.$store.commit('changeScashPrice', price);
     },
     openClaim(data) {
       this.$refs.extract.open(data);

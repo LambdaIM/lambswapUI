@@ -75,9 +75,10 @@ export default {
       );
       obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
       obj.price = data.price && data.price.toSignificant(6);
-      if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
-        this.$store.commit('changeScashPrice', obj.price);
-      }
+      // if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
+      //   this.$store.commit('changeScashPrice', obj.price);
+      // }
+      this.$store.commit('changeScashPrice', 100);
       this.$store.commit('changeEarnPrice', obj.price);
       return obj;
     },

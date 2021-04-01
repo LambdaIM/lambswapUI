@@ -39,7 +39,7 @@
           </div>
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.output') }}</span>
-            <span class="value">--</span>
+            <span class="value">{{ item.daynum }}</span>
           </div>
         </div>
 
