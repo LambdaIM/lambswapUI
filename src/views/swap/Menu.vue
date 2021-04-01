@@ -44,9 +44,9 @@ export default {
     toPage(name) {
       this.name = name;
       if (name === 'swap') {
-        this.$router.push('/exchange');
+        this.$router.push('/exchange/swap');
       } else if(name === 'pool') {
-        this.$router.push('/exchange/pool');
+        this.$router.push('/exchange/');
       }else{
           this.$router.push('/exchange/history');
       }
