@@ -21,7 +21,7 @@
         <div class="apy">
           <h4>{{ $t('earn.card.apy') }}</h4>
           <p class="percent">
-            {{ item.data && item.data.rewardRate | formatReward(365, scashPrice, item.data && item.data.totalSupply) }}%
+            {{ item.data && item.data.rewardRate | formatReward(365, scashPrice, item.data && item.data.totalSupply,item.poolValue) }}%
           </p>
         </div>
 

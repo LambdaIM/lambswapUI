@@ -138,7 +138,8 @@ const formatRate = (value) => {
   }
 };
 
-const formatReward = (value, days, scashPrice, totalSupply) => {
+const formatReward = (value, days, scashPrice, totalSupply,LPvalue) => {
+  console.log(value, days, scashPrice, totalSupply,LPvalue);
   if (!value) {
     return "0";
   }
@@ -150,7 +151,8 @@ const formatReward = (value, days, scashPrice, totalSupply) => {
     total = new BigNumber('1');
   }
   const scash = new BigNumber(scashPrice);
-  const reward = time.times(rate).div(total).times(scash).times('100').decimalPlaces(2).toNumber();
+  console.log(value, days, scashPrice, totalSupply,LPvalue,total.toNumber());
+  const reward = time.times(rate).div(LPvalue).times(scash).times('12').times('100').decimalPlaces(2).toNumber();
   return reward;
 };
 

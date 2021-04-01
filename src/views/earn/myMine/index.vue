@@ -9,11 +9,11 @@
           {{ row.name }}
         </template>
 
-        <template slot="apy" slot-scope="{ row }">
+        <!-- <template slot="apy" slot-scope="{ row }">
           <span class="text-success">
             {{ row.data && row.data.rewardRate | formatReward(365, scashPrice, row.data && row.data.totalSupply) }}%
           </span>
-        </template>
+        </template> -->
         <template slot="stake" slot-scope="{ row }">
           {{ row.data && row.data.balance }}
         </template>
@@ -109,10 +109,10 @@ export default {
           title: this.$t('myPage.table.pool'),
           slot: 'pool',
         },
-        {
-          title: this.$t('myPage.table.apy'),
-          slot: 'apy',
-        },
+        // {
+        //   title: this.$t('myPage.table.apy'),
+        //   slot: 'apy',
+        // },
         {
           title: this.$t('myPage.table.stake'),
           slot: 'stake',
