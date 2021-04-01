@@ -75,12 +75,12 @@ export default {
 
     // 获取手续费
     async getFee() {
-      console.log(this.pledgeAmount);
+      // console.log(this.pledgeAmount);
       try {
         const num = this.pledgeAmount.toString();
         const amount = this.web3.utils.toWei(num, 'ether');
         const tokenJson = this.data;
-        console.log(tokenJson,num,amount);
+        // console.log(tokenJson,num,amount);
         const stakingRewardsContract = useStakingRewardsContractSigna(this.ethersprovider, this.ethAddress, tokenJson);
         const esGas = await stakingRewardsContract.estimateGas.stake(amount);
         const gasPrice = await getGasPrice(this.ethersprovider);

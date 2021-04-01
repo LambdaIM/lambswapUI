@@ -4,8 +4,8 @@
       <div v-for="(item, index) in data" :key="index" class="list-item">
         <div class="name flex justify-start items-center">
           <div class="img-warpper">
-            <img src="../../../../assets/img/susd48.svg" alt="susd">
-            <img src="../../../../assets/img/susd48.svg" alt="susd" class="imgRight">
+            <img :src="item.img1" alt="susd">
+            <img :src="item.img2" alt="susd" class="imgRight">
           </div>
           <div class="right">
             <p class="coin">
@@ -100,6 +100,7 @@ export default {
       height: 48px;
       position: relative;
       img {
+        max-width: 48px;
         position: absolute;
         left: 0;
         bottom: 0;

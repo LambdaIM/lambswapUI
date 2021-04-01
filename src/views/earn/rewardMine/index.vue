@@ -16,6 +16,7 @@ import { mapState } from 'vuex';
 import { StakingRewardListbatch } from '../utils/helpUtils/mineUtilFunc.js';
 import event from '@/common/js/event';
 import { readpariInfoNuminfoEarn } from '@/contactLogic/readpairpool.js';
+import { getTokenImg } from '@/contactLogic/readbalance.js';
 export default {
   data() {
     return {
@@ -28,14 +29,14 @@ export default {
     singeMineList: () => import('./components/singleMineList.vue'),
     multiMineList: () => import('./components/multiMineList.vue'),
     loading: () => import('@/components/basic/loading.vue'),
-    airDrop: ()=> import('@/components/airDrop.vue'),
+    airDrop: () => import('@/components/airDrop.vue'),
   },
   methods: {
     async getListData() {
       this.showLoading = true;
       try {
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
-        console.log({data});
+        // console.log({ data });
         const tempLiquidity = data.filter((item) => item.kind === 'multi');
         // console.log({tempLiquidity});
         const result = [];
@@ -47,17 +48,22 @@ export default {
               ...item,
               poolValue: res.usdtNum,
               price: res.price,
+              img1: res.img1,
+              img2: res.img2,
             });
           }
         };
         await results();
+        // console.log(result);
         this.liquidityData = result;
 
         this.designatedData = data.filter((item) => item.kind === 'single');
       } catch (error) {
         console.log(error);
       } finally {
+        // setTimeout(() => {
         this.showLoading = false;
+        // }, 2000);
       }
     },
     async getPriceData(item) {
@@ -75,6 +81,9 @@ export default {
       );
       obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
       obj.price = data.price && data.price.toSignificant(6);
+      console.log(item);
+      obj.img1 = getTokenImg(item.symbol[0],this.ethChainID);
+      obj.img2 = getTokenImg(item.symbol[1],this.ethChainID);
       // if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
       //   this.$store.commit('changeScashPrice', obj.price);
       // }

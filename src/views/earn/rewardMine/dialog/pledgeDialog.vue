@@ -92,8 +92,8 @@
           </p>
           <div class="confirm-content">
             <div class="images-warpper items-center">
-              <img src="../../../../assets/img/comp.svg" width="48" alt="comp">
-              <img src="../../../../assets/img/comp.svg" width="48" alt="comp" class="img2">
+              <img :src="data.img1" alt="comp">
+              <img :src="data.img2" alt="comp" class="img2">
             </div>
             <h2>{{ pledgeAmount }}</h2>
             <p>{{ data.name }}</p>
@@ -104,8 +104,8 @@
               <span>{{ $t('earn.dialog.stakeDialog.asset') }}</span>
               <div>
                 <div class="images-warpper">
-                  <img src="../../../../assets/img/comp.svg" width="14" alt="comp">
-                  <img src="../../../../assets/img/comp.svg" width="14" alt="comp" class="img2">
+                  <img :src="data.img1" width="14" alt="comp">
+                  <img :src="data.img2" width="14" alt="comp" class="img2">
                 </div>
                 <p>{{ data.name }}</p>
               </div>
@@ -295,6 +295,7 @@
         height: 48px;
         position: relative;
         img {
+          max-width: 48px;
           position: absolute;
           left: -12px;
           top: 0;
@@ -344,6 +345,7 @@
           position: relative;
           margin-right: 8px;
           img {
+            max-width: 14px;
             position: absolute;
             left: 0;
             top: 0;
