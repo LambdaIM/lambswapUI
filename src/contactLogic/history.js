@@ -248,13 +248,13 @@ function stakeformat(item,chainID){
 
 function exitformat(item,chainID){
     const outamountA = item[0].amount;
-    const outamountB = item[1].amount;
+    const outamountB = item[1]?item[1].amount:'';
 
 
     const  tokenADDRESSA = item[0].amount_token_address ;
-    const  tokenADDRESSB = item[1].amount_token_address ;
+    const  tokenADDRESSB = item[1]?item[1].amount_token_address:'' ;
 
-    const  poolADDRESS = item[1].from ;
+    const  poolADDRESS = item[0].from ;
 
     return {
         outamountA,
