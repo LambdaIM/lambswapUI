@@ -15,7 +15,11 @@
           </template>
         </div>
         <div class="checkNotice">
-          <a class="underline" href="https://github.com/armors/armors_audits/blob/main/LambSwap_audit.pdf" target="_blank">
+          <a
+            class="underline noticeText"
+            href="https://github.com/armors/armors_audits/blob/main/LambSwap_audit.pdf"
+            target="_blank"
+          >
             {{ $t('check.notice') }}
           </a>
         </div>
@@ -103,6 +107,14 @@ export default {
           padding: 4px;
           border-radius: 0px;
           border-bottom: 2px solid #ff41a1;
+        }
+      }
+      .checkNotice {
+        .noticeText {
+          color: rgba(20, 23, 28, 0.4);
+          &:hover {
+            color: #ff41a1;
+          }
         }
       }
     }
