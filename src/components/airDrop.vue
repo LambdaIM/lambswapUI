@@ -36,12 +36,16 @@
           {{ $t('liquidity.airdrop.count') }}
         </p>
         <!-- <div class="count"> -->
-        <countDown class="count" date="2021-04-06T10:00:00+08:00" />
+        <!-- <countDown class="count" date="2021-04-06T10:00:00+08:00" /> -->
+        <countDown class="count" date="2021-04-02T19:08:00+08:00" />
         <!-- </div> -->
       </div>
 
       <div class="airdrop-item create">
-        <button class="createBtn disableBtn">
+        <button v-if="!isAbleOpen" class="createBtn disableBtn">
+          {{ $t('liquidity.airdrop.extract') }}
+        </button>
+        <button v-if="isAbleOpen" class="createBtn">
           {{ $t('liquidity.airdrop.extract') }}
         </button>
       </div>
@@ -50,7 +54,13 @@
 </template>
 
 <script>
+import event from '@/common/js/event';
 export default {
+  data() {
+    return {
+      isAbleOpen: false,
+    };
+  },
   components: {
     countDown: () => import('@/components/basic/countDown.vue'),
   },
@@ -63,6 +73,11 @@ export default {
     goBuild() {
       this.$router.push('/buildr/create');
     },
+  },
+  mounted() {
+    event.$on('open', () => {
+      this.isAbleOpen = true;
+    });
   },
 };
 </script>
