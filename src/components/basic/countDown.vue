@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import event from '@/common/js/event';
 export default {
   data() {
     return {
@@ -33,6 +34,9 @@ export default {
   mounted() {
     this.timer = setInterval(() => {
       this.now = Math.trunc(new Date().getTime() / 1000);
+      if(this.isReady) {
+        event.$emit('open');
+      }
     }, 1000);
   },
   computed: {
@@ -50,6 +54,13 @@ export default {
     },
     days() {
       return Math.trunc((this.dateInMilliseconds - this.now) / 60 / 60 / 24);
+    },
+    isReady() {
+      const secReady = this.seconds <= 0;
+      const minutesReady = this.minutes <= 0;
+      const hoursReady = this.hours <=0;
+      const daysReady = this.days <= 0;
+      return secReady && minutesReady && hoursReady && daysReady;
     },
   },
   beforeDestroy() {
