@@ -7,7 +7,8 @@ export default {
     stake: 'Stake',
     unstake: 'Unstake',
     claim: 'Claim',
-    claimAirdrop: 'Claim Airdrop'
+    claimAirdrop: 'Claim Airdrop',
+    unclaimAirdrop: 'Unclaim Airdrop'
   },
   tabMenu: {
     earn: 'Earn',
