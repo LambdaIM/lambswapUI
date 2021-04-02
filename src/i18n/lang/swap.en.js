@@ -105,7 +105,7 @@ export default {
     airdrop: {
       next: 'Next Airdrop',
       subTitle: 'Get airdrops based on average ratio and snapshots in LP Token Staking.',
-      title1: 'Airdrop Volume(estimated total 10000000 LAMB)',
+      title1: 'Airdrop Volume',
       tag: 'LAMB Airdrop',
       count: 'Countdown',
       extract: 'Claim'

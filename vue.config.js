@@ -13,6 +13,37 @@ process.env.VUE_APP_historylambswap= historylambswap;
 console.log(process.env);
 
 module.exports = {
+  pages: {
+    index: {
+      // entry for the page
+      entry: 'src/main.js',
+      // the source template
+      template: 'public/index.html',
+      // output as dist/index.html
+      filename: 'index.html',
+      // when using title option,
+      // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+      title: 'LambSwap 存储资产DEX',
+      // chunks to include on this page, by default includes
+      // extracted common chunks and vendor chunks.
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
+    },
+    indexEn: {
+      // entry for the page
+      entry: 'src/main.js',
+      // the source template
+      template: 'public/indexEn.html',
+      // output as dist/index.html
+      filename: 'indexEn.html',
+      // when using title option,
+      // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+      title: 'LambSwap Storage Digital Assets DEX',
+      // chunks to include on this page, by default includes
+      // extracted common chunks and vendor chunks.
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
+    }
+    
+  },
   configureWebpack: {
     // plugins: [
     //   new webpack.DefinePlugin({
