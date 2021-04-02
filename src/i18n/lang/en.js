@@ -50,5 +50,8 @@ export default {
     changeWallet:'Change Wallet',
     Disconnect:'Disconnect',
     AddLambwallet:'Add to Wallet'
+  },
+  check: {
+    notice: 'LambSwap is Audited by Armors'
   }
 };

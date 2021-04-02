@@ -1,18 +1,30 @@
 <template>
   <div class="earn-wrapper">
     <div class="content-wrapper">
-      <div class="switch-wrapper flex justify-start items-center">
-        <template v-for="(item, index) in menuList">
-          <button
-            :key="index"
-            class="menu-item"
-            :class="name === item.id ? 'active-menu' : ''"
-            @click="toPage(item.id)"
+      <div class="menu-wrapper flex justify-between items-center">
+        <div class="switch-wrapper flex justify-start items-center">
+          <template v-for="(item, index) in menuList">
+            <button
+              :key="index"
+              class="menu-item"
+              :class="name === item.id ? 'active-menu' : ''"
+              @click="toPage(item.id)"
+            >
+              {{ item.name }}
+            </button>
+          </template>
+        </div>
+        <div class="checkNotice">
+          <a
+            class="underline noticeText"
+            href="https://github.com/armors/armors_audits/blob/main/LambSwap_audit.pdf"
+            target="_blank"
           >
-            {{ item.name }}
-          </button>
-        </template>
+            {{ $t('check.notice') }}
+          </a>
+        </div>
       </div>
+
       <div class="earn-child-content">
         <router-view />
       </div>
@@ -79,23 +91,34 @@ export default {
   margin-top: 24px;
   .content-wrapper {
     width: 100%;
-    .switch-wrapper {
+    .menu-wrapper {
       margin-bottom: 24px;
-      .menu-item {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 500;
-        color: rgba(20, 23, 28, 0.4);
-        line-height: 19px;
-        margin-right: 48px;
+      .switch-wrapper {
+        .menu-item {
+          display: inline-block;
+          font-size: 16px;
+          font-weight: 500;
+          color: rgba(20, 23, 28, 0.4);
+          line-height: 19px;
+          margin-right: 48px;
+        }
+        .active-menu {
+          color: rgba(20, 23, 28, 1);
+          padding: 4px;
+          border-radius: 0px;
+          border-bottom: 2px solid #ff41a1;
+        }
       }
-      .active-menu {
-        color: rgba(20, 23, 28, 1);
-        padding: 4px;
-        border-radius: 0px;
-        border-bottom: 2px solid #FF41A1;
+      .checkNotice {
+        .noticeText {
+          color: rgba(20, 23, 28, 0.4);
+          &:hover {
+            color: #ff41a1;
+          }
+        }
       }
     }
+
     .earn-child-content {
       margin-bottom: 110px;
     }

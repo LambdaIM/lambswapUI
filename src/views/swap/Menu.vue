@@ -1,30 +1,38 @@
 <template>
   <div class="connect-wrapper">
     <div class="content-wrapper">
-      <div class="switch-wrapper flex justify-start items-center">
-        <button
-          class="menu-item"
-          :class="nameclass === 'pool'? 'active-menu':''"
-          @click="toPage('pool')"
-        >
-          {{ $t('swap.subMenu2') }}
-        </button>
-        
-        <button
-          class="menu-item"
-          :class="nameclass === 'swap'? 'active-menu':''"
-          @click="toPage('swap')"
-        >
-          {{ $t('swap.subMenu1') }}
-        </button>
-        
-        <button
-          class="menu-item"
-          :class="nameclass === 'history'? 'active-menu':''"
-          @click="toPage('history')"
-        >
-          {{ $t('swap.subMenu3') }}
-        </button>
+      <div class="menu-wrapper flex justify-between items-center">
+        <div class="switch-wrapper flex justify-start items-center">
+          <button
+            class="menu-item"
+            :class="nameclass === 'pool'? 'active-menu':''"
+            @click="toPage('pool')"
+          >
+            {{ $t('swap.subMenu2') }}
+          </button>
+
+          <button
+            class="menu-item"
+            :class="nameclass === 'swap'? 'active-menu':''"
+            @click="toPage('swap')"
+          >
+            {{ $t('swap.subMenu1') }}
+          </button>
+
+          <button
+            class="menu-item"
+            :class="nameclass === 'history'? 'active-menu':''"
+            @click="toPage('history')"
+          >
+            {{ $t('swap.subMenu3') }}
+          </button>
+        </div>
+
+        <div class="checkNotice">
+          <a class="underline noticeText" href="https://github.com/armors/armors_audits/blob/main/LambSwap_audit.pdf" target="_blank">
+            {{ $t('check.notice') }}
+          </a>
+        </div>
       </div>
       <router-view />
     </div>
@@ -45,23 +53,23 @@ export default {
       this.name = name;
       if (name === 'swap') {
         this.$router.push('/exchange/swap');
-      } else if(name === 'pool') {
+      } else if (name === 'pool') {
         this.$router.push('/exchange/');
-      }else{
-          this.$router.push('/exchange/history');
+      } else {
+        this.$router.push('/exchange/history');
       }
     },
   },
   mounted() {
     this.name = this.$route.name;
   },
-  computed:{
-    nameclass:function(){
-        const  name = this.$route.name;
-        console.log( name );
-        return name;
-    }
-  }
+  computed: {
+    nameclass: function () {
+      const name = this.$route.name;
+      console.log(name);
+      return name;
+    },
+  },
 };
 </script>
 
@@ -71,22 +79,32 @@ export default {
   // height: 100vh;
   .content-wrapper {
     width: 100%;
-    .switch-wrapper {
+    .menu-wrapper {
       margin-bottom: 24px;
-      // margin-left: 100px;
-      .menu-item {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 500;
-        color: rgba(20, 23, 28, 0.4);
-        line-height: 19px;
-        margin-right: 48px;
+      .switch-wrapper {
+        // margin-left: 100px;
+        .menu-item {
+          display: inline-block;
+          font-size: 16px;
+          font-weight: 500;
+          color: rgba(20, 23, 28, 0.4);
+          line-height: 19px;
+          margin-right: 48px;
+        }
+        .active-menu {
+          color: #ff41a1;
+          padding: 4px;
+          border-radius: 0px;
+          border-bottom: 2px solid #ff41a1;
+        }
       }
-      .active-menu {
-        color: #FF41A1;
-        padding: 4px;
-        border-radius: 0px;
-        border-bottom: 2px solid #FF41A1;
+      .checkNotice {
+        .noticeText {
+          color: rgba(20, 23, 28, 0.4);
+          &:hover {
+            color: #ff41a1;
+          }
+        }
       }
     }
   }

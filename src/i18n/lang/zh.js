@@ -51,4 +51,7 @@ export default {
     Disconnect: '解除连接',
     AddLambwallet:'添加至钱包'
   },
+  check: {
+    notice: 'LambSwap 智能合约已通过 Armors 审核'
+  }
 };
