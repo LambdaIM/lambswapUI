@@ -7,7 +7,8 @@ export default {
     stake: '质押',
     unstake: '取出',
     claim: '提取收益',
-    claimAirdrop: '提取空投'
+    claimAirdrop: '提取空投',
+    unclaimAirdrop: '未提取空投'
   },
   tabMenu: {
     earn: '收益挖矿',
