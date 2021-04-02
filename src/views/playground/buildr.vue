@@ -38,6 +38,14 @@
     <button @click="syncReward">
       读取铸造金库未提取的奖励
     </button>
+    <br>
+    <button @click="airDropread">
+      lamb 空投读取相关
+    </button>
+    <br>
+    <button @click="withdrawDropread">
+      提取 lamb 空投奖励
+    </button>
   </div>
 </template>
 <script>
@@ -65,6 +73,7 @@ import {StakingRewardListbatch} from '@/views/earn/utils/helpUtils/mineUtilFunc.
 import {getUnClaimedReward} from '@/contactLogic/earn/Reward.js';
 
 import {fetchCollateralIndicatorsCurrentDebt} from '@/contactLogic/buildr/create.js';
+import {userAirDropValue,withdrawAirDropGas,withdrawAirDropValue}  from '@/contactLogic/AirDrop.js'
 
 
 export default {
@@ -275,6 +284,26 @@ export default {
       console.log('参与铸造的scusd',data2.toString())
 
 
+
+    },
+   async airDropread(){
+      var chainID = this.ethChainID;
+      const account = this.ethAddress;
+      const library = this.ethersprovider;
+      var result = await userAirDropValue(library,account,chainID)
+
+      console.log('需要领取的奖励',result.toString())
+      var resultgas = await withdrawAirDropGas(library,account,chainID)
+      console.log('领取的奖励的gas',resultgas.toString())
+
+    },
+   async withdrawDropread(){
+      var chainID = this.ethChainID;
+      const account = this.ethAddress;
+      const library = this.ethersprovider;
+      
+      var result = await withdrawAirDropValue(library,account,chainID)
+      console.log('领取的奖励',result)
 
     }
 
