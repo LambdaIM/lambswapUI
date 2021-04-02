@@ -27,12 +27,12 @@
           <div class="rightdiv">
             <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[0] }}</span>
             <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[1] }}</span>
-            <span class="colorText">{{ $t('liquidity.pool.sharePool') }}</span>
+            <!-- <span class="colorText">{{ $t('liquidity.pool.sharePool') }}</span> -->
           </div>
           <div class="number">
-            <span>{{ item.aTokenbalance|formatNormalValue }}</span>
-            <span>{{ item.bTokenbalance |formatNormalValue }}</span>
-            <span class="colorText">{{ Calculatepercentage(item.balance,item.totalSupply) |formatRate }}</span>
+            <span>{{ item.aToketotalSupply |formatNormalValue }}</span>
+            <span>{{ item.bToketotalSupply |formatNormalValue }}</span>
+            <!-- <span class="colorText">{{ Calculatepercentage(item.balance,item.totalSupply) |formatRate }}</span> -->
           </div>
         </div>
 
@@ -135,6 +135,12 @@ export default {
       const account = this.ethAddress;
       try {
         const list = await readpairLiquidity(chainID, library, account);
+        list.forEach(element => {
+          element.aToketotalSupply = element.aToketotalSupply.toSignificant(6);
+          element.bToketotalSupply = element.bToketotalSupply.toSignificant(6);
+          
+        });
+
         console.log(list);
         this.$data.dataList = list;
       } catch (error) {
