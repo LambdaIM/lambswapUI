@@ -301,7 +301,7 @@ export default {
       var chainID = this.ethChainID;
       const account = this.ethAddress;
       const library = this.ethersprovider;
-      
+
       var result = await withdrawAirDropValue(library,account,chainID)
       console.log('领取的奖励',result)
 
