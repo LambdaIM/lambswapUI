@@ -54,6 +54,8 @@ import ABI_CollateralState from "../constants/abis/CollateralState.json";
 
 import ABI_ERC20_LAMBDA from "../constants/abis/erc20lambda.json";
 
+import ABI_AirDrop from "../constants/abis/AirDrop.json";
+
 
 // returns null on errors
 function useContract(
@@ -336,6 +338,22 @@ export function useErc20LambdaContract(
     account,
     tokenAddress,
     ABI_ERC20_LAMBDA,
+    withSignerIfPossible
+  );
+}
+
+export function useAirDropContract(
+  library,
+  account,
+  tokenAddress,
+  withSignerIfPossible
+) {
+
+  return useContract(
+    library,
+    account,
+    tokenAddress,
+    ABI_AirDrop,
     withSignerIfPossible
   );
 }
