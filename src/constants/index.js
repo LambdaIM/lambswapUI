@@ -38,5 +38,7 @@ export const PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN = new Percent(JSBI.BigInt(1000
 // for non expert mode disable swaps above this
 export const BLOCKED_PRICE_IMPACT_NON_EXPERT = new Percent(JSBI.BigInt(1500), BIPS_BASE); // 15%
 
+export const AirDropper_address ='0x0559DfceeeEdB151454a51a56Cf2270F1E122371';
+
 
 
