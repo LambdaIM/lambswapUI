@@ -268,7 +268,7 @@ export default {
     .left-wrapper {
       height: 100%;
       .menu-wrapper {
-        margin-left: 80px;
+        margin-left: 50px;
         .menu-item {
           display: inline-block;
           text-align: center;
@@ -400,12 +400,11 @@ export default {
 }
 
 .connectBtnadd{
-  padding-left:5px ;
-  padding-right:5px ;
+  padding: 0 8px;
   height: 28px;
   border-radius: 10px;
   line-height: 19px;
-  
+
   color: #FF41A1;
   border: 1px solid #FF41A1;
   border-radius: 14px;
