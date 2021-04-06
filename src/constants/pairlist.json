@@ -11,6 +11,11 @@
     {
         "chainId": 128,
         
+        "pair":["GOAT","LAMB"]
+    },
+    {
+        "chainId": 128,
+        
         "pair":["LAMB","USDT"]
     },
     {
@@ -23,7 +28,6 @@
         
         "pair":["LAMB","FIL"]
     },
-
     {
         "chainId": 4,
         "pair":["USDT","scUSD"]
