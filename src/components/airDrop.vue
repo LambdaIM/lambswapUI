@@ -35,8 +35,14 @@
         <!-- <p class="drop-title">
           {{ $t('liquidity.airdrop.count') }}
         </p> -->
-        <p>
+        <p class="drop-title">
           {{ $t('liquidity.airdrop.t1') }}
+        </p>
+        <p class="mt-1">
+          {{ $t('liquidity.airdrop.t2') }}
+        </p>
+        <p class="mt-1">
+          {{ $t('liquidity.airdrop.t3') }}
         </p>
         <!-- <div class="count"> -->
         <!-- <countDown class="count" date="2021-04-06T10:00:00+08:00" /> -->
@@ -219,7 +225,7 @@ export default {
   color: #ffffff;
   line-height: 19px;
   padding: 8px 16px;
-  background: #0058ff;
+  background: #ff41a1;
   border-radius: 18px;
 }
 .drop-title {
