@@ -100,10 +100,11 @@ export default {
       airdrop: {
         next: '下次空投时间',
         subTitle: '对 LP Token 质押期间进行不定期快照，根据平均占比获取空投额度',
-        title1: '空投量（总量预计10,000,000LAMB)',
+        title1: '空投量',
         tag: 'LAMB 空投',
         count: '倒计时',
-        extract: '提取'
+        extract: '提取',
+        t1: '2000000 LAMB 社区奖励正在空投中...'
       }
     },
 };

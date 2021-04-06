@@ -4,7 +4,7 @@
       <div class="left">
         <span class="title">LAMB</span>
         <span class="next">{{ $t('liquidity.airdrop.next') }}</span>
-        <span class="time">2021.4.6 10:00(UTC+8)</span>
+        <span class="time">2021.4.28 10:00(UTC+8)</span>
       </div>
       <div class="right">
         {{ $t('liquidity.airdrop.subTitle') }}
@@ -32,11 +32,14 @@
       </div>
 
       <div class="airdrop-item countdown">
-        <p class="drop-title">
+        <!-- <p class="drop-title">
           {{ $t('liquidity.airdrop.count') }}
+        </p> -->
+        <p>
+          {{ $t('liquidity.airdrop.t1') }}
         </p>
         <!-- <div class="count"> -->
-        <countDown class="count" date="2021-04-06T10:00:00+08:00" />
+        <!-- <countDown class="count" date="2021-04-06T10:00:00+08:00" /> -->
         <!-- <countDown class="count" date="2021-04-02T19:08:00+08:00" /> -->
         <!-- </div> -->
       </div>
@@ -56,7 +59,7 @@
 </template>
 
 <script>
-import event from '@/common/js/event';
+// import event from '@/common/js/event';
 import { userAirDropValue } from '@/contactLogic/AirDrop.js';
 import { mapState } from 'vuex';
 const BigNumber = require('bignumber.js');
@@ -83,11 +86,11 @@ export default {
       return this.ethChainID && this.ethersprovider && this.ethAddress;
     },
   },
-  isReady(value) {
-    if (value) {
-      this.airDropRead();
-    }
-  },
+  // isReady(value) {
+  //   if (value) {
+  //     this.airDropRead();
+  //   }
+  // },
   methods: {
     openExtract() {
       this.$refs.extract.open(this.unclaim);
@@ -108,9 +111,9 @@ export default {
     if (this.isReady) {
       this.airDropRead();
     }
-    event.$on('open', () => {
-      this.isAbleOpen = true;
-    });
+    // event.$on('open', () => {
+    //   this.isAbleOpen = true;
+    // });
   },
 };
 </script>
