@@ -45,10 +45,10 @@
       </div>
 
       <div class="airdrop-item create">
-        <button v-if="!isAbleOpen || !ethAddress" class="createBtn disableBtn">
+        <!-- <button v-if="!isAbleOpen || !ethAddress" class="createBtn disableBtn">
           {{ $t('liquidity.airdrop.extract') }}
-        </button>
-        <button v-if="isAbleOpen && ethAddress" class="createBtn" @click="openExtract">
+        </button> -->
+        <button class="createBtn" @click="openExtract">
           {{ $t('liquidity.airdrop.extract') }}
         </button>
       </div>
