@@ -29,6 +29,7 @@
             </div>
             <p class="price">
               {{ item.price | formatNormalValue }}
+              <span v-if="item.pairName=='GOAT/LAMB'&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
             </p>
             <p :class="item.change == '+' ? 'change' : 'change decline'">
               {{ item.change }} {{ item.prisechange | formatRate }}
@@ -195,6 +196,7 @@ export default {
       gasfee: '',
       pairlistloading: false,
       inputnotice: '',
+      LAMB_USDT:''
     };
   },
   components: {
@@ -219,7 +221,17 @@ export default {
       this.$data.pairlistloading = false;
 
       console.log({ data });
-      this.$data.pairlist = data;
+      this.$data.pairlist = data||[];
+      const _this= this;
+      this.$data.pairlist.forEach(element => {
+        console.log(element);
+        if(element.pairName=='LAMB/USDT'){
+          _this.$data.LAMB_USDT =element.price;
+
+        }
+        
+      });
+
       if (data && data[0] && this.selectPairOBJ === null) {
         setTimeout(() => {
           this.selectPair(data[0]);
@@ -699,4 +711,11 @@ export default {
   height: 100px;
   position: relative;
 }
+
+.goatprice{
+  font-size: 12px;
+  color: #9fa3a7;
+  display: block;
+}
+
 </style>

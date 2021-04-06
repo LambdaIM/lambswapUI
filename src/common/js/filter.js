@@ -57,6 +57,20 @@ const formatNormalValue = (value) => {
   return returnVal;
 };
 
+
+const formatNormal3Value = (value) => {
+  if (!value) {
+    return 0;
+  }
+  const val = String(value);
+  const bigValue = new BigNumber(val);
+  const returnVal = bigValue.div(1).decimalPlaces(3).toNumber();
+  if (returnVal < 0.000001) {
+    return "<0.000001";
+  }
+  return returnVal;
+};
+
 const formatDate = (value) => {
   if (value == "" || value == undefined) {
     return "";
@@ -194,5 +208,6 @@ export default {
   formatReward,
   formatBalanceNumber,
   format1e18ValueList,
-  two_digits
+  two_digits,
+  formatNormal3Value
 };
