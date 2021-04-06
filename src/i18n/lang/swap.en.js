@@ -108,7 +108,8 @@ export default {
       title1: 'Airdrop Volume',
       tag: 'LAMB Airdrop',
       count: 'Countdown',
-      extract: 'Claim'
+      extract: 'Claim',
+      t1: '2000000 LAMB Airdrop Bonus are being sent...'
     }
   },
 };
