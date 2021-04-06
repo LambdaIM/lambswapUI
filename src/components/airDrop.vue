@@ -37,32 +37,80 @@
         </p>
         <!-- <div class="count"> -->
         <countDown class="count" date="2021-04-06T10:00:00+08:00" />
+        <!-- <countDown class="count" date="2021-04-02T19:08:00+08:00" /> -->
         <!-- </div> -->
       </div>
 
       <div class="airdrop-item create">
-        <button class="createBtn disableBtn">
+        <button v-if="!isAbleOpen || !ethAddress" class="createBtn disableBtn">
+          {{ $t('liquidity.airdrop.extract') }}
+        </button>
+        <button v-if="isAbleOpen && ethAddress" class="createBtn" @click="openExtract">
           {{ $t('liquidity.airdrop.extract') }}
         </button>
       </div>
     </div>
+
+    <extractDialog ref="extract" />
   </div>
 </template>
 
 <script>
+import event from '@/common/js/event';
+import { userAirDropValue } from '@/contactLogic/AirDrop.js';
+import { mapState } from 'vuex';
+const BigNumber = require('bignumber.js');
+BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 export default {
+  data() {
+    return {
+      isAbleOpen: false,
+      unclaim: '',
+    };
+  },
   components: {
     countDown: () => import('@/components/basic/countDown.vue'),
+    extractDialog: () => import('@/components/extractDialog'),
   },
   props: {
     data: {
       type: Array,
     },
   },
-  methods: {
-    goBuild() {
-      this.$router.push('/buildr/create');
+  computed: {
+    ...mapState(['ethChainID', 'ethAddress', 'ethersprovider']),
+    isReady() {
+      return this.ethChainID && this.ethersprovider && this.ethAddress;
     },
+  },
+  isReady(value) {
+    if (value) {
+      this.airDropRead();
+    }
+  },
+  methods: {
+    openExtract() {
+      this.$refs.extract.open(this.unclaim);
+    },
+    async airDropRead() {
+      try {
+        const chainID = this.ethChainID;
+        const account = this.ethAddress;
+        const library = this.ethersprovider;
+        const result = await userAirDropValue(library, account, chainID);
+        this.unclaim = new BigNumber(result.toString()).div('1e18').decimalPlaces(2).toNumber();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  mounted() {
+    if (this.isReady) {
+      this.airDropRead();
+    }
+    event.$on('open', () => {
+      this.isAbleOpen = true;
+    });
   },
 };
 </script>

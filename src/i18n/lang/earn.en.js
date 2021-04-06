@@ -6,7 +6,9 @@ export default {
     willRecieive: 'You will receive',
     stake: 'Stake',
     unstake: 'Unstake',
-    claim: 'Claim'
+    claim: 'Claim',
+    claimAirdrop: 'Claim Airdrop',
+    unclaimAirdrop: 'Unclaim Airdrop'
   },
   tabMenu: {
     earn: 'Earn',
