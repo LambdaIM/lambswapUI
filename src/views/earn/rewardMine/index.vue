@@ -84,10 +84,10 @@ export default {
       console.log(item);
       obj.img1 = getTokenImg(item.symbol[0],this.ethChainID);
       obj.img2 = getTokenImg(item.symbol[1],this.ethChainID);
-      // if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
-      //   this.$store.commit('changeScashPrice', obj.price);
-      // }
-      this.$store.commit('changeScashPrice', 100);
+      if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
+        this.$store.commit('changeScashPrice', obj.price);
+      }
+      // this.$store.commit('changeScashPrice', 100);
       this.$store.commit('changeEarnPrice', obj.price);
       return obj;
     },

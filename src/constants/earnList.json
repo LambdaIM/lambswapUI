@@ -1,4 +1,16 @@
-[  {
+[
+  {
+    "name": "GOAT/LAMB LP",
+    "address": "0xFd13C96907feaA52b07A9640dd7a93b7C47BfeEd",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum":"333",
+    "symbol": [
+      "GOAT",
+      "LAMB"
+    ]
+  }, {
   "name": "ETH/LAMB LP",
   "address": "0xD52adC338824b8359AD6ED873A32b68b0c95c38e",
   "decimals": 18,
