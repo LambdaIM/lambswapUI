@@ -4,7 +4,7 @@
       <div class="left-wrapper">
         <div class="logo-wrapper flex justify-between items-center">
           <img src="../../assets/foot.png" alt="logo">
-          <img class="ml-3" src="../../assets/lamb.svg" alt="lamb">
+          <img class="ml-6" src="../../assets/lamb.png" alt="lamb">
         </div>
         <p>© 2021 LambSwap All rights reserved</p>
       </div>
