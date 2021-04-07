@@ -10,7 +10,7 @@
             <span class="card-title">{{ $t('common.amount') }}</span>
             <div class="balance-item">
               <span class="mr-2 text-secondary">{{ $t('common.unclaimAirdrop') }}</span>
-              <span>{{ claimAmount }} LAMB</span>
+              <span>{{ claimAmount || 0 }} LAMB</span>
             </div>
           </div>
           <div class="claim-wrapper">

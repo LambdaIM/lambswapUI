@@ -108,6 +108,7 @@ export default {
         const library = this.ethersprovider;
         const result = await userAirDropValue(library, account, chainID);
         this.unclaim = new BigNumber(result.toString()).div('1e18').decimalPlaces(2).toNumber();
+        console.log(this.unclaim);
       } catch (error) {
         console.log(error);
       }
