@@ -2,8 +2,9 @@
   <footer class="footer-wrapper">
     <div class="footer-content container mx-auto flex justify-between items-center">
       <div class="left-wrapper">
-        <div class="logo-wrapper">
+        <div class="logo-wrapper flex justify-between items-center">
           <img src="../../assets/foot.png" alt="logo">
+          <img class="ml-3" src="../../assets/lamb.svg" alt="lamb">
         </div>
         <p>© 2021 LambSwap All rights reserved</p>
       </div>
