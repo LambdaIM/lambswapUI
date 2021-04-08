@@ -26,14 +26,22 @@
             </a>
           </div> -->
         </div>
-        <Select v-model="lang" class="lang-wrapper" style="width: 124px" @on-change="getSelectLang">
-          <Option value="zh">
-            简体中文
-          </Option>
-          <Option value="en">
-            English
-          </Option>
-        </Select>
+        <div class=" flex items-center">
+          <div class="wechat">
+            <div class="isShow">
+              <img src="../../assets/img/erweima.jpg" alt="erweima">
+            </div>
+            <img src="../../assets/img/WeChat.png" alt="WeChat">
+          </div>
+          <Select v-model="lang" class="lang-wrapper" style="width: 124px" @on-change="getSelectLang">
+            <Option value="zh">
+              简体中文
+            </Option>
+            <Option value="en">
+              English
+            </Option>
+          </Select>
+        </div>
       </div>
     </div>
   </footer>
@@ -41,7 +49,7 @@
 
 
 <script>
-import jscookie from 'js-cookie';
+import jscookie from "js-cookie";
 export default {
   data() {
     return {
@@ -51,8 +59,8 @@ export default {
   methods: {
     // 获取语言key
     getKey() {
-      const key = jscookie.get('langkey');
-      key === 'zh' ? (this.lang = 'zh') : (this.lang = 'en');
+      const key = jscookie.get("langkey");
+      key === "zh" ? (this.lang = "zh") : (this.lang = "en");
       this.$i18n.locale = this.lang;
     },
 
@@ -60,7 +68,7 @@ export default {
     getSelectLang(val) {
       this.lang = val;
       this.$i18n.locale = this.lang;
-      jscookie.set('langkey', this.lang, { expires: 180 });
+      jscookie.set("langkey", this.lang, { expires: 180 });
     },
   },
   mounted() {
@@ -95,7 +103,37 @@ export default {
     }
   }
 }
+.wechat {
+  cursor: pointer;
+  position: relative;
+  .isShow {
+    display: none;
+    position: absolute;
+    left: -90px;
+    top: -225px;
+    img {
+      max-width: 200px;
+    }
+  }
+  ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 90px;
+    bottom: -38px;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top: 20px solid #fff;
+  }
+  img {
+    max-width: 40px;
+  }
+}
+.wechat:hover .isShow{
+  display:block;
+}
 .lang-wrapper {
-  margin-left: 48px;
+  margin-left: 20px;
 }
 </style>
