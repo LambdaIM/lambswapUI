@@ -25,7 +25,7 @@
           <DropdownMenu slot="list" class="list-wrapper">
             <template v-for="(item, index) in tokenList">
               <DropdownItem :key="index" class="list-item" :name="index">
-                <img :src="item.imgSrc" :alt="item">
+                <img :src="item.imgSrc">
                 <span>{{ item.name }}</span>
               </DropdownItem>
             </template>
@@ -106,19 +106,19 @@ export default {
       statusVal: '',
       tokenList:[{
         isBan:true,
-        imgSrc:'https://s2.bqiapp.com/logo/1/lambda_72.png?v=64',
+        imgSrc:'https://www.lambswap.fi/tokenlogo/lamb48.svg',
         name:'LAMB'
       },{
         isBan:true,
-        imgSrc:'https://s2.bqiapp.com/logo/1/tether.png?x-oss-process=style/coin_72',
+        imgSrc:'https://www.lambswap.fi/tokenlogo/usdt48.svg',
         name:'USDT'
       },{
         isBan:true,
-        imgSrc:'https://s2.bqiapp.com/logo/1/filecoinnew.png?x-oss-process=style/coin_72&v=1602728806',
+        imgSrc:'https://www.lambswap.fi/tokenlogo/fil.png',
         name:'FIL'
       },{
         isBan:true,
-        imgSrc:'https://s2.bqiapp.com/logo/1/ethereum.png?x-oss-process=style/coin_72',
+        imgSrc:'https://www.lambswap.fi/tokenlogo/eth48.svg',
         name:'ETH'
       },{
         isBan:true,
