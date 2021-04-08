@@ -11,7 +11,8 @@ import getethProvider from '@/contacthelp/getethProvider.js';
 import _ from 'underscore';
 
 import {
-  useTokenContractMulticall
+  useTokenContractMulticall,
+  useIUniswapV2PairABIContractMulticall
 } from "../contacthelp/useContractMulticall.js";
 import { Contract, Provider } from '@webfans/ethers-multicall';
 import { ethers } from 'ethers';
@@ -49,26 +50,26 @@ export async function readpairpool(chainID, library) {
   const tokenList = _.where(token.tokens, { chainId: chainID });
   const callList = [];
 
-  list.forEach(async element => {
+  // list.forEach(async element => {
 
-    const coinA = _.find(tokenList, { symbol: element.pair[0] });
-    const coinB = _.find(tokenList, { symbol: element.pair[1] });
-    const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
-    const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
-    try {
-      const pairCall = Fetcher.fetchPairData(TokenA, TokenB, getethProvider(TokenB));
-      callList.push(pairCall);
-    } catch (error) {
-      console.log(error);
-      console.log(coinA.symbol,coinB.symbol);
+  //   const coinA = _.find(tokenList, { symbol: element.pair[0] });
+  //   const coinB = _.find(tokenList, { symbol: element.pair[1] });
+  //   const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
+  //   const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
+  //   try {
+  //     const pairCall = Fetcher.fetchPairData(TokenA, TokenB, getethProvider(TokenB));
+  //     callList.push(pairCall);
+  //   } catch (error) {
+  //     console.log(error);
+  //     console.log(coinA.symbol,coinB.symbol);
 
-    }
+  //   }
 
 
-  });
+  // });
   let PairList;
 //  try {
-   PairList = await Promise.all(callList);
+   PairList = await pairList(chainID,library);
 //  } catch (error) {
 //    console.log('error',error,callList);
 //    PairList=[];
@@ -106,7 +107,7 @@ export async function readpairpool(chainID, library) {
 
 
 
-    PricePromiseList.push(getpairPrice(pairaddress, chainID, target.pair[0], target.pair[1]));
+    // PricePromiseList.push(getpairPrice(pairaddress, chainID, target.pair[0], target.pair[1]));
 
     dataList.push({
       Pair: element,
@@ -120,35 +121,35 @@ export async function readpairpool(chainID, library) {
 
   });
 
-  const PriceList = await Promise.all(PricePromiseList);
+  // const PriceList = await Promise.all(PricePromiseList);
   // console.log('PriceList', PriceList);
-  dataList.forEach((item) => {
+  // dataList.forEach((item) => {
 
-    const prise24 = _.find(PriceList, (one) => {
-      if (one&&one[item.pairName]) {
-        return one;
+  //   const prise24 = _.find(PriceList, (one) => {
+  //     if (one&&one[item.pairName]) {
+  //       return one;
 
-      }
+  //     }
 
-    });
-    if (prise24) {
-      item.prise24 = prise24[item.pairName];
-      if (item.price - item.prise24 > 0) {
-        item.change = '+';
-      } else {
-        item.change = '-';
-      }
-      item.prisechange = Math.abs((item.price - item.prise24) / item.prise24);
-
-
-
-    } else {
-      item.prisechange = '';
-    }
+  //   });
+  //   if (prise24) {
+  //     item.prise24 = prise24[item.pairName];
+  //     if (item.price - item.prise24 > 0) {
+  //       item.change = '+';
+  //     } else {
+  //       item.change = '-';
+  //     }
+  //     item.prisechange = Math.abs((item.price - item.prise24) / item.prise24);
 
 
 
-  });
+  //   } else {
+  //     item.prisechange = '';
+  //   }
+
+
+
+  // });
 
   // console.log(dataList);
   return dataList;
@@ -563,10 +564,12 @@ export async function getpairPrice(pairaddress, chainID, tokenA, tokenB) {
 
 }
 
-export async function pairList(chainID){
+export async function pairList(chainID,library){
   const list = _.where(pairlist, { chainId: chainID });
   const tokenList = _.where(token.tokens, { chainId: chainID });
   const callList = [];
+
+  console.log('pairList');
 
   list.forEach(async element => {
 
@@ -577,17 +580,42 @@ export async function pairList(chainID){
     const pairAddress = Pair.getAddress(TokenA, TokenB);
     console.log(TokenA, TokenB,pairAddress);
 
-    // try {
-    //   const pairCall = Fetcher.fetchPairData(TokenA, TokenB, getethProvider(TokenB));
-    //   callList.push(pairCall);
-    // } catch (error) {
-    //   console.log(error);
-    //   console.log(coinA.symbol,coinB.symbol);
-
-    // }
-
-
+    const UniswapV2Pair = useIUniswapV2PairABIContractMulticall({address:pairAddress});
+    callList.push(UniswapV2Pair.token0()); 
+    callList.push(UniswapV2Pair.token1()); 
+    callList.push(UniswapV2Pair.getReserves()); 
   });
+  
+  const ethcallProvider = new Provider(library,chainID);
+    await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
+    const result = await ethcallProvider.all(callList);
+    console.log(result);
+    const pairList = [];
+    for (let index = 0; index < result.length; index+=3) {
+      const tokrnAddressA = result[index];
+      const tokrnAddressB = result[index+1];
+      const [reserve0, reserve1] = result[index+2];
+
+      const coinA = _.find(tokenList, (item)=>{
+          return item.address.toLowerCase() == tokrnAddressA.toLowerCase();
+      });
+      const coinB = _.find(tokenList, (item)=>{
+          return item.address.toLowerCase() == tokrnAddressB.toLowerCase();
+        });
+
+      const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
+      const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
+
+      const tokens = [TokenA,TokenB];
+      const [token0, token1] = tokens[0].sortsBefore(tokens[1]) ? tokens : [tokens[1], tokens[0]];
+    
+      const pair = new Pair(new TokenAmount(token0, reserve0), new TokenAmount(token1, reserve1));
+      console.log(pair);
+      pairList.push(pair);
+      
+    }
+
+    return pairList;
 
 }
 

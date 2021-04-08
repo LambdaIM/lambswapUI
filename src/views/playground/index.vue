@@ -310,8 +310,8 @@ export default {
    async getpairList(){
       const chainId = this.ethChainID;
       const library = this.ethersprovider;
-      var data = await pairList(chainId);
-      console.log(data)
+      var data = await pairList(chainId,library);
+      console.log('批量读取结果',data)
     }
   },
   computed: {
