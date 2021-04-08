@@ -16,9 +16,21 @@
       </div>
 
       <div class="connect-wrapper flex justify-between items-center">
-        <button v-if="ethChainID" class="connectBtnadd" @click="addtoken">
-          {{ $t('header.AddLambwallet') }}
-        </button>
+        <Dropdown v-if="ethChainID" trigger="click" class="network-wrapper" style="width:150px" @on-click="addtoken">
+          <div class="netWork flex justify-between items-center" style="width:160px">
+            <div class="dot" />
+            <span>{{ $t('header.AddLambwallet') }}</span>
+            <img class="arrow" src="../../assets/img/down.svg" alt="down">
+          </div>
+          <DropdownMenu slot="list" class="list-wrapper">
+            <template v-for="(item, index) in tokenList">
+              <DropdownItem :key="index" class="list-item" :name="index">
+                <img :src="item.imgSrc" :alt="item">
+                <span>{{ item.name }}</span>
+              </DropdownItem>
+            </template>
+          </DropdownMenu>
+        </Dropdown>
 
         <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
@@ -92,12 +104,35 @@ export default {
       netInfo: config.netInfo,
       netID: '1',
       statusVal: '',
+      tokenList:[{
+        isBan:true,
+        imgSrc:'https://s2.bqiapp.com/logo/1/lambda_72.png?v=64',
+        name:'LAMB'
+      },{
+        isBan:true,
+        imgSrc:'https://s2.bqiapp.com/logo/1/tether.png?x-oss-process=style/coin_72',
+        name:'USDT'
+      },{
+        isBan:true,
+        imgSrc:'https://s2.bqiapp.com/logo/1/filecoinnew.png?x-oss-process=style/coin_72&v=1602728806',
+        name:'FIL'
+      },{
+        isBan:true,
+        imgSrc:'https://s2.bqiapp.com/logo/1/ethereum.png?x-oss-process=style/coin_72',
+        name:'ETH'
+      },{
+        isBan:true,
+        imgSrc:'https://www.lambswap.fi/tokenlogo/goat.jpg',
+        name:'GOAT'
+      }]
     };
   },
   methods: {
-   async addtoken(){
+   async addtoken(index){
+      const item = this.$data.tokenList[index];
+     
       const chainID = this.ethChainID;
-      const TokenA = getToken('LAMB', chainID);
+      const TokenA = getToken(item.name, chainID);
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
         const wasAdded = await window.ethereum.request({
@@ -108,7 +143,7 @@ export default {
               address: TokenA.address, // The address that the token is at.
               symbol: TokenA.symbol, // A ticker symbol or shorthand, up to 5 chars.
               decimals: TokenA.decimals, // The number of decimals in the token
-              image: 'https://s2.bqiapp.com/logo/1/lambda_72.png?v=64', // A string url of the token logo
+              image: item.imgSrc, // A string url of the token logo
             },
           },
         });
