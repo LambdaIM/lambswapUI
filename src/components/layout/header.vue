@@ -16,8 +16,8 @@
       </div>
 
       <div class="connect-wrapper flex justify-between items-center">
-        <Dropdown v-if="ethChainID" trigger="click" class="network-wrapper" @on-click="addtoken">
-          <div class="netWork flex justify-between items-center" :class="getBg">
+        <Dropdown v-if="ethChainID" trigger="click" class="network-wrapper" style="width:150px" @on-click="addtoken">
+          <div class="netWork flex justify-between items-center" style="width:160px">
             <div class="dot" />
             <span>{{ $t('header.AddLambwallet') }}</span>
             <img class="arrow" src="../../assets/img/down.svg" alt="down">
