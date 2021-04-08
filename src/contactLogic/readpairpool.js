@@ -581,9 +581,12 @@ export async function pairList(chainID,library){
     console.log(TokenA, TokenB,pairAddress);
 
     const UniswapV2Pair = useIUniswapV2PairABIContractMulticall({address:pairAddress});
+
     callList.push(UniswapV2Pair.token0()); 
     callList.push(UniswapV2Pair.token1()); 
     callList.push(UniswapV2Pair.getReserves()); 
+
+
   });
   
   const ethcallProvider = new Provider(library,chainID);
@@ -616,6 +619,98 @@ export async function pairList(chainID,library){
     }
 
     return pairList;
+
+}
+
+export async function pairListEarn(chainID, library) {
+  // console.log('readpariInfoNuminfo');
+  // const pairInfo = await readpariInfo(chainID, library, tokensymbolA, tokensymbolB);
+  const pairListInfo = await pairList(chainID,library);
+  const callList = [];
+
+  pairListInfo.forEach((pairInfo)=>{
+    const TokenContract = useTokenContractMulticall(pairInfo.liquidityToken);
+      callList.push(TokenContract.totalSupply());
+  });
+
+
+  
+  //  callList.push(TokenContract.balanceOf(account));
+
+  const ethcallProvider = new Provider(library, chainID);
+  await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
+  const listresult = await ethcallProvider.all(callList);
+  const resultList =[];
+
+  pairListInfo.forEach((pairInfo,index)=>{
+    const totalSupply = listresult[index];
+
+    const totalSupplyTokenAmount = new TokenAmount(pairInfo.liquidityToken, totalSupply.toString());
+
+    
+
+    //  const aToketotalSupply = pairInfo.getLiquidityValue(pairInfo.tokenAmounts[0].token, totalSupplyTokenAmount, totalSupplyTokenAmount, false);
+    //  const bToketotalSupply = pairInfo.getLiquidityValue(pairInfo.tokenAmounts[1].token, totalSupplyTokenAmount, totalSupplyTokenAmount, false);
+
+    const aTokenbalance = (pledgebalance)=>{
+      const balanceTokenAmount = new TokenAmount(pairInfo.liquidityToken, pledgebalance.toString());
+     return pairInfo.getLiquidityValue(pairInfo.tokenAmounts[0].token, totalSupplyTokenAmount, balanceTokenAmount, false);
+
+    }; 
+    const bTokenbalance =(pledgebalance)=>{
+      const balanceTokenAmount = new TokenAmount(pairInfo.liquidityToken, pledgebalance.toString());
+     return pairInfo.getLiquidityValue(pairInfo.tokenAmounts[1].token, totalSupplyTokenAmount, balanceTokenAmount, false);
+    }; 
+
+    const route = new Route([pairInfo], pairInfo.tokenAmounts[0].token);
+    //tokensymbolA, tokensymbolB
+    
+    const price=(tokensymbolA,tokensymbolB)=>{
+      let price;
+      const pairprice={};
+      if(tokensymbolB ==  pairInfo.tokenAmounts[0].token.symbol){
+        price = route.pairs[0].priceOf(pairInfo.tokenAmounts[1].token);
+        pairprice[tokensymbolA+"/"+tokensymbolB] = route.pairs[0].priceOf(pairInfo.tokenAmounts[1].token).toSignificant(6);
+        pairprice[tokensymbolB+"/"+tokensymbolA] = route.pairs[0].priceOf(pairInfo.tokenAmounts[0].token).toSignificant(6);
+      }else{
+        price = route.pairs[0].priceOf(pairInfo.tokenAmounts[0].token);
+        pairprice[tokensymbolB+"/"+tokensymbolA] = route.pairs[0].priceOf(pairInfo.tokenAmounts[1].token).toSignificant(6);
+        pairprice[tokensymbolA+"/"+tokensymbolB] = route.pairs[0].priceOf(pairInfo.tokenAmounts[0].token).toSignificant(6);
+      }
+      return {
+        price,
+        pairprice,
+        priceinvert: price.invert(),
+      };
+
+    };
+
+    
+
+    resultList.push({
+      pairInfo,
+      // aToketotalSupply,
+      // bToketotalSupply,
+      aTokenbalance,
+      bTokenbalance,
+      totalSupply,
+      price,
+      // priceinvert: price.invert(),
+      // pairprice
+  
+    });
+    
+  });
+
+  
+  //  const  balance = listresult[1];
+
+
+  // console.log(pairprice);
+
+
+
+  return resultList;
 
 }
 

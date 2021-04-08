@@ -111,7 +111,8 @@ import {
   buildAddliquidityParam,
   checkoutTokenAllowance,
   readpariInfoNuminfo,
-  pairList
+  pairList,
+  pairListEarn
 } from '@/contactLogic/readpairpool.js';
 import { readSwapBalance, getToken } from '@/contactLogic/readbalance.js';
 
@@ -312,6 +313,10 @@ export default {
       const library = this.ethersprovider;
       var data = await pairList(chainId,library);
       console.log('批量读取结果',data)
+
+      var data1 = await pairListEarn(chainId,library);
+      console.log('批量读取结果2',data1)
+      
     }
   },
   computed: {
