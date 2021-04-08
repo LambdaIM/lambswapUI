@@ -3,7 +3,7 @@ import pairlist from "@/constants/pairlist.json";
 
 import {
   ChainId, Token, TokenAmount, Fetcher,
-  Route, Percent, Router
+  Route, Percent, Router,Pair
 } from "@webfans/uniswapsdk";
 
 // import { useTokenbalance } from "@/contacthelp/Allowances.js";
@@ -560,6 +560,34 @@ export async function getpairPrice(pairaddress, chainID, tokenA, tokenB) {
   obj[tokenA + '/' + tokenB] = infoData[tokenA + '/' + tokenB];
   return obj;
 
+
+}
+
+export async function pairList(chainID){
+  const list = _.where(pairlist, { chainId: chainID });
+  const tokenList = _.where(token.tokens, { chainId: chainID });
+  const callList = [];
+
+  list.forEach(async element => {
+
+    const coinA = _.find(tokenList, { symbol: element.pair[0] });
+    const coinB = _.find(tokenList, { symbol: element.pair[1] });
+    const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
+    const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
+    const pairAddress = Pair.getAddress(TokenA, TokenB);
+    console.log(TokenA, TokenB,pairAddress);
+
+    // try {
+    //   const pairCall = Fetcher.fetchPairData(TokenA, TokenB, getethProvider(TokenB));
+    //   callList.push(pairCall);
+    // } catch (error) {
+    //   console.log(error);
+    //   console.log(coinA.symbol,coinB.symbol);
+
+    // }
+
+
+  });
 
 }
 
