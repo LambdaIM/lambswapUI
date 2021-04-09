@@ -462,7 +462,7 @@ export default {
 }
 @media (min-width: 1441px) {
    .left-wrapper {
-     width: 70%;
+     min-width: 68%;
       .menu-wrapper {
         margin-left: 60px;
         .menu-item {
@@ -471,7 +471,7 @@ export default {
       }
     }
     .connect-wrapper{
-      width: 26%;
+      width: 22%;
     }
 }
 </style>
