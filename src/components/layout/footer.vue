@@ -109,7 +109,7 @@ export default {
   .isShow {
     display: none;
     position: absolute;
-    left: -90px;
+    left: -95px;
     top: -225px;
     img {
       max-width: 200px;
@@ -127,7 +127,7 @@ export default {
     border-top: 20px solid #fff;
   }
   img {
-    max-width: 40px;
+    max-width: 30px;
   }
 }
 .wechat:hover .isShow{
