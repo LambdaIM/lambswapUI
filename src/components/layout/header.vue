@@ -12,26 +12,26 @@
           </router-link>
           <a href="https://bridge.lambdastorage.com/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
           <a href="https://lamb-swap.gitbook.io/lambswap/" class="menu-item" target="_blank">{{ $t('header.nav.Docs') }}</a>
+          <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a" class="menu-item" target="_blank">lambswap</a>
         </div>
       </div>
 
+      <Dropdown v-if="ethChainID" trigger="click" class="AddLambwallet-wrapper" @on-click="addtoken">
+        <div class="AddLambwallet flex items-center">
+          <div class="dot" />
+          <span>{{ $t('header.AddLambwallet') }}</span>
+          <img class="arrow" src="../../assets/img/down.svg" alt="down">
+        </div>
+        <DropdownMenu slot="list" class="list-wrapper">
+          <template v-for="(item, index) in tokenList">
+            <DropdownItem :key="index" class="list-item" :name="index">
+              <img :src="item.imgSrc">
+              <span>{{ item.name }}</span>
+            </DropdownItem>
+          </template>
+        </DropdownMenu>
+      </Dropdown>
       <div class="connect-wrapper flex justify-between items-center">
-        <Dropdown v-if="ethChainID" trigger="click" class="network-wrapper" style="width:150px" @on-click="addtoken">
-          <div class="netWork flex justify-between items-center" style="width:160px">
-            <div class="dot" />
-            <span>{{ $t('header.AddLambwallet') }}</span>
-            <img class="arrow" src="../../assets/img/down.svg" alt="down">
-          </div>
-          <DropdownMenu slot="list" class="list-wrapper">
-            <template v-for="(item, index) in tokenList">
-              <DropdownItem :key="index" class="list-item" :name="index">
-                <img :src="item.imgSrc">
-                <span>{{ item.name }}</span>
-              </DropdownItem>
-            </template>
-          </DropdownMenu>
-        </Dropdown>
-
         <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
             <div class="dot" :class="statusVal" />
@@ -301,6 +301,7 @@ export default {
   .nav-wrapper {
     height: 100%;
     .left-wrapper {
+      width: 58%;
       height: 100%;
       .menu-wrapper {
         margin-left: 50px;
@@ -309,7 +310,6 @@ export default {
           text-align: center;
           padding: 0px 16px;
           height: 28px;
-          margin-right: 24px;
           font-size: 16px;
           font-weight: 500;
           color: #14171c;
@@ -327,6 +327,20 @@ export default {
         }
       }
     }
+    .AddLambwallet-wrapper{
+      cursor: pointer;
+        .AddLambwallet{
+          span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #14171c;
+            line-height: 16px;
+          }
+          img {
+            margin: 0px 8px;
+          }
+        }
+      }
 
     .connect-wrapper {
       .connected-content {
@@ -340,7 +354,7 @@ export default {
           font-weight: 500;
           color: #14171c;
           line-height: 14px;
-          margin-right: 16px;
+          margin-right: 8px;
         }
         .changeBtn {
           width: 148px;
@@ -355,7 +369,7 @@ export default {
       .network-wrapper {
         cursor: pointer;
         width: 124px;
-        margin-right: 32px;
+        margin-right: 20px;
         .netWork {
           width: 124px;
           height: 28px;
@@ -379,6 +393,7 @@ export default {
           }
         }
       }
+      
     }
   }
 }
@@ -444,5 +459,19 @@ export default {
   border: 1px solid #FF41A1;
   border-radius: 14px;
   margin-right: 10px;
+}
+@media (min-width: 1441px) {
+   .left-wrapper {
+     min-width: 68%;
+      .menu-wrapper {
+        margin-left: 60px;
+        .menu-item {
+          margin-right: 30px;
+        }
+      }
+    }
+    .connect-wrapper{
+      width: 22%;
+    }
 }
 </style>
