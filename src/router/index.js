@@ -9,11 +9,11 @@ const routes = [
     redirect: '/earn'
     // component: Home,
   },
-  // {
-  //   path: "/playground",
-  //   name: "playground",
-  //   component: () => import("@/views/playground/index.vue"),
-  // },
+  {
+    path: "/playground",
+    name: "playground",
+    component: () => import("@/views/playground/index.vue"),
+  },
   {
     path: "/exchange",
     // name: "exchange",

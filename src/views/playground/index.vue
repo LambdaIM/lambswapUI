@@ -70,6 +70,12 @@
       提取收益
     </button>
 
+    <button @click="getpairList">
+      读取交易对列表
+    </button>
+
+    
+
     <!-- howbuildAddliquidityParam -->
 
     <div class="modal-wrapper">
@@ -105,6 +111,8 @@ import {
   buildAddliquidityParam,
   checkoutTokenAllowance,
   readpariInfoNuminfo,
+  pairList,
+  pairListEarn
 } from '@/contactLogic/readpairpool.js';
 import { readSwapBalance, getToken } from '@/contactLogic/readbalance.js';
 
@@ -300,6 +308,16 @@ export default {
 
       console.log(removenum);
     },
+   async getpairList(){
+      const chainId = this.ethChainID;
+      const library = this.ethersprovider;
+      var data = await pairList(chainId,library);
+      console.log('批量读取结果',data)
+
+      var data1 = await pairListEarn(chainId,library);
+      console.log('批量读取结果2',data1)
+      
+    }
   },
   computed: {
     ...mapState(['ethAddress', 'ethChainID', 'web3', 'ethersprovider']),
