@@ -160,6 +160,60 @@ export async function readpairpool(chainID, library) {
   //   console.log(result);
 }
 
+export async function readpairpoolPrice(chainID, library,pairdataList){
+  const list = _.where(pairlist, { chainId: chainID });
+  const tokenList = _.where(token.tokens, { chainId: chainID });
+  const callList = [];
+  const PricePromiseList=[];
+
+  list.forEach((target)=>{
+
+    const coinA = _.find(tokenList, { symbol: target.pair[0] });
+    const coinB = _.find(tokenList, { symbol: target.pair[1] });
+    const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
+    const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
+    const pairaddress = Pair.getAddress(TokenA, TokenB);
+
+    PricePromiseList.push(getpairPrice(pairaddress, chainID, target.pair[0], target.pair[1]));
+
+  });
+  const PriceList = await Promise.all(PricePromiseList);
+
+
+   pairdataList.forEach((item) => {
+
+    const prise24 = _.find(PriceList, (one) => {
+      if (one&&one[item.pairName]) {
+        return one;
+
+      }
+
+    });
+    if (prise24) {
+      item.prise24 = prise24[item.pairName];
+      if (item.price - item.prise24 > 0) {
+        item.change = '+';
+      } else {
+        item.change = '-';
+      }
+      item.prisechange = Math.abs((item.price - item.prise24) / item.prise24);
+
+
+
+    } else {
+      item.prisechange = '';
+    }
+
+
+
+  });
+
+  return pairdataList;
+
+  
+
+}
+
 export async function readpairLiquidity(chainID, library, account) {
   const list = await readpairpool(chainID, library);
   const callList = [];

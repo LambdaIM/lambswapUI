@@ -31,8 +31,11 @@
               {{ item.price | formatNormalValue }}
               <span v-if="item.pairName=='GOAT/LAMB'&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
             </p>
-            <p :class="item.change == '+' ? 'change' : 'change decline'">
+            <p v-if="item.change" :class="item.change == '+' ? 'change' : 'change decline'">
               {{ item.change }} {{ item.prisechange | formatRate }}
+            </p>
+            <p v-else :class="item.change == '+' ? 'change' : 'change decline'">
+              --
             </p>
           </div>
         </div>
@@ -154,7 +157,7 @@ import {
   ROUTER_ADDRESS,
 } from '@/constants/index.js';
 
-import { readpairpool } from '@/contactLogic/readpairpool.js';
+import { readpairpool,readpairpoolPrice } from '@/contactLogic/readpairpool.js';
 import { readSwapBalance, getToken, getTokenImg } from '@/contactLogic/readbalance.js';
 
 import { tradeCalculate, SwapGas } from '@/contactLogic/swaplogoc.js';
@@ -237,6 +240,15 @@ export default {
           this.selectPair(data[0]);
         }, 1000);
       }
+      
+      setTimeout(async() => {
+        const data= await readpairpoolPrice(chainID, library,_this.$data.pairlist);
+        console.log(data);
+        _this.$data.pairlist = [];
+        _this.$data.pairlist = data;
+
+      },1);
+      
     },
     async selectPair(pair) {
       console.log(pair);
