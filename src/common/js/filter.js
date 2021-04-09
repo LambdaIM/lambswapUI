@@ -37,11 +37,11 @@ const format1e18ValueList = (value) => {
   }
   const val = String(value);
   const bigValue = new BigNumber(val);
-  const returnVal = bigValue.div("1e18").toFixed(2);
+  const returnVal = bigValue.div("1e18");
   if (returnVal < 0.000001) {
     return "<0.000001";
   }
-  return returnVal;
+  return returnVal.decimalPlaces(6);
 };
 
 const formatNormalValue = (value) => {
