@@ -29,6 +29,9 @@ export  async function readSwapHistory(chainID,account,pageNum,showNum){
         }else if(item.method_name == 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens'){
             item.show = removeLiquidityWithPermitformatETH(item.txs,chainID);
 
+        }else if(item.method_name == 'removeLiquidity'){
+            item.show = removeLiquidityWithformat(item.txs,chainID);
+
         }
 
         //removeLiquidityETHWithPermitSupportingFeeOnTransferTokens,
@@ -142,6 +145,24 @@ function removeLiquidityWithPermitformat(item,chainID){
 }
 
 function removeLiquidityWithPermitformatETH(item,chainID){
+    const lpamount = item[0].amount;
+    const  tokenADDRESSA = item[2].amount_token_address ;
+    const  tokenADDRESSB = item[3].amount_token_address ;
+    const amountA = item[2].amount;
+    const amountB = item[3].amount;
+
+    return {
+        inamount:lpamount,
+        outamount:[amountA,amountB],
+        tokenA:tokenNameByaddress(tokenADDRESSA,chainID),
+        tokenB:tokenNameByaddress(tokenADDRESSB,chainID)
+    };
+
+
+}
+
+function removeLiquidityWithformat(item,chainID){
+ console.log('removeLiquidityWithformat');
     const lpamount = item[0].amount;
     const  tokenADDRESSA = item[2].amount_token_address ;
     const  tokenADDRESSB = item[3].amount_token_address ;
