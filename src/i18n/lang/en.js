@@ -43,7 +43,8 @@ export default {
       Exchange:'Exchange',
       Earn:'Earn',
       Bridge:'Bridge',
-      Docs:'Docs'
+      Docs:'Docs',
+      chart: 'Chart'
     },
     connectWallet:'Connect Wallet',
     copyAddress:'Copy Address',

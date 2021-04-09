@@ -12,7 +12,7 @@
           </router-link>
           <a href="https://bridge.lambdastorage.com/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
           <a href="https://lamb-swap.gitbook.io/lambswap/" class="menu-item" target="_blank">{{ $t('header.nav.Docs') }}</a>
-          <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a" class="menu-item" target="_blank">lambswap</a>
+          <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a" class="menu-item" target="_blank">{{ $t('header.nav.chart') }}</a>
         </div>
       </div>
 
@@ -130,7 +130,7 @@ export default {
   methods: {
    async addtoken(index){
       const item = this.$data.tokenList[index];
-     
+
       const chainID = this.ethChainID;
       const TokenA = getToken(item.name, chainID);
       try {
@@ -393,7 +393,7 @@ export default {
           }
         }
       }
-      
+
     }
   }
 }
