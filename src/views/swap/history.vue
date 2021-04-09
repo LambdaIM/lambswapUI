@@ -94,6 +94,7 @@ export default {
         swapExactTokensForETH: "swap",
         removeLiquidityETHWithPermitSupportingFeeOnTransferTokens:
           "removeLiquidity",
+        removeLiquidity:'removeLiquidity'
       },
       pageIndex: 1,
       pageNum: 1,
