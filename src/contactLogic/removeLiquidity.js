@@ -21,6 +21,8 @@ import BigNumber  from 'bignumber.js';
 
 import getChainCoinInfo from '@/constants/networkCoinconfig.js';
 
+import {useTokenApprove} from '@/contacthelp/Approve.js';
+
 
 export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
     const pairContract = usePairContract(
@@ -85,6 +87,7 @@ export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
         .send("eth_signTypedData_v4", [account, data])
         .then(splitSignature)
         .then((signature) => {
+          
             const SignatureData = {
               v: signature.v,
               r: signature.r,
@@ -93,10 +96,22 @@ export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
             };
             resolve(SignatureData);
             
-            
           })
-          .catch((error) => {
-            reject(error);
+          .catch(async (error) => {
+            try {
+              const tx = await  useTokenApprove(library,
+                account,
+                pair.liquidityToken,
+                ROUTER_ADDRESS,
+                liquidityAmount.raw.toString());
+                resolve({deadline: deadline});
+              
+            } catch (error2) {
+              reject(error2);  
+            }
+           
+
+            
           });
 
      });
@@ -140,36 +155,67 @@ export async function buildremoveparameter({library,chainId,account,pair,
   }
 
   let args;
+  if(signatureData.v!=undefined){
+    if(currencyoneIsETH){
+      //10个参数
+      args = [
+       currencyBIsETH?currencyAmountA.token.address:currencyAmountB.token.address,
+       liquidityAmount.raw.toString(),
+       amountsMin["CURRENCY_A"].toString(),
+       amountsMin["CURRENCY_B"].toString(),
+       account,
+       signatureData.deadline,
+       false,
+       signatureData.v,
+       signatureData.r,
+       signatureData.s,
+     ];
+  
+   }else{
+     //11个参数
+      args = [
+       currencyAmountA.token.address,
+       currencyAmountB.token.address,
+       liquidityAmount.raw.toString(),
+       amountsMin["CURRENCY_A"].toString(),
+       amountsMin["CURRENCY_B"].toString(),
+       account,
+       signatureData.deadline,
+       false,
+       signatureData.v,
+       signatureData.r,
+       signatureData.s,
+     ];
+    }
 
-  if(currencyoneIsETH){
-    args = [
-     currencyBIsETH?currencyAmountA.token.address:currencyAmountB.token.address,
-     liquidityAmount.raw.toString(),
-     amountsMin["CURRENCY_A"].toString(),
-     amountsMin["CURRENCY_B"].toString(),
-     account,
-     signatureData.deadline,
-     false,
-     signatureData.v,
-     signatureData.r,
-     signatureData.s,
-   ];
+  }else if(currencyoneIsETH){
+    //6个参数
+      args = [
+       currencyBIsETH?currencyAmountA.token.address:currencyAmountB.token.address,
+       liquidityAmount.raw.toString(),
+       amountsMin["CURRENCY_A"].toString(),
+       amountsMin["CURRENCY_B"].toString(),
+       account,
+       signatureData.deadline,
+       
+     ];
+  
+   }else{
 
- }else{
-    args = [
-     currencyAmountA.token.address,
-     currencyAmountB.token.address,
-     liquidityAmount.raw.toString(),
-     amountsMin["CURRENCY_A"].toString(),
-     amountsMin["CURRENCY_B"].toString(),
-     account,
-     signatureData.deadline,
-     false,
-     signatureData.v,
-     signatureData.r,
-     signatureData.s,
-   ];
-  }
+    //7个参数
+      args = [
+       currencyAmountA.token.address,
+       currencyAmountB.token.address,
+       liquidityAmount.raw.toString(),
+       amountsMin["CURRENCY_A"].toString(),
+       amountsMin["CURRENCY_B"].toString(),
+       account,
+       signatureData.deadline,
+
+     ];
+    }
+
+  
 
   console.log('args',args);
   return args;
@@ -181,7 +227,9 @@ export async function buildremoveparameter({library,chainId,account,pair,
 export async function  removeliquidityGas (chainID,library,account,parameters){
   const contract = getRouterContract(chainID, library, account);
   let estimatedGasLimit,estimatedGasLimit1,estimatedGasLimit2;
+ if(parameters.length>=10){
 
+ 
   if(parameters.length==10){
     console.log('----1');
     estimatedGasLimit1 = await contract.estimateGas.removeLiquidityETHWithPermit(...parameters, {});
@@ -196,6 +244,23 @@ export async function  removeliquidityGas (chainID,library,account,parameters){
   }else{
     console.log('----2');
      estimatedGasLimit = await contract.estimateGas.removeLiquidityWithPermit(...parameters, {});
+
+  }
+
+}else if(parameters.length==6){
+    console.log('----1');
+    estimatedGasLimit1 = await contract.estimateGas.removeLiquidityETH(...parameters, {});
+    estimatedGasLimit2 = await contract.estimateGas.removeLiquidityETHSupportingFeeOnTransferTokens(...parameters, {});
+
+    if(BigNumber.isBigNumber(estimatedGasLimit1)){
+      estimatedGasLimit = estimatedGasLimit1;
+    }else if(BigNumber.isBigNumber(estimatedGasLimit2)){
+      estimatedGasLimit = estimatedGasLimit2;
+    }
+
+  }else{
+    console.log('----2');
+     estimatedGasLimit = await contract.estimateGas.removeLiquidity(...parameters, {});
 
   }
   
@@ -213,28 +278,68 @@ export async function sendremoveliquidity(chainID,library,account,parameters){
   const contract = getRouterContract(chainID, library, account);
 
   let estimatedGasLimit,estimatedGasLimit1,estimatedGasLimit2;
-  if(parameters.length==10){
-     estimatedGasLimit1 = await contract.estimateGas.removeLiquidityETHWithPermit(...parameters, {});
-     estimatedGasLimit2 = await contract.estimateGas.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(...parameters, {});
+  if(parameters.length>=10){
+    if(parameters.length==10){
+      estimatedGasLimit1 = await contract.estimateGas.removeLiquidityETHWithPermit(...parameters, {});
+      estimatedGasLimit2 = await contract.estimateGas.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(...parameters, {});
+ 
+   }else{
+      estimatedGasLimit = await contract.estimateGas.removeLiquidityWithPermit(...parameters, {});
+ 
+   }
 
-  }else{
-     estimatedGasLimit = await contract.estimateGas.removeLiquidityWithPermit(...parameters, {});
-
-  }
+  }else if(parameters.length==6){
+      estimatedGasLimit1 = await contract.estimateGas.removeLiquidityETH(...parameters, {});
+      estimatedGasLimit2 = await contract.estimateGas.removeLiquidityETHSupportingFeeOnTransferTokens(...parameters, {});
+ 
+   }else{
+      estimatedGasLimit = await contract.estimateGas.removeLiquidity(...parameters, {});
+ 
+   }
+  
   
 
   let result;
-  if(parameters.length==10){
+
+  if(parameters.length>=10){
+    if(parameters.length==10){
+      if(BigNumber.isBigNumber(estimatedGasLimit1)){
+        estimatedGasLimit = estimatedGasLimit1;
+         result = await contract.removeLiquidityETHWithPermit(...parameters, {
+          ...{},
+          gasLimit: calculateGasMargin(estimatedGasLimit),
+        });
+    
+      }else if(BigNumber.isBigNumber(estimatedGasLimit2)){
+        estimatedGasLimit = estimatedGasLimit2;
+        result = await contract.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(...parameters, {
+          ...{},
+          gasLimit: calculateGasMargin(estimatedGasLimit),
+        });
+      }
+    
+    }
+    else{
+      result = await contract.removeLiquidityWithPermit(...parameters, {
+        ...{},
+        gasLimit: calculateGasMargin(estimatedGasLimit),
+      });
+  
+    }
+  
+  
+
+}else if(parameters.length==6){
     if(BigNumber.isBigNumber(estimatedGasLimit1)){
       estimatedGasLimit = estimatedGasLimit1;
-       result = await contract.removeLiquidityETHWithPermit(...parameters, {
+       result = await contract.removeLiquidityETH(...parameters, {
         ...{},
         gasLimit: calculateGasMargin(estimatedGasLimit),
       });
   
     }else if(BigNumber.isBigNumber(estimatedGasLimit2)){
       estimatedGasLimit = estimatedGasLimit2;
-      result = await contract.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(...parameters, {
+      result = await contract.removeLiquidityETHSupportingFeeOnTransferTokens(...parameters, {
         ...{},
         gasLimit: calculateGasMargin(estimatedGasLimit),
       });
@@ -242,14 +347,12 @@ export async function sendremoveliquidity(chainID,library,account,parameters){
   
   }
   else{
-    result = await contract.removeLiquidityWithPermit(...parameters, {
+    result = await contract.removeLiquidity(...parameters, {
       ...{},
       gasLimit: calculateGasMargin(estimatedGasLimit),
     });
 
-  }
-
-  
+  } 
         
   return result;
       

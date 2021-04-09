@@ -155,6 +155,7 @@ import {
   sendremoveliquidity,
 } from '@/contactLogic/removeLiquidity.js';
 
+
 let pariInfo;
 
 export default {
@@ -323,8 +324,14 @@ export default {
         this.$data.fee = fee;
 
         this.isShowRemove = false;
+        
       } catch (error) {
         console.log(error);
+        this.$Notice.error({
+          title: 'error',
+          desc:JSON.stringify(error),
+          duration:60
+        });
       }
 
       this.$data.btnLoading = false;
