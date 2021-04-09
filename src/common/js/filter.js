@@ -41,7 +41,7 @@ const format1e18ValueList = (value) => {
   if (returnVal < 0.000001) {
     return "<0.000001";
   }
-  return returnVal;
+  return returnVal.decimalPlaces(6);
 };
 
 const formatNormalValue = (value) => {
