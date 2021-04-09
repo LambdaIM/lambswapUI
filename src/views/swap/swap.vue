@@ -238,7 +238,7 @@ export default {
       if (data && data[0] && this.selectPairOBJ === null) {
         setTimeout(() => {
           this.selectPair(data[0]);
-        }, 1000);
+        }, 1);
       }
       
       setTimeout(async() => {
