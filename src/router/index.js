@@ -91,11 +91,11 @@ const routes = [
   //     },
   //   ]
   // },
-  {
-    path: "/buildrtest",
-    name: "buildrtest",
-    component: () => import("@/views/playground/buildr.vue"),
-  }
+  // {
+  //   path: "/buildrtest",
+  //   name: "buildrtest",
+  //   component: () => import("@/views/playground/buildr.vue"),
+  // }
 ];
 
 const router = new VueRouter({
