@@ -166,7 +166,7 @@ const formatReward = (value, days, scashPrice, totalSupply,LPvalue) => {
   }
   const scash = new BigNumber(scashPrice);
   // console.log(value, days, scashPrice, totalSupply,LPvalue,total.toNumber());
-  const reward = time.times(rate).div(LPvalue).times(scash).times('5').times('100').decimalPlaces(2).toNumber();
+  const reward = time.times(rate).div(LPvalue).times(scash).times('4').times('100').decimalPlaces(2).toNumber();
   return reward;
 };
 
