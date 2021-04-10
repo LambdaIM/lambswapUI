@@ -70,6 +70,10 @@
       提取收益
     </button>
 
+    <button @click="addChain">
+      添加网络
+    </button>
+
     <!-- howbuildAddliquidityParam -->
 
     <div class="modal-wrapper">
@@ -128,6 +132,27 @@ export default {
     };
   },
   methods: {
+    addChain() {
+      const param = {
+        chainId: Web3.utils.toHex('256'),
+        chainName: 'Heco Main',
+        nativeCurrency: {
+          name: 'heco',
+          symbol: 'HT',
+          decimals: 18,
+        },
+        rpcUrls: ['https://http-testnet.hecochain.com'],
+        blockExplorerUrls: ['https://testnet.hecoinfo.com/'],
+      };
+      const ethereum =  window.ethereum;
+      ethereum.request({ method: 'wallet_addEthereumChain', params: [param] })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error=> {
+        console.log(error);
+      })
+    },
     openDialog() {
       this.open = true;
     },
