@@ -300,13 +300,13 @@ export default {
       return this.ethChainID && this.ethAddress;
     },
   },
-  // watch: {
-  //   isReady(value) {
-  //     if (value) {
-  //       this.getStatus();
-  //     }
-  //   },
-  // },
+  watch: {
+    isReady(value) {
+      if (value) {
+        this.getStatus();
+      }
+    },
+  },
   mounted() {
     if (this.isReady) {
       this.getStatus();
