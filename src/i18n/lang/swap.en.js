@@ -111,7 +111,7 @@ export default {
       extract: 'Claim',
       t1: 'Airdrop Bonus are being sent...',
       t2: 'Your airdrop bonus will be sent on average within 6 days from 4.6-4.11.',
-      t3: 'Airdrop Progress：4/6'
+      t3: 'Airdrop Progress：5/6'
     }
   },
 };
