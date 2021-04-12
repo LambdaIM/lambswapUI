@@ -86,7 +86,6 @@ export default {
         .menu-item {
           display: inline-block;
           font-size: 16px;
-          font-weight: 500;
           color: rgba(20, 23, 28, 0.4);
           line-height: 19px;
           margin-right: 48px;

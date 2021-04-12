@@ -187,8 +187,6 @@
         }
         p {
           font-size: 12px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #ff3c00;
           line-height: 14px;
         }
@@ -198,17 +196,11 @@
       h2 {
         height: 19px;
         font-size: 16px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 19px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 14px;
         text-align: right;
         span {
@@ -251,9 +243,6 @@
           text-align: center;
           height: 28px;
           font-size: 24px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 28px;
         }
       }
@@ -262,25 +251,17 @@
         h2 {
           height: 47px;
           font-size: 40px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 47px;
         }
         p {
           height: 19px;
           font-size: 16px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 19px;
           margin: 8px 0;
         }
         span {
           height: 16px;
           font-size: 14px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
         }
@@ -297,9 +278,6 @@
           text-align: right;
           padding-top: 8px;
           font-size: 12px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 14px;
         }
         .title {

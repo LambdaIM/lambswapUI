@@ -74,9 +74,6 @@ export default {
   padding: 24px;
   .title {
     font-size: 24px;
-    font-family: Gilroy-Medium, Gilroy;
-    font-weight: 500;
-    color: #14171c;
     line-height: 50px;
   }
   .input-warpper {
@@ -106,15 +103,10 @@ export default {
     .text-warpper {
       p {
         font-size: 16px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 19px;
       }
       span {
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }

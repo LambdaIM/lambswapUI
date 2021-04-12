@@ -164,17 +164,11 @@
   .title {
     margin-bottom: 32px;
     font-size: 20px;
-    font-family: Gilroy-Medium, Gilroy;
-    font-weight: 500;
-    color: #14171c;
     line-height: 24px;
   }
   .info {
     height: 19px;
     font-size: 16px;
-    font-family: Gilroy-Regular, Gilroy;
-    font-weight: 400;
-    color: #14171c;
     line-height: 19px;
     margin: 12px 0 32px;
   }
@@ -194,8 +188,6 @@
         }
         p {
           font-size: 12px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #ff3c00;
           line-height: 14px;
         }
@@ -220,18 +212,12 @@
       .mortgage {
         height: 19px;
         font-size: 16px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 19px;
       }
       .balance {
         p {
           height: 14px;
           font-size: 12px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 14px;
         }
         span {
@@ -265,8 +251,6 @@
     p {
       height: 16px;
       font-size: 14px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
       color: #828489;
       line-height: 16px;
       margin-bottom: 8px;

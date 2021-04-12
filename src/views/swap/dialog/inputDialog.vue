@@ -637,9 +637,6 @@ export default {
     .title {
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 28px;
       margin-bottom: 24px;
     }
@@ -653,7 +650,6 @@ export default {
         .balance-item {
           float: right;
           font-size: 12px;
-          font-weight: 500;
           line-height: 14px;
         }
       }
@@ -693,10 +689,7 @@ export default {
           top: 30%;
           p {
             font-size: 16px;
-            font-family: Gilroy-Medium, Gilroy;
             line-height: 32px;
-            font-weight: 500;
-            color: #14171c;
           }
         }
       }
@@ -717,8 +710,6 @@ export default {
             width: 100%;
             height: 14px;
             font-size: 12px;
-            font-family: Gilroy-Medium, Gilroy;
-            font-weight: 500;
             color: #ff3c00;
             line-height: 14px;
           }
@@ -738,17 +729,12 @@ export default {
       span {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 14px;
         margin-bottom: 8px;
       }
@@ -763,8 +749,6 @@ export default {
         margin-top: 24px;
         text-align: center;
         font-size: 14px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #FF41A1;
       }
     }
@@ -782,9 +766,6 @@ export default {
     .title {
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 28px;
       margin-bottom: 24px;
     }
@@ -793,9 +774,6 @@ export default {
       margin: 24px 0 32px;
       height: 19px;
       font-size: 16px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 19px;
     }
 
@@ -820,25 +798,17 @@ export default {
       h2 {
         height: 47px;
         font-size: 40px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 47px;
         margin: 8px 0;
       }
       p {
         height: 19px;
         font-size: 16px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 19px;
       }
       span {
         height: 32px;
         font-size: 14px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 16px;
         text-align: center;
@@ -865,17 +835,12 @@ export default {
       span {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 14px;
         margin-bottom: 8px;
       }

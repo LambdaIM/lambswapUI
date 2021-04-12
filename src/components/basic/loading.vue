@@ -2,7 +2,7 @@
   <div
     class="demo-spin-col"
   >
-    <Spin fix>
+    <Spin fix class="my-spin">
       <Icon
         type="ios-loading"
         size="30"

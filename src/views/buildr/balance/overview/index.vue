@@ -38,9 +38,6 @@
   .title {
     height: 24px;
     font-size: 20px;
-    font-family: Gilroy-Medium, Gilroy;
-    font-weight: 500;
-    color: #14171c;
     line-height: 24px;
   }
   .content-warpper {
@@ -56,16 +53,12 @@
         h2 {
           height: 16px;
           font-size: 14px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #ffffff;
           line-height: 16px;
         }
         p {
           height: 24px;
           font-size: 20px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #ffffff;
           line-height: 24px;
           margin-top: 8px;
