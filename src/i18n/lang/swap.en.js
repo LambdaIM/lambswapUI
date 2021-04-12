@@ -109,7 +109,7 @@ export default {
       tag: 'LAMB Airdrop',
       count: 'Countdown',
       extract: 'Claim',
-      t1: 'Airdrop Bonus are being sent...',
+      t1: 'The Airdrop has been completed. Stay tuned for the next Airdrop.',
       t2: 'Your airdrop bonus will be sent on average within 6 days from 4.6-4.11.',
       t3: 'Airdrop Progress：6/6'
     }
