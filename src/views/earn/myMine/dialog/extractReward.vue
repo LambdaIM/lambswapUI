@@ -154,9 +154,6 @@ export default {
     .title {
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 28px;
       margin-bottom: 24px;
     }
@@ -170,7 +167,6 @@ export default {
         .balance-item {
           float: right;
           font-size: 12px;
-          font-weight: 500;
           line-height: 14px;
         }
       }
@@ -188,7 +184,6 @@ export default {
           background: #f7f8f9;
           font-size: 40px;
           line-height: 47px;
-          color: #14171c;
           padding: 16px;
           caret-color: #FF41A1;
           &:focus {
@@ -214,16 +209,12 @@ export default {
       span {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #14171c;
         line-height: 14px;
         margin-bottom: 8px;

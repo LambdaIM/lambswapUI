@@ -176,63 +176,8 @@ export default {
     p {
       height: 19px;
       font-size: 16px;
-
-      font-weight: 500;
-      color: #14171c;
       line-height: 19px;
       margin: 8px 0 16px;
-    }
-    .buttonWarpper {
-      margin-top: 12px;
-      .button-item {
-        width: 522px;
-        height: 50px;
-        border-radius: 25px;
-        align-items: center;
-        background-image: linear-gradient(
-          90deg,
-          rgba(251, 70, 107, 1),
-          rgba(63, 94, 251, 1)
-        );
-        position: relative;
-        .border-image {
-          width: 520px;
-          height: 48px;
-          border-radius: 24px;
-          padding: 0 16px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          position: absolute;
-          left: 1px;
-          top: 1px;
-          background: #ffffff;
-          p {
-            font-size: 16px;
-
-            font-weight: 500;
-            color: #3f5efb;
-            line-height: 19px;
-            margin: 0px;
-            cursor: pointer;
-          }
-          div {
-            span {
-              cursor: pointer;
-              height: 19px;
-              font-size: 16px;
-
-              font-weight: 500;
-              color: #14171c;
-              line-height: 19px;
-            }
-            display: flex;
-            img {
-              margin-left: 10px;
-            }
-          }
-        }
-      }
     }
   }
   .liquidityPool {
@@ -244,8 +189,6 @@ export default {
     h2 {
       height: 24px;
       font-size: 20px;
-      font-weight: 500;
-      color: #14171c;
       line-height: 24px;
       margin-bottom: 24px;
     }
@@ -269,15 +212,12 @@ export default {
         p {
           height: 24px;
           font-size: 20px;
-          font-weight: 500;
-          color: #14171c;
           line-height: 24px;
         }
         span {
           display: block;
           height: 16px;
           font-size: 14px;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
           margin-bottom: 6px;
@@ -305,7 +245,6 @@ export default {
             width: 100%;
             height: 100%;
             font-size: 16px;
-            font-weight: 500;
             color: #ffffff;
             line-height: 19px;
           }
@@ -320,14 +259,12 @@ export default {
             width: 100%;
             height: 100%;
             font-size: 16px;
-            font-weight: 500;
             color: #FF41A1;
             line-height: 19px;
           }
         }
         .colorText {
           font-size: 14px;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
           background: linear-gradient(90deg, #fc466b 0%, #3f5efb 80%);
@@ -352,6 +289,7 @@ export default {
       }
       .buttonWarpper {
         width: 15%;
+        margin-top: 12px;
       }
     }
   }

@@ -456,9 +456,7 @@ export default {
         width: 100%;
         padding: 0px 16px 8px 16px;
         span {
-          height: 14px;
           font-size: 12px;
-          font-weight: 500;
           color: #828489;
           line-height: 14px;
         }
@@ -510,8 +508,6 @@ export default {
             p {
               height: 80px;
               font-size: 16px;
-              font-weight: 500;
-              color: #14171c;
               line-height: 19px;
             }
           }
@@ -520,15 +516,12 @@ export default {
           width: 25%;
           height: 19px;
           font-size: 16px;
-          font-weight: 500;
-          color: #14171c;
           line-height: 19px;
         }
         .change {
           width: 25%;
           height: 19px;
           font-size: 16px;
-          font-weight: 500;
           color: #00d075;
           line-height: 19px;
         }
@@ -559,8 +552,6 @@ export default {
     margin-left: 72px;
     .swap-title {
       font-size: 20px;
-      font-weight: 500;
-      color: #14171c;
       line-height: 24px;
     }
     .From-wrapper {
@@ -573,7 +564,6 @@ export default {
         .balance-item {
           float: right;
           font-size: 12px;
-          font-weight: 500;
           line-height: 14px;
         }
       }
@@ -591,7 +581,6 @@ export default {
           background: #f7f8f9;
           font-size: 40px;
           line-height: 47px;
-          color: #14171c;
           padding: 16px;
           caret-color: #FF41A1;
           &:focus {
@@ -619,8 +608,6 @@ export default {
           }
           p {
             font-size: 16px;
-            font-weight: 500;
-            color: #14171c;
           }
           img{
             max-width: 24px;
@@ -632,19 +619,16 @@ export default {
         font-size: 12px;
         span {
           font-size: 12px;
-          font-weight: 500;
           color: #FF41A1;
         }
       }
     }
     .notice-wrapper {
-      // display: none;
       .notice-content {
         margin: 20px 0;
         display: flex;
         align-items: center;
         padding: 9px 30px;
-        // width: 412px;
         height: 32px;
         background: rgba(255, 60, 0, 0.1);
         border-radius: 4px;
@@ -653,7 +637,6 @@ export default {
         }
         p {
           font-size: 12px;
-          font-weight: 500;
           color: #ff3c00;
           line-height: 14px;
         }
@@ -688,14 +671,11 @@ export default {
         flex-direction: row;
         p {
           font-size: 14px;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
         }
         span {
           font-size: 14px;
-          font-weight: 500;
-          color: #14171c;
           line-height: 16px;
           margin-left: 8px;
         }

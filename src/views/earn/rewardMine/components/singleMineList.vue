@@ -43,7 +43,6 @@ export default {
   padding: 32px 44px 44px 44px;
   .title {
     font-size: 20px;
-    color: #14171c;
     line-height: 24px;
   }
   .subTitle {

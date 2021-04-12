@@ -65,8 +65,6 @@
         p {
           height: 24px;
           font-size: 20px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #FF41A1;
           line-height: 24px;
           margin-left: 10px;
@@ -95,8 +93,6 @@
       text-align: center;
       height: 100%;
       font-size: 16px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
       color: #ffffff;
       line-height: 48px;
       background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);

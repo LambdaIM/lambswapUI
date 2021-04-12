@@ -168,8 +168,6 @@ export default {
   margin: 20px 0 100px 0;
   .pageTitle {
     font-size: 20px;
-    font-weight: 500;
-    color: #14171c;
     line-height: 24px;
   }
   .myPage-table-wrapper {

@@ -73,8 +73,6 @@
     }
     .title{
       font-size: 20px;
-      font-weight: 500;
-      color: #14171C;
       line-height: 24px;
     }
     .tab {
@@ -88,7 +86,6 @@
         margin-right: 40px;
         color: #14171c66;
         font-size: 16px;
-        font-weight: 500;
         cursor: pointer;
       }
       .tab-active {
@@ -112,7 +109,6 @@
         height: 32px;
         line-height: 32px;
         font-size: 14px;
-        font-weight: 500;
         color: #FF41A1;
         background: rgba(0, 88, 255, 0.1);
         border-radius: 16px;
