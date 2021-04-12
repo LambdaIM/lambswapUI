@@ -44,8 +44,9 @@
 <script>
 import { mapState } from 'vuex';
 import { StakingRewardListbatch } from '../utils/helpUtils/mineUtilFunc.js';
-import { readpariInfoNuminfoEarn } from '@/contactLogic/readpairpool.js';
+import { pairListEarn } from '@/contactLogic/readpairpool.js';
 import event from '@/common/js/event';
+import _ from 'underscore';
 export default {
   data() {
     return {
@@ -62,11 +63,12 @@ export default {
     async getListData() {
       this.showLoading = true;
       try {
+        const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
-        console.log(data);
+        // console.log(data);
         const [scashData] = data.filter(item => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
-        await this.getPriceData(scashData);
+        await this.getPriceData(scashData,pairListPrice);
         this.data = data;
       } catch (error) {
         console.log(error);
@@ -74,20 +76,27 @@ export default {
         this.showLoading = false;
       }
     },
-    async getPriceData(item) {
-      // this.$store.commit('changeScashPrice', 100);
-
+    async getPriceData(item,pairListPrice) {
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
-      const pledgeBalance = item.data && item.data.totalSupply;
-      const pledgeBalanceWei = this.web3.utils.toWei(pledgeBalance.toString());
-      const data = await readpariInfoNuminfoEarn(
-        this.ethChainID,
-        this.ethersprovider,
-        tokensymbolA,
-        tokensymbolB,
-        pledgeBalanceWei
-      );
+
+      // 匹配读取价格信息
+      const priceItem = _.find(pairListPrice, (pairItem) => {
+        if (
+          (pairItem.pairInfo.tokenAmounts[0].token.symbol === tokensymbolA &&
+            pairItem.pairInfo.tokenAmounts[1].token.symbol === tokensymbolB) ||
+          (pairItem.pairInfo.tokenAmounts[1].token.symbol === tokensymbolA &&
+            pairItem.pairInfo.tokenAmounts[0].token.symbol === tokensymbolB)
+        ) {
+          return pairItem;
+        }
+      });
+
+      // 构造价格相关信息
+      const data = {
+        price: priceItem.price(tokensymbolA, tokensymbolB).price,
+      };
+
       const price = data.price && data.price.toSignificant(6);
       this.$store.commit('changeScashPrice', price);
     },
