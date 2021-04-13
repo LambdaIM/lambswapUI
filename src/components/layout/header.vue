@@ -130,6 +130,11 @@ export default {
           imgSrc: 'https://www.lambswap.fi/tokenlogo/goat.jpg',
           name: 'GOAT',
         },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/hyperLogo48.png',
+          name: 'HGT',
+        }
       ],
     };
   },
