@@ -15,6 +15,11 @@
     },
     {
         "chainId": 128,
+        "isfirst":"true",
+        "pair":["HGT","LAMB"]
+    },
+    {
+        "chainId": 128,
         
         "pair":["LAMB","USDT"]
     },
@@ -31,7 +36,7 @@
     {
         "chainId": 128,
         
-        "pair":["LAMB","HGT"]
+        "pair":["HGT","GOAT"]
     },
     {
         "chainId": 4,

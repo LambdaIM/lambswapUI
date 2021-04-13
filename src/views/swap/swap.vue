@@ -29,7 +29,7 @@
             </div>
             <p class="price">
               {{ item.price | formatNormalValue }}
-              <span v-if="item.pairName=='GOAT/LAMB'&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
+              <span v-if="(item.pairName=='GOAT/LAMB'||item.pairName=='HGT/LAMB')&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
             </p>
             <p v-if="item.change" :class="item.change == '+' ? 'change' : 'change decline'">
               {{ item.change }} {{ item.prisechange | formatRate }}
