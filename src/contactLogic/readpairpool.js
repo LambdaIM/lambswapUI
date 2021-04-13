@@ -44,6 +44,9 @@ function Calculatepercentage(balance, totalSupply) {
 
 
 }
+export function  getTokenList(chainID){
+   return   _.where(token.tokens, { chainId: chainID });
+}
 
 export async function readpairpool(chainID, library) {
   const list = _.where(pairlist, { chainId: chainID });
@@ -113,7 +116,7 @@ export async function readpairpool(chainID, library) {
       Pair: element,
       price: price.toSignificant(6),
       pairName: `${target.pair[0]}/${target.pair[1]}`,
-      listSymbol: element.tokenAmounts[0].token.symbol,
+      listSymbol: target.isfirst=='true'?target.pair[0]:target.pair[1],
       pairSymbols: [element.tokenAmounts[0].token.symbol, element.tokenAmounts[1].token.symbol],
       configSymbols: [target.pair[0], target.pair[1]]
 

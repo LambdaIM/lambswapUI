@@ -5,12 +5,12 @@
     },
     {
         "chainId": 256,
-        
+        "isfirst":"true",
         "pair":["GOAT","LAMB"]
     },
     {
         "chainId": 128,
-        
+        "isfirst":"true",
         "pair":["GOAT","LAMB"]
     },
     {
@@ -27,6 +27,11 @@
         "chainId": 128,
         
         "pair":["LAMB","FIL"]
+    },
+    {
+        "chainId": 128,
+        
+        "pair":["LAMB","HGT"]
     },
     {
         "chainId": 4,
