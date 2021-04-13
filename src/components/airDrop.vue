@@ -39,10 +39,10 @@
           {{ $t('liquidity.airdrop.t1') }}
         </p>
         <p class="mt-1">
-          {{ $t('liquidity.airdrop.t2') }}
+          <!-- {{ $t('liquidity.airdrop.t2') }} -->
         </p>
         <p class="mt-1">
-          {{ $t('liquidity.airdrop.t3') }}
+          <!-- {{ $t('liquidity.airdrop.t3') }} -->
         </p>
         <!-- <div class="count"> -->
         <!-- <countDown class="count" date="2021-04-06T10:00:00+08:00" /> -->
