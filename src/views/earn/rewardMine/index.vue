@@ -5,6 +5,8 @@
     </div>
     <template v-else>
       <!-- <airDrop /> -->
+
+      <mlambPool />
       <!-- <singeMineList :data="designatedData" /> -->
       <multiMineList :data="liquidityData" />
     </template>
@@ -31,6 +33,7 @@ export default {
   components: {
     singeMineList: () => import('./components/singleMineList.vue'),
     multiMineList: () => import('./components/multiMineList.vue'),
+    mlambPool: () => import('./components/mLAMBPool.vue'),
     loading: () => import('@/components/basic/loading.vue'),
     airDrop: () => import('@/components/airDrop.vue'),
   },
