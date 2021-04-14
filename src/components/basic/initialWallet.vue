@@ -8,6 +8,15 @@ import   {getPrice} from '@/contactLogic/tokenPrice.js';
 import getChainCoinInfo from '@/constants/networkCoinconfig.js';
 import chainConfig from '@/config/config.js';
 
+import WalletConnectProvider from "@walletconnect/web3-provider";
+const WalletConnectprovider = new WalletConnectProvider({
+   rpc: {
+    128: "https://http-mainnet-node.huobichain.com",
+    // ...
+  },
+  chainId:128 
+});
+
 export default {
   data() {
     return {};
@@ -34,7 +43,9 @@ export default {
     // 检查是否连接
     async isEthConnect() {
       try {
+        console.log('isEthConnect',this.web3);
         const res = await this.web3.eth.getCoinbase();
+        console.log('isEthConnect',res);
         return res;
       } catch (error) {
         console.log(error);
@@ -118,10 +129,20 @@ export default {
 
     // eth初始化
     async initEth() {
+      console.log('initEth');
       try {
         // console.log('initEth');
-        let web3Provider;
+        let web3Provider= WalletConnectprovider;
+        if(web3Provider.isConnecting==false){
+          const res = await WalletConnectprovider.enable();
+          web3Provider= WalletConnectprovider;
+          this.$store.commit('changeEthAddress', res[0]);
 
+        }
+        if(web3Provider == undefined){
+
+        
+          
         if (window.ethereum) {
           web3Provider = window.ethereum;
         } else if (window.web3) {
@@ -136,12 +157,17 @@ export default {
 
           return false;
         }
+
+        }
+        console.log(web3Provider);
         const web3 = new Web3(web3Provider);
 
         const ethersprovider = new ethers.providers.Web3Provider(web3Provider);
         this.$store.commit('changeweb3', { web3, ethersprovider });
 
+        console.log('isConnect start');
         const isConnect = await this.isEthConnect();
+        console.log('isConnect end',isConnect);
 
         await this.getEthChainID();
         await this.coinPrice();
