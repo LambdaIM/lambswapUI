@@ -246,7 +246,7 @@ export default {
           desc: this.$t('notice.n40'),
           duration: 30,
         });
-        this.addChain();
+        // this.addChain();
       }
 
       if (this.ethAddress && targetID === this.ethChainID) {

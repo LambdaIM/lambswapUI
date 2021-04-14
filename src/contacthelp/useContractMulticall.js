@@ -6,7 +6,7 @@ import { ChainId, WETH } from "@webfans/uniswapsdk";
 import ERC20_ABI from "../constants/abis/erc20.json";
 import ERC20_ABI_LAMB from "../constants/abis/erc20lamb.json";
 
-import ERC20_ABI_tlambbar from "../constants/abis/tlambbar.json";
+import ERC20_ABI_tlambbar from "../constants/abis/mLAMBBar.json";
 
 import { getContractMulticall  } from "./utils.js";
 

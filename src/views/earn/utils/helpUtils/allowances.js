@@ -1,5 +1,5 @@
 
-import { useStakingRewardsContract } from "./useContract.js";
+import { useStakingRewardsContract,useTokenContract } from "./useContract.js";
 import { TokenAmount } from "@webfans/uniswapsdk";
 
 export async function useStakingRewardsbalance(library, account, token) {
@@ -39,7 +39,7 @@ export async function useStakingRewardsRead(library, account, token, methodName,
   return result;
 }
 
-export  function useStakingRewardsContractSigna(
+export function useStakingRewardsContractSigna(
   library,
   account,
   token
@@ -48,4 +48,34 @@ export  function useStakingRewardsContractSigna(
 
   // console.log(contract);
   return contract;
+}
+
+export async function useTokentotalSupply(
+  library,
+  account,
+  token,
+) {
+  const contract = useTokenContract(library, account, token.address, false);
+  let result;
+  try {
+    result = await contract.totalSupply();
+  } catch (error) {
+    console.log(error);
+  }
+  return new TokenAmount(token, result.toString());
+}
+
+export async function useTokenBalance(
+  library,
+  account,
+  token
+) {
+  const contract = useTokenContract(library, account, token.address, false);
+  let result;
+  try {
+    result = await contract.balanceOf(account);
+  } catch (error) {
+    console.log(error);
+  }
+  return new TokenAmount(token, result.toString());
 }

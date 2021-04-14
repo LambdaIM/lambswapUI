@@ -1,0 +1,10 @@
+[
+    {
+        "name": "mLamb bar Huobi ECO",
+        "address": "0x2BBf86FFa0703990b91125c73baFA9bc7c010431",
+        "decimals": 18,
+        "chainId": 256,
+        "symbol": "mLAMB",
+        "rewardToken": "0x048206E76B3eD8d3986a9A1ED019836263FC847a"
+    }
+]
