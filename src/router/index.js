@@ -15,6 +15,11 @@ const routes = [
     component: () => import("@/views/playground/index.vue"),
   },
   {
+    path: "/addpair",
+    name: "addpair",
+    component: () => import("@/views/playground/addpair.vue"),
+  },
+  {
     path: "/exchange",
     // name: "exchange",
     component: () => import("@/views/swap/Menu.vue"),
