@@ -33,7 +33,7 @@
           总资产
         </p>
         <p class="mt-1">
-          {{ listData && listData.data && listData.data.totalAsset }} mLAMB
+          {{ listData && listData.data && listData.data.totalAsset }} XmLAMB
         </p>
       </div>
 
@@ -83,8 +83,8 @@ export default {
         const account = this.ethAddress;
         const library = this.ethersprovider;
         const [result] = await getFarmList(library, account, chainID);
-        console.log({result});
         this.listData = result;
+        console.log({result});
       } catch (error) {
         console.log(error);
       }
