@@ -72,13 +72,7 @@ import Cookies from 'js-cookie';
 import event from '@/common/js/event';
 
 
-const provider = new WalletConnectProvider({
-   rpc: {
-    128: "https://http-mainnet-node.huobichain.com",
-    // ...
-  },
-  chainId:128 
-});
+
 export default {
   inject: ['reload'],
   components: {
@@ -132,6 +126,13 @@ export default {
     async getwalletconnectAuth() {
       try {
         // 请求用户授权
+        const provider = new WalletConnectProvider({
+          rpc: {
+            128: "https://http-mainnet-node.huobichain.com",
+            // ...
+          },
+          chainId:128 
+        });
         console.log('provider',provider);
         // await provider.disconnect();
         const res = await provider.enable();
@@ -143,8 +144,9 @@ export default {
         this.reload();
       } catch (error) {
         event.$emit('initpageEth');
-        this.reload();
+        
         console.log(error);
+        this.reload();
       }
     },
     getLambAuth() {
