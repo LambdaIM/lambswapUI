@@ -17,12 +17,21 @@ const WalletConnectprovider = new WalletConnectProvider({
   chainId:128 
 });
 
+import Cookies from 'js-cookie';
+import event from '@/common/js/event';
+
+
 export default {
   data() {
     return {};
   },
   mounted() {
     this.initEth();
+    const _this =this;
+
+    event.$on('initpageEth',()=>{
+      _this.initEth();
+    });
 
   },
   methods: {
@@ -43,7 +52,7 @@ export default {
     // 检查是否连接
     async isEthConnect() {
       try {
-        console.log('isEthConnect',this.web3);
+        console.log('isEthConnect',this.web3,this.ethersprovider);
         const res = await this.web3.eth.getCoinbase();
         console.log('isEthConnect',res);
         return res;
@@ -130,19 +139,12 @@ export default {
     // eth初始化
     async initEth() {
       console.log('initEth');
+      let web3Provider;
       try {
         // console.log('initEth');
-        let web3Provider= WalletConnectprovider;
-        if(web3Provider.isConnecting==false){
-          const res = await WalletConnectprovider.enable();
-          web3Provider= WalletConnectprovider;
-          this.$store.commit('changeEthAddress', res[0]);
+        const usewalletname = Cookies.get('usewalletname')||'metamask';
 
-        }
-        if(web3Provider == undefined){
-
-        
-          
+        if(usewalletname == 'metamask'){  
         if (window.ethereum) {
           web3Provider = window.ethereum;
         } else if (window.web3) {
@@ -158,7 +160,20 @@ export default {
           return false;
         }
 
+        }else if(usewalletname == 'walletconnect'){
+           web3Provider=this.WalletConnectprovider||WalletConnectprovider;
+          if(web3Provider.isConnecting==false){
+            const res = await WalletConnectprovider.enable();
+            web3Provider= WalletConnectprovider;
+            this.$store.commit('changeEthAddress', res[0]);
+            this.$store.commit('changeWalletConnectprovider', WalletConnectprovider);
+
+          }
+
         }
+        
+        
+        
         console.log(web3Provider);
         const web3 = new Web3(web3Provider);
 
@@ -204,7 +219,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID']),
+    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID','WalletConnectprovider']),
   },
   watch:{
     ethChainID:function(){
