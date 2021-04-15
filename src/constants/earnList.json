@@ -10,6 +10,17 @@
       "GOAT",
       "LAMB"
     ]
+  },{
+    "name": "HGT/LAMB LP",
+    "address": "0x4a839b242A648b042563F6C1E1242616ce11994b",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum":"50",
+    "symbol": [
+      "HGT",
+      "LAMB"
+    ]
   }, {
   "name": "ETH/LAMB LP",
   "address": "0xD52adC338824b8359AD6ED873A32b68b0c95c38e",
