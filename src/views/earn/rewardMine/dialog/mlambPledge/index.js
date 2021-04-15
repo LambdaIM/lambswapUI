@@ -23,7 +23,8 @@ export default {
       sendLoading: false,
       mLAMBBalance: 0,
       needApprove: false,
-      tokenObj: {}
+      tokenObj: {},
+      approveLoading: false
     };
   },
   computed: {
@@ -41,13 +42,13 @@ export default {
         const account = this.ethAddress;
 
         const chainId = this.ethChainID;
-        const address = this.data && this.data.rewardToken;
+        const address = this.data && this.data.address;
         const decimals = this.data && this.data.decimals;
         const symbol = this.data && this.data.symbol;
 
         const tokenData = new Token(chainId, address, decimals, symbol);
 
-        const amount = Web3.utils.toWei(this.pledgeAmount.toString());
+        const amount = Web3.utils.toWei(this.pledgeAmount.toString(),'ether');
         const result = await useSushiBarEnter(library, account, tokenData, amount);
         if (result.hash) {
           event.$emit('sendSuccess');
@@ -100,16 +101,16 @@ export default {
     checkApprove: debounce(async function () {
       try {
         const chainId = this.ethChainID;
-        const address = this.data && this.data.rewardToken;
+        const address = this.data && this.data.address;
         const decimals = this.data && this.data.decimals;
         const symbol = this.data && this.data.symbol;
         const tokenData = new Token(chainId, address, decimals, symbol);
 
         // 需要将数据转为字符串格式
         const amount = this.pledgeAmount.toString();
-        const amountToApprove = new TokenAmount(tokenData, this.web3.utils.toWei(amount, 'ether'));
+        const amountToApprove = new TokenAmount(tokenData, Web3.utils.toWei(amount, 'ether'));
 
-        this.tokenObj.dataAddress = this.data && this.data.address;
+        this.tokenObj.dataAddress = this.data && this.data.data.rewardTokenAddress;
         this.tokenObj.amountToApprove = amountToApprove;
 
         // 检查授权

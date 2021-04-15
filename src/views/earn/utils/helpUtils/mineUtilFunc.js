@@ -8,7 +8,8 @@ const BigNumber = require('bignumber.js');
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 
-import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead, useTokenBalance, useTokentotalSupply ,usemLAMBContract} from "./allowances.js";
+import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead, useTokenBalance, useTokentotalSupply } from "./allowances.js";
+import { usemLAMBContract } from './useContract.js';
 
 import { Provider } from '@webfans/ethers-multicall';
 
@@ -210,8 +211,9 @@ export async function getFarmList(library, account, chainID) {
 
   for (let index = 0; index < result.length; index++) {
     const item = result[index];
+
     const token = _.find(tokenlist.tokens, (token) => {
-      return item.rewardToken == token.address;
+      return item.symbol === token.symbol && item.chainID === token.chainID;
     });
 
     const totalSupplyShare = await useTokentotalSupply(library, account, item);
@@ -225,7 +227,8 @@ export async function getFarmList(library, account, chainID) {
       totalSupplyShare: totalSupplyShare.toSignificant(6),
       balanceShare: balanceShare.toSignificant(6),
       totalAsset: totalAsset.toSignificant(6),
-      myAsset: myAsset.toSignificant(6)
+      myAsset: myAsset.toSignificant(6),
+      rewardTokenAddress: token.address
       // claimedReward:claimedReward.toSignificant(6)
     };
   }
@@ -233,14 +236,11 @@ export async function getFarmList(library, account, chainID) {
 }
 
 // 质押mLAMB
-export async function useSushiBarEnter(library,account,token,amount) {
-  // console.log({library,account,token,amount});
+export async function useSushiBarEnter(library, account, token, amount) {
   const contract = usemLAMBContract(library, account, token.address, true);
-
   let result;
   try {
     const safeGasEstimate = await contract.estimateGas.enter(amount);
-    console.log(safeGasEstimate);
     result = await contract.enter(amount, {
       gasLimit: calculateGasMargin(safeGasEstimate),
     });
@@ -251,13 +251,9 @@ export async function useSushiBarEnter(library,account,token,amount) {
 }
 
 // 取出mLAMB
-export async function useSushiBarLeave(
-  library,
-  account,
-  token,
-  amount
-) {
-  const contract = usemLAMBContract(library, account, token, true);
+export async function useSushiBarLeave(library, account, token, amount) {
+  // console.log({library, account, token, amount});
+  const contract = usemLAMBContract(library, account, token.address, true);
   let result;
   try {
     const safeGasEstimate = await contract.estimateGas.leave(amount);
