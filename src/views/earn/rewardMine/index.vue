@@ -68,6 +68,7 @@ export default {
       }
     },
     async getPriceData(item, pairListPrice) {
+      console.log('getPriceData');
       const obj = {};
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
@@ -92,8 +93,13 @@ export default {
         bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
         price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
       };
+      if(data.aTokenbalance.token.symbol==tokensymbolA){
+        obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
+      }else{
+        obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
+      }
+      
 
-      obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
       obj.price = data.price && data.price.toSignificant(6);
       obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);
       obj.img2 = getTokenImg(item.symbol[1], this.ethChainID);

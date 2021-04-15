@@ -680,7 +680,7 @@ export async function pairList(chainID,library){
 }
 
 export async function pairListEarn(chainID, library) {
-  // console.log('readpariInfoNuminfo');
+  console.log('pairListEarn');
   // const pairInfo = await readpariInfo(chainID, library, tokensymbolA, tokensymbolB);
   const pairListInfo = await pairList(chainID,library);
   const callList = [];
