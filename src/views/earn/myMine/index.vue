@@ -15,14 +15,23 @@
           </span>
         </template> -->
         <template slot="stake" slot-scope="{ row }">
-          {{ row.data && row.data.balance }}
+          <span v-if="row.kind !== 'depositMLAMB'">{{ row.data && row.data.balance }}</span>
+          <div v-else>
+            <p>{{ row.data && row.data.balanceShare }} XmLAMB</p>
+            <p class="asset">
+              {{ row.data && row.data.myAsset }} mLAMB
+            </p>
+          </div>
         </template>
         <template slot="earned" slot-scope="{ row }">
-          {{ row.data && row.data.earned }} {{ row.data && row.data.rewardToken }}
+          <span v-if="row.kind !== 'depositMLAMB'">
+            {{ row.data && row.data.earned }} {{ row.data && row.data.rewardToken }}
+          </span>
+          <span v-else>--</span>
         </template>
 
         <template slot="operation" slot-scope="{ row }">
-          <div class="btn-wrapper flex justify-start items-center">
+          <div v-if="row.kind !== 'depositMLAMB'" class="btn-wrapper flex justify-start items-center">
             <button class="table-btn claim" @click="openClaim(row)">
               {{ $t('myPage.table.claim') }}
             </button>
@@ -31,12 +40,17 @@
               <span v-if="row.kind === 'multi'" class="ml-1">LP</span>
             </button>
           </div>
+
+          <button v-else class="table-btn stake" @click="openUnstakeMLAMB(row)">
+            {{ $t('myPage.table.unstake') }}
+          </button>
         </template>
       </Table>
     </template>
     <div class="modal-wrapper">
       <takeDialog ref="take" />
       <extractDialog ref="extract" />
+      <extractMLAMBDialog ref="extractMLAMB" />
     </div>
   </div>
 </template>
@@ -47,6 +61,7 @@ import { StakingRewardListbatch } from '../utils/helpUtils/mineUtilFunc.js';
 import { pairListEarn } from '@/contactLogic/readpairpool.js';
 import event from '@/common/js/event';
 import _ from 'underscore';
+import { getFarmList } from '../utils/helpUtils/mineUtilFunc.js';
 export default {
   data() {
     return {
@@ -58,25 +73,26 @@ export default {
     loading: () => import('@/components/basic/loading.vue'),
     takeDialog: () => import('./dialog/takeoutDialog.vue'),
     extractDialog: () => import('./dialog/extractReward.vue'),
+    extractMLAMBDialog: () => import('./dialog/mLAMBTakeout.vue'),
   },
   methods: {
     async getListData() {
       this.showLoading = true;
       try {
-        const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
-        const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
-        // console.log(data);
-        const [scashData] = data.filter(item => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
+        const mLambData = await getFarmList(this.ethersprovider, this.ethAddress, this.ethChainID);
+        // const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
+        const data = (await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)) || [];
+        // const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
-        await this.getPriceData(scashData,pairListPrice);
-        this.data = data;
+        // await this.getPriceData(scashData, pairListPrice);
+        this.data = data.concat(mLambData);
       } catch (error) {
         console.log(error);
       } finally {
         this.showLoading = false;
       }
     },
-    async getPriceData(item,pairListPrice) {
+    async getPriceData(item, pairListPrice) {
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
 
@@ -106,9 +122,12 @@ export default {
     openUnstake(data) {
       this.$refs.take.open(data);
     },
+    openUnstakeMLAMB(data) {
+      this.$refs.extractMLAMB.open(data);
+    },
   },
   computed: {
-    ...mapState(['ethersprovider', 'ethChainID', 'ethAddress', 'scashPrice','web3']),
+    ...mapState(['ethersprovider', 'ethChainID', 'ethAddress', 'scashPrice', 'web3']),
     isReady() {
       return this.ethersprovider && this.ethChainID && this.ethAddress;
     },
@@ -187,11 +206,16 @@ export default {
     .claim {
       margin-right: 12px;
       color: #fff;
-      background: #FF41A1;
+      background: #ff41a1;
     }
     .stake {
-      border: 1px solid #FF41A1;
-      color: #FF41A1;
+      border: 1px solid #ff41a1;
+      color: #ff41a1;
+    }
+    .asset{
+      margin-top: 8px;
+      font-size: 14px;
+      color: rgb(141, 138, 138);
     }
   }
 }
