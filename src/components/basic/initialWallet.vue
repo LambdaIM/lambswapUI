@@ -163,7 +163,7 @@ export default {
 
         }else if(usewalletname == 'walletconnect'){
            web3Provider=this.WalletConnectprovider||WalletConnectprovider;
-          if(web3Provider.isConnecting==false){
+          if(web3Provider.connected==false){
             try {
               const res = await WalletConnectprovider.enable();
                 web3Provider= WalletConnectprovider;
@@ -173,7 +173,7 @@ export default {
             } catch (error) {
               // web3Provider= ;
               console.log(error);
-              web3Provider.isConnecting=false;
+              web3Provider.connected=false;
               
             }
             
@@ -184,7 +184,7 @@ export default {
         
         
         let  web3,ethersprovider;
-        if(usewalletname == 'metamask'&&web3Provider||web3Provider&&web3Provider.isConnecting){
+        if(usewalletname == 'metamask'&&web3Provider||web3Provider&&web3Provider.connected){
            web3 = new Web3(web3Provider);
            ethersprovider = new ethers.providers.Web3Provider(web3Provider);
 

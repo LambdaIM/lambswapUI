@@ -103,6 +103,7 @@ export default {
      }
     },
     connectWallet(name) {
+      this.$store.commit('changeEthAddress', '');
        if(name === 'metamask'){
          this.getEthAuth();
        }else if(name === 'walletconnect'){
