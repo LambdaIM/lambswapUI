@@ -19,6 +19,7 @@ const WalletConnectprovider = new WalletConnectProvider({
 
 import Cookies from 'js-cookie';
 import event from '@/common/js/event';
+import getethProvider from '@/contacthelp/getethProvider.js';
 
 
 export default {
@@ -157,27 +158,43 @@ export default {
           });
           this.$store.commit('changeEthChainID', chainConfig.defaultChainID);
 
-          return false;
+          // return false;
         }
 
         }else if(usewalletname == 'walletconnect'){
            web3Provider=this.WalletConnectprovider||WalletConnectprovider;
           if(web3Provider.isConnecting==false){
-            const res = await WalletConnectprovider.enable();
-            web3Provider= WalletConnectprovider;
-            this.$store.commit('changeEthAddress', res[0]);
-            this.$store.commit('changeWalletConnectprovider', WalletConnectprovider);
+            try {
+              const res = await WalletConnectprovider.enable();
+                web3Provider= WalletConnectprovider;
+                this.$store.commit('changeEthAddress', res[0]);
+                this.$store.commit('changeWalletConnectprovider', WalletConnectprovider);
+              
+            } catch (error) {
+              // web3Provider= ;
+              console.log(error);
+              web3Provider.isConnecting=false;
+              
+            }
+            
 
           }
 
         }
         
         
-        
-        console.log(web3Provider);
-        const web3 = new Web3(web3Provider);
+        let  web3,ethersprovider;
+        if(usewalletname == 'metamask'&&web3Provider||web3Provider&&web3Provider.isConnecting){
+           web3 = new Web3(web3Provider);
+           ethersprovider = new ethers.providers.Web3Provider(web3Provider);
 
-        const ethersprovider = new ethers.providers.Web3Provider(web3Provider);
+        }else{
+          ethersprovider = getethProvider({chainId:128});
+          web3 = new Web3('https://http-mainnet-node.huobichain.com');
+
+        }
+        
+
         this.$store.commit('changeweb3', { web3, ethersprovider });
 
         console.log('isConnect start');

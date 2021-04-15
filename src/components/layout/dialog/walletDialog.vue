@@ -141,6 +141,8 @@ export default {
         this.openWalletDialog = false;
         this.reload();
       } catch (error) {
+        event.$emit('initpageEth');
+        this.reload();
         console.log(error);
       }
     },
