@@ -18,8 +18,8 @@
     "kind": "multi",
     "daynum":"50",
     "symbol": [
-      "HGT",
-      "LAMB"
+      "LAMB",
+      "HGT"
     ]
   }, {
   "name": "ETH/LAMB LP",
