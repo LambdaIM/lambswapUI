@@ -1,7 +1,7 @@
 <template>
   <header class="header-wrapper header-wrapper-bg">
     <!-- pc端头部导航 -->
-    <nav class="nav-wrapper container mx-auto flex justify-between items-center pcNav">
+    <nav v-if="!isMobile" class="nav-wrapper container mx-auto flex justify-between items-center pcNav">
       <div class="left-wrapper flex items-center">
         <img width="150" src="../../assets/img/home/1.png" alt="logo">
         <div class="menu-wrapper">
@@ -87,7 +87,7 @@
     </nav>
 
     <!-- 小屏幕导航 -->
-    <nav class="nav-wrapper container mobileHeader">
+    <nav v-else class="nav-wrapper container mobileHeader">
       <div class="content-left">
         <img src="../../assets/logo.svg" alt="logo">
       </div>
@@ -125,9 +125,6 @@ import { mapState } from 'vuex';
 import config from '@/config/config.js';
 import jscookie from 'js-cookie';
 import { getToken } from '@/contactLogic/readbalance.js';
-
-
-
 export default {
   inject: ['reload'],
   components: {
@@ -309,7 +306,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethAddress', 'ethChainID','web3','WalletConnectprovider','WalletName']),
+    ...mapState(['ethAddress', 'ethChainID','web3','WalletConnectprovider','WalletName','isMobile']),
     getShortAddress() {
       return `${this.ethAddress.slice(0, 6)}...${this.ethAddress.slice(-6)}`;
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="footer-wrapper">
     <!-- pc底部栏 -->
-    <footer class="footer pcFooter">
+    <footer v-if="!isMobile" class="footer pcFooter">
       <div class="footer-content container mx-auto flex justify-between items-center">
         <div class="left-wrapper">
           <div class="logo-wrapper flex justify-between items-center">
@@ -49,7 +49,7 @@
     </footer>
 
     <!-- 移动端底部栏 -->
-    <footer class="mobileFooter container">
+    <footer v-else class="mobileFooter container">
       <div :class="isActive=='mining'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('mining')">
         <img src="../../assets/img/mining.svg" alt="mining">
         <img src="../../assets/img/mining-active.svg" alt="mining" class="acitveImg">
@@ -90,13 +90,17 @@
 
 
 <script>
-import jscookie from "js-cookie";
+import jscookie from 'js-cookie';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       lang: null,
       isActive: "mining",
     };
+  },
+  computed: {
+    ...mapState(['isMobile'])
   },
   methods: {
     // 获取语言key
