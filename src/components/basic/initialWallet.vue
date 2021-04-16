@@ -140,6 +140,11 @@ export default {
           clearTimeout(timer);
         }, 1000);
       });
+        providerobj.on('disconnect',()=>{
+          this.checkAccount([]);
+          window.location.reload();
+        });
+      
       }
     },
 
@@ -256,7 +261,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID','WalletConnectprovider']),
+    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID','WalletConnectprovider','WalletName']),
   },
   watch:{
     ethChainID:function(){
