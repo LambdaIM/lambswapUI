@@ -113,11 +113,22 @@ export default {
 
     // 检测eth账号切换
     checkStatus() {
-      window.ethereum.on('accountsChanged', (accounts) => {
+      //WalletConnectprovider
+      let providerobj={};
+      if(this.WalletName=='metamask'){
+        providerobj=window.ethereum;
+      }else if(this.WalletName=='walletconnect') {
+        providerobj=this.WalletConnectprovider;
+
+      }
+      if(providerobj&&providerobj.on){
+
+      
+        providerobj.on('accountsChanged', (accounts) => {
         this.checkAccount(accounts);
         window.location.reload();
       });
-      window.ethereum.on('networkChanged', (network) => {
+        providerobj.on('networkChanged', (network) => {
         this.$store.commit('changeEthChainID', network);
         this.$Notice.warning({
           title: this.$t('notice.n'),
@@ -129,6 +140,7 @@ export default {
           clearTimeout(timer);
         }, 1000);
       });
+      }
     },
 
     // eth初始化
@@ -166,11 +178,8 @@ export default {
 
         }else if(usewalletname == 'walletconnect'){
           const WalletConnectprovider = new WalletConnectProvider({
-              rpc: {
-                128: "https://http-mainnet-node.huobichain.com",
-                // ...
-              },
-              chainId:128 
+              rpc: chainConfig.walletconnectRPC,
+              chainId:chainConfig.defaultChainID 
             });
             
            web3Provider=this.WalletConnectprovider||WalletConnectprovider;
@@ -241,7 +250,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.$Notice.warning({
-          title: this.$t('notice.n12'),
+          title: this.$t('notice.n12')
         });
       }
     },

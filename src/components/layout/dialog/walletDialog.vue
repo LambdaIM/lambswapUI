@@ -71,7 +71,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import Cookies from 'js-cookie';
 import event from '@/common/js/event';
 
-
+import chainConfig from '@/config/config.js';
 
 export default {
   inject: ['reload'],
@@ -130,11 +130,8 @@ export default {
       try {
         // 请求用户授权
         const provider = new WalletConnectProvider({
-          rpc: {
-            128: "https://http-mainnet-node.huobichain.com",
-            // ...
-          },
-          chainId:128 
+          rpc: chainConfig.walletconnectRPC,
+          chainId:chainConfig.defaultChainID 
         });
         console.log('provider',provider);
         // await provider.disconnect();
