@@ -42,6 +42,7 @@ export default {
       Buildr:'Buildr',
       Exchange:'Exchange',
       Earn:'Earn',
+      Earn1:'Earn',
       Bridge:'Bridge',
       Docs:'Docs',
       chart: 'Chart'

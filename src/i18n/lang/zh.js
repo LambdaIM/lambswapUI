@@ -42,6 +42,7 @@ export default {
       Buildr: '铸造',
       Exchange: '交易',
       Earn: '收益挖矿',
+      Earn1: '挖矿',
       Bridge: '跨链',
       Docs:'教程',
       chart: '行情'
