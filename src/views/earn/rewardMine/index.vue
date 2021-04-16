@@ -4,7 +4,7 @@
       <loading />
     </div>
     <template v-else>
-      <airDrop />
+      <!-- <airDrop /> -->
       <!-- <singeMineList :data="designatedData" /> -->
       <multiMineList :data="liquidityData" />
     </template>
@@ -98,7 +98,7 @@ export default {
       }else{
         obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
       }
-      
+
 
       obj.price = data.price && data.price.toSignificant(6);
       obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);
@@ -147,6 +147,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/media.less';
 .rewardMine-wrapper {
   position: relative;
   width: 100%;

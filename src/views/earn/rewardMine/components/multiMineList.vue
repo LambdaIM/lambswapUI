@@ -33,18 +33,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '../media/media.less';
 .multiMine-wrapper {
   width: 100%;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
-  padding: 32px 44px 44px 44px;
   .title {
     font-size: 20px;
     line-height: 24px;
   }
   .subTitle {
-    font-size: 16px;
     font-weight: 400;
     color: #8690a8;
     line-height: 19px;

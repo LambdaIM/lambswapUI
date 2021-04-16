@@ -87,6 +87,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/media.less';
 .earn-wrapper {
   margin-top: 24px;
   .content-wrapper {
@@ -96,10 +97,10 @@ export default {
       .switch-wrapper {
         .menu-item {
           display: inline-block;
-          font-size: 16px;
+          // font-size: 16px;
           color: rgba(20, 23, 28, 0.4);
           line-height: 19px;
-          margin-right: 48px;
+          // margin-right: 48px;
         }
         .active-menu {
           color: rgba(20, 23, 28, 1);
