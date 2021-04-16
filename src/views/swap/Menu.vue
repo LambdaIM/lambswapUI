@@ -74,6 +74,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/index.less';
 .connect-wrapper {
   margin-top: 24px;
   // height: 100vh;
@@ -85,10 +86,8 @@ export default {
         // margin-left: 100px;
         .menu-item {
           display: inline-block;
-          font-size: 16px;
           color: rgba(20, 23, 28, 0.4);
           line-height: 19px;
-          margin-right: 48px;
         }
         .active-menu {
           color: #ff41a1;
