@@ -8,12 +8,25 @@ import   {getPrice} from '@/contactLogic/tokenPrice.js';
 import getChainCoinInfo from '@/constants/networkCoinconfig.js';
 import chainConfig from '@/config/config.js';
 
+import WalletConnectProvider from "@walletconnect/web3-provider";
+
+
+import Cookies from 'js-cookie';
+import event from '@/common/js/event';
+import getethProvider from '@/contacthelp/getethProvider.js';
+
+
 export default {
   data() {
     return {};
   },
   mounted() {
     this.initEth();
+    const _this =this;
+
+    event.$on('initpageEth',()=>{
+      _this.initEth();
+    });
 
   },
   methods: {
@@ -34,7 +47,9 @@ export default {
     // 检查是否连接
     async isEthConnect() {
       try {
+        console.log('isEthConnect',this.web3,this.ethersprovider);
         const res = await this.web3.eth.getCoinbase();
+        console.log('isEthConnect',res);
         return res;
       } catch (error) {
         console.log(error);
@@ -118,10 +133,22 @@ export default {
 
     // eth初始化
     async initEth() {
+      console.log('initEth');
+      let web3Provider;
       try {
         // console.log('initEth');
-        let web3Provider;
+        let  usewalletname = Cookies.get('usewalletname');
+        if(usewalletname==undefined||usewalletname==''){
+          if(window.ethereum||window.web3){
+            usewalletname = 'metamask';
+          }else{
+            usewalletname = 'walletconnect';
+          }
+        }
+        
+        this.$store.commit('WalletName', usewalletname);
 
+        if(usewalletname == 'metamask'){  
         if (window.ethereum) {
           web3Provider = window.ethereum;
         } else if (window.web3) {
@@ -134,14 +161,56 @@ export default {
           });
           this.$store.commit('changeEthChainID', chainConfig.defaultChainID);
 
-          return false;
+          // return false;
         }
-        const web3 = new Web3(web3Provider);
 
-        const ethersprovider = new ethers.providers.Web3Provider(web3Provider);
+        }else if(usewalletname == 'walletconnect'){
+          const WalletConnectprovider = new WalletConnectProvider({
+              rpc: {
+                128: "https://http-mainnet-node.huobichain.com",
+                // ...
+              },
+              chainId:128 
+            });
+            
+           web3Provider=this.WalletConnectprovider||WalletConnectprovider;
+          if(web3Provider.connected==false){
+            try {
+              const res = await WalletConnectprovider.enable();
+                web3Provider= WalletConnectprovider;
+                this.$store.commit('changeEthAddress', res[0]);
+                this.$store.commit('changeWalletConnectprovider', WalletConnectprovider);
+              
+            } catch (error) {
+              // web3Provider= ;
+              console.log(error);
+              web3Provider.connected=false;
+              
+            }
+            
+
+          }
+
+        }
+        
+        
+        let  web3,ethersprovider;
+        if(usewalletname == 'metamask'&&web3Provider||web3Provider&&web3Provider.connected){
+           web3 = new Web3(web3Provider);
+           ethersprovider = new ethers.providers.Web3Provider(web3Provider);
+
+        }else{
+          ethersprovider = getethProvider({chainId:128});
+          web3 = new Web3('https://http-mainnet-node.huobichain.com');
+
+        }
+        
+
         this.$store.commit('changeweb3', { web3, ethersprovider });
 
+        console.log('isConnect start');
         const isConnect = await this.isEthConnect();
+        console.log('isConnect end',isConnect);
 
         await this.getEthChainID();
         await this.coinPrice();
@@ -178,7 +247,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID']),
+    ...mapState(['ethAddress', 'web3', 'ethersprovider','ethChainID','WalletConnectprovider']),
   },
   watch:{
     ethChainID:function(){
