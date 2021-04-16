@@ -28,6 +28,20 @@
             <img src="../../../assets/img/check-blue-24.png">
           </div>
         </div>
+        <div
+          class="wallet-content flex justify-between items-center"
+          :class="wallet == 'walletconnect' ? 'wallet-content-active' : ''"
+          @click="selectWallet('walletconnect')"
+        >
+          <div class="logo flex items-center text-warpper">
+            <img src="../../../assets/img/walletconnect-hexagon-blue.svg">
+            <p>WalletConnect</p>
+          </div>
+
+          <div class="img-wapper">
+            <img src="../../../assets/img/check-blue-24.png">
+          </div>
+        </div>
         <!-- <div
           class="wallet-content flex items-center justify-between"
           :class="wallet == 'lambda' ? 'wallet-content-active' : ''"
@@ -53,6 +67,12 @@
 </template>
 
 <script>
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import Cookies from 'js-cookie';
+import event from '@/common/js/event';
+
+
+
 export default {
   inject: ['reload'],
   components: {
@@ -67,13 +87,28 @@ export default {
   methods: {
     selectWallet(wallet) {
       this.wallet = wallet;
+      Cookies.set('usewalletname', wallet, { expires: 365, path: '/' });
+      
+      this.$store.commit('WalletName', wallet);
+      
     },
     open() {
       this.openWalletDialog = true;
+     const usewalletname = Cookies.get('usewalletname');
+     if(usewalletname){
+       this.wallet = usewalletname;
+     }
     },
     connectWallet(name) {
+      this.$store.commit('changeEthAddress', '');
+       if(name === 'metamask'){
+         this.getEthAuth();
+       }else if(name === 'walletconnect'){
+         this.getwalletconnectAuth();
+
+       }
       
-      name === 'metamask' ? this.getEthAuth() : this.getLambAuth();
+      // name === 'metamask' ? this.getEthAuth() : this.getLambAuth();
       this.openWalletDialog = false;
     },
 
@@ -84,13 +119,39 @@ export default {
         const res = await window.ethereum.enable();
         this.$store.commit('changeEthAddress', res[0]);
         // await this.initEth();
+        event.$emit('initpageEth');
         this.openWalletDialog = false;
         this.reload();
       } catch (error) {
         console.log(error);
       }
     },
-
+    async getwalletconnectAuth() {
+      try {
+        // 请求用户授权
+        const provider = new WalletConnectProvider({
+          rpc: {
+            128: "https://http-mainnet-node.huobichain.com",
+            // ...
+          },
+          chainId:128 
+        });
+        console.log('provider',provider);
+        // await provider.disconnect();
+        const res = await provider.enable();
+        this.$store.commit('changeEthAddress', res[0]);
+        this.$store.commit('changeWalletConnectprovider', provider);
+        
+        event.$emit('initpageEth');
+        this.openWalletDialog = false;
+        this.reload();
+      } catch (error) {
+        event.$emit('initpageEth');
+        
+        console.log(error);
+        this.reload();
+      }
+    },
     getLambAuth() {
       console.log('lambda');
     },

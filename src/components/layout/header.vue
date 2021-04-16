@@ -59,7 +59,9 @@
         <template v-else>
           <Dropdown trigger="click" class="func-wrapper" @on-click="choseFunc">
             <div class="connected-content flex justify-start items-center">
-              <img src="../../assets/img/metamask18.svg" alt="metamask">
+              <img v-if="WalletName=='metamask'" src="../../assets/img/metamask18.svg" alt="metamask">
+              <img v-else src="../../assets/img/walletconnect-hexagon-blue.svg" alt="walletconnect">
+
               <span>{{ getShortAddress }}</span>
               <img class="arrow" src="../../assets/img/down.svg" alt="down">
             </div>
@@ -72,10 +74,10 @@
                 <img src="../../assets/img/changeWallet.svg" alt="change">
                 <span>{{ $t('header.changeWallet') }}</span>
               </DropdownItem>
-              <!-- <DropdownItem class="list-item" name="disconnect">
+              <DropdownItem v-if="WalletConnectprovider" class="list-item" name="disconnect">
                 <img src="../../assets/img/disconnect16.svg" alt="disconnect">
                 <span>{{ $t('header.Disconnect') }}</span>
-              </DropdownItem> -->
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </template>
@@ -92,7 +94,10 @@ import config from '@/config/config.js';
 import jscookie from 'js-cookie';
 import { getToken } from '@/contactLogic/readbalance.js';
 
+
+
 export default {
+  inject: ['reload'],
   components: {
     walletdialog: () => import('./dialog/walletDialog'),
   },
@@ -190,6 +195,9 @@ export default {
 
     // 添加并且切换网络类型
     addChain() {
+      if(this.WalletName!='metamask'){
+        return ;
+      }
       const param = {
         chainId: '0x80',
         chainName: 'Heco Main',
@@ -219,14 +227,18 @@ export default {
       if (val === 'change') {
         this.openWalletDialog();
       }
-      // if (val === 'disconnect') {
-      //   this.disconnectWallet();
-      // }
+      if (val === 'disconnect') {
+        this.disconnectWallet();
+      }
     },
 
-    // async disconnectWallet() {
-    //   console.log('disconnect');
-    // },
+    async disconnectWallet() {
+      console.log('disconnect');
+      await this.WalletConnectprovider.disconnect();
+      this.$store.commit('changeEthAddress', '');
+      this.$store.commit('changeWalletConnectprovider', null);
+      this.reload();
+    },
 
     getStatus() {
       const targetID = parseInt(jscookie.get('targetNet')) || 128;
@@ -265,7 +277,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethAddress', 'ethChainID']),
+    ...mapState(['ethAddress', 'ethChainID','web3','WalletConnectprovider','WalletName']),
     getShortAddress() {
       return `${this.ethAddress.slice(0, 6)}...${this.ethAddress.slice(-6)}`;
     },

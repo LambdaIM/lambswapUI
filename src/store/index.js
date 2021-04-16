@@ -15,6 +15,8 @@ const store = new vuex.Store({
     earnPrice: '',
     scashPrice: '',
     chainTokenName: '',
+    WalletConnectprovider:null,
+    WalletName:''
   },
   mutations: {
     changeToken(state, token) {
@@ -49,6 +51,13 @@ const store = new vuex.Store({
     changechainTokenName(state, name){
       state.chainTokenName = name;
 
+    },
+    changeWalletConnectprovider(state, Connectprovider){
+      state.WalletConnectprovider = Connectprovider; 
+
+    },
+    WalletName(state, name){
+      state.WalletName = name; 
     }
   },
   actions: {
