@@ -88,7 +88,33 @@
 
     <!-- 小屏幕导航 -->
     <nav class="nav-wrapper container mobileHeader">
-      header
+      <div class="content-left">
+        <img src="../../assets/logo.svg" alt="logo">
+      </div>
+      <div class="content-right flex items-center">
+        <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
+          <div class="netWork flex justify-between items-center" :class="getBg">
+            <div class="dot" :class="statusVal" />
+            <span>{{ network }}</span>
+            <img class="arrow" src="../../assets/img/down.svg" alt="down">
+          </div>
+          <DropdownMenu slot="list" class="list-wrapper">
+            <template v-for="(item, index) in getNetList">
+              <DropdownItem v-if="netInfo[item].isBan === false" :key="index" class="list-item" :name="item">
+                <img :src="netInfo[item].imgSrc" :alt="item">
+                <span>{{ netInfo[item].name }}</span>
+              </DropdownItem>
+              <DropdownItem v-else :key="index" disabled class="list-item" :name="item">
+                <img :src="netInfo[item].imgSrc" :alt="item">
+                <span>{{ netInfo[item].name }}</span>
+              </DropdownItem>
+            </template>
+          </DropdownMenu>
+        </Dropdown>
+        <div>
+          <img src="../../assets/img/header-ico.svg" alt="headerico" class="headerIco">
+        </div>
+      </div>
     </nav>
     <walletdialog ref="wallet" />
   </header>

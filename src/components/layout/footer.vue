@@ -50,7 +50,31 @@
 
     <!-- 移动端底部栏 -->
     <footer class="mobileFooter container">
-      footer
+      <div :class="isActive=='mining'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('mining')">
+        <img src="../../assets/img/mining.svg" alt="mining">
+        <img src="../../assets/img/mining-active.svg" alt="mining" class="acitveImg">
+        <p>挖矿</p>
+      </div>
+      <div :class="isActive=='swap'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('swap')">
+        <img src="../../assets/img/swap.svg" alt="swap">
+        <img src="../../assets/img/swap-active.svg" alt="swap" class="acitveImg">
+        <p>交易</p>
+      </div>
+      <div :class="isActive=='birdge'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('birdge')">
+        <img src="../../assets/img/birdge.svg" alt="birdge">
+        <img src="../../assets/img/birdge-active.svg" alt="birdge" class="acitveImg">
+        <p>跨链</p>
+      </div>
+      <div :class="isActive=='doc'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('doc')">
+        <img src="../../assets/img/doc.svg" alt="doc">
+        <img src="../../assets/img/doc-active.svg" alt="doc" class="acitveImg">
+        <p>教程</p>
+      </div>
+      <div :class="isActive=='quotes'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('quotes')">
+        <img src="../../assets/img/quotes-active.svg" alt="quotes">
+        <img src="../../assets/img/quotes.svg" alt="quotes" class="acitveImg">
+        <p>行情</p>
+      </div>
     </footer>
   </div>
 </template>
@@ -62,6 +86,7 @@ export default {
   data() {
     return {
       lang: null,
+      isActive:'mining',
     };
   },
   methods: {
@@ -78,6 +103,9 @@ export default {
       this.$i18n.locale = this.lang;
       jscookie.set('langkey', this.lang, { expires: 180 });
     },
+    activeMenu(name){
+      this.isActive = name;
+    }
   },
   mounted() {
     this.getKey();

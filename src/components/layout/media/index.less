@@ -1,20 +1,65 @@
 @media (max-width: 1200px) {
-  .header-wrapper{
+  .header-wrapper {
     height: 56px;
-    .pcNav{
+
+    .pcNav {
       display: none;
     }
-    .mobileHeader{
-      display: block;
+
+    .mobileHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .content-left{
+        img{
+          width: 110px;
+        }
+      }
+      .content-right{
+        .network-wrapper {
+          cursor: pointer;
+          width: 124px;
+          
+          .netWork {
+            width: 124px;
+            height: 28px;
+            border-radius: 14px;
+            .dot {
+              margin-left: 8px;
+              width: 8px;
+              height: 8px;
+              border-radius: 100%;
+            }
+            span {
+              font-size: 14px;
+              font-weight: 500;
+              color: #14171c;
+              line-height: 16px;
+            }
+            .arrow {
+              margin-right: 8px;
+            }
+          }
+        }
+        .headerIco{
+          margin: 0 8px 0 16px;
+          img{
+            width: 24px;
+          }
+        }
+      }
 
     }
   }
-  .footer-wrapper{
+
+  .footer-wrapper {
     height: 48px;
-    .pcFooter{
+
+    .pcFooter {
       display: none;
     }
-    .mobileFooter{
+
+    .mobileFooter {
       width: 100%;
       height: 48px;
       background-color: #fff;
@@ -23,18 +68,50 @@
       left: 0;
       right: 0;
       bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .menu-item {
+        img {
+          max-width: 24px;
+        }
+        .acitveImg{
+          display: none;
+        }
+        p {
+          font-size: 9px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          color: #909DB2;
+          line-height: 13px;
+        }
+      }
+      .activeMenu{
+        img{
+          display: none;
+        }
+        .acitveImg{
+          display: block;
+        }
+        p{
+          color: #FF42A1;
+        }
+      }
     }
   }
 }
 
 @media (min-width: 1201px) {
-  .header-wrapper{
+  .header-wrapper {
     height: 88px;
-    .mobileHeader{
+
+    .mobileHeader {
       display: none;
     }
+
     .left-wrapper {
       min-width: 68%;
+
       .menu-wrapper {
         .menu-item {
           margin-right: 30px;
@@ -43,12 +120,14 @@
     }
   }
 
-  .footer-wrapper{
+  .footer-wrapper {
     height: 120px;
-    .pcFooter{
+
+    .pcFooter {
       display: block;
     }
-    .mobileFooter{
+
+    .mobileFooter {
       display: none;
     }
   }
