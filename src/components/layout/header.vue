@@ -1,6 +1,7 @@
 <template>
   <header class="header-wrapper header-wrapper-bg">
-    <nav class="nav-wrapper container mx-auto flex justify-between items-center">
+    <!-- pc端头部导航 -->
+    <nav class="nav-wrapper container mx-auto flex justify-between items-center pcNav">
       <div class="left-wrapper flex items-center">
         <img width="150" src="../../assets/img/home/1.png" alt="logo">
         <div class="menu-wrapper">
@@ -83,6 +84,11 @@
         </template>
         </button>
       </div>
+    </nav>
+
+    <!-- 小屏幕导航 -->
+    <nav class="nav-wrapper container mobileHeader">
+      header
     </nav>
     <walletdialog ref="wallet" />
   </header>
@@ -337,9 +343,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/index.less';
 .header-wrapper {
   width: 100%;
-  height: 88px;
   position: fixed;
   top: 0;
   left: 0;
@@ -348,7 +354,7 @@ export default {
   .nav-wrapper {
     height: 100%;
     .left-wrapper {
-      width: 58%;
+      // width: 58%;
       height: 100%;
       .menu-wrapper {
         margin-left: 50px;
@@ -506,18 +512,5 @@ export default {
   border-radius: 14px;
   margin-right: 10px;
 }
-@media (min-width: 1441px) {
-  .left-wrapper {
-    min-width: 68%;
-    .menu-wrapper {
-      margin-left: 60px;
-      .menu-item {
-        margin-right: 30px;
-      }
-    }
-  }
-  .connect-wrapper {
-    width: 22%;
-  }
-}
+
 </style>

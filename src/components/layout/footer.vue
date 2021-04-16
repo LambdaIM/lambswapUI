@@ -1,16 +1,18 @@
 <template>
-  <footer class="footer-wrapper">
-    <div class="footer-content container mx-auto flex justify-between items-center">
-      <div class="left-wrapper">
-        <div class="logo-wrapper flex justify-between items-center">
-          <img src="../../assets/foot.png" alt="logo">
-          <img class="ml-6" src="../../assets/lamb.png" alt="lamb">
+  <div class="footer-wrapper">
+    <!-- pc底部栏 -->
+    <footer class="footer pcFooter">
+      <div class="footer-content container mx-auto flex justify-between items-center">
+        <div class="left-wrapper">
+          <div class="logo-wrapper flex justify-between items-center">
+            <img src="../../assets/foot.png" alt="logo">
+            <img class="ml-6" src="../../assets/lamb.png" alt="lamb">
+          </div>
+          <p>© 2021 LambSwap All rights reserved</p>
         </div>
-        <p>© 2021 LambSwap All rights reserved</p>
-      </div>
-      <div class="right-wrapper flex">
-        <div class="contact-wrapper flex justify-between items-center">
-          <!-- <div class="contact-item mr">
+        <div class="right-wrapper flex">
+          <!-- <div class="contact-wrapper flex justify-between items-center">
+            <div class="contact-item mr">
             <a href="/" target="_blank">
               <img src="../../assets/img/telegram.svg" alt="telegram">
             </a>
@@ -24,32 +26,38 @@
             <a href="/" target="_blank">
               <img src="../../assets/img/medium.svg" alt="medium">
             </a>
-          </div> -->
-        </div>
-        <div class=" flex items-center">
-          <div class="wechat">
-            <div class="isShow">
-              <img src="../../assets/img/erweima.jpg" alt="erweima">
-            </div>
-            <img src="../../assets/img/WeChat.png" alt="WeChat">
           </div>
-          <Select v-model="lang" class="lang-wrapper" style="width: 124px" @on-change="getSelectLang">
-            <Option value="zh">
-              简体中文
-            </Option>
-            <Option value="en">
-              English
-            </Option>
-          </Select>
+          </div> -->
+          <div class="flex items-center">
+            <div class="wechat">
+              <div class="isShow">
+                <img src="../../assets/img/erweima.jpg" alt="erweima">
+              </div>
+              <img src="../../assets/img/WeChat.png" alt="WeChat">
+            </div>
+            <Select v-model="lang" class="lang-wrapper" style="width: 124px" @on-change="getSelectLang">
+              <Option value="zh">
+                简体中文
+              </Option>
+              <Option value="en">
+                English
+              </Option>
+            </Select>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+
+    <!-- 移动端底部栏 -->
+    <footer class="mobileFooter container">
+      footer
+    </footer>
+  </div>
 </template>
 
 
 <script>
-import jscookie from "js-cookie";
+import jscookie from 'js-cookie';
 export default {
   data() {
     return {
@@ -59,8 +67,8 @@ export default {
   methods: {
     // 获取语言key
     getKey() {
-      const key = jscookie.get("langkey");
-      key === "zh" ? (this.lang = "zh") : (this.lang = "en");
+      const key = jscookie.get('langkey');
+      key === 'zh' ? (this.lang = 'zh') : (this.lang = 'en');
       this.$i18n.locale = this.lang;
     },
 
@@ -68,7 +76,7 @@ export default {
     getSelectLang(val) {
       this.lang = val;
       this.$i18n.locale = this.lang;
-      jscookie.set("langkey", this.lang, { expires: 180 });
+      jscookie.set('langkey', this.lang, { expires: 180 });
     },
   },
   mounted() {
@@ -78,27 +86,31 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/index.less';
 .footer-wrapper {
   width: 100%;
-  height: 120px;
-  background: #050d26;
-  .footer-content {
+  .footer {
+    width: 100%;
     height: 100%;
-    .left-wrapper {
-      .logo-wrapper {
-        width: 150px;
+    background: #050d26;
+    .footer-content {
+      height: 100%;
+      .left-wrapper {
+        .logo-wrapper {
+          width: 150px;
+        }
+        p {
+          margin-top: 10px;
+          font-size: 12px;
+          font-weight: 400;
+          color: #ffffff;
+          line-height: 14px;
+        }
       }
-      p {
-        margin-top: 10px;
-        font-size: 12px;
-        font-weight: 400;
-        color: #ffffff;
-        line-height: 14px;
-      }
-    }
-    .right-wrapper {
-      .mr {
-        margin-right: 24px;
+      .right-wrapper {
+        .mr {
+          margin-right: 24px;
+        }
       }
     }
   }
@@ -116,7 +128,7 @@ export default {
     }
   }
   ::before {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     left: 90px;
@@ -130,8 +142,8 @@ export default {
     max-width: 30px;
   }
 }
-.wechat:hover .isShow{
-  display:block;
+.wechat:hover .isShow {
+  display: block;
 }
 .lang-wrapper {
   margin-left: 20px;

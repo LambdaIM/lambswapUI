@@ -1,8 +1,6 @@
 <template>
   <div class="pool-warpper">
     <airDrop />
-
-
     <div class="liquidityPool">
       <h2>{{ $t('liquidity.pool.title') }}</h2>
       <div v-if="pairlistloading" class="demo-spin-container ">
@@ -149,7 +147,7 @@ export default {
         list.forEach(element => {
           element.aToketotalSupply = element.aToketotalSupply.toSignificant(6);
           element.bToketotalSupply = element.bToketotalSupply.toSignificant(6);
-          
+
         });
 
         console.log(list);
@@ -248,7 +246,7 @@ export default {
           }
         }
         .input-warpper {
-          width: 160px;
+          // width: 160px;
           height: 36px;
           background: #FF41A1;
           border-radius: 18px;
@@ -261,7 +259,7 @@ export default {
           }
         }
         .remove-warpper {
-          width: 160px;
+          // width: 160px;
           height: 36px;
           border-radius: 18px;
           border: 1px solid #FF41A1;
