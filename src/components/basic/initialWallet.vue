@@ -9,13 +9,7 @@ import getChainCoinInfo from '@/constants/networkCoinconfig.js';
 import chainConfig from '@/config/config.js';
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
-const WalletConnectprovider = new WalletConnectProvider({
-   rpc: {
-    128: "https://http-mainnet-node.huobichain.com",
-    // ...
-  },
-  chainId:128 
-});
+
 
 import Cookies from 'js-cookie';
 import event from '@/common/js/event';
@@ -143,7 +137,16 @@ export default {
       let web3Provider;
       try {
         // console.log('initEth');
-        const usewalletname = Cookies.get('usewalletname')||'metamask';
+        let  usewalletname = Cookies.get('usewalletname');
+        if(usewalletname==undefined||usewalletname==''){
+          if(window.ethereum||window.web3){
+            usewalletname = 'metamask';
+          }else{
+            usewalletname = 'walletconnect';
+          }
+        }
+        
+        this.$store.commit('WalletName', usewalletname);
 
         if(usewalletname == 'metamask'){  
         if (window.ethereum) {
@@ -162,6 +165,14 @@ export default {
         }
 
         }else if(usewalletname == 'walletconnect'){
+          const WalletConnectprovider = new WalletConnectProvider({
+              rpc: {
+                128: "https://http-mainnet-node.huobichain.com",
+                // ...
+              },
+              chainId:128 
+            });
+            
            web3Provider=this.WalletConnectprovider||WalletConnectprovider;
           if(web3Provider.connected==false){
             try {

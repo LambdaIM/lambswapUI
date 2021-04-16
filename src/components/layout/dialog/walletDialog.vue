@@ -88,6 +88,9 @@ export default {
     selectWallet(wallet) {
       this.wallet = wallet;
       Cookies.set('usewalletname', wallet, { expires: 365, path: '/' });
+      
+      this.$store.commit('WalletName', wallet);
+      
     },
     open() {
       this.openWalletDialog = true;
