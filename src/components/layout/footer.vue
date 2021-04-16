@@ -53,27 +53,36 @@
       <div :class="isActive=='mining'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('mining')">
         <img src="../../assets/img/mining.svg" alt="mining">
         <img src="../../assets/img/mining-active.svg" alt="mining" class="acitveImg">
-        <p>挖矿</p>
+        <router-link to="/earn">
+          {{ $t('header.nav.Earn1') }}
+        </router-link>
+        <!-- <p>挖矿</p> -->
       </div>
       <div :class="isActive=='swap'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('swap')">
         <img src="../../assets/img/swap.svg" alt="swap">
         <img src="../../assets/img/swap-active.svg" alt="swap" class="acitveImg">
-        <p>交易</p>
+        <router-link to="/exchange">
+          {{ $t('header.nav.Exchange') }}
+        </router-link>
+        <!-- <p>交易</p> -->
       </div>
       <div :class="isActive=='birdge'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('birdge')">
         <img src="../../assets/img/birdge.svg" alt="birdge">
         <img src="../../assets/img/birdge-active.svg" alt="birdge" class="acitveImg">
-        <p>跨链</p>
+        <a href="https://bridge.lambdastorage.com/">{{ $t('header.nav.Bridge') }}</a>
+        <!-- <p>跨链</p> -->
       </div>
       <div :class="isActive=='doc'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('doc')">
         <img src="../../assets/img/doc.svg" alt="doc">
         <img src="../../assets/img/doc-active.svg" alt="doc" class="acitveImg">
-        <p>教程</p>
+        <a href="https://lamb-swap.gitbook.io/lambswap/">{{ $t('header.nav.Docs') }}</a>
+        <!-- <p>教程</p> -->
       </div>
       <div :class="isActive=='quotes'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('quotes')">
         <img src="../../assets/img/quotes-active.svg" alt="quotes">
         <img src="../../assets/img/quotes.svg" alt="quotes" class="acitveImg">
-        <p>行情</p>
+        <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a">{{ $t('header.nav.chart') }}</a>
+        <!-- <p>行情</p> -->
       </div>
     </footer>
   </div>
@@ -81,19 +90,19 @@
 
 
 <script>
-import jscookie from 'js-cookie';
+import jscookie from "js-cookie";
 export default {
   data() {
     return {
       lang: null,
-      isActive:'mining',
+      isActive: "mining",
     };
   },
   methods: {
     // 获取语言key
     getKey() {
-      const key = jscookie.get('langkey');
-      key === 'zh' ? (this.lang = 'zh') : (this.lang = 'en');
+      const key = jscookie.get("langkey");
+      key === "zh" ? (this.lang = "zh") : (this.lang = "en");
       this.$i18n.locale = this.lang;
     },
 
@@ -101,11 +110,11 @@ export default {
     getSelectLang(val) {
       this.lang = val;
       this.$i18n.locale = this.lang;
-      jscookie.set('langkey', this.lang, { expires: 180 });
+      jscookie.set("langkey", this.lang, { expires: 180 });
     },
-    activeMenu(name){
+    activeMenu(name) {
       this.isActive = name;
-    }
+    },
   },
   mounted() {
     this.getKey();
@@ -114,7 +123,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import './media/index.less';
+@import "./media/index.less";
 .footer-wrapper {
   width: 100%;
   .footer {
@@ -156,7 +165,7 @@ export default {
     }
   }
   ::before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     left: 90px;
