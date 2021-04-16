@@ -37,13 +37,23 @@
         </div>
 
         <div class="buttonWarpper">
-          <div class="input-warpper">
+          <div v-if="ethAddress" class="input-warpper">
             <button @click="openInput(item)">
               {{ $t('liquidity.pool.btnInput') }}
             </button>
           </div>
-          <div class="remove-warpper">
+          <div v-else class="input-warpper disableBtn">
+            <button width="100px" height="30px" border-radius="18px">
+              {{ $t('liquidity.pool.btnInput') }}
+            </button>
+          </div>
+          <div v-if="ethAddress" class="remove-warpper">
             <button @click="openRemove(item)">
+              {{ $t('liquidity.pool.btnRemove') }}
+            </button>
+          </div>
+          <div v-else class="remove-warpper disableBtn">
+            <button width="100px" height="30px" border-radius="18px">
               {{ $t('liquidity.pool.btnRemove') }}
             </button>
           </div>
@@ -80,6 +90,7 @@ export default {
     removeDialog: () => import("./dialog/removeDialog.vue"),
     loading: () => import("@/components/basic/loading.vue"),
     airDrop: ()=> import('@/components/airDrop.vue'),
+    Buttons: () => import("@/components/basic/buttons.vue"),
   },
   mounted() {
     //txsuccess

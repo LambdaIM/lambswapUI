@@ -25,6 +25,8 @@ import {useTokenApprove} from '@/contacthelp/Approve.js';
 
 
 export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
+  console.log('localApprove');
+  
     const pairContract = usePairContract(
         library,
         account,
@@ -81,8 +83,34 @@ export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
         message,
       });
 
-
+     console.log('*********');
       const  result = await new Promise((resolve, reject)=>{
+        try {
+           useTokenApprove(library,
+            account,
+            pair.liquidityToken,
+            ROUTER_ADDRESS,
+            liquidityAmount.raw.toString())
+            .then((data)=>{
+              console.log('---');
+              if(data==undefined){
+                reject('Cancel Approve');    
+              }else{
+                resolve({deadline: deadline});
+              }
+
+            }).catch((error2)=>{
+              console.log('---');
+              reject(error2);  
+
+            });
+
+            
+          
+        } catch (error2) {
+          reject(error2);  
+        }
+      /*
         library
         .send("eth_signTypedData_v4", [account, data])
         .then(splitSignature)
@@ -113,6 +141,8 @@ export async function localApprove(library,chainId,account,pair,ToRemoveAmount){
 
             
           });
+        */
+
 
      });
 

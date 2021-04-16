@@ -118,27 +118,33 @@
             <span v-if="outputcurrency">{{ Minimumreceived }} {{ outputcurrency.symbol }}</span>
           </div>
         </div>
-
-        <Buttons v-if="btnloading" border-radius="24px">
-          Loading...
-        </Buttons>
-        <div v-else>
-          <Buttons v-if="PriceImpactGreater == true" border-radius="24px">
-            {{ $t('swap.PriceImpactError') }}
+        <div v-if="ethAddress">
+          <Buttons v-if="btnloading" border-radius="24px">
+            Loading...
           </Buttons>
           <div v-else>
-            <Buttons v-if="needApprove == false" border-radius="24px" @click.native="openconfirmtDialog">
-              {{ $t('swap.swapBtn') }}
+            <Buttons v-if="PriceImpactGreater == true" border-radius="24px">
+              {{ $t('swap.PriceImpactError') }}
             </Buttons>
             <div v-else>
-              <Buttons class="smallbtn" border-radius="24px" @click.native="makeApprove">
-                {{ $t('swap.approve') }}
-              </Buttons>
-              <Buttons class="smallbtn disableBtn">
+              <Buttons v-if="needApprove == false" border-radius="24px" @click.native="openconfirmtDialog">
                 {{ $t('swap.swapBtn') }}
               </Buttons>
+              <div v-else>
+                <Buttons class="smallbtn" border-radius="24px" @click.native="makeApprove">
+                  {{ $t('swap.approve') }}
+                </Buttons>
+                <Buttons class="smallbtn disableBtn">
+                  {{ $t('swap.swapBtn') }}
+                </Buttons>
+              </div>
             </div>
           </div>
+        </div>
+        <div v-else>
+          <Buttons class="disableBtn">
+            {{ $t('swap.swapBtn') }}
+          </Buttons>
         </div>
       </div>
     </div>
