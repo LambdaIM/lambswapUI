@@ -1,7 +1,7 @@
 <template>
   <div class="list-wrapper">
     <div class="list-item-wrapper">
-      <div v-for="(item, index) in data" :key="index" class="list-item">
+      <div v-for="(item, index) in data" :key="index" class="list-item pc-list-item">
         <div class="name flex justify-start items-center">
           <div class="img-warpper">
             <img :src="item.img2" alt="susd">
@@ -21,18 +21,23 @@
         <div class="apy">
           <h4>{{ $t('earn.card.apy') }}</h4>
           <p class="percent">
-            {{ item.data && item.data.rewardRate | formatReward(365, scashPrice, item.data && item.data.totalSupply,item.poolValue) }}%
+            {{
+              item.data &&
+                item.data.rewardRate | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
+            }}%
           </p>
         </div>
 
         <div class="balance">
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.totalStaked') }}</span>
-            <span class="value">{{ (item.data && item.data.totalSupply) || 0 }}  LP</span>
+            <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
           </div>
           <div class="balance-item">
             <span class="title">{{ $t('earn.card.totalPool') }}</span>
-            <span v-if="item.kind === 'multi'" class="value">{{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}</span>
+            <span v-if="item.kind === 'multi'" class="value">
+              {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
+            </span>
             <span v-if="item.kind === 'single'" class="value">
               {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
             </span>
@@ -52,13 +57,73 @@
           </Buttons>
         </div>
       </div>
+
+      <div v-for="(item, index) in data" :key="index+10" class="mobile-list-item">
+        <div class="m-img-wrapper">
+          <div class="m-img-box">
+            <img :src="item.img2" alt="susd">
+            <img :src="item.img1" alt="susd" class="imgRight">
+          </div>
+        </div>
+
+        <div class="m-price-wrapper">
+          <p class="name">
+            {{ item.name }}
+          </p>
+          <p v-if="item.kind === 'multi'" class="price">
+            1 {{ item.symbol && item.symbol[0] }} = {{ item.price | formatNormalValue }}
+            {{ item.symbol && item.symbol[1] }}
+          </p>
+        </div>
+
+        <div class="m-point-wrapper">
+          <div class="point-item">
+            <span class="title">{{ $t('earn.card.apy') }}</span>
+            <span class="value text-success">
+              {{
+                item.data &&
+                  item.data.rewardRate
+                  | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
+              }}%
+            </span>
+          </div>
+          <div class="point-item">
+            <span class="title">{{ $t('earn.card.totalStaked') }}</span>
+            <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
+          </div>
+
+          <div class="point-item">
+            <span class="title">{{ $t('earn.card.totalPool') }}</span>
+            <span v-if="item.kind === 'multi'" class="value">
+              {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
+            </span>
+            <span v-if="item.kind === 'single'" class="value">
+              {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
+            </span>
+          </div>
+
+          <div class="point-item">
+            <span class="title">{{ $t('earn.card.output') }}</span>
+            <span class="value">{{ item.daynum }} GOAT</span>
+          </div>
+        </div>
+
+        <div class="m-btn-wrapper">
+          <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
+            {{ $t('earn.card.stake') }}
+          </button>
+          <button v-else class="stakeBtn disableBtn">
+            {{ $t('earn.card.stake') }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-const BigNumber = require("bignumber.js");
+import { mapState } from 'vuex';
+const BigNumber = require('bignumber.js');
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 export default {
   props: {
@@ -68,26 +133,26 @@ export default {
   },
   methods: {
     openStake(data) {
-      this.$emit("openStake", data);
+      this.$emit('openStake', data);
     },
   },
   components: {
-    Buttons: () => import("@/components/basic/buttons.vue"),
+    Buttons: () => import('@/components/basic/buttons.vue'),
   },
   computed: {
-    ...mapState(["earnPrice", "ethAddress", "scashPrice"]),
+    ...mapState(['earnPrice', 'ethAddress', 'scashPrice']),
   },
 };
 </script>
 
 <style lang="less" scoped>
+@import '../media/media.less';
 .list-wrapper {
   margin-top: 24px;
   .list-item {
     background: #ffffff;
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
-    padding: 32px 24px;
     display: flex;
     flex-direction: row;
     // justify-content: space-between;
