@@ -194,9 +194,6 @@ export default {
     .earn-title {
       font-size: 20px;
       padding: 0 16px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 24px;
       margin-bottom: 5px;
     }
@@ -204,9 +201,6 @@ export default {
       p {
         height: 19px;
         font-size: 16px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
-        color: #14171c;
         line-height: 19px;
         margin: 10px 0;
       }
@@ -261,8 +255,6 @@ export default {
       margin-top: 8px;
       height: 16px;
       font-size: 14px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
       color: #8690a8;
       line-height: 16px;
     }

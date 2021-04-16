@@ -37,11 +37,11 @@ const format1e18ValueList = (value) => {
   }
   const val = String(value);
   const bigValue = new BigNumber(val);
-  const returnVal = bigValue.div("1e18").toFixed(2);
+  const returnVal = bigValue.div("1e18").decimalPlaces(6);
   if (returnVal < 0.000001) {
     return "<0.000001";
   }
-  return returnVal;
+  return returnVal.decimalPlaces(6);
 };
 
 const formatNormalValue = (value) => {
@@ -166,7 +166,7 @@ const formatReward = (value, days, scashPrice, totalSupply,LPvalue) => {
   }
   const scash = new BigNumber(scashPrice);
   // console.log(value, days, scashPrice, totalSupply,LPvalue,total.toNumber());
-  const reward = time.times(rate).div(LPvalue).times(scash).times('12').times('100').decimalPlaces(2).toNumber();
+  const reward = time.times(rate).div(LPvalue).times(scash).times('100').decimalPlaces(2).toNumber();
   return reward;
 };
 

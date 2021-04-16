@@ -117,7 +117,6 @@ export default {
         margin-left: 28px;
         .coin {
           font-size: 20px;
-          color: #14171c;
           line-height: 24px;
         }
         .price {
@@ -158,7 +157,6 @@ export default {
         .value {
           float: right;
           font-size: 14px;
-          color: #14171c;
           line-height: 16px;
         }
       }
@@ -170,7 +168,6 @@ export default {
         border-radius: 18px;
         padding: 8px 40px;
         font-size: 16px;
-        font-weight: 500;
         color: #ffffff;
         line-height: 19px;
       }

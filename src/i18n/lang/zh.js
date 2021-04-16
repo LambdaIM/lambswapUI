@@ -43,7 +43,8 @@ export default {
       Exchange: '交易',
       Earn: '收益挖矿',
       Bridge: '跨链',
-      Docs:'教程'
+      Docs:'教程',
+      chart: '行情'
     },
     connectWallet:'连接钱包',
     copyAddress: '复制地址',

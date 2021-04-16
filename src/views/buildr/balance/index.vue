@@ -136,9 +136,6 @@
   .title2 {
     height: 24px;
     font-size: 20px;
-    font-family: Gilroy-Medium, Gilroy;
-    font-weight: 500;
-    color: #14171c;
     line-height: 24px;
   }
   .CDP-content {
@@ -188,17 +185,12 @@
           span {
             height: 16px;
             font-size: 14px;
-            font-family: Gilroy-Medium, Gilroy;
-            font-weight: 500;
             color: #828489;
             line-height: 16px;
           }
           p {
             height: 19px;
             font-size: 20px;
-            font-family: Gilroy-Medium, Gilroy;
-            font-weight: 500;
-            color: #14171c;
             line-height: 19px;
             margin-top: 5px;
           }

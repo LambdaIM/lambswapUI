@@ -29,10 +29,13 @@
             </div>
             <p class="price">
               {{ item.price | formatNormalValue }}
-              <span v-if="item.pairName=='GOAT/LAMB'&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
+              <span v-if="(item.pairName=='GOAT/LAMB'||item.pairName=='HGT/LAMB')&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
             </p>
-            <p :class="item.change == '+' ? 'change' : 'change decline'">
+            <p v-if="item.change" :class="item.change == '+' ? 'change' : 'change decline'">
               {{ item.change }} {{ item.prisechange | formatRate }}
+            </p>
+            <p v-else :class="item.change == '+' ? 'change' : 'change decline'">
+              --
             </p>
           </div>
         </div>
@@ -154,7 +157,7 @@ import {
   ROUTER_ADDRESS,
 } from '@/constants/index.js';
 
-import { readpairpool } from '@/contactLogic/readpairpool.js';
+import { readpairpool,readpairpoolPrice } from '@/contactLogic/readpairpool.js';
 import { readSwapBalance, getToken, getTokenImg } from '@/contactLogic/readbalance.js';
 
 import { tradeCalculate, SwapGas } from '@/contactLogic/swaplogoc.js';
@@ -235,8 +238,17 @@ export default {
       if (data && data[0] && this.selectPairOBJ === null) {
         setTimeout(() => {
           this.selectPair(data[0]);
-        }, 1000);
+        }, 1);
       }
+      
+      setTimeout(async() => {
+        const data= await readpairpoolPrice(chainID, library,_this.$data.pairlist);
+        console.log(data);
+        _this.$data.pairlist = [];
+        _this.$data.pairlist = data;
+
+      },1);
+      
     },
     async selectPair(pair) {
       console.log(pair);
@@ -444,9 +456,7 @@ export default {
         width: 100%;
         padding: 0px 16px 8px 16px;
         span {
-          height: 14px;
           font-size: 12px;
-          font-weight: 500;
           color: #828489;
           line-height: 14px;
         }
@@ -498,8 +508,6 @@ export default {
             p {
               height: 80px;
               font-size: 16px;
-              font-weight: 500;
-              color: #14171c;
               line-height: 19px;
             }
           }
@@ -508,15 +516,12 @@ export default {
           width: 25%;
           height: 19px;
           font-size: 16px;
-          font-weight: 500;
-          color: #14171c;
           line-height: 19px;
         }
         .change {
           width: 25%;
           height: 19px;
           font-size: 16px;
-          font-weight: 500;
           color: #00d075;
           line-height: 19px;
         }
@@ -547,8 +552,6 @@ export default {
     margin-left: 72px;
     .swap-title {
       font-size: 20px;
-      font-weight: 500;
-      color: #14171c;
       line-height: 24px;
     }
     .From-wrapper {
@@ -561,7 +564,6 @@ export default {
         .balance-item {
           float: right;
           font-size: 12px;
-          font-weight: 500;
           line-height: 14px;
         }
       }
@@ -579,7 +581,6 @@ export default {
           background: #f7f8f9;
           font-size: 40px;
           line-height: 47px;
-          color: #14171c;
           padding: 16px;
           caret-color: #FF41A1;
           &:focus {
@@ -607,8 +608,6 @@ export default {
           }
           p {
             font-size: 16px;
-            font-weight: 500;
-            color: #14171c;
           }
           img{
             max-width: 24px;
@@ -620,19 +619,16 @@ export default {
         font-size: 12px;
         span {
           font-size: 12px;
-          font-weight: 500;
           color: #FF41A1;
         }
       }
     }
     .notice-wrapper {
-      // display: none;
       .notice-content {
         margin: 20px 0;
         display: flex;
         align-items: center;
         padding: 9px 30px;
-        // width: 412px;
         height: 32px;
         background: rgba(255, 60, 0, 0.1);
         border-radius: 4px;
@@ -641,7 +637,6 @@ export default {
         }
         p {
           font-size: 12px;
-          font-weight: 500;
           color: #ff3c00;
           line-height: 14px;
         }
@@ -676,14 +671,11 @@ export default {
         flex-direction: row;
         p {
           font-size: 14px;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
         }
         span {
           font-size: 14px;
-          font-weight: 500;
-          color: #14171c;
           line-height: 16px;
           margin-left: 8px;
         }

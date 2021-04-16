@@ -9,11 +9,16 @@ const routes = [
     redirect: '/earn'
     // component: Home,
   },
-  // {
-  //   path: "/playground",
-  //   name: "playground",
-  //   component: () => import("@/views/playground/index.vue"),
-  // },
+  {
+    path: "/playground",
+    name: "playground",
+    component: () => import("@/views/playground/index.vue"),
+  },
+  {
+    path: "/addpair",
+    name: "addpair",
+    component: () => import("@/views/playground/addpair.vue"),
+  },
   {
     path: "/exchange",
     // name: "exchange",
@@ -91,11 +96,11 @@ const routes = [
   //     },
   //   ]
   // },
-  {
-    path: "/buildrtest",
-    name: "buildrtest",
-    component: () => import("@/views/playground/buildr.vue"),
-  }
+  // {
+  //   path: "/buildrtest",
+  //   name: "buildrtest",
+  //   component: () => import("@/views/playground/buildr.vue"),
+  // }
 ];
 
 const router = new VueRouter({

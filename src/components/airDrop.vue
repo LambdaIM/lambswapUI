@@ -35,8 +35,14 @@
         <!-- <p class="drop-title">
           {{ $t('liquidity.airdrop.count') }}
         </p> -->
-        <p>
+        <p class="drop-title">
           {{ $t('liquidity.airdrop.t1') }}
+        </p>
+        <p class="mt-1">
+          <!-- {{ $t('liquidity.airdrop.t2') }} -->
+        </p>
+        <p class="mt-1">
+          <!-- {{ $t('liquidity.airdrop.t3') }} -->
         </p>
         <!-- <div class="count"> -->
         <!-- <countDown class="count" date="2021-04-06T10:00:00+08:00" /> -->
@@ -45,10 +51,13 @@
       </div>
 
       <div class="airdrop-item create">
-        <button v-if="!isAbleOpen || !ethAddress" class="createBtn disableBtn">
+        <!-- <button v-if="!isAbleOpen || !ethAddress" class="createBtn disableBtn">
+          {{ $t('liquidity.airdrop.extract') }}
+        </button> -->
+        <button v-if="ethAddress" class="createBtn" @click="openExtract">
           {{ $t('liquidity.airdrop.extract') }}
         </button>
-        <button v-if="isAbleOpen && ethAddress" class="createBtn" @click="openExtract">
+        <button v-else class="createBtn disableBtn">
           {{ $t('liquidity.airdrop.extract') }}
         </button>
       </div>
@@ -102,6 +111,7 @@ export default {
         const library = this.ethersprovider;
         const result = await userAirDropValue(library, account, chainID);
         this.unclaim = new BigNumber(result.toString()).div('1e18').decimalPlaces(2).toNumber();
+        console.log(this.unclaim);
       } catch (error) {
         console.log(error);
       }
@@ -219,7 +229,7 @@ export default {
   color: #ffffff;
   line-height: 19px;
   padding: 8px 16px;
-  background: #0058ff;
+  background: #ff41a1;
   border-radius: 18px;
 }
 .drop-title {

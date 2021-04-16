@@ -12,14 +12,26 @@
           </router-link>
           <a href="https://bridge.lambdastorage.com/" class="menu-item" target="_blank">{{ $t('header.nav.Bridge') }}</a>
           <a href="https://lamb-swap.gitbook.io/lambswap/" class="menu-item" target="_blank">{{ $t('header.nav.Docs') }}</a>
+          <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a" class="menu-item" target="_blank">{{ $t('header.nav.chart') }}</a>
         </div>
       </div>
 
+      <Dropdown v-if="ethChainID" trigger="click" class="AddLambwallet-wrapper" @on-click="addtoken">
+        <div class="AddLambwallet flex items-center">
+          <div class="dot" />
+          <span>{{ $t('header.AddLambwallet') }}</span>
+          <img class="arrow" src="../../assets/img/down.svg" alt="down">
+        </div>
+        <DropdownMenu slot="list" class="list-wrapper">
+          <template v-for="(item, index) in tokenList">
+            <DropdownItem :key="index" class="list-item" :name="index">
+              <img :src="item.imgSrc">
+              <span>{{ item.name }}</span>
+            </DropdownItem>
+          </template>
+        </DropdownMenu>
+      </Dropdown>
       <div class="connect-wrapper flex justify-between items-center">
-        <button v-if="ethChainID" class="connectBtnadd" @click="addtoken">
-          {{ $t('header.AddLambwallet') }}
-        </button>
-
         <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
             <div class="dot" :class="statusVal" />
@@ -78,7 +90,7 @@
 import { mapState } from 'vuex';
 import config from '@/config/config.js';
 import jscookie from 'js-cookie';
-import {  getToken} from '@/contactLogic/readbalance.js';
+import { getToken } from '@/contactLogic/readbalance.js';
 
 export default {
   components: {
@@ -92,12 +104,46 @@ export default {
       netInfo: config.netInfo,
       netID: '1',
       statusVal: '',
+      tokenList: [
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/lamb48.svg',
+          name: 'LAMB',
+        },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/usdt48.svg',
+          name: 'USDT',
+        },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/fil.png',
+          name: 'FIL',
+        },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/eth48.svg',
+          name: 'ETH',
+        },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/goat.jpg',
+          name: 'GOAT',
+        },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/hyperLogo48.png',
+          name: 'HGT',
+        }
+      ],
     };
   },
   methods: {
-   async addtoken(){
+    async addtoken(index) {
+      const item = this.$data.tokenList[index];
+
       const chainID = this.ethChainID;
-      const TokenA = getToken('LAMB', chainID);
+      const TokenA = getToken(item.name, chainID);
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
         const wasAdded = await window.ethereum.request({
@@ -108,7 +154,7 @@ export default {
               address: TokenA.address, // The address that the token is at.
               symbol: TokenA.symbol, // A ticker symbol or shorthand, up to 5 chars.
               decimals: TokenA.decimals, // The number of decimals in the token
-              image: 'https://s2.bqiapp.com/logo/1/lambda_72.png?v=64', // A string url of the token logo
+              image: item.imgSrc, // A string url of the token logo
             },
           },
         });
@@ -121,7 +167,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-
     },
     openWalletDialog() {
       this.$refs.wallet.open();
@@ -141,6 +186,30 @@ export default {
 
       this.network = this.netInfo[val].name;
       jscookie.set('net', this.network, { expires: 180 });
+    },
+
+    // 添加并且切换网络类型
+    addChain() {
+      const param = {
+        chainId: '0x80',
+        chainName: 'Heco Main',
+        nativeCurrency: {
+          name: 'heco',
+          symbol: 'HT',
+          decimals: 18,
+        },
+        rpcUrls: ['https://http-mainnet.hecochain.com'],
+        blockExplorerUrls: ['https://hecoinfo.com/'],
+      };
+      const ethereum = window.ethereum;
+      ethereum
+        .request({ method: 'wallet_addEthereumChain', params: [param] })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     async choseFunc(val) {
@@ -163,7 +232,7 @@ export default {
       const targetID = parseInt(jscookie.get('targetNet')) || 128;
 
       this.network = jscookie.get('net');
-      if(!this.network) {
+      if (!this.network) {
         this.network = this.netInfo[config.defaultChainID].name;
       }
 
@@ -180,8 +249,9 @@ export default {
         this.$Notice.error({
           title: this.$t('notice.n39'),
           desc: this.$t('notice.n40'),
-          duration: 30
+          duration: 30,
         });
+        this.addChain();
       }
 
       if (this.ethAddress && targetID === this.ethChainID) {
@@ -266,6 +336,7 @@ export default {
   .nav-wrapper {
     height: 100%;
     .left-wrapper {
+      width: 58%;
       height: 100%;
       .menu-wrapper {
         margin-left: 50px;
@@ -274,7 +345,6 @@ export default {
           text-align: center;
           padding: 0px 16px;
           height: 28px;
-          margin-right: 24px;
           font-size: 16px;
           font-weight: 500;
           color: #14171c;
@@ -283,12 +353,26 @@ export default {
           display: inline-block;
           height: 28px;
           text-align: center;
-          background: #FF41A1;
+          background: #ff41a1;
           border-radius: 14px;
           font-size: 16px;
           font-weight: 500;
           color: #ffffff;
           line-height: 28px;
+        }
+      }
+    }
+    .AddLambwallet-wrapper {
+      cursor: pointer;
+      .AddLambwallet {
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: #14171c;
+          line-height: 16px;
+        }
+        img {
+          margin: 0px 8px;
         }
       }
     }
@@ -305,12 +389,12 @@ export default {
           font-weight: 500;
           color: #14171c;
           line-height: 14px;
-          margin-right: 16px;
+          margin-right: 8px;
         }
         .changeBtn {
           width: 148px;
           height: 40px;
-          border: 1px solid #FF41A1;
+          border: 1px solid #ff41a1;
           font-size: 16px;
           font-weight: 500;
           color: #14171c;
@@ -320,7 +404,7 @@ export default {
       .network-wrapper {
         cursor: pointer;
         width: 124px;
-        margin-right: 32px;
+        margin-right: 20px;
         .netWork {
           width: 124px;
           height: 28px;
@@ -395,19 +479,33 @@ export default {
   border-radius: 20px;
   line-height: 19px;
   font-size: 16px;
-  color: #FF41A1;
-  border: 1px solid #FF41A1;
+  color: #ff41a1;
+  border: 1px solid #ff41a1;
 }
 
-.connectBtnadd{
+.connectBtnadd {
   padding: 0 8px;
   height: 28px;
   border-radius: 10px;
   line-height: 19px;
 
-  color: #FF41A1;
-  border: 1px solid #FF41A1;
+  color: #ff41a1;
+  border: 1px solid #ff41a1;
   border-radius: 14px;
   margin-right: 10px;
+}
+@media (min-width: 1441px) {
+  .left-wrapper {
+    min-width: 68%;
+    .menu-wrapper {
+      margin-left: 60px;
+      .menu-item {
+        margin-right: 30px;
+      }
+    }
+  }
+  .connect-wrapper {
+    width: 22%;
+  }
 }
 </style>

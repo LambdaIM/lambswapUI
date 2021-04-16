@@ -15,8 +15,11 @@
 import { mapState } from 'vuex';
 import { StakingRewardListbatch } from '../utils/helpUtils/mineUtilFunc.js';
 import event from '@/common/js/event';
-import { readpariInfoNuminfoEarn } from '@/contactLogic/readpairpool.js';
+import { pairListEarn } from '@/contactLogic/readpairpool.js';
 import { getTokenImg } from '@/contactLogic/readbalance.js';
+import Web3 from 'web3';
+import _ from 'underscore';
+
 export default {
   data() {
     return {
@@ -36,6 +39,7 @@ export default {
       this.showLoading = true;
       try {
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
+        const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
         // console.log({ data });
         const tempLiquidity = data.filter((item) => item.kind === 'multi');
         // console.log({tempLiquidity});
@@ -43,7 +47,7 @@ export default {
         const results = async () => {
           for (let index = 0; index < tempLiquidity.length; index++) {
             const item = tempLiquidity[index];
-            const res = await this.getPriceData(item);
+            const res = await this.getPriceData(item, pairListPrice);
             result.push({
               ...item,
               poolValue: res.usdtNum,
@@ -54,40 +58,56 @@ export default {
           }
         };
         await results();
-        // console.log(result);
         this.liquidityData = result;
 
         this.designatedData = data.filter((item) => item.kind === 'single');
       } catch (error) {
         console.log(error);
       } finally {
-        // setTimeout(() => {
         this.showLoading = false;
-        // }, 2000);
       }
     },
-    async getPriceData(item) {
+    async getPriceData(item, pairListPrice) {
+      console.log('getPriceData');
       const obj = {};
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
       const pledgeBalance = item && item.data && item.data.totalSupply;
-      const pledgeBalanceWei = this.web3.utils.toWei(pledgeBalance.toString());
-      const data = await readpariInfoNuminfoEarn(
-        this.ethChainID,
-        this.ethersprovider,
-        tokensymbolA,
-        tokensymbolB,
-        pledgeBalanceWei
-      );
-      obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
+      const pledgeBalanceWei = Web3.utils.toWei(pledgeBalance.toString());
+
+      // 匹配读取价格信息
+      const pairPriceItem = _.find(pairListPrice, (pairItem) => {
+        if (
+          (pairItem.pairInfo.tokenAmounts[0].token.symbol == tokensymbolA &&
+            pairItem.pairInfo.tokenAmounts[1].token.symbol == tokensymbolB) ||
+          (pairItem.pairInfo.tokenAmounts[1].token.symbol == tokensymbolA &&
+            pairItem.pairInfo.tokenAmounts[0].token.symbol == tokensymbolB)
+        ) {
+          return pairItem;
+        }
+      });
+
+      // 构造价格相关信息
+      const data = {
+        aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
+        bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
+        price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
+      };
+      if(data.aTokenbalance.token.symbol==tokensymbolA){
+        obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
+      }else{
+        obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
+      }
+      
+
       obj.price = data.price && data.price.toSignificant(6);
-      console.log(item);
-      obj.img1 = getTokenImg(item.symbol[0],this.ethChainID);
-      obj.img2 = getTokenImg(item.symbol[1],this.ethChainID);
+      obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);
+      obj.img2 = getTokenImg(item.symbol[1], this.ethChainID);
+
       if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
         this.$store.commit('changeScashPrice', obj.price);
       }
-      // this.$store.commit('changeScashPrice', 100);
+
       this.$store.commit('changeEarnPrice', obj.price);
       return obj;
     },

@@ -174,9 +174,6 @@ export default {
       width: 100%;
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 28px;
       margin-bottom: 30px;
     }
@@ -185,9 +182,6 @@ export default {
       text-align: center;
       height: 47px;
       font-size: 40px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 47px;
 
       p {
@@ -203,9 +197,6 @@ export default {
       .card-item {
         .card-title {
           font-size: 16px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
-          color: #14171c;
           line-height: 19px;
         }
         .main {
@@ -216,9 +207,6 @@ export default {
             width: 62px;
             text-align: center;
             font-size: 14px;
-            font-family: Gilroy-Medium, Gilroy;
-            font-weight: 500;
-            color: #14171c;
             line-height: 16px;
           }
           .netname-2 {
@@ -248,15 +236,11 @@ export default {
         p {
           width: 100px;
           font-size: 14px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #828489;
           line-height: 16px;
         }
         span {
           font-size: 14px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #14171c;
           line-height: 16px;
           margin-left: 8px;

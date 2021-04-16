@@ -155,6 +155,7 @@ import {
   sendremoveliquidity,
 } from '@/contactLogic/removeLiquidity.js';
 
+
 let pariInfo;
 
 export default {
@@ -323,8 +324,14 @@ export default {
         this.$data.fee = fee;
 
         this.isShowRemove = false;
+        
       } catch (error) {
         console.log(error);
+        this.$Notice.error({
+          title: 'error',
+          desc:JSON.stringify(error),
+          duration:60
+        });
       }
 
       this.$data.btnLoading = false;
@@ -408,9 +415,6 @@ export default {
     .title {
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
-      color: #14171c;
       line-height: 28px;
       margin-bottom: 24px;
     }
@@ -424,7 +428,6 @@ export default {
         .balance-item {
           float: right;
           font-size: 12px;
-          font-weight: 500;
           line-height: 14px;
         }
       }
@@ -442,7 +445,6 @@ export default {
           background: #f7f8f9;
           font-size: 40px;
           line-height: 47px;
-          color: #14171c;
           padding: 16px;
           caret-color: #FF41A1;
           &:focus {
@@ -474,8 +476,6 @@ export default {
             width: 100%;
             height: 14px;
             font-size: 12px;
-            font-family: Gilroy-Medium, Gilroy;
-            font-weight: 500;
             color: #ff3c00;
             line-height: 14px;
           }
@@ -494,8 +494,6 @@ export default {
         border-radius: 6px;
         border: 1px solid rgba(0, 0, 0, 0.06);
         font-size: 14px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 36px;
         text-align: center;
@@ -517,16 +515,12 @@ export default {
       span {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #14171c;
         line-height: 14px;
         margin-bottom: 8px;
@@ -551,8 +545,6 @@ export default {
     .title {
       height: 28px;
       font-size: 24px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
       color: #14171c;
       line-height: 28px;
       margin-bottom: 24px;
@@ -562,8 +554,6 @@ export default {
       margin: 24px 0 32px;
       height: 19px;
       font-size: 16px;
-      font-family: Gilroy-Medium, Gilroy;
-      font-weight: 500;
       color: #14171c;
       line-height: 19px;
     }
@@ -576,16 +566,12 @@ export default {
         p {
           height: 28px;
           font-size: 24px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #14171c;
           line-height: 28px;
           margin: 8px 0 4px;
         }
         span {
           font-size: 14px;
-          font-family: Gilroy-Medium, Gilroy;
-          font-weight: 500;
           color: #14171c;
           line-height: 16px;
         }
@@ -611,16 +597,12 @@ export default {
       span {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #828489;
         line-height: 14px;
       }
       p {
         height: 14px;
         font-size: 12px;
-        font-family: Gilroy-Medium, Gilroy;
-        font-weight: 500;
         color: #14171c;
         line-height: 14px;
         margin-bottom: 8px;
