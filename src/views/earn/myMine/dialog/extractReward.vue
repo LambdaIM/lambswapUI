@@ -145,12 +145,10 @@ export default {
 
 <style lang="less" scoped>
 .claim-modal {
-  width: 500px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .claim-content {
-    padding: 14px 28px;
     .title {
       height: 28px;
       font-size: 24px;
@@ -205,6 +203,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 8px;
       }
       span {
         height: 14px;
@@ -217,7 +216,6 @@ export default {
         font-size: 12px;
         color: #14171c;
         line-height: 14px;
-        margin-bottom: 8px;
       }
     }
     .btn-warpper {

@@ -168,7 +168,6 @@ export default {
   width: 500px;
   background: #ffffff;
   border-radius: 12px;
-  padding: 36px 44px;
   .connect-content {
     .title {
       width: 100%;

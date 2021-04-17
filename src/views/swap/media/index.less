@@ -1,27 +1,151 @@
 @media (max-width: 1200px) {
   .connect-wrapper {
-    .menu-wrapper{
-      .menu-item{
+    .menu-wrapper {
+      .menu-item {
         font-size: 14px;
         margin-right: 24px;
       }
-      .checkNotice{
-        display: none;
+    }
+
+    .checkNotice {
+      display: none;
+    }
+  }
+
+  .liquidityPool {
+    margin-top: 16px;
+    padding: 20px 16px;
+
+    .poolCon {
+      display: none;
+    }
+
+    // 手机端交易对样式
+    .mobile-list-item {
+      background: #FFFFFF;
+      box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 20px 16px;
+      margin-bottom: 16px;
+
+      // 两个图片
+      .m-img-wrapper {
+        margin-bottom: 8px;
+        width: 100%;
+
+        .m-img-box {
+          width: 72px;
+          height: 48px;
+          margin: 0 auto;
+          position: relative;
+
+          img {
+            position: absolute;
+            max-width: 48px;
+            left: 0;
+          }
+
+          .imgRight {
+            position: absolute;
+            left: 24px;
+          }
+        }
+      }
+
+      .m-price-wrapper {
+        margin-bottom: 24px;
+
+        p {
+          text-align: center;
+        }
+
+        .name {
+          font-size: 20px;
+        }
+
+        .price {
+          font-size: 14px;
+          color: #8690A8;
+        }
+      }
+
+      // 指标信息
+      .m-point-wrapper {
+        width: 100%;
+
+        .point-item {
+          margin-bottom: 8px;
+          overflow: hidden;
+
+          .title {
+            float: left;
+            font-size: 14px;
+            color: #8690a8;
+            line-height: 16px;
+            font-weight: 400;
+          }
+
+          .value {
+            float: right;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      }
+
+      // 按钮
+      .m-btn-wrapper {
+        margin-top: 16px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .m-btn {
+          width: 45%;
+          height: 36px;
+          border: 1px solid #FF42A1;
+          border-radius: 18px;
+        }
+
+        .inputBtn {
+          font-size: 16px;
+          color: #FFFFFF;
+          line-height: 22px;
+          background: #FF42A1;
+        }
+
+        .removeBtn {
+          font-size: 16px;
+          color: #FF42A1;
+          line-height: 22px;
+        }
       }
     }
+
   }
 }
 
 @media (min-width: 1201px) {
   .connect-wrapper {
-    .menu-wrapper{
-      .menu-item{
+    .menu-wrapper {
+      .menu-item {
         font-size: 16px;
         margin-right: 48px;
       }
-      .checkNotice{
-        display: block;
-      }
+    }
+
+    .checkNotice {
+      display: block;
+    }
+  }
+
+  .liquidityPool {
+    margin-top: 44px;
+    padding: 24px 44px;
+
+    .mobile-list-item {
+      display: none;
     }
   }
 }

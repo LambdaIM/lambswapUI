@@ -144,7 +144,6 @@
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .pledge-content {
-    padding: 14px 28px;
     .title {
       height: 28px;
       font-size: 24px;
@@ -225,6 +224,7 @@
     .price-warpper {
       margin-top: 30px;
       .price-item {
+        margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -247,7 +247,7 @@
         font-weight: 500;
         color: #14171c;
         line-height: 14px;
-        margin-bottom: 8px;
+        // margin-bottom: 8px;
       }
     }
     .btn-warpper {
