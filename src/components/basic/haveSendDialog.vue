@@ -52,7 +52,6 @@ export default {
 
 <style lang="less" scoped>
 .modal-content {
-  padding: 40px;
   .img-warpper {
       margin-top: 40px;
     img {

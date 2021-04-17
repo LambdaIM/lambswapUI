@@ -4,7 +4,7 @@
       <loading />
     </div>
     <template v-else>
-      <Table class="myPage-table-wrapper" :columns="columns" :data="data">
+      <Table v-if="!isMobile" class="myPage-table-wrapper" :columns="columns" :data="data">
         <template slot="pool" slot-scope="{ row }">
           {{ row.name }}
         </template>
@@ -33,6 +33,31 @@
           </div>
         </template>
       </Table>
+
+      <div class="m-card-wrapper">
+        <div v-for="(item, index) in data" :key="index" class="m-card-item">
+          <p class="mb-4">
+            {{ item.name }}
+          </p>
+          <div class="point-item">
+            <span class="title">{{ $t('myPage.table.stake') }}</span>
+            <span class="value">{{ item.data && item.data.balance }}</span>
+          </div>
+          <div class="point-item">
+            <span class="title">{{ $t('myPage.table.unclaim') }}</span>
+            <span class="value">{{ item.data && item.data.earned }} {{ item.data && item.data.rewardToken }}</span>
+          </div>
+
+          <div class="m-btn-wrapper">
+            <button class="claimBtn m-btn" @click="openClaim(item)">
+              {{ $t('myPage.table.claim') }}
+            </button>
+            <button class="stakeBtn m-btn" @click="openUnstake(item)">
+              {{ $t('myPage.table.unstake') }}
+            </button>
+          </div>
+        </div>
+      </div>
     </template>
     <div class="modal-wrapper">
       <takeDialog ref="take" />
@@ -66,9 +91,9 @@ export default {
         const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
         // console.log(data);
-        const [scashData] = data.filter(item => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
+        const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
-        await this.getPriceData(scashData,pairListPrice);
+        await this.getPriceData(scashData, pairListPrice);
         this.data = data;
       } catch (error) {
         console.log(error);
@@ -76,7 +101,7 @@ export default {
         this.showLoading = false;
       }
     },
-    async getPriceData(item,pairListPrice) {
+    async getPriceData(item, pairListPrice) {
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
 
@@ -108,7 +133,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['ethersprovider', 'ethChainID', 'ethAddress', 'scashPrice','web3']),
+    ...mapState(['ethersprovider', 'ethChainID', 'ethAddress', 'scashPrice', 'web3', 'isMobile']),
     isReady() {
       return this.ethersprovider && this.ethChainID && this.ethAddress;
     },
@@ -160,12 +185,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/media.less';
 .myPage-wrapper {
   background: #ffffff;
-  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
-  padding: 44px;
-  margin: 20px 0 100px 0;
   .pageTitle {
     font-size: 20px;
     line-height: 24px;
@@ -185,11 +208,11 @@ export default {
     .claim {
       margin-right: 12px;
       color: #fff;
-      background: #FF41A1;
+      background: #ff41a1;
     }
     .stake {
-      border: 1px solid #FF41A1;
-      color: #FF41A1;
+      border: 1px solid #ff41a1;
+      color: #ff41a1;
     }
   }
 }

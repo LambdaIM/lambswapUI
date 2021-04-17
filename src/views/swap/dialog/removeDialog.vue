@@ -324,7 +324,7 @@ export default {
         this.$data.fee = fee;
 
         this.isShowRemove = false;
-        
+
       } catch (error) {
         console.log(error);
         this.$Notice.error({
@@ -405,15 +405,11 @@ export default {
 
 <style lang="less" scoped>
 .remove-modal {
-  width: 500px;
-  height: 573px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .remove-content {
-    padding: 0 44px 20px;
     .title {
-      height: 28px;
       font-size: 24px;
       line-height: 28px;
       margin-bottom: 24px;

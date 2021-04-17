@@ -1,62 +1,129 @@
 <template>
   <div class="pool-warpper">
-    <airDrop />
+    <!-- <airDrop /> -->
     <div class="liquidityPool">
       <h2>{{ $t('liquidity.pool.title') }}</h2>
-      <div v-if="pairlistloading" class="demo-spin-container ">
+      <div v-if="pairlistloading" class="demo-spin-container">
         <loading />
       </div>
-      <div v-for="item in dataList" v-else :key="item.pairName" class="poolCon">
-        <div class="flex items-center imgWapper">
-          <div class="img-warpper flex">
-            <img width="48" :src="getTokenImg(item.pairSymbols[1])">
-            <img width="48" :src="getTokenImg(item.pairSymbols[0])" class="otherImg">
-          </div>
-          <div>
-            <p>{{ item.pairName }}</p>
-            <span>1 {{ item.configSymbols[0] }} = {{ item.price }} {{ item.configSymbols[1] }}</span>
-          </div>
-        </div>
-        <div class="totalWarpper">
-          <span>{{ $t('liquidity.pool.totalInputed') }}</span>
-          <p>{{ item.totalSupply | formatBalance }}</p>
-        </div>
-        <div class=" flex items-center inputedWarpper">
-          <div class="rightdiv">
-            <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[0] }}</span>
-            <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[1] }}</span>
-            <!-- <span class="colorText">{{ $t('liquidity.pool.sharePool') }}</span> -->
-          </div>
-          <div class="number">
-            <span>{{ item.aToketotalSupply |formatNormalValue }} {{ item.pairSymbols[0] }} </span>
-            <span>{{ item.bToketotalSupply |formatNormalValue }} {{ item.pairSymbols[1] }} </span>
-            <!-- <span class="colorText">{{ Calculatepercentage(item.balance,item.totalSupply) |formatRate }}</span> -->
-          </div>
-        </div>
 
-        <div class="buttonWarpper">
-          <div v-if="ethAddress" class="input-warpper">
-            <button @click="openInput(item)">
-              {{ $t('liquidity.pool.btnInput') }}
-            </button>
+      <template v-if="!isMobile">
+        <div v-for="item in dataList" :key="item.pairName" class="poolCon">
+          <div class="flex items-center imgWapper">
+            <div class="img-warpper flex">
+              <img width="48" :src="getTokenImg(item.pairSymbols[1])">
+              <img width="48" :src="getTokenImg(item.pairSymbols[0])" class="otherImg">
+            </div>
+            <div>
+              <p>{{ item.pairName }}</p>
+              <span>1 {{ item.configSymbols[0] }} = {{ item.price }} {{ item.configSymbols[1] }}</span>
+            </div>
           </div>
-          <div v-else class="input-warpper disableBtn">
-            <button width="100px" height="30px" border-radius="18px">
-              {{ $t('liquidity.pool.btnInput') }}
-            </button>
+          <div class="totalWarpper">
+            <span>{{ $t('liquidity.pool.totalInputed') }}</span>
+            <p>{{ item.totalSupply | formatBalance }}</p>
           </div>
-          <div v-if="ethAddress" class="remove-warpper">
-            <button @click="openRemove(item)">
-              {{ $t('liquidity.pool.btnRemove') }}
-            </button>
+          <div class="flex items-center inputedWarpper">
+            <div class="rightdiv">
+              <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[0] }}</span>
+              <span>{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[1] }}</span>
+              <!-- <span class="colorText">{{ $t('liquidity.pool.sharePool') }}</span> -->
+            </div>
+            <div class="number">
+              <span>{{ item.aToketotalSupply | formatNormalValue }} {{ item.pairSymbols[0] }}</span>
+              <span>{{ item.bToketotalSupply | formatNormalValue }} {{ item.pairSymbols[1] }}</span>
+              <!-- <span class="colorText">{{ Calculatepercentage(item.balance,item.totalSupply) |formatRate }}</span> -->
+            </div>
           </div>
-          <div v-else class="remove-warpper disableBtn">
-            <button width="100px" height="30px" border-radius="18px">
-              {{ $t('liquidity.pool.btnRemove') }}
-            </button>
+
+          <div class="buttonWarpper">
+            <template v-if="ethAddress">
+              <div class="input-warpper">
+                <button @click="openInput(item)">
+                  {{ $t('liquidity.pool.btnInput') }}
+                </button>
+                <div class="remove-warpper">
+                  <button @click="openRemove(item)">
+                    {{ $t('liquidity.pool.btnRemove') }}
+                  </button>
+                </div>
+              </div>
+            </template>
+
+            <template v-else>
+              <div class="input-warpper disableBtn">
+                <button>
+                  {{ $t('liquidity.pool.btnInput') }}
+                </button>
+              </div>
+
+              <div class="remove-warpper disableBtn">
+                <button>
+                  {{ $t('liquidity.pool.btnRemove') }}
+                </button>
+              </div>
+            </template>
           </div>
         </div>
-      </div>
+      </template>
+
+      <template v-else>
+        <div v-for="(item, index) in dataList" :key="index" class="mobile-list-item">
+          <div class="m-img-wrapper">
+            <div class="m-img-box">
+              <img :src="getTokenImg(item.pairSymbols[1])">
+              <img :src="getTokenImg(item.pairSymbols[0])" class="imgRight">
+            </div>
+          </div>
+
+          <div class="m-price-wrapper">
+            <p class="name">
+              {{ item.pairName }}
+            </p>
+            <p class="price">
+              1 {{ item.configSymbols[0] }} = {{ item.price }} {{ item.configSymbols[1] }}
+            </p>
+          </div>
+
+          <div class="m-point-wrapper">
+            <div class="point-item">
+              <span class="title">{{ $t('liquidity.pool.totalInputed') }}</span>
+              <span class="value">
+                {{ item.totalSupply | formatBalance }}
+              </span>
+            </div>
+            <div class="point-item">
+              <span class="title">{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[0] }}</span>
+              <span class="value">{{ item.aToketotalSupply | formatNormalValue }} {{ item.pairSymbols[0] }}</span>
+            </div>
+
+            <div class="point-item">
+              <span class="title">{{ $t('liquidity.pool.inputed') }} {{ item.pairSymbols[1] }}</span>
+              <span class="value">{{ item.bToketotalSupply | formatNormalValue }} {{ item.pairSymbols[1] }}</span>
+            </div>
+          </div>
+
+          <div class="m-btn-wrapper">
+            <template v-if="ethAddress">
+              <button class="m-btn inputBtn" @click="openInput(item)">
+                {{ $t('liquidity.pool.btnInput') }}
+              </button>
+              <button class="m-btn removeBtn" @click="openRemove(item)">
+                {{ $t('liquidity.pool.btnRemove') }}
+              </button>
+            </template>
+            <template v-else>
+              <button class="m-btn inputBtn disableBtn">
+                {{ $t('liquidity.pool.btnInput') }}
+              </button>
+
+              <button class="m-btn removeBtn disableBtn">
+                {{ $t('liquidity.pool.btnRemove') }}
+              </button>
+            </template>
+          </div>
+        </div>
+      </template>
     </div>
 
     <div class="modal-wrapper">
@@ -67,14 +134,14 @@
 </template>
 
 <script>
-import { readpairLiquidity } from "@/contactLogic/readpairpool.js";
-import { mapState } from "vuex";
-const debounce = require("debounce");
+import { readpairLiquidity } from '@/contactLogic/readpairpool.js';
+import { mapState } from 'vuex';
+const debounce = require('debounce');
 
-const BigNumber = require("bignumber.js");
-import event from "@/common/js/event";
+const BigNumber = require('bignumber.js');
+import event from '@/common/js/event';
 
-import { getTokenImg } from "@/contactLogic/readbalance.js";
+import { getTokenImg } from '@/contactLogic/readbalance.js';
 
 export default {
   data() {
@@ -84,16 +151,16 @@ export default {
     };
   },
   components: {
-    inputDialog: () => import("./dialog/inputDialog.vue"),
-    removeDialog: () => import("./dialog/removeDialog.vue"),
-    loading: () => import("@/components/basic/loading.vue"),
-    airDrop: ()=> import('@/components/airDrop.vue'),
-    Buttons: () => import("@/components/basic/buttons.vue"),
+    inputDialog: () => import('./dialog/inputDialog.vue'),
+    removeDialog: () => import('./dialog/removeDialog.vue'),
+    loading: () => import('@/components/basic/loading.vue'),
+    airDrop: () => import('@/components/airDrop.vue'),
+    Buttons: () => import('@/components/basic/buttons.vue'),
   },
   mounted() {
     //txsuccess
-    console.log("- -");
-    event.$on("txsuccess", () => {
+    console.log('- -');
+    event.$on('txsuccess', () => {
       this.readList();
     });
     if (this.ethChainID) {
@@ -117,10 +184,10 @@ export default {
   },
   methods: {
     tobuilder() {
-      this.$router.push("/buildr");
+      this.$router.push('/buildr');
     },
     toexchange() {
-      this.$router.push("/exchange");
+      this.$router.push('/exchange');
     },
     getTokenImg(tokensymbol) {
       const chainID = this.ethChainID;
@@ -138,16 +205,15 @@ export default {
       this.$refs.remove.open(pairs);
     },
     readList: debounce(async function () {
-      console.log("readList");
+      console.log('readList');
       const chainID = this.ethChainID;
       const library = this.ethersprovider;
       const account = this.ethAddress;
       try {
         const list = await readpairLiquidity(chainID, library, account);
-        list.forEach(element => {
+        list.forEach((element) => {
           element.aToketotalSupply = element.aToketotalSupply.toSignificant(6);
           element.bToketotalSupply = element.bToketotalSupply.toSignificant(6);
-
         });
 
         console.log(list);
@@ -160,18 +226,18 @@ export default {
     }, 1000),
   },
   computed: {
-    ...mapState(["ethChainID", "ethAddress", "web3", "ethersprovider"]),
+    ...mapState(['ethChainID', 'ethAddress', 'web3', 'ethersprovider', 'isMobile']),
   },
 };
 </script>
 
 <style lang="less" scoped>
+@import './media/index.less';
 .pool-warpper {
   .rewards-warpper {
     background: #ffffff;
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
-    padding: 24px 44px;
     h2 {
       height: 40px;
       font-size: 32px;
@@ -190,8 +256,6 @@ export default {
     }
   }
   .liquidityPool {
-    margin-top: 44px;
-    padding: 32px 44px;
     background: #ffffff;
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
@@ -248,7 +312,7 @@ export default {
         .input-warpper {
           // width: 160px;
           height: 36px;
-          background: #FF41A1;
+          background: #ff41a1;
           border-radius: 18px;
           button {
             width: 100%;
@@ -262,13 +326,13 @@ export default {
           // width: 160px;
           height: 36px;
           border-radius: 18px;
-          border: 1px solid #FF41A1;
+          border: 1px solid #ff41a1;
           margin-top: 8px;
           button {
             width: 100%;
             height: 100%;
             font-size: 16px;
-            color: #FF41A1;
+            color: #ff41a1;
             line-height: 19px;
           }
         }
@@ -287,13 +351,13 @@ export default {
           color: #14171c;
         }
       }
-      .imgWapper{
+      .imgWapper {
         width: 25%;
       }
-      .totalWarpper{
+      .totalWarpper {
         width: 15%;
       }
-      .inputedWarpper{
+      .inputedWarpper {
         width: 25%;
       }
       .buttonWarpper {

@@ -115,12 +115,10 @@ export default {
 
 <style lang="less" scoped>
 .remove-modal {
-  width: 500px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .remove-content {
-    padding: 14px 28px;
     .title {
       height: 28px;
       font-size: 24px;
@@ -164,18 +162,16 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 8px;
       }
       span {
-        height: 14px;
         font-size: 12px;
         color: #828489;
         line-height: 14px;
       }
       p {
-        height: 14px;
         font-size: 12px;
         line-height: 14px;
-        margin-bottom: 8px;
       }
     }
     .btn-warpper {

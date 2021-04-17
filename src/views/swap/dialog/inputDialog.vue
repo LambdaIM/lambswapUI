@@ -627,13 +627,10 @@ export default {
 
 <style lang="less" scoped>
 .input-modal {
-  width: 500px;
-  height: 573px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .input-content {
-    padding: 0 44px 20px;
     .title {
       height: 28px;
       font-size: 24px;
