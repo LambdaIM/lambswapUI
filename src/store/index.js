@@ -61,7 +61,6 @@ const store = new vuex.Store({
       state.WalletName = name;
     },
     changeIsMobile(state,status) {
-      console.log({status});
       state.isMobile  = status;
     }
   },

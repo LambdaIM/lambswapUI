@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="content-wrapper flex justify-between">
+  <div class="exchange">
+    <div v-if="!isMobile" class="content-wrapper flex justify-between pc-exchange">
       <div class="exchanges-wrapper">
         <div class="list-wrapper">
           <div class="list-title flex justify-between">
@@ -24,12 +24,17 @@
             @click="selectPair(item)"
           >
             <div>
-              <img width="32" :src="getTokenImg(item.listSymbol)">
+              <img :src="getTokenImg(item.listSymbol)">
               <p>{{ item.pairName }}</p>
             </div>
             <p class="price">
               {{ item.price | formatNormalValue }}
-              <span v-if="(item.pairName=='GOAT/LAMB'||item.pairName=='HGT/LAMB')&&LAMB_USDT!=''" class="goatprice"> ${{ LAMB_USDT*item.price | formatNormal3Value }}</span>
+              <span
+                v-if="(item.pairName == 'GOAT/LAMB' || item.pairName == 'HGT/LAMB') && LAMB_USDT != ''"
+                class="goatprice"
+              >
+                ${{ (LAMB_USDT * item.price) | formatNormal3Value }}
+              </span>
             </p>
             <p v-if="item.change" :class="item.change == '+' ? 'change' : 'change decline'">
               {{ item.change }} {{ item.prisechange | formatRate }}
@@ -57,7 +62,7 @@
               @keyup="inputChange"
             >
             <div v-if="inputcurrency" class="flex unit">
-              <img width="32" :src="getTokenImg(inputcurrency.symbol)">
+              <img :src="getTokenImg(inputcurrency.symbol)">
               <p>
                 {{ inputcurrency.symbol }}
               </p>
@@ -93,7 +98,7 @@
           <div class="input-wrapper flex">
             <input v-model="coinBValue" type="text" class="amount-input" readonly>
             <div v-if="outputcurrency" class="flex unit">
-              <img width="32" :src="getTokenImg(outputcurrency.symbol)">
+              <img :src="getTokenImg(outputcurrency.symbol)">
               <p>
                 {{ outputcurrency.symbol }}
               </p>
@@ -134,7 +139,7 @@
                 <Buttons class="smallbtn" border-radius="24px" @click.native="makeApprove">
                   {{ $t('swap.approve') }}
                 </Buttons>
-                <Buttons class="smallbtn disableBtn">
+                <Buttons border-radius="24px" class="smallbtn disableBtn">
                   {{ $t('swap.swapBtn') }}
                 </Buttons>
               </div>
@@ -149,21 +154,176 @@
       </div>
     </div>
 
+    <div v-else class="m-exchange">
+      <div class="menu-wrapper flex justify-items-start items-center" @click="openDraw">
+        <img class="mr-3" src="../../assets/img/menu.svg" alt="menu">
+        <span>{{ selectPairName }}</span>
+      </div>
+
+      <!-- swap -->
+      <div class="content-wrapper m-swap-wrapper">
+        <div class="left-right-item">
+          <span class="left">{{ $t('swap.balance') }}</span>
+
+          <div v-if="outputcurrency" class="right">
+            <span class="m-balance">{{ $t('swap.balance') }}</span>
+            <span v-if="inputcurrency" class="m-balance-value">
+              {{ inBalance | format1e18Value }} {{ inputcurrency.symbol }}
+            </span>
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <input
+            v-model="inputAmount"
+            type="text"
+            :class="inputnotice == '' ? 'amount-input' : 'amount-input  amount-input-error'"
+            @keyup="inputChange"
+          >
+          <div v-if="inputcurrency" class="unit">
+            <img :src="getTokenImg(inputcurrency.symbol)">
+            <p>
+              {{ inputcurrency.symbol }}
+            </p>
+          </div>
+        </div>
+
+        <div v-if="inputnotice" class="notice-wrapper">
+          <div class="notice-content">
+            <img src="../../assets/img/notice-red.png">
+            <p>{{ inputnotice }}</p>
+          </div>
+        </div>
+
+        <div v-if="isArrow" class="arrow-wrapper" @click="Changeparameters">
+          <img src="../../assets/img/exchange-32.svg">
+        </div>
+        <div v-else class="arrow-wrapper arrow-active" @click="Changeparameters">
+          <img src="../../assets/img/exchange-32-w.svg">
+        </div>
+
+        <div class="left-right-item">
+          <span class="left">{{ $t('swap.toToken') }}</span>
+          <div v-if="outputcurrency" class="right">
+            <span class="m-balance">{{ $t('swap.balance') }}</span>
+            <span class="m-balance-value">{{ outBalance | format1e18Value }} {{ outputcurrency.symbol }}</span>
+          </div>
+        </div>
+
+        <div class="input-wrapper">
+          <input v-model="coinBValue" type="text" class="amount-input" readonly>
+          <div v-if="outputcurrency" class="unit">
+            <img :src="getTokenImg(outputcurrency.symbol)">
+            <p>
+              {{ outputcurrency.symbol }}
+            </p>
+          </div>
+        </div>
+
+        <div class="m-detail-wrapper">
+          <div v-if="needApprove == false" class="detail-item">
+            <p>{{ $t('swap.ethgasfree') }}</p>
+            <span>
+              {{ gasfee | formatBalanceNumber }} {{ chainTokenName }} ≈ $
+              {{ (chainTokenPrice * gasfee) | formatBalanceNumber }}
+            </span>
+          </div>
+          <div class="detail-item">
+            <p>{{ $t('swap.PriceImpact') }}</p>
+            <span>{{ PriceImpact }}</span>
+          </div>
+          <div class="detail-item">
+            <p>{{ $t('swap.Minimumreceived') }}</p>
+            <span v-if="outputcurrency">{{ Minimumreceived }} {{ outputcurrency.symbol }}</span>
+          </div>
+        </div>
+
+        <div class="m-btn-wrapper">
+          <template v-if="ethAddress">
+            <button v-if="btnloading" class="m-swap-btn">
+              Loading...
+            </button>
+
+            <template v-else>
+              <button v-if="PriceImpactGreater == true" class="m-swap-btn">
+                {{ $t('swap.PriceImpactError') }}
+              </button>
+              <div v-else>
+                <button v-if="needApprove == false" class="m-swap-btn" @click="openconfirmtDialog">
+                  {{ $t('swap.swapBtn') }}
+                </button>
+                <div v-else>
+                  <button class="m-swap-btn smallBtn" @click="makeApprove">
+                    {{ $t('swap.approve') }}
+                  </button>
+                  <button class="m-swap-btn smallBtn disableBtn">
+                    {{ $t('swap.swapBtn') }}
+                  </button>
+                </div>
+              </div>
+            </template>
+          </template>
+          <template v-else>
+            <button class="disableBtn">
+              {{ $t('swap.swapBtn') }}
+            </button>
+          </template>
+        </div>
+      </div>
+    </div>
+
     <confirmtDialog ref="confirm" />
+
+    <Drawer v-model="openMobileList" :transfer="false" width="340" placement="left" :closable="true">
+      <h2 slot="header">
+        市场
+      </h2>
+      <div class="m-pair-content">
+        <Table :columns="pairColumns" :data="drawPairData" @on-row-click="selectPair">
+          <template slot="pair" slot-scope="{ row }">
+            <div class="pairItem tableItem">
+              <img :src="getTokenImg(row.listSymbol)">
+              <p>{{ row.pairName }}</p>
+            </div>
+          </template>
+
+          <template slot="price" slot-scope="{ row }">
+            <div class="tableItem">
+              <p>{{ row.price | formatNormalValue }}</p>
+
+              <p
+                v-if="(row.pairName == 'GOAT/LAMB' || row.pairName == 'HGT/LAMB') && LAMB_USDT != ''"
+                class="goatprice"
+              >
+                ${{ (LAMB_USDT * row.price) | formatNormal3Value }}
+              </p>
+            </div>
+          </template>
+
+          <template slot="rate" slot-scope="{ row }">
+            <div class="tableItem">
+              <span v-if="row.change === '-'" class="text-error">
+                {{ row.change }}{{ row.prisechange | formatRate }}
+              </span>
+              <span v-if="row.change === '+'" class="text-success">
+                {{ row.change }}{{ row.prisechange | formatRate }}
+              </span>
+            </div>
+          </template>
+        </Table>
+      </div>
+    </Drawer>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 
-import { ChainId, TokenAmount } from '@webfans/uniswapsdk';
+import { TokenAmount } from '@webfans/uniswapsdk';
 
-import {
-  INITIAL_ALLOWED_SLIPPAGE,
-  ROUTER_ADDRESS,
-} from '@/constants/index.js';
+import { INITIAL_ALLOWED_SLIPPAGE, ROUTER_ADDRESS } from '@/constants/index.js';
 
-import { readpairpool,readpairpoolPrice } from '@/contactLogic/readpairpool.js';
+import { readpairpool, readpairpoolPrice } from '@/contactLogic/readpairpool.js';
 import { readSwapBalance, getToken, getTokenImg } from '@/contactLogic/readbalance.js';
 
 import { tradeCalculate, SwapGas } from '@/contactLogic/swaplogoc.js';
@@ -205,7 +365,9 @@ export default {
       gasfee: '',
       pairlistloading: false,
       inputnotice: '',
-      LAMB_USDT:''
+      LAMB_USDT: '',
+      openMobileList: false,
+      drawPairData: [],
     };
   },
   components: {
@@ -214,6 +376,10 @@ export default {
     loading: () => import('@/components/basic/loading.vue'),
   },
   methods: {
+    openDraw() {
+      this.openMobileList = true;
+      this.drawPairData = this.pairlist;
+    },
     getTokenImg(tokensymbol) {
       const chainID = this.ethChainID;
       return getTokenImg(tokensymbol, chainID);
@@ -225,20 +391,18 @@ export default {
       const chainID = this.ethChainID;
       const library = this.ethersprovider;
       // const account = this.ethAddress;
-      this.$data.pairlistloading = true;
+      this.pairlistloading = true;
       const data = await readpairpool(chainID, library);
-      this.$data.pairlistloading = false;
+      this.pairlistloading = false;
 
-      console.log({ data });
-      this.$data.pairlist = data||[];
-      const _this= this;
-      this.$data.pairlist.forEach(element => {
-        console.log(element);
-        if(element.pairName=='LAMB/USDT'){
-          _this.$data.LAMB_USDT =element.price;
-
+      // console.log({ data });
+      this.pairlist = data || [];
+      // const _this = this;
+      this.pairlist.forEach((element) => {
+        // console.log(element);
+        if (element.pairName == 'LAMB/USDT') {
+          this.LAMB_USDT = element.price;
         }
-        
       });
 
       if (data && data[0] && this.selectPairOBJ === null) {
@@ -246,34 +410,33 @@ export default {
           this.selectPair(data[0]);
         }, 1);
       }
-      
-      setTimeout(async() => {
-        const data= await readpairpoolPrice(chainID, library,_this.$data.pairlist);
-        console.log(data);
-        _this.$data.pairlist = [];
-        _this.$data.pairlist = data;
 
-      },1);
-      
+      setTimeout(async () => {
+        const data = await readpairpoolPrice(chainID, library, this.pairlist);
+        console.log(data);
+        this.pairlist = [];
+        this.pairlist = data;
+      }, 1);
     },
     async selectPair(pair) {
       console.log(pair);
 
-      this.$data.selectPairOBJ = pair;
+      this.selectPairOBJ = pair;
 
-      this.$data.selectPairName = pair.pairName;
+      this.selectPairName = pair.pairName;
 
-      this.$data.inputcurrency = pair.Pair.tokenAmounts[1].currency;
-      this.$data.outputcurrency = pair.Pair.tokenAmounts[0].currency;
+      this.inputcurrency = pair.Pair.tokenAmounts[1].currency;
+      this.outputcurrency = pair.Pair.tokenAmounts[0].currency;
       this.isArrow = true;
+      this.openMobileList = false;
       this.showparameters();
     },
     Changeparameters() {
       console.log('Changeparameters');
-      if (this.$data.selectPairOBJ) {
+      if (this.selectPairOBJ) {
         this.isArrow = !this.isArrow;
-        this.$data.inputcurrency = this.$data.selectPairOBJ.Pair.tokenAmounts[this.isArrow ? 1 : 0].currency;
-        this.$data.outputcurrency = this.$data.selectPairOBJ.Pair.tokenAmounts[this.isArrow ? 0 : 1].currency;
+        this.inputcurrency = this.selectPairOBJ.Pair.tokenAmounts[this.isArrow ? 1 : 0].currency;
+        this.outputcurrency = this.selectPairOBJ.Pair.tokenAmounts[this.isArrow ? 0 : 1].currency;
         this.showparameters();
         this.clearData();
       }
@@ -287,61 +450,61 @@ export default {
       }
       this.clearData();
 
-      const TokenA = getToken(this.$data.inputcurrency.symbol, chainID);
-      const TokenB = getToken(this.$data.outputcurrency.symbol, chainID);
+      const TokenA = getToken(this.inputcurrency.symbol, chainID);
+      const TokenB = getToken(this.outputcurrency.symbol, chainID);
 
       const data = await readSwapBalance(chainID, library, account, TokenA, TokenB);
 
-      this.$data.inBalance = data.TokenAamount.toString();
-      this.$data.outBalance = data.TokenBamount.toString();
+      this.inBalance = data.TokenAamount.toString();
+      this.outBalance = data.TokenBamount.toString();
     },
     inputChange: debounce(async function () {
       //debounce(
-      console.log(this.$data.inputAmount);
-      this.$data.inputnotice = '';
+      console.log(this.inputAmount);
+      this.inputnotice = '';
       if (this.inputcheckup()) {
         try {
-          this.$data.btnloading = true;
-          await this.calculationOutPut(this.$data.inputAmount);
+          this.btnloading = true;
+          await this.calculationOutPut(this.inputAmount);
         } catch (error) {
           console.log(error);
         } finally {
-          this.$data.btnloading = false;
+          this.btnloading = false;
         }
       }
     }, 1000),
     inputcheckup() {
       try {
-        const num = parseFloat(this.$data.inputAmount);
+        const num = parseFloat(this.inputAmount);
         if (isNaN(num)) {
-          this.$data.inputnotice = this.$t('swap.enterthequantity');
+          this.inputnotice = this.$t('swap.enterthequantity');
           nowTrade = null;
           return false;
         }
-        const inamount = new BigNumber(Web3.utils.toWei(this.$data.inputAmount, 'ether'));
+        const inamount = new BigNumber(Web3.utils.toWei(this.inputAmount, 'ether'));
         if (inamount.isGreaterThan(this.inBalance) || inamount.isLessThanOrEqualTo('0')) {
-          this.$data.inputnotice = this.$t('swap.actions.Amountexceedsbalance');
+          this.inputnotice = this.$t('swap.actions.Amountexceedsbalance');
           nowTrade = null;
           return false;
         }
       } catch (error) {
         console.log(error);
-        this.$data.inputnotice = this.$t('swap.actions.needNumber');
+        this.inputnotice = this.$t('swap.actions.needNumber');
         nowTrade = null;
       }
 
       return true;
     },
     clearData() {
-      this.$data.inputAmount = '';
-      this.$data.coinBValue = '';
+      this.inputAmount = '';
+      this.coinBValue = '';
       nowTrade = null;
-      this.$data.inputnotice = '';
+      this.inputnotice = '';
     },
     async calculationOutPut(num) {
       const chainID = this.ethChainID;
-      const TokenA = getToken(this.$data.inputcurrency.symbol, chainID);
-      const TokenB = getToken(this.$data.outputcurrency.symbol, chainID);
+      const TokenA = getToken(this.inputcurrency.symbol, chainID);
+      const TokenB = getToken(this.outputcurrency.symbol, chainID);
 
       const inputAmount = new TokenAmount(TokenA, Web3.utils.toWei(num, 'ether'));
 
@@ -353,10 +516,10 @@ export default {
 
       console.log(result);
 
-      this.$data.PriceImpact = result.PriceImpact;
-      this.$data.PriceImpactGreater = result.PriceImpactGreater;
-      this.$data.coinBValue = result.coinBValue.toSignificant(6);
-      this.$data.Minimumreceived = result.Minimumreceived.toSignificant(6);
+      this.PriceImpact = result.PriceImpact;
+      this.PriceImpactGreater = result.PriceImpactGreater;
+      this.coinBValue = result.coinBValue.toSignificant(6);
+      this.Minimumreceived = result.Minimumreceived.toSignificant(6);
       nowTrade = result.trade;
 
       setTimeout(() => {
@@ -370,13 +533,13 @@ export default {
 
       console.log(trade);
       const needApprove = await useNeedApprove(account, library, trade, INITIAL_ALLOWED_SLIPPAGE);
-      this.$data.needApprove = needApprove;
+      this.needApprove = needApprove;
 
       console.log(needApprove);
       if (needApprove === false) {
         const gasfee = await SwapGas(library, account, ChainId, trade);
         console.log('gasfee', gasfee);
-        this.$data.gasfee = gasfee;
+        this.gasfee = gasfee;
       }
     },
     async makeApprove() {
@@ -385,9 +548,9 @@ export default {
       const chainID = this.ethChainID;
       const library = this.ethersprovider;
       const account = this.ethAddress;
-      const num = this.$data.inputAmount;
+      const num = this.inputAmount;
 
-      const TokenA = getToken(this.$data.inputcurrency.symbol, chainID);
+      const TokenA = getToken(this.inputcurrency.symbol, chainID);
       const amount = Web3.utils.toWei(num, 'ether');
       const spender = ROUTER_ADDRESS;
 
@@ -398,7 +561,7 @@ export default {
         if (transaction) {
           const waitdata = await transaction.wait([1]);
           console.log(waitdata);
-          this.$data.needApprove = false;
+          this.needApprove = false;
           this.calculationOutPut(num);
         } else {
           //取消授权
@@ -419,13 +582,41 @@ export default {
     },
     openconfirmtDialog() {
       if (nowTrade) {
-        this.$refs.confirm.open(_.clone(this.$data), nowTrade);
+        this.$refs.confirm.open(_.clone(this), nowTrade);
         this.clearData();
       }
     },
   },
   computed: {
-    ...mapState(['ethChainID', 'ethAddress', 'web3', 'ethersprovider', 'chainTokenPrice', 'chainTokenName']),
+    ...mapState([
+      'ethChainID',
+      'ethAddress',
+      'web3',
+      'ethersprovider',
+      'chainTokenPrice',
+      'chainTokenName',
+      'isMobile',
+    ]),
+    pairColumns() {
+      const columns = [
+        {
+          title: this.$t('swap.Pair'),
+          slot: 'pair',
+          minWidth: 120,
+        },
+        {
+          title: this.$t('swap.Price'),
+          slot: 'price',
+          minWidth: 100,
+        },
+        {
+          title: this.$t('swap.Change'),
+          slot: 'rate',
+          minWidth: 100,
+        },
+      ];
+      return columns;
+    },
   },
   async mounted() {
     if (this.ethChainID) {
@@ -448,12 +639,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './media/index.less';
 .content-wrapper {
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   margin-top: 16px;
-  padding: 44px;
   .exchanges-wrapper {
     width: 48%;
     .list-wrapper {
@@ -539,7 +730,7 @@ export default {
         content: '';
         height: 56px;
         width: 2px;
-        background: #FF41A1;
+        background: #ff41a1;
         position: absolute;
         left: 0;
         top: 0;
@@ -588,9 +779,9 @@ export default {
           font-size: 40px;
           line-height: 47px;
           padding: 16px;
-          caret-color: #FF41A1;
+          caret-color: #ff41a1;
           &:focus {
-            border: 1px solid #FF41A1;
+            border: 1px solid #ff41a1;
             border-radius: 4px;
           }
         }
@@ -608,14 +799,14 @@ export default {
           justify-content: space-between;
           align-items: center;
           line-height: 32px;
-          img{
+          img {
             max-width: 24px;
             max-height: 24px;
           }
           p {
             font-size: 16px;
           }
-          img{
+          img {
             max-width: 24px;
           }
         }
@@ -625,7 +816,7 @@ export default {
         font-size: 12px;
         span {
           font-size: 12px;
-          color: #FF41A1;
+          color: #ff41a1;
         }
       }
     }
@@ -651,8 +842,8 @@ export default {
     .arrow-wrapper {
       position: relative;
       cursor: pointer;
-      width:32px;
-      height:32px;
+      width: 32px;
+      height: 32px;
       background: #f7f8f9;
       border-radius: 4px;
       margin: 34px auto;
@@ -665,7 +856,7 @@ export default {
       }
     }
     .arrow-active {
-      background: #FF41A1;
+      background: #ff41a1;
     }
 
     .details-wrapper {
@@ -710,10 +901,9 @@ export default {
   position: relative;
 }
 
-.goatprice{
+.goatprice {
   font-size: 12px;
   color: #9fa3a7;
   display: block;
 }
-
 </style>

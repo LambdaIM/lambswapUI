@@ -40,34 +40,15 @@ export default {
       this.$nextTick(() => (this.isRouterAlive = true));
     },
   },
-  watch: {
-    // 监听屏幕宽度变化
-    screenWidth: {
-      handler(newName, oldName) {
-        console.log({ newName });
-        if (!this.timer) {
-          this.screenWidth = newName;
-
-          // 移动端
-          if (this.screenWidth < 1200) {
-            this.$store.commit('changeIsMobile', true);
-          } else {
-            this.$store.commit('changeIsMobile', false);
-          }
-
-          this.timer = true;
-          setTimeout(() => {
-            this.timer = false;
-          }, 400);
-        }
-      },
-    },
-  },
   mounted() {
-    // alert(this.screenWidth);
     window.onresize = () => {
       return (() => {
         this.screenWidth = document.body.clientWidth;
+        if (this.screenWidth < 1200) {
+          this.$store.commit('changeIsMobile', true);
+        } else {
+          this.$store.commit('changeIsMobile', false);
+        }
       })();
     };
   },
