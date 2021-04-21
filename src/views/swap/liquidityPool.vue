@@ -42,11 +42,11 @@
                 <button @click="openInput(item)">
                   {{ $t('liquidity.pool.btnInput') }}
                 </button>
-                <div class="remove-warpper">
-                  <button @click="openRemove(item)">
-                    {{ $t('liquidity.pool.btnRemove') }}
-                  </button>
-                </div>
+              </div>
+              <div class="remove-warpper">
+                <button @click="openRemove(item)">
+                  {{ $t('liquidity.pool.btnRemove') }}
+                </button>
               </div>
             </template>
 
