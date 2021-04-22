@@ -50,38 +50,45 @@
 
     <!-- 移动端底部栏 -->
     <footer v-else class="mobileFooter container">
-      <div :class="isActive=='mining'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('mining')">
+      <div :class="isActive=='earn'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('earn')">
         <img src="../../assets/img/mining.svg" alt="mining">
         <img src="../../assets/img/mining-active.svg" alt="mining" class="acitveImg">
+        <p>{{ $t('header.nav.Earn1') }}</p>
+        <!-- <a href="#">{{ $t('header.nav.Earn1') }}</a>
         <router-link to="/earn">
           {{ $t('header.nav.Earn1') }}
-        </router-link>
+        </router-link> -->
         <!-- <p>挖矿</p> -->
       </div>
-      <div :class="isActive=='swap'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('swap')">
+      <div :class="isActive=='exchange'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('exchange')">
         <img src="../../assets/img/swap.svg" alt="swap">
         <img src="../../assets/img/swap-active.svg" alt="swap" class="acitveImg">
-        <router-link to="/exchange">
+        <p>{{ $t('header.nav.Exchange') }}</p>
+        <!-- <router-link to="/exchange">
           {{ $t('header.nav.Exchange') }}
-        </router-link>
+        </router-link> -->
         <!-- <p>交易</p> -->
       </div>
       <div :class="isActive=='birdge'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('birdge')">
         <img src="../../assets/img/birdge.svg" alt="birdge">
         <img src="../../assets/img/birdge-active.svg" alt="birdge" class="acitveImg">
-        <a href="https://bridge.lambdastorage.com/">{{ $t('header.nav.Bridge') }}</a>
+        <p>{{ $t('header.nav.Bridge') }}</p>
+        <!-- <a href="#">{{ $t('header.nav.Bridge') }}</a> -->
         <!-- <p>跨链</p> -->
       </div>
       <div :class="isActive=='doc'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('doc')">
         <img src="../../assets/img/doc.svg" alt="doc">
         <img src="../../assets/img/doc-active.svg" alt="doc" class="acitveImg">
-        <a href="https://lamb-swap.gitbook.io/lambswap/">{{ $t('header.nav.Docs') }}</a>
+        <p>{{ $t('header.nav.Docs') }}</p>
+        <!-- <a href="#">{{ $t('header.nav.Docs') }}</a> -->
         <!-- <p>教程</p> -->
       </div>
       <div :class="isActive=='quotes'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('quotes')">
         <img src="../../assets/img/quotes-active.svg" alt="quotes">
         <img src="../../assets/img/quotes.svg" alt="quotes" class="acitveImg">
-        <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a">{{ $t('header.nav.chart') }}</a>
+        <!-- <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a">{{ $t('header.nav.chart') }}</a> -->
+        <!-- <a href="#">{{ $t('header.nav.chart') }}</a> -->
+        <p>{{ $t('header.nav.chart') }}</p>
         <!-- <p>行情</p> -->
       </div>
     </footer>
@@ -118,6 +125,20 @@ export default {
     },
     activeMenu(name) {
       this.isActive = name;
+      if(name=='earn'||name=='exchange'){
+         this.$router.push({
+          path:`/${name}`,
+        });
+      }
+      if(name=='birdge'){
+         window.location.href = 'https://bridge.lambdastorage.com/';
+      }
+      if(name=='doc'){
+         window.location.href = 'https://lamb-swap.gitbook.io/lambswap/';
+      }
+      if(name=='quotes'){
+         window.location.href = 'https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a';
+      }
     },
   },
   mounted() {
