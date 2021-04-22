@@ -297,6 +297,7 @@ export default {
       }
       .inputedWarpper{
         width: 25%;
+        white-space: nowrap;
       }
       .buttonWarpper {
         width: 15%;
