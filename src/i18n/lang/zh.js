@@ -51,7 +51,8 @@ export default {
     copyAddress: '复制地址',
     changeWallet: '更换钱包',
     Disconnect: '解除连接',
-    AddLambwallet:'添加至钱包'
+    AddLambwallet:'添加至钱包',
+    wechat: '微信',
   },
   check: {
     notice: 'LambSwap 智能合约已通过 Armors 审核'
