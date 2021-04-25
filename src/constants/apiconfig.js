@@ -17,7 +17,8 @@ export  async function swapHistory(account,pageNum=1,showNum=10,chainID){
     '0x005E0D3157335F4Af22Ea89D7C389AFc6Bd514fc',
     '0x3ef407F05CA26A641E3A3d40B4CA0e7622676E1A',
     '0xE1f45DE5b21Feda6cB6A8e96c577f44240c039a2',
-    '0xbd729565FcEC9ECEf76E5a3dD0175E00759B4e23'
+    '0xbd729565FcEC9ECEf76E5a3dD0175E00759B4e23',
+    '0xBE460002a4198Ac842dfd98313eae2e979322C2e'
     
   ].join(',');
     let data;
