@@ -123,30 +123,40 @@
             </template>
           </DropdownMenu>
         </Dropdown>
-        <div class="wallet-warpper">
+        <div class="wallet-wrapper">
           <img v-clickoutside="closeWallet" src="../../assets/img/header-ico.svg" alt="headerico" class="headerIco" @click="showWallet">
           <div v-if="isShowWallet" class="wallet-item">
             <div>
               <img src="../../assets/img/metamask48.svg" alt="metamask48">
               <p>{{ getShortAddress }}</p>
             </div>
-            <button>复制地址</button>
-            <button>解除连接</button>
+            <button @click="copyAddress">
+              {{ $t('header.copyAddress') }}
+            </button>
+            <button v-if="WalletConnectprovider" @click="disconnectWallet">
+              {{ $t('header.Disconnect') }}
+            </button>
           </div>
         </div>
-        <div class="set-warpper">
+        <div class="set-wrapper">
           <img v-clickoutside="closeSet" src="../../assets/img/setting.svg" alt="setting" class="headerset" @click="showSet">
-          <div v-if="isShowSetting" class="setting-warpper">
+          <div v-if="isShowSetting" class="setting-wrapper">
             <div><img src="../../assets/lambda-LOGO.svg" alt="lambda-LOGO"></div>
-            <p>简体中文</p>
-            <div class="btn-warpper">
+
+            <p @click="changeLang">
+              {{ lang }}
+            </p>
+
+
+
+            <!-- <a class="btn-wrapper" href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a" target="_blank">
               <img src="../../assets/WeChat-ico.png" alt="WeChat">
-              <p>微信</p>
-            </div>
-            <div class="btn-warpper">
+              <p>{{ $t('header.nav.chart') }}</p>
+            </a> -->
+            <a class="btn-wrapper" href="https://lamb-swap.gitbook.io/lambswap/" target="_blank">
               <img src="../../assets/docs-ico.svg" alt="docs">
-              <p>教程</p>
-            </div>
+              <p>{{ $t('header.nav.Docs') }}</p>
+            </a>
           </div>
         </div>
       </div>
@@ -156,71 +166,97 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import config from "@/config/config.js";
-import jscookie from "js-cookie";
-import { getToken } from "@/contactLogic/readbalance.js";
+import { mapState } from 'vuex';
+import config from '@/config/config.js';
+import jscookie from 'js-cookie';
+import { getToken } from '@/contactLogic/readbalance.js';
 export default {
-  inject: ["reload"],
+  inject: ['reload'],
   components: {
-    walletdialog: () => import("./dialog/walletDialog"),
+    walletdialog: () => import('./dialog/walletDialog'),
   },
   data() {
     return {
+      lang: 'English',
+      langKey: 'en',
       isExchange: false,
       showBoxShadow: false,
-      network: "",
+      network: '',
       netInfo: config.netInfo,
-      netID: "1",
-      statusVal: "",
+      netID: '1',
+      statusVal: '',
       isShowWallet: false,
       isShowSetting: false,
       tokenList: [
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/lamb48.svg",
-          name: "LAMB",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/lamb48.svg',
+          name: 'LAMB',
         },
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/usdt48.svg",
-          name: "USDT",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/usdt48.svg',
+          name: 'USDT',
         },
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/fil.png",
-          name: "FIL",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/fil.png',
+          name: 'FIL',
         },
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/eth48.svg",
-          name: "ETH",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/eth48.svg',
+          name: 'ETH',
         },
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/goat.jpg",
-          name: "GOAT",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/goat.jpg',
+          name: 'GOAT',
         },
         {
           isBan: true,
-          imgSrc: "https://www.lambswap.fi/tokenlogo/hyperLogo48.png",
-          name: "HGT",
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/hyperLogo48.png',
+          name: 'HGT',
         },
       ],
     };
   },
   methods: {
+    changeLang() {
+      if(this.langKey === 'zh') {
+        this.langKey = 'en';
+        this.lang = 'English';
+      }else{
+        this.langKey = 'zh';
+        this.lang = '简体中文';
+      }
+      jscookie.set('langkey', this.langKey, { expires: 180 });
+      this.$i18n.locale = this.langKey;
+    },
+
+    getKey() {
+      const key = jscookie.get('langkey');
+      if (key === 'zh') {
+        this.lang = '简体中文';
+        this.langKey = 'zh';
+      } else {
+        this.lang = 'English';
+        this.langKey = 'en';
+      }
+      this.$i18n.locale = this.langKey;
+    },
+
     async addtoken(index) {
-      const item = this.$data.tokenList[index];
+      const item = this.tokenList[index];
 
       const chainID = this.ethChainID;
       const TokenA = getToken(item.name, chainID);
       try {
         // wasAdded is a boolean. Like any RPC method, an error may be thrown.
         const wasAdded = await window.ethereum.request({
-          method: "wallet_watchAsset",
+          method: 'wallet_watchAsset',
           params: {
-            type: "ERC20", // Initially only supports ERC20, but eventually more!
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
             options: {
               address: TokenA.address, // The address that the token is at.
               symbol: TokenA.symbol, // A ticker symbol or shorthand, up to 5 chars.
@@ -231,9 +267,9 @@ export default {
         });
 
         if (wasAdded) {
-          console.log("Thanks for your interest!");
+          console.log('Thanks for your interest!');
         } else {
-          console.log("Your loss!");
+          console.log('Your loss!');
         }
       } catch (error) {
         console.log(error);
@@ -245,39 +281,40 @@ export default {
     copyAddress() {
       this.$copyText(this.ethAddress).then(() => {
         this.$Notice.success({
-          title: this.$t("notice.n36"),
+          title: this.$t('notice.n36'),
         });
       });
     },
     // 选择目标网络
     choseNetWork(val) {
       this.netID = val;
-      jscookie.set("targetNet", val, { expires: 180 });
+      jscookie.set('targetNet', val, { expires: 180 });
       this.getStatus();
 
       this.network = this.netInfo[val].name;
-      jscookie.set("net", this.network, { expires: 180 });
+      jscookie.set('net', this.network, { expires: 180 });
     },
 
     // 添加并且切换网络类型
     addChain() {
-      if (this.WalletName != "metamask") {
+      console.log(this.WalletName);
+      if (this.WalletName != 'metamask') {
         return;
       }
       const param = {
-        chainId: "0x80",
-        chainName: "Heco Main",
+        chainId: '0x80',
+        chainName: 'Heco Main',
         nativeCurrency: {
-          name: "heco",
-          symbol: "HT",
+          name: 'heco',
+          symbol: 'HT',
           decimals: 18,
         },
-        rpcUrls: ["https://http-mainnet.hecochain.com"],
-        blockExplorerUrls: ["https://hecoinfo.com/"],
+        rpcUrls: ['https://http-mainnet.hecochain.com'],
+        blockExplorerUrls: ['https://hecoinfo.com/'],
       };
       const ethereum = window.ethereum;
       ethereum
-        .request({ method: "wallet_addEthereumChain", params: [param] })
+        .request({ method: 'wallet_addEthereumChain', params: [param] })
         .then((res) => {
           console.log(res);
         })
@@ -287,85 +324,77 @@ export default {
     },
 
     async choseFunc(val) {
-      if (val === "copy") {
+      if (val === 'copy') {
         this.copyAddress();
       }
-      if (val === "change") {
+      if (val === 'change') {
         this.openWalletDialog();
       }
-      if (val === "disconnect") {
+      if (val === 'disconnect') {
         this.disconnectWallet();
       }
     },
 
     async disconnectWallet() {
-      console.log("disconnect");
+      console.log('disconnect');
       await this.WalletConnectprovider.disconnect();
-      this.$store.commit("changeEthAddress", "");
-      this.$store.commit("changeWalletConnectprovider", null);
+      this.$store.commit('changeEthAddress', '');
+      this.$store.commit('changeWalletConnectprovider', null);
       this.reload();
     },
 
     getStatus() {
-      const targetID = parseInt(jscookie.get("targetNet")) || 128;
+      const targetID = parseInt(jscookie.get('targetNet')) || 128;
 
-      this.network = jscookie.get("net");
+      this.network = jscookie.get('net');
       if (!this.network) {
         this.network = this.netInfo[config.defaultChainID].name;
       }
 
       // console.log(targetID, this.ethChainID, this.network);
       if (!this.ethAddress) {
-        this.statusVal = "notConnect";
+        this.statusVal = 'notConnect';
         this.$Notice.warning({
-          title: this.$t("notice.n37"),
-          desc: this.$t("notice.n38"),
+          title: this.$t('notice.n37'),
+          desc: this.$t('notice.n38'),
         });
       }
       if (this.ethAddress && targetID !== this.ethChainID) {
-        this.statusVal = "wrongConnect";
+        this.statusVal = 'wrongConnect';
         this.$Notice.error({
-          title: this.$t("notice.n39"),
-          desc: this.$t("notice.n40"),
+          title: this.$t('notice.n39'),
+          desc: this.$t('notice.n40'),
           duration: 30,
         });
         this.addChain();
       }
 
       if (this.ethAddress && targetID === this.ethChainID) {
-        this.statusVal = "connect";
+        this.statusVal = 'connect';
         this.$Notice.success({
-          title: this.$t("notice.n41"),
+          title: this.$t('notice.n41'),
           desc: this.ethAddress,
         });
       }
       // console.log(this.statusVal);
     },
 
-    showWallet(){
+    showWallet() {
       this.isShowWallet = true;
     },
-    showSet(){
+    showSet() {
       this.isShowSetting = true;
     },
 
-    closeWallet(){
+    closeWallet() {
       this.isShowWallet = false;
     },
-    closeSet(){
+    closeSet() {
       this.isShowSetting = false;
     },
-
   },
   computed: {
-    ...mapState([
-      "ethAddress",
-      "ethChainID",
-      "web3",
-      "WalletConnectprovider",
-      "WalletName",
-      "isMobile",
-    ]),
+    ...mapState(['ethAddress', 'ethChainID', 'web3', 'WalletConnectprovider', 'WalletName', 'isMobile']),
     getShortAddress() {
       return `${this.ethAddress.slice(0, 6)}...${this.ethAddress.slice(-6)}`;
     },
@@ -376,27 +405,27 @@ export default {
     getBg() {
       let styleVal;
       switch (this.netID) {
-        case "1":
-          styleVal = "ethNet";
+        case '1':
+          styleVal = 'ethNet';
           break;
-        case "3":
-          styleVal = "ethNet";
+        case '3':
+          styleVal = 'ethNet';
           break;
-        case "128":
-          styleVal = "hecoNet";
+        case '128':
+          styleVal = 'hecoNet';
           break;
-        case "256":
-          styleVal = "hecoNet";
+        case '256':
+          styleVal = 'hecoNet';
           break;
-        case "56":
-          styleVal = "bscNet";
+        case '56':
+          styleVal = 'bscNet';
           break;
-        case "97":
-          styleVal = "bscNet";
+        case '97':
+          styleVal = 'bscNet';
           break;
 
         default:
-          styleVal = "ethNet";
+          styleVal = 'ethNet';
           break;
       }
       return styleVal;
@@ -413,10 +442,11 @@ export default {
     },
   },
   mounted() {
+    this.getKey();
     if (this.isReady) {
       this.getStatus();
     } else {
-      this.statusVal = "notConnect";
+      this.statusVal = 'notConnect';
       // 设置默认网络
       this.network = this.netInfo[config.defaultChainID].name;
     }
@@ -425,7 +455,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "./media/index.less";
+@import './media/index.less';
 .header-wrapper {
   width: 100%;
   position: fixed;
