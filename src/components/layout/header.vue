@@ -218,6 +218,11 @@ export default {
           imgSrc: 'https://www.lambswap.fi/tokenlogo/hyperLogo48.png',
           name: 'HGT',
         },
+        {
+          isBan: true,
+          imgSrc: 'https://www.lambswap.fi/tokenlogo/lamb48.svg',
+          name: 'mLAMB',
+        }
       ],
     };
   },

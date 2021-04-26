@@ -1,4 +1,15 @@
-[
+[{
+  "name": "mLAMB/LAMB LP",
+  "address": "0x972329A641af049f775c256A0E7e48BE142Fa513",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "daynum":"300",
+  "symbol": [
+    "mLAMB",
+    "LAMB"
+  ]
+},
   {
     "name": "GOAT/LAMB LP",
     "address": "0xFd13C96907feaA52b07A9640dd7a93b7C47BfeEd",

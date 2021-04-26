@@ -16,6 +16,11 @@
     {
         "chainId": 128,
         "isfirst":"true",
+        "pair":["mLAMB","LAMB"]
+    },
+    {
+        "chainId": 128,
+        "isfirst":"true",
         "pair":["HGT","LAMB"]
     },
     {
