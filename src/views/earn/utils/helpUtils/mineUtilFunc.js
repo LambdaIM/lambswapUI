@@ -1,4 +1,6 @@
 import multiSymbolData from "@/constants/earnList.json";
+import farmJson from "@/constants/farm.json";
+
 import tokenlist from "@/constants/token.json";
 import { TokenAmount } from "@webfans/uniswapsdk";
 import _ from 'underscore';
@@ -6,12 +8,14 @@ const BigNumber = require('bignumber.js');
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 
-import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead } from "./allowances.js";
+import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead, useTokenBalance, useTokentotalSupply } from "./allowances.js";
+import { usemLAMBContract } from './useContract.js';
 
-import { Contract, Provider } from '@webfans/ethers-multicall';
+import { Provider } from '@webfans/ethers-multicall';
 
 import { useStakingRewardsContractMulticall, useTokenContractMulticall } from "@/contacthelp/useContractMulticall.js";
 
+import { calculateGasMargin } from "@/contacthelp/utils.js";
 
 function getTokenInfo(chainID, address) {
   let result;
@@ -194,5 +198,68 @@ export async function StakingRewardListbatch(library, account, chainID) {
   return result;
 }
 
+export async function getFarmList(library, account, chainID) {
+  const list = farmJson || [];
+  const result = [];
 
+  list.forEach((item) => {
+    if (item.chainId === chainID) {
+      result.push(item);
+    }
+  });
 
+  for (let index = 0; index < result.length; index++) {
+    const item = result[index];
+    const token = _.find(tokenlist.tokens, (token) => {
+      return item.symbol === token.symbol && item.chainId === token.chainId;
+    });
+
+    const totalSupplyShare = await useTokentotalSupply(library, account, item);
+    const balanceShare = await useTokenBalance(library, account, item);
+    const totalAsset = await useTokenBalance(library, item.address, token);
+    // const Reward = await useSushiBarReward(library,account,item);
+    // const claimedReward = await useSushiBarhaveclaimed(library,account,item);
+    const myAsset = balanceShare.multiply(totalAsset).divide(totalSupplyShare);
+
+    item.data = {
+      totalSupplyShare: totalSupplyShare.toSignificant(6),
+      balanceShare: balanceShare.toSignificant(6),
+      totalAsset: totalAsset.toSignificant(6),
+      myAsset: myAsset.toSignificant(6),
+      rewardTokenAddress: token.address
+      // claimedReward:claimedReward.toSignificant(6)
+    };
+  }
+  return result;
+}
+
+// 质押mLAMB
+export async function useSushiBarEnter(library, account, token, amount) {
+  const contract = usemLAMBContract(library, account, token.address, true);
+  let result;
+  try {
+    const safeGasEstimate = await contract.estimateGas.enter(amount);
+    result = await contract.enter(amount, {
+      gasLimit: calculateGasMargin(safeGasEstimate),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return result;
+}
+
+// 取出mLAMB
+export async function useSushiBarLeave(library, account, token, amount) {
+  // console.log({library, account, token, amount});
+  const contract = usemLAMBContract(library, account, token.address, true);
+  let result;
+  try {
+    const safeGasEstimate = await contract.estimateGas.leave(amount);
+    result = await contract.leave(amount, {
+      gasLimit: calculateGasMargin(safeGasEstimate),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return result;
+}

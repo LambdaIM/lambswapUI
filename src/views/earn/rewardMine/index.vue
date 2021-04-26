@@ -5,6 +5,8 @@
     </div>
     <template v-else>
       <!-- <airDrop /> -->
+
+      <mlambPool />
       <!-- <singeMineList :data="designatedData" /> -->
       <multiMineList :data="liquidityData" />
     </template>
@@ -31,6 +33,7 @@ export default {
   components: {
     singeMineList: () => import('./components/singleMineList.vue'),
     multiMineList: () => import('./components/multiMineList.vue'),
+    mlambPool: () => import('./components/mLAMBPool.vue'),
     loading: () => import('@/components/basic/loading.vue'),
     airDrop: () => import('@/components/airDrop.vue'),
   },
@@ -87,18 +90,24 @@ export default {
         }
       });
 
+      // // 构造价格相关信息
+      // const data = {
+      //   aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
+      //   bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
+      //   price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
+      // };
+      // if(data.aTokenbalance.token.symbol==tokensymbolA){
+      //   obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
+      // }else{
+      //   obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
+      // }
+
       // 构造价格相关信息
       const data = {
         aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
         bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
         price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
       };
-      if(data.aTokenbalance.token.symbol==tokensymbolA){
-        obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
-      }else{
-        obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
-      }
-
 
       obj.price = data.price && data.price.toSignificant(6);
       obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);

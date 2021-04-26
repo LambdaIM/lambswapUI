@@ -1,4 +1,6 @@
 import ERC20_ABI_StakingRewards from "@/constants/abis/StakingRewards.json";
+import ERC20_ABI from "@/constants/abis/erc20.json";
+import mLAMBBarAbi from "@/constants/abis/mLAMBBar.json";
 import { Contract } from "@ethersproject/contracts";
 import { getAddress } from "@ethersproject/address";
 import { AddressZero } from "@ethersproject/constants";
@@ -50,6 +52,37 @@ export function useStakingRewardsContract(library, account, tokenAddress, withSi
     account,
     tokenAddress,
     ERC20_ABI_StakingRewards,
+    withSignerIfPossible
+  );
+}
+
+export function useTokenContract(
+  library,
+  account,
+  tokenAddress,
+  withSignerIfPossible
+) {
+  return useContract(
+    library,
+    account,
+    tokenAddress,
+    ERC20_ABI,
+    withSignerIfPossible
+  );
+}
+
+
+export function usemLAMBContract(
+  library,
+  account,
+  tokenAddress,
+  withSignerIfPossible
+) {
+  return useContract(
+    library,
+    account,
+    tokenAddress,
+    mLAMBBarAbi,
     withSignerIfPossible
   );
 }
