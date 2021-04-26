@@ -1,7 +1,7 @@
 [
     {
-        "name": "mLamb bar Huobi ECO",
-        "address": "0x2BBf86FFa0703990b91125c73baFA9bc7c010431",
+        "name": "mLAMB bar",
+        "address": "0x58159dfd4be86d8e4510DB790261049bF0c888d2",
         "decimals": 18,
         "chainId": 256,
         "symbol": "mLAMB",

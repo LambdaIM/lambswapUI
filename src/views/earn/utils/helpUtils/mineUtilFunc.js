@@ -208,12 +208,10 @@ export async function getFarmList(library, account, chainID) {
     }
   });
 
-
   for (let index = 0; index < result.length; index++) {
     const item = result[index];
-
     const token = _.find(tokenlist.tokens, (token) => {
-      return item.symbol === token.symbol && item.chainID === token.chainID;
+      return item.symbol === token.symbol && item.chainId === token.chainId;
     });
 
     const totalSupplyShare = await useTokentotalSupply(library, account, item);

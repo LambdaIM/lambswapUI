@@ -60,6 +60,15 @@
     "vue-cli-plugin-tailwind": "^2.0.6",
     "vue-template-compiler": "^2.6.11"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{vue,js}": [
+      "vue-cli-service lint --fix",
+      "git add ."
+    ]
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",

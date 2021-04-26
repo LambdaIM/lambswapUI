@@ -105,8 +105,9 @@ export default {
       this.showLoading = true;
       try {
         const mLambData = await getFarmList(this.ethersprovider, this.ethAddress, this.ethChainID);
+        console.log({mLambData});
         // const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
-        const data = (await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)) || [];
+        const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)|| [];
         // const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
         // await this.getPriceData(scashData, pairListPrice);
