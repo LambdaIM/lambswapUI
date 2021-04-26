@@ -101,16 +101,19 @@ export default {
     checkApprove: debounce(async function () {
       try {
         const chainId = this.ethChainID;
-        const address = this.data && this.data.address;
+        const address = this.data && this.data.data.rewardTokenAddress;
         const decimals = this.data && this.data.decimals;
         const symbol = this.data && this.data.symbol;
         const tokenData = new Token(chainId, address, decimals, symbol);
 
         // 需要将数据转为字符串格式
         const amount = this.pledgeAmount.toString();
+
+        // 批准mlamb的授权
         const amountToApprove = new TokenAmount(tokenData, Web3.utils.toWei(amount, 'ether'));
 
-        this.tokenObj.dataAddress = this.data && this.data.data.rewardTokenAddress;
+        // xmlamb地址
+        this.tokenObj.dataAddress = this.data && this.data.address;
         this.tokenObj.amountToApprove = amountToApprove;
 
         // 检查授权
