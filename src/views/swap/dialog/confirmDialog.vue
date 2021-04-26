@@ -165,7 +165,7 @@ export default {
 
 <style lang="less" scoped>
 .right-wrapper {
-  width: 500px;
+  // width: 500px;
   background: #ffffff;
   border-radius: 12px;
   .connect-content {
