@@ -21,7 +21,7 @@
               @keyup="aTokenChange"
             >
             <div v-if="tokenA" class="flex unit">
-              <img width="32" height="32px" :src="getTokenImg(tokenA.symbol)">
+              <img style="height:32px;" width="32" height="32" :src="getTokenImg(tokenA.symbol)">
               <p>{{ tokenA.symbol }}</p>
             </div>
           </div>
