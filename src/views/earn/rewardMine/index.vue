@@ -99,6 +99,12 @@ export default {
         obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
       }
 
+      // 构造价格相关信息
+      const data = {
+        aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
+        bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
+        price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
+      };
 
       obj.price = data.price && data.price.toSignificant(6);
       obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);
