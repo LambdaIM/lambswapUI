@@ -138,8 +138,8 @@
 
 <style lang="less" scoped>
 .pledge-modal {
-  width: 500px;
-  height: 573px;
+  // width: 500px;
+  // height: 573px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
