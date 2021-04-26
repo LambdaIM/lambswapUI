@@ -17,14 +17,14 @@
             <input v-model.number="stakeVal" type="number" class="amount-input" @input="handleInput">
           </div>
         </div>
-        <div class="price-warpper">
+        <div class="price-wrapper">
           <div class="price-item">
             <span>{{ $t('myPage.dialog.unstake.unstake') }} XmLAMB</span>
             <p>{{ stakeVal }} XmLAMB</p>
           </div>
         </div>
 
-        <div class="btn-warpper">
+        <div class="btn-wrapper">
           <Buttons v-if="!takeLoading" @click.native="sendTakeout">
             {{ $t('common.confirm') }}
           </Buttons>
@@ -205,7 +205,7 @@ export default {
       }
     }
 
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       .price-item {
         display: flex;
@@ -230,7 +230,7 @@ export default {
         margin-bottom: 8px;
       }
     }
-    .btn-warpper {
+    .btn-wrapper {
       margin-top: 24px;
       .button-wrapper {
         height: 48px;

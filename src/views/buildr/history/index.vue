@@ -12,7 +12,7 @@
           <Table :columns="getHistory" :data="list">
             <template slot="Assets" slot-scope="{row}">
               <div class=" Assets">
-                <div class="imgages-warpper">
+                <div class="imgages-wrapper">
                   <img :src="getTokenImg(row.assets)" class="images">
                 </div>
                 <p>
@@ -80,7 +80,7 @@
       .Assets {
         display: flex;
         align-items: center;
-        .imgages-warpper {
+        .imgages-wrapper {
           display: flex;
           margin-right: 6px;
           img {

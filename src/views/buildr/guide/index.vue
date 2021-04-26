@@ -1,5 +1,5 @@
 <template>
-  <div class="guide-warpper flex items-center justify-center">
+  <div class="guide-wrapper flex items-center justify-center">
     <div class="guide-left">
       <h2>{{ $t('build-buildr') }}</h2>
       <p>{{ $t('build-deposit-digital-assets') }}</p>
@@ -16,7 +16,7 @@
 <script src="./index.js"></script>
 
 <style lang="less" scoped>
-.guide-warpper {
+.guide-wrapper {
   margin: 50px 0;
   width: 100%;
   height: 100%;

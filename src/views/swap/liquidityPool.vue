@@ -1,5 +1,5 @@
 <template>
-  <div class="pool-warpper">
+  <div class="pool-wrapper">
     <!-- <airDrop /> -->
     <div class="liquidityPool">
       <h2>{{ $t('liquidity.pool.title') }}</h2>
@@ -10,7 +10,7 @@
       <template v-if="!isMobile">
         <div v-for="item in dataList" :key="item.pairName" class="poolCon">
           <div class="flex items-center imgWapper">
-            <div class="img-warpper flex">
+            <div class="img-wrapper flex">
               <img width="48" :src="getTokenImg(item.pairSymbols[1])">
               <img width="48" :src="getTokenImg(item.pairSymbols[0])" class="otherImg">
             </div>
@@ -38,12 +38,12 @@
 
           <div class="buttonWarpper">
             <template v-if="ethAddress">
-              <div class="input-warpper">
+              <div class="input-wrapper">
                 <button @click="openInput(item)">
                   {{ $t('liquidity.pool.btnInput') }}
                 </button>
               </div>
-              <div class="remove-warpper">
+              <div class="remove-wrapper">
                 <button @click="openRemove(item)">
                   {{ $t('liquidity.pool.btnRemove') }}
                 </button>
@@ -51,13 +51,13 @@
             </template>
 
             <template v-else>
-              <div class="input-warpper disableBtn">
+              <div class="input-wrapper disableBtn">
                 <button>
                   {{ $t('liquidity.pool.btnInput') }}
                 </button>
               </div>
 
-              <div class="remove-warpper disableBtn">
+              <div class="remove-wrapper disableBtn">
                 <button>
                   {{ $t('liquidity.pool.btnRemove') }}
                 </button>
@@ -233,8 +233,8 @@ export default {
 
 <style lang="less" scoped>
 @import './media/index.less';
-.pool-warpper {
-  .rewards-warpper {
+.pool-wrapper {
+  .rewards-wrapper {
     background: #ffffff;
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
@@ -295,7 +295,7 @@ export default {
           line-height: 16px;
           margin-bottom: 6px;
         }
-        .img-warpper {
+        .img-wrapper {
           margin-right: 16px;
           width: 72px;
           height: 48px;
@@ -309,7 +309,7 @@ export default {
             left: 24px;
           }
         }
-        .input-warpper {
+        .input-wrapper {
           // width: 160px;
           height: 36px;
           background: #ff41a1;
@@ -322,7 +322,7 @@ export default {
             line-height: 19px;
           }
         }
-        .remove-warpper {
+        .remove-wrapper {
           // width: 160px;
           height: 36px;
           border-radius: 18px;

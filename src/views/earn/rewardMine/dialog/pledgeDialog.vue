@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="price-warpper">
+        <div class="price-wrapper">
           <div class="price-item">
             <span>{{ $t('earn.dialog.stakeDialog.totalStakePool') }}</span>
             <p>{{ data.data && data.data.totalSupply }} {{ data.name }}</p>
@@ -60,7 +60,7 @@
           </div> -->
         </div>
 
-        <div class="btn-warpper">
+        <div class="btn-wrapper">
           <template v-if="needApprove">
             <Buttons v-if="approveLoading" class="dialogBtn">
               {{ $t('earn.dialog.loading') }}
@@ -84,14 +84,14 @@
 
       <div v-else>
         <div class="confirmPledge-content">
-          <div class="arrow-warpper" @click="showPledgeDialog">
+          <div class="arrow-wrapper" @click="showPledgeDialog">
             <img src="../../../../assets/img/arrow-left.svg" alt="arrow-left">
           </div>
           <p class="title text-center">
             {{ $t('earn.dialog.stakeDialog.confirm') }}
           </p>
           <div class="confirm-content">
-            <div class="images-warpper items-center">
+            <div class="images-wrapper items-center">
               <img :src="data.img1" alt="comp">
               <img :src="data.img2" alt="comp" class="img2">
             </div>
@@ -99,11 +99,11 @@
             <p>{{ data.name }}</p>
             <span>{{ $t('earn.dialog.stakeDialog.willMine') }}</span>
           </div>
-          <div class="price-warpper">
+          <div class="price-wrapper">
             <div>
               <span>{{ $t('earn.dialog.stakeDialog.asset') }}</span>
               <div>
-                <div class="images-warpper">
+                <div class="images-wrapper">
                   <img :src="data.img1" width="14" alt="comp">
                   <img :src="data.img2" width="14" alt="comp" class="img2">
                 </div>
@@ -221,7 +221,7 @@
         }
       }
     }
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       .price-item {
         margin-bottom: 8px;
@@ -250,7 +250,7 @@
         // margin-bottom: 8px;
       }
     }
-    .btn-warpper {
+    .btn-wrapper {
       margin-top: 16px;
       .button-wrapper {
         height: 48px;
@@ -270,7 +270,7 @@
   .confirmPledge-content {
     padding: 16px 28px;
     position: relative;
-    .arrow-warpper {
+    .arrow-wrapper {
       cursor: pointer;
       position: absolute;
       left: 24px;
@@ -334,12 +334,12 @@
       }
     }
 
-    .price-warpper {
+    .price-wrapper {
       margin-top: 56px;
       div {
         display: flex;
         justify-content: space-between;
-        .images-warpper {
+        .images-wrapper {
           width: 22px;
           height: 14px;
           position: relative;
@@ -382,12 +382,5 @@
       height: 48px;
     }
   }
-}
-
-.demo-spin-container {
-  display: inline-block;
-  width: 400px;
-  height: 200px;
-  position: relative;
 }
 </style>

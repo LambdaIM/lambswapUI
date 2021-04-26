@@ -52,7 +52,7 @@
           <div v-if="btnloading">
             <loading />
           </div>
-          <div v-else class="details-warpper">
+          <div v-else class="details-wrapper">
             <div class="details-items">
               <p>{{ $t('swapConfirm.Asset') }}</p>
               <div class="details-items">
@@ -225,7 +225,7 @@ export default {
       }
     }
 
-    .details-warpper {
+    .details-wrapper {
       .details-items {
         margin-top: 8px;
         display: flex;

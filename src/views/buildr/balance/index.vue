@@ -1,6 +1,6 @@
 <template>
   <div class="balance">
-    <div class="overview-warpper">
+    <div class="overview-wrapper">
       <Overview />
     </div>
     <div class="CDP-content">
@@ -95,7 +95,7 @@
                   {{ BigNumber(poolItem.currentDebt).toFixed(2) }} scUSD</a>
               </div>
             </div>
-            <div class="btn-warpper" />
+            <div class="btn-wrapper" />
           </div>
         </div>
       </div>

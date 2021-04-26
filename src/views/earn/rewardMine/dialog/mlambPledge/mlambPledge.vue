@@ -32,14 +32,14 @@
             </div>
           </div>
         </div>
-        <div class="price-warpper">
+        <div class="price-wrapper">
           <div class="price-item">
             <span>{{ $t('earn.dialog.stakeDialog.willStake') }}</span>
             <p>{{ pledgeAmount || 0 }} mLAMB</p>
           </div>
         </div>
 
-        <div class="btn-warpper">
+        <div class="btn-wrapper">
           <template v-if="needApprove">
             <Buttons v-if="approveLoading">
               {{ $t('earn.dialog.loading') }}
@@ -68,13 +68,12 @@
 
 <style lang="less" scoped>
 .pledge-modal {
-  width: 500px;
-  height: 573px;
+  // width: 500px;
+  // height: 573px;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .pledge-content {
-    padding: 14px 28px;
     .title {
       height: 28px;
       font-size: 24px;
@@ -114,9 +113,9 @@
           line-height: 47px;
           color: #14171c;
           padding: 16px;
-          caret-color: #0058ff;
+          caret-color: #FF41A1;
           &:focus {
-            border: 1px solid #0058ff;
+            border: 1px solid #FF41A1;
             border-radius: 4px;
           }
         }
@@ -147,14 +146,15 @@
           text-align: center;
         }
         :hover {
-          border-color: #0058ff;
-          color: #0058ff;
+          border-color: #FF41A1;
+          color: #FF41A1;
         }
       }
     }
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       .price-item {
+        margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -177,10 +177,10 @@
         font-weight: 500;
         color: #14171c;
         line-height: 14px;
-        margin-bottom: 8px;
+        // margin-bottom: 8px;
       }
     }
-    .btn-warpper {
+    .btn-wrapper {
       margin-top: 16px;
       .button-wrapper {
         height: 48px;
@@ -192,7 +192,7 @@
         font-size: 14px;
         font-family: Gilroy-Medium, Gilroy;
         font-weight: 500;
-        color: #0058ff;
+        color: #FF41A1;
       }
     }
   }
@@ -200,7 +200,7 @@
   .confirmPledge-content {
     padding: 16px 28px;
     position: relative;
-    .arrow-warpper {
+    .arrow-wrapper {
       cursor: pointer;
       position: absolute;
       left: 24px;
@@ -225,6 +225,7 @@
         height: 48px;
         position: relative;
         img {
+          max-width: 48px;
           position: absolute;
           left: -12px;
           top: 0;
@@ -263,17 +264,18 @@
       }
     }
 
-    .price-warpper {
+    .price-wrapper {
       margin-top: 56px;
       div {
         display: flex;
         justify-content: space-between;
-        .images-warpper {
+        .images-wrapper {
           width: 22px;
           height: 14px;
           position: relative;
           margin-right: 8px;
           img {
+            max-width: 14px;
             position: absolute;
             left: 0;
             top: 0;
@@ -310,12 +312,5 @@
       height: 48px;
     }
   }
-}
-
-.demo-spin-container {
-  display: inline-block;
-  width: 400px;
-  height: 200px;
-  position: relative;
 }
 </style>

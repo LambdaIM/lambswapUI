@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="input-warpper flex justify-between items-center mrg-t-20 mrg-b-5">
+        <div class="input-wrapper flex justify-between items-center mrg-t-20 mrg-b-5">
           <div class="mortgage">
             Deposit
           </div>
@@ -47,7 +47,7 @@
           />
           <img :src="getTokenImg(defaultPool.token)" :alt="defaultPool.token">
         </div>
-        <div v-if="checkValue !== 'ok'" class="notice-warpper">
+        <div v-if="checkValue !== 'ok'" class="notice-wrapper">
           <div class="notice-content">
             <img src="../../../assets/img/notice-red.png">
             <p>{{ checkValue }}</p>
@@ -173,7 +173,7 @@
     margin: 12px 0 32px;
   }
   .content-left {
-    .notice-warpper {
+    .notice-wrapper {
       .notice-content {
         margin: 20px 0;
         display: flex;
@@ -207,7 +207,7 @@
         }
       }
     }
-    .input-warpper {
+    .input-wrapper {
       margin: 24px 0 12px;
       .mortgage {
         height: 19px;

@@ -9,28 +9,28 @@
     >
       <div class="modal-content">
         <div v-if="step === 1" class="flex">
-          <div class="tab-warpper">
+          <div class="tab-wrapper">
             <button class="tab tab-disabled" @click="onMintClick">
               {{ $t('build-generate') }}
             </button>
           </div>
-          <div class="tab-warpper">
+          <div class="tab-wrapper">
             <button class="tab">
               {{ $t('build-payback') }}
             </button>
           </div>
         </div>
-        <div class="padding-warpper">
+        <div class="padding-wrapper">
           <div v-if="step === 1" class="step-one">
             <div class="grid-2">
               <h2>{{ $t('build-Amount') }}</h2>
               <p><span>{{ $t('build-balance') }}：</span> {{ BigNumber(scUSDNumber).toFixed(6) }} scUSD</p>
             </div>
-            <div class="input-warpper">
+            <div class="input-wrapper">
               <ScInput unit="scUSD" :on-change="onChangeValue" :is-error="checkValue !== 'ok'" />
               <img :src="getTokenImg('scUSD')" alt="scUSD">
             </div>
-            <div v-if="checkValue !== 'ok'" class="notice-warpper">
+            <div v-if="checkValue !== 'ok'" class="notice-wrapper">
               <div class="notice-content">
                 <img src="../../../../../assets/img/notice-red.png">
                 <p>{{ checkValue }}</p>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div v-if="step === 2" class="step-two">
-            <div class="title-warpper">
+            <div class="title-wrapper">
               <img src="../../../../../assets/img/arrow-left.svg" alt="arrow" @click="changeStep">
               <h2>{{ $t('build-confirm') }}</h2>
             </div>
@@ -118,7 +118,7 @@
               <li><span>{{ currFee }}</span> scUSD</li>
             </ul>
           </div>
-          <div class="button-warpper">
+          <div class="button-wrapper">
             <button v-if="step === 1 && checkValue === 'ok'" class="btn" @click="onNextClick">
               {{ $t('build-next') }}
             </button>
@@ -129,7 +129,7 @@
               {{ $t('build-confirm') }}
             </button>
           </div>
-          <div v-if="step === 1" class="close-warpper">
+          <div v-if="step === 1" class="close-wrapper">
             <img src="../../../../../assets/img/closeBtn.svg" alt="closeBtn" @click="closeDialog">
           </div>
         </div>
@@ -171,7 +171,7 @@
   overflow: hidden;
   padding: 0 0 10px;
 
-  .tab-warpper {
+  .tab-wrapper {
     width: 50%;
     .tab {
       width: 100%;
@@ -189,9 +189,9 @@
       border-radius: 12px 0px 0px 0px;
     }
   }
-  .padding-warpper {
+  .padding-wrapper {
     padding: 0 44px 10px;
-    .notice-warpper {
+    .notice-wrapper {
       .notice-content {
         margin: 20px 0;
         display: flex;
@@ -240,7 +240,7 @@
           margin-left: 3px;
         }
       }
-      .input-warpper {
+      .input-wrapper {
         margin-top: 8px;
         position: relative;
         img {
@@ -252,7 +252,7 @@
       }
     }
     .step-two {
-      .title-warpper {
+      .title-wrapper {
         img {
           cursor: pointer;
           position: absolute;
@@ -306,7 +306,7 @@
         }
       }
     }
-    .close-warpper {
+    .close-wrapper {
       width: 100%;
       margin-top: 32px;
       img {

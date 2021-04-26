@@ -19,7 +19,7 @@
           :class="wallet == 'metamask' ? 'wallet-content-active' : ''"
           @click="selectWallet('metamask')"
         >
-          <div class="logo flex items-center text-warpper">
+          <div class="logo flex items-center text-wrapper">
             <img src="../../../assets/img/metamask48.svg">
             <p>MetaMask</p>
           </div>
@@ -33,7 +33,7 @@
           :class="wallet == 'walletconnect' ? 'wallet-content-active' : ''"
           @click="selectWallet('walletconnect')"
         >
-          <div class="logo flex items-center text-warpper">
+          <div class="logo flex items-center text-wrapper">
             <img src="../../../assets/img/walletconnect-hexagon-blue.svg">
             <p>WalletConnect</p>
           </div>
@@ -47,7 +47,7 @@
           :class="wallet == 'lambda' ? 'wallet-content-active' : ''"
           @click="selectWallet('lambda')"
         >
-          <div class="logo flex items-center text-warpper">
+          <div class="logo flex items-center text-wrapper">
             <img src="../../../assets/img/lambda48.svg">
             <p>LAMB Wallet</p>
           </div>
@@ -88,9 +88,9 @@ export default {
     selectWallet(wallet) {
       this.wallet = wallet;
       Cookies.set('usewalletname', wallet, { expires: 365, path: '/' });
-      
+
       this.$store.commit('WalletName', wallet);
-      
+
     },
     open() {
       this.openWalletDialog = true;
@@ -107,7 +107,7 @@ export default {
          this.getwalletconnectAuth();
 
        }
-      
+
       // name === 'metamask' ? this.getEthAuth() : this.getLambAuth();
       this.openWalletDialog = false;
     },
@@ -131,20 +131,20 @@ export default {
         // 请求用户授权
         const provider = new WalletConnectProvider({
           rpc: chainConfig.walletconnectRPC,
-          chainId:chainConfig.defaultChainID 
+          chainId:chainConfig.defaultChainID
         });
         console.log('provider',provider);
         // await provider.disconnect();
         const res = await provider.enable();
         this.$store.commit('changeEthAddress', res[0]);
         this.$store.commit('changeWalletConnectprovider', provider);
-        
+
         event.$emit('initpageEth');
         this.openWalletDialog = false;
         this.reload();
       } catch (error) {
         event.$emit('initpageEth');
-        
+
         console.log(error);
         this.reload();
       }
@@ -181,7 +181,7 @@ export default {
     width: 100%;
     height: 64px;
     border-radius: 6px;
-    .text-warpper {
+    .text-wrapper {
       img {
         margin-right: 16px;
       }

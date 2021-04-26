@@ -17,7 +17,7 @@
             <input v-model="Amount" type="text" class="amount-input" @keyup="numchange">
           </div>
 
-          <div v-if="inputnoticeA" class="notice-warpper">
+          <div v-if="inputnoticeA" class="notice-wrapper">
             <div class="notice-content">
               <img src="../../../assets/img/notice-red.png">
               <p>{{ inputnoticeA }}</p>
@@ -38,7 +38,7 @@
             {{ $t('swapHistory.removeDialog.max') }}
           </div>
         </div>
-        <div v-if="tokenA && tokenB" class="price-warpper">
+        <div v-if="tokenA && tokenB" class="price-wrapper">
           <div>
             <span>{{ $t('swapHistory.confirmDialog.willReceive') }} {{ tokenA.symbol }}</span>
             <p>{{ AmountA }} {{ tokenA.symbol }}</p>
@@ -65,7 +65,7 @@
       </div>
 
       <div v-else class="removeConfirm-content">
-        <div class="arrow-warpper" @click="showRemove">
+        <div class="arrow-wrapper" @click="showRemove">
           <img src="../../../assets/img/arrow-left.svg" alt="arrow-left">
         </div>
         <p class="title text-center">
@@ -80,7 +80,7 @@
             <p>{{ AmountA }}</p>
             <span>{{ tokenA.symbol }}</span>
           </div>
-          <div class="add-warpper">
+          <div class="add-wrapper">
             <img src="../../../assets/img/add.svg" alt="add">
           </div>
           <div class="token-item">
@@ -93,7 +93,7 @@
           <loading />
         </div>
         <div v-else>
-          <div v-if="tokenA && tokenB" class="price-warpper">
+          <div v-if="tokenA && tokenB" class="price-wrapper">
             <div>
               <span>{{ $t('swapHistory.confirmDialog.Price') }}</span>
               <div class="price">
@@ -455,7 +455,7 @@ export default {
           }
         }
       }
-      .notice-warpper {
+      .notice-wrapper {
         margin-top: 10px;
         .notice-content {
           padding: 10px;
@@ -499,7 +499,7 @@ export default {
         color: #FF41A1;
       }
     }
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       div {
         display: flex;
@@ -532,7 +532,7 @@ export default {
   .removeConfirm-content {
     padding: 0 44px 20px;
     position: relative;
-    .arrow-warpper {
+    .arrow-wrapper {
       cursor: pointer;
       position: absolute;
       left: 24px;
@@ -574,7 +574,7 @@ export default {
       }
     }
 
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       div {
         display: flex;

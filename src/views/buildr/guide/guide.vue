@@ -1,12 +1,12 @@
 <template>
-  <div class="guide-warpper">
+  <div class="guide-wrapper">
     <h2 class="buildr-title">
       {{ $t('build-title-1') }}
     </h2>
     <h2 class="buildr-title">
       {{ $t('build-title-2') }}
     </h2>
-    <div class="list-warpper">
+    <div class="list-wrapper">
       <div class="list-item">
         <div class="img-wapper">
           <img src="../../../assets/img/itemImg.png">
@@ -40,7 +40,7 @@
 <script src="./index.js"></script>
 
 <style lang="less" scoped>
-.guide-warpper {
+.guide-wrapper {
   padding: 80px;
   min-height: calc(100vh - 250px);
   background-image: url("../../../assets/img/buildr-bg.png");
@@ -52,7 +52,7 @@
     color: #14171c;
     line-height: 49px;
   }
-  .list-warpper {
+  .list-wrapper {
     .list-item {
       margin-top: 16px;
       .img-wapper {

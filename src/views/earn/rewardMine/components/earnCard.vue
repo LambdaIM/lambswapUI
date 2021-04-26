@@ -4,7 +4,7 @@
       <template v-if="!isMobile">
         <div v-for="(item, index) in data" :key="index" class="list-item pc-list-item">
           <div class="name flex justify-start items-center">
-            <div class="img-warpper">
+            <div class="img-wrapper">
               <img :src="item.img2" alt="susd">
               <img :src="item.img1" alt="susd" class="imgRight">
             </div>
@@ -164,7 +164,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 16px;
-    .img-warpper {
+    .img-wrapper {
       margin-right: 16px;
       width: 72px;
       height: 48px;

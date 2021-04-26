@@ -17,7 +17,7 @@
             <input v-model="claimAmount" readonly type="text" class="amount-input">
           </div>
         </div>
-        <div class="price-warpper">
+        <div class="price-wrapper">
           <div class="price-item">
             <span>{{ $t('common.willRecieive') }}</span>
             <p>{{ claimAmount }} {{ rewardToken }}</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="btn-warpper">
+        <div class="btn-wrapper">
           <Buttons v-if="!extractLoading" @click.native="sendExtract">
             {{ $t('common.confirm') }}
           </Buttons>
@@ -197,7 +197,7 @@ export default {
         }
       }
     }
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       .price-item {
         display: flex;
@@ -218,7 +218,7 @@ export default {
         line-height: 14px;
       }
     }
-    .btn-warpper {
+    .btn-wrapper {
       margin-top: 24px;
       .button-wrapper {
         height: 48px;

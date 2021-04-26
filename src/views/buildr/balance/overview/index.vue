@@ -1,12 +1,12 @@
 <template>
   <div class="overview-warp">
-    <div class="content-warpper flex items-center">
+    <div class="content-wrapper flex items-center">
       <div class="content">
-        <div class="total-warpper">
+        <div class="total-wrapper">
           <h2>{{ $t('build-total-collateral-value') }}</h2>
           <p><span>{{ BigNumber(totalValue).toFixed(2) }}</span> USD</p>
         </div>
-        <div class="other-warpper flex items-center">
+        <div class="other-wrapper flex items-center">
           <div>
             <h2>{{ $t('build-total-debt') }}</h2>
             <p><span>-{{ BigNumber(totalDebt).toFixed(2) }}</span> scUSD </p>
@@ -40,7 +40,7 @@
     font-size: 20px;
     line-height: 24px;
   }
-  .content-warpper {
+  .content-wrapper {
     margin-top: 24px;
     .content {
       margin-right: 24px;
@@ -64,7 +64,7 @@
           margin-top: 8px;
         }
       }
-      .total-warpper {
+      .total-wrapper {
         p {
           height: 38px;
           font-size: 32px;
@@ -75,7 +75,7 @@
           margin: 8px 0 16px;
         }
       }
-      .other-warpper {
+      .other-wrapper {
         padding-top: 10px;
         div {
           width: 30%;

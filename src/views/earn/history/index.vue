@@ -207,7 +207,7 @@ export default {
       .Pool {
         display: flex;
         align-items: center;
-        .imgages-warpper {
+        .imgages-wrapper {
           display: flex;
           margin-right: 12px;
           width: 40px;

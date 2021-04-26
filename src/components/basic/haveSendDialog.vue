@@ -8,7 +8,7 @@
       :closable="true"
     >
       <div class="modal-content">
-        <div class="img-warpper text-center">
+        <div class="img-wrapper text-center">
           <img src="../../assets/img/check-green-64.png">
         </div>
         <h1>{{ $t('swapConfirm.txhavesend') }}</h1>
@@ -17,8 +17,6 @@
           {{ $t('swapConfirm.Confirm') }}
         </Buttons>
       </div>
-    </modal>
-
     </Modal>
   </div>
 </template>
@@ -43,6 +41,9 @@ export default {
       this.openSuccesDialog = false;
     },
     open(title){
+      if(!title) {
+        this.title = '';
+      }
       this.openSuccesDialog = true;
       this.title = title;
     }
@@ -52,7 +53,8 @@ export default {
 
 <style lang="less" scoped>
 .modal-content {
-  .img-warpper {
+  padding: 40px;
+  .img-wrapper {
       margin-top: 40px;
     img {
       width: 64px;

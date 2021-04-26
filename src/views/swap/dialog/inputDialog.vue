@@ -25,14 +25,14 @@
               <p>{{ tokenA.symbol }}</p>
             </div>
           </div>
-          <div v-if="inputnoticeA" class="notice-warpper">
+          <div v-if="inputnoticeA" class="notice-wrapper">
             <div class="notice-content">
               <img src="../../../assets/img/notice-red.png">
               <p>{{ inputnoticeA }}</p>
             </div>
           </div>
         </div>
-        <div class="add-warpper">
+        <div class="add-wrapper">
           <img src="../../../assets/img/add.svg" alt="add">
         </div>
         <div class="Input-wrapper">
@@ -55,14 +55,14 @@
               <p>{{ tokenB.symbol }}</p>
             </div>
           </div>
-          <div v-if="inputnoticeB" class="notice-warpper">
+          <div v-if="inputnoticeB" class="notice-wrapper">
             <div class="notice-content">
               <img src="../../../assets/img/notice-red.png">
               <p>{{ inputnoticeB }}</p>
             </div>
           </div>
         </div>
-        <div class="price-warpper flex justify-between">
+        <div class="price-wrapper flex justify-between">
           <span>{{ $t('swapHistory.confirmDialog.Price') }}</span>
           <div>
             <p v-if="tokenB && tokenA && price">
@@ -74,7 +74,7 @@
           </div>
         </div>
 
-        <div class="btn-warpper">
+        <div class="btn-wrapper">
           <div v-if="btnloading">
             <Buttons>{{ $t('swapHistory.confirmDialog.loading') }}</Buttons>
           </div>
@@ -104,7 +104,7 @@
       </div>
       <div v-else>
         <div v-if="LiquidityInfo" class="confirmInput-content">
-          <div class="arrow-warpper" @click="showInput">
+          <div class="arrow-wrapper" @click="showInput">
             <img src="../../../assets/img/arrow-left.svg" alt="arrow-left">
           </div>
           <p class="title text-center">
@@ -115,7 +115,7 @@
           </p>
 
           <div class="confirm-content">
-            <div class="images-warpper">
+            <div class="images-wrapper">
               <img :src="getTokenImg(tokenB.symbol)" width="48" alt="comp">
               <img :src="getTokenImg(tokenA.symbol)" width="48" alt="comp" class="img2">
             </div>
@@ -132,7 +132,7 @@
             <loading />
           </div>
           <div v-else>
-            <div class="price-warpper">
+            <div class="price-wrapper">
               <div>
                 <span>{{ tokenA.symbol }} {{ $t('swapHistory.inputDialog.title') }}</span>
                 <p>{{ aTokenAmount }} {{ tokenA.symbol }}</p>
@@ -690,7 +690,7 @@ export default {
           }
         }
       }
-      .notice-warpper {
+      .notice-wrapper {
         margin-top: 10px;
         .notice-content {
           padding: 10px;
@@ -713,7 +713,7 @@ export default {
         }
       }
     }
-    .add-warpper {
+    .add-wrapper {
       width: 40px;
       height: 40px;
       padding: 8px;
@@ -721,7 +721,7 @@ export default {
       border-radius: 4px;
       margin: 32px auto;
     }
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       span {
         height: 14px;
@@ -736,7 +736,7 @@ export default {
         margin-bottom: 8px;
       }
     }
-    .btn-warpper {
+    .btn-wrapper {
       margin-top: 16px;
       .button-wrapper {
         height: 48px;
@@ -754,7 +754,7 @@ export default {
   .confirmInput-content {
     padding: 0 40px 20px;
     position: relative;
-    .arrow-warpper {
+    .arrow-wrapper {
       cursor: pointer;
       position: absolute;
       left: 24px;
@@ -813,7 +813,7 @@ export default {
       }
     }
 
-    .price-warpper {
+    .price-wrapper {
       margin-top: 30px;
       div {
         display: flex;

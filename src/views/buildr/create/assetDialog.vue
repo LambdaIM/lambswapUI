@@ -5,7 +5,7 @@
         <p slot="header" class="title text-center">
           {{ $t('build-Assets') }}
         </p>
-        <div class="input-warpper flex items-center">
+        <div class="input-wrapper flex items-center">
           <img src="../../../assets/img/search-16.png">
           <input v-model="searchCon" type="text" @keyup="search">
         </div>
@@ -16,12 +16,12 @@
                 <template>
                   <img :src="getTokenImg(item.token)" :alt="item.token">
                 </template>
-                <div class="text-warpper">
+                <div class="text-wrapper">
                   <p>{{ item.name }}</p>
                   <span>{{ item.desc }}</span>
                 </div>
               </div>
-              <div :class="tokenName === item.name ? 'icon-active' : 'img-warpper'">
+              <div :class="tokenName === item.name ? 'icon-active' : 'img-wrapper'">
                 <img src="../../../assets/img/check-blue-24.png">
               </div>
             </div>
@@ -76,7 +76,7 @@ export default {
     font-size: 24px;
     line-height: 50px;
   }
-  .input-warpper {
+  .input-wrapper {
     padding: 5px 10px;
     width: 100%;
     height: 40px;
@@ -100,7 +100,7 @@ export default {
       max-width: 32px;
       margin-right: 16px;
     }
-    .text-warpper {
+    .text-wrapper {
       p {
         font-size: 16px;
         line-height: 19px;
@@ -112,14 +112,14 @@ export default {
       }
     }
 
-    .img-warpper {
+    .img-wrapper {
       display: none;
     }
     .icon-active {
       display: block;
     }
   }
-  .disableAssets-warpper {
+  .disableAssets-wrapper {
     cursor: not-allowed;
     img {
       opacity: 0.4;
