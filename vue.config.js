@@ -1,12 +1,9 @@
-
-const webpack = require("webpack");
-
 let historylambswap = 'history.lambswap.fi' ;
 if(process.env.NODE_ENV == 'production'){
   historylambswap = 'history.lambswap.fi' ;
 }else{
-  // historylambswap = '59.110.68.178:8086' ;
-  historylambswap = 'history.lambswap.fi' ;
+  historylambswap = '59.110.68.178:8080' ;
+  // historylambswap = 'history.lambswap.fi' ;
 }
 process.env.VUE_APP_historylambswap= historylambswap;
 
@@ -42,7 +39,7 @@ module.exports = {
       // extracted common chunks and vendor chunks.
       chunks: ['chunk-vendors', 'chunk-common', 'index']
     }
-    
+
   },
   configureWebpack: {
     // plugins: [
@@ -81,7 +78,7 @@ module.exports = {
       args[0].terserOptions.compress.drop_console = true;
       return args;
     });
-    
+
   },
 
 };
