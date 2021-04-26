@@ -124,10 +124,26 @@
           </DropdownMenu>
         </Dropdown>
         <div class="wallet-wrapper">
-          <img v-clickoutside="closeWallet" src="../../assets/img/header-ico.svg" alt="headerico" class="headerIco" @click="showWallet">
+          <img
+            v-if="!ethAddress"
+            v-clickoutside="closeWallet"
+            src="../../assets/img/header-ico.svg"
+            alt="headerico"
+            class="headerIco"
+            @click="openWalletDialog"
+          >
+          <img
+            v-else
+            v-clickoutside="closeWallet"
+            src="../../assets/img/header-ico.svg"
+            alt="headerico"
+            class="headerIco"
+            @click="showWallet"
+          >
           <div v-if="isShowWallet" class="wallet-item">
             <div>
-              <img src="../../assets/img/metamask48.svg" alt="metamask48">
+              <img v-if="WalletName=='metamask'" src="../../assets/img/metamask18.svg" alt="metamask">
+              <img v-else src="../../assets/img/walletconnect-hexagon-blue.svg" alt="walletconnect">
               <p>{{ getShortAddress }}</p>
             </div>
             <button @click="copyAddress">
