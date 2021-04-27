@@ -204,5 +204,10 @@ export default {
     },
 
   },
+  watch: {
+    pledgeAmount() {
+      this.checkApprove();
+    }
+  }
 };
 
