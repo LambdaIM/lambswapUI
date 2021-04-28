@@ -1,73 +1,76 @@
-[{
-  "name": "mLAMB/LAMB LP",
-  "address": "0x972329A641af049f775c256A0E7e48BE142Fa513",
-  "decimals": 18,
-  "chainId": 128,
-  "kind": "multi",
-  "daynum":"300",
-  "symbol": [
-    "mLAMB",
-    "LAMB"
-  ]
-},
+[
+  {
+    "name": "mLAMB/LAMB LP",
+    "address": "0x972329A641af049f775c256A0E7e48BE142Fa513",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum": "300",
+    "symbol": [
+      "mLAMB",
+      "LAMB"
+    ]
+  },
   {
     "name": "GOAT/LAMB LP",
     "address": "0xFd13C96907feaA52b07A9640dd7a93b7C47BfeEd",
     "decimals": 18,
     "chainId": 128,
     "kind": "multi",
-    "daynum":"333",
+    "daynum": "333",
     "symbol": [
       "GOAT",
       "LAMB"
     ]
-  },{
+  },
+  {
     "name": "HGT/LAMB LP",
     "address": "0x4a839b242A648b042563F6C1E1242616ce11994b",
     "decimals": 18,
     "chainId": 128,
     "kind": "multi",
-    "daynum":"50",
+    "daynum": "50",
     "symbol": [
       "HGT",
       "LAMB"
     ]
-  }, {
-  "name": "ETH/LAMB LP",
-  "address": "0xD52adC338824b8359AD6ED873A32b68b0c95c38e",
-  "decimals": 18,
-  "chainId": 128,
-  "kind": "multi",
-  "daynum":"138",
-  "symbol": [
-    "ETH",
-    "LAMB"
-  ]
-},
-{
-  "name": "FIL/LAMB LP",
-  "address": "0xE4ce1D079508DfD8d909D9BA922d4196F1606A65",
-  "decimals": 18,
-  "chainId": 128,
-  "kind": "multi",
-  "daynum":"111",
-  "symbol": [
-    "FIL",
-    "LAMB"
-  ]
-},
-{
-  "name": "USDT/LAMB LP",
-  "address": "0x795E3881e046c7c7468E4A6bf40CF193a76ad9c3",
-  "decimals": 18,
-  "chainId": 128,
-  "kind": "multi",
-  "daynum":"167",
-  "symbol": [
-    "USDT",
-    "LAMB"
-  ]
-},
+  },
+  {
+    "name": "ETH/LAMB LP",
+    "address": "0xD52adC338824b8359AD6ED873A32b68b0c95c38e",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum": "138",
+    "symbol": [
+      "ETH",
+      "LAMB"
+    ]
+  },
+  {
+    "name": "FIL/LAMB LP",
+    "address": "0xE4ce1D079508DfD8d909D9BA922d4196F1606A65",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum": "111",
+    "symbol": [
+      "FIL",
+      "LAMB"
+    ]
+  },
+  {
+    "name": "USDT/LAMB LP",
+    "address": "0x795E3881e046c7c7468E4A6bf40CF193a76ad9c3",
+    "decimals": 18,
+    "chainId": 128,
+    "kind": "multi",
+    "daynum": "167",
+    "symbol": [
+      "USDT",
+      "LAMB"
+    ]
+  },
   {
     "name": "FIL/LAMB LP",
     "address": "0x27D9c0421Dc818ABf351f390A121AFC07430CB22",
@@ -90,7 +93,6 @@
       "LAMB"
     ]
   },
-  
   {
     "name": "scUSD/USDT LP",
     "address": "0x02Df6b73c1Ee09a20FD339A026813983f59A0a33",
@@ -134,5 +136,13 @@
       "SCASH",
       "ETH"
     ]
+  },
+  {
+    "name": "mLAMB bar",
+    "address": "0x58159dfd4be86d8e4510DB790261049bF0c888d2",
+    "decimals": 18,
+    "chainId": 256,
+    "symbol": "mLAMB",
+    "kind": "depositMLAMB"
   }
 ]

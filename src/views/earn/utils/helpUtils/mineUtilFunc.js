@@ -13,7 +13,7 @@ import { usemLAMBContract } from './useContract.js';
 
 import { Provider } from '@webfans/ethers-multicall';
 
-import { useStakingRewardsContractMulticall, useTokenContractMulticall } from "@/contacthelp/useContractMulticall.js";
+import { useStakingRewardsContractMulticall, useTokenContractMulticall,mlambBarContractCall } from "@/contacthelp/useContractMulticall.js";
 
 import { calculateGasMargin } from "@/contacthelp/utils.js";
 
@@ -113,18 +113,21 @@ export async function StakingRewardListbatch(library, account, chainID) {
       result.push(item);
     }
   });
+  // console.log({result});
   let callList = [];
   result.forEach((element) => {
     const TokenAContract = useStakingRewardsContractMulticall(element);
+    console.log({TokenAContract});
     callList.push(TokenAContract.rewardRate());
     callList.push(TokenAContract.stakingToken());
     callList.push(TokenAContract.totalSupply());
     callList.push(TokenAContract.rewardsToken());
+
   });
   const ethcallProvider = new Provider(library, chainID);
   await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
   const infoList = await ethcallProvider.all(callList);
-  // console.log(infoList);
+  console.log(infoList);
 
 
   callList = [];
@@ -199,24 +202,44 @@ export async function StakingRewardListbatch(library, account, chainID) {
 }
 
 export async function getFarmList(library, account, chainID) {
-  const list = farmJson || [];
+  console.log({library, account, chainID});
+  const list = multiSymbolData || [];
   const result = [];
-
   list.forEach((item) => {
-    if (item.chainId === chainID) {
+    if (item.chainId === chainID && item.kind === 'depositMLAMB') {
       result.push(item);
     }
   });
 
   for (let index = 0; index < result.length; index++) {
     const item = result[index];
+
+
+    const TokenAContract = mlambBarContractCall(item);
+    const ethcallProvider = new Provider(library, chainID);
+    await ethcallProvider.init();
+    console.log({TokenAContract});
+
+    const totalSupplycall = TokenAContract.totalSupply();
+
+    const balancecall = TokenAContract.balanceOf(account);
+    // const list = [totalSupplycall,balancecall];
+    const [totalSupply,balance] = await ethcallProvider.all([totalSupplycall,balancecall]);
+
+    console.log(totalSupply.toString(),balance.toString());
+
     const token = _.find(tokenlist.tokens, (token) => {
       return item.symbol === token.symbol && item.chainId === token.chainId;
     });
 
+    // 总质押xmlamb
     const totalSupplyShare = await useTokentotalSupply(library, account, item);
+    // 个人账户xmlamb
     const balanceShare = await useTokenBalance(library, account, item);
+
+
     const totalAsset = await useTokenBalance(library, item.address, token);
+    console.log(totalAsset);
     // const Reward = await useSushiBarReward(library,account,item);
     // const claimedReward = await useSushiBarhaveclaimed(library,account,item);
     const myAsset = balanceShare.multiply(totalAsset).divide(totalSupplyShare);

@@ -162,7 +162,6 @@ export default {
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   .remove-content {
-    padding: 14px 28px;
     .title {
       height: 28px;
       font-size: 24px;

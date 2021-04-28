@@ -1,6 +1,9 @@
 <template>
   <div class="content-wapper">
-    <div v-if="!ethAddress||list.length==0" class="noData-wapper">
+    <div v-if="showLoading">
+      <loading />
+    </div>
+    <div v-else-if="!ethAddress || list.length == 0" class="noData-wapper">
       <div class="flex flex-col items-center">
         <img src="../../../assets/img/noData.png" alt="noData">
         <p>No Data</p>
@@ -19,14 +22,17 @@
             </template>
             <template slot="Action" slot-scope="{ row }">
               <div class="Action">
-                <p v-if="row.method_name==='stake'" class="action">
+                <p v-if="row.method_name === 'stake'" class="action">
                   {{ $t('earn.actions.stake') }}
                 </p>
-                <p v-if="row.method_name==='exit'" class="action">
+                <p v-if="row.method_name === 'exit'" class="action">
                   {{ $t('earn.actions.exit') }}
                 </p>
-                <p v-if="row.method_name==='getReward'" class="action">
+                <p v-if="row.method_name === 'getReward'" class="action">
                   {{ $t('earn.actions.getReward') }}
+                </p>
+                <p v-else class="action">
+                  {{ row.method_name }}
                 </p>
               </div>
             </template>
@@ -49,6 +55,15 @@
                   {{ row.show.inamount | format1e18ValueList }} {{ row.show.tokenA }}
                 </p>
               </div>
+
+              <div v-if="row.method_name === 'leave'" class="Amount">
+                <p class="amout">
+                  {{ row.show.outamountA | format1e18ValueList }} {{ row.show.tokenA }}
+                </p>
+                <p class="amout">
+                  {{ row.show.outamountB | format1e18ValueList }} {{ row.show.tokenB }}
+                </p>
+              </div>
             </template>
             <template slot="Status" slot-scope="{ row }">
               <div class="Status">
@@ -68,49 +83,29 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { readPledgeHistory } from "@/contactLogic/history.js";
-import { getTokenImg } from "@/contactLogic/readbalance.js";
-import tokenList from "@/constants/earnList.json";
+import { mapState } from 'vuex';
+import { readPledgeHistory } from '@/contactLogic/history.js';
+import tokenList from '@/constants/token.json';
 
 export default {
   data() {
     return {
       list: [],
-      list1: [],
-      pageIndex: 1,
       pageNum: 1,
-      pairloading: false,
-      addressName: "",
       showLoading: false,
-      methodName: [],
     };
   },
-  // components: {
-  //   loading: () => import('@/components/basic/loading.vue'),
-  // },
+  components: {
+    loading: () => import('@/components/basic/loading.vue'),
+  },
   methods: {
-    getTokenImg(tokensymbol) {
-      const chainID = this.ethChainID;
-      return getTokenImg(tokensymbol, chainID);
-    },
     async getreadPledgeHistory() {
       this.showLoading = true;
       try {
-        const account = this.ethAddress;
         const chainID = this.ethChainID;
-        const data = await readPledgeHistory(
-          chainID,
-          account,
-          this.pageIndex,
-          10
-        );
+        const account = this.ethAddress;
+        const data = await readPledgeHistory(chainID, account, this.pageNum, 10);
         this.list = this.list.concat(data.data);
-        if (data.count % 10 === 0) {
-          this.pageNum = data.count / 10;
-        } else {
-          this.pageNum = (data.count - (data.count % 10)) / 10 + 1;
-        }
       } catch (error) {
         console.log(error);
       } finally {
@@ -118,67 +113,67 @@ export default {
       }
     },
     selectAddress(val) {
-      const [token] = tokenList.filter((item) => {
+      const [token] = tokenList.tokens.filter((item) => {
         return item.address === val;
       });
       return token.name;
     },
     onreachbottom() {
-      // console.log('onreachbottom', this.pageIndex);
+      // console.log('onreachbottom', this.pageNum);
       const _this = this;
 
       return new Promise((resolve) => {
         setTimeout(async () => {
-          _this.pageIndex += 1;
+          _this.pageNum += 1;
           await _this.getreadPledgeHistory();
           resolve({});
         }, 1);
       });
     },
   },
-  created() {
-    this.pageIndex = 1;
+  mounted() {
+    this.pageNum = 1;
+    this.showLoading = true;
     this.list = [];
-    if (this.ethAddress) {
-      this.showLoading = true;
+    if (this.isReady) {
       this.getreadPledgeHistory();
     }
   },
   watch: {
-    ethAddress: function () {
-      if (this.ethAddress) {
-        this.getreadPledgeHistory();
-      }
+    isReady() {
+      this.getreadPledgeHistory();
     },
   },
   computed: {
     getHistory() {
       const columns = [
         {
-          title: this.$t("history.table.pool"),
-          slot: "Pool",
+          title: this.$t('history.table.pool'),
+          slot: 'Pool',
           minWidth: 200,
         },
         {
-          title: this.$t("history.table.action"),
-          slot: "Action",
+          title: this.$t('history.table.action'),
+          slot: 'Action',
           minWidth: 100,
         },
         {
-          title: this.$t("history.table.amount"),
-          slot: "Amount",
+          title: this.$t('history.table.amount'),
+          slot: 'Amount',
           minWidth: 120,
         },
         {
-          title: this.$t("history.table.status"),
-          slot: "Status",
+          title: this.$t('history.table.status'),
+          slot: 'Status',
           minWidth: 100,
         },
       ];
       return columns;
     },
-
-    ...mapState(["ethAddress", "ethChainID", "web3", "ethersprovider"]),
+    isReady() {
+      return this.ethAddress && this.ethChainID;
+    },
+    ...mapState(['ethAddress', 'ethChainID', 'web3', 'ethersprovider']),
   },
 };
 </script>

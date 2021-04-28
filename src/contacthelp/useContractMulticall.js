@@ -15,6 +15,7 @@ import { getContractMulticall  } from "./utils.js";
 import ERC20_ABI_StakingRewards from "@/constants/abis/StakingRewards.json";
 
 import IUniswapV2PairABI  from '@/constants/abis/UniswapV2Pair.json';
+import mlambBarABI  from '@/constants/abis/mLAMBBar.json';
 
 
 // returns null on errors
@@ -53,6 +54,16 @@ export function useStakingRewardsContractMulticall(
   return useContract(
     token.address,
     ERC20_ABI_StakingRewards
+  );
+}
+
+export function mlambBarContractCall(
+  token
+) {
+  // console.info("- -useTokenContract");
+  return useContract(
+    token.address,
+    mlambBarABI
   );
 }
 

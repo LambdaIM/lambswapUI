@@ -33,7 +33,7 @@
           总资产
         </p>
         <p class="mt-1">
-          {{ listData && listData.data && listData.data.totalAsset }} XmLAMB
+          {{ listData && listData.data && listData.data.totalSupplyShare }} XmLAMB
         </p>
       </div>
 
