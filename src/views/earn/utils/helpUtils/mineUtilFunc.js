@@ -1,6 +1,4 @@
 import multiSymbolData from "@/constants/earnList.json";
-import farmJson from "@/constants/farm.json";
-
 import tokenlist from "@/constants/token.json";
 import { TokenAmount } from "@webfans/uniswapsdk";
 import _ from 'underscore';
@@ -13,7 +11,7 @@ import { usemLAMBContract } from './useContract.js';
 
 import { Provider } from '@webfans/ethers-multicall';
 
-import { useStakingRewardsContractMulticall, useTokenContractMulticall,mlambBarContractCall } from "@/contacthelp/useContractMulticall.js";
+import { useStakingRewardsContractMulticall, useTokenContractMulticall, mlambBarContractCall } from "@/contacthelp/useContractMulticall.js";
 
 import { calculateGasMargin } from "@/contacthelp/utils.js";
 
@@ -117,7 +115,7 @@ export async function StakingRewardListbatch(library, account, chainID) {
   let callList = [];
   result.forEach((element) => {
     const TokenAContract = useStakingRewardsContractMulticall(element);
-    console.log({TokenAContract});
+    console.log({ TokenAContract });
     callList.push(TokenAContract.rewardRate());
     callList.push(TokenAContract.stakingToken());
     callList.push(TokenAContract.totalSupply());
@@ -213,45 +211,46 @@ export async function getFarmList(library, account, chainID) {
 
   for (let index = 0; index < result.length; index++) {
     const item = result[index];
-
-
     const TokenAContract = mlambBarContractCall(item);
     const ethcallProvider = new Provider(library, chainID);
     await ethcallProvider.init();
-    console.log({TokenAContract});
-
+    // console.log({TokenAContract});
     const totalSupplycall = TokenAContract.totalSupply();
-
-    const balancecall = TokenAContract.balanceOf(account);
-    // const list = [totalSupplycall,balancecall];
-    const [totalSupply,balance] = await ethcallProvider.all([totalSupplycall,balancecall]);
-
-    console.log(totalSupply.toString(),balance.toString());
-
+    const [totalSupply] = await ethcallProvider.all([totalSupplycall]);
     const token = _.find(tokenlist.tokens, (token) => {
       return item.symbol === token.symbol && item.chainId === token.chainId;
     });
 
     // 总质押xmlamb
-    const totalSupplyShare = await useTokentotalSupply(library, account, item);
-    // 个人账户xmlamb
-    const balanceShare = await useTokenBalance(library, account, item);
-
-
-    const totalAsset = await useTokenBalance(library, item.address, token);
-    console.log(totalAsset);
-    // const Reward = await useSushiBarReward(library,account,item);
-    // const claimedReward = await useSushiBarhaveclaimed(library,account,item);
-    const myAsset = balanceShare.multiply(totalAsset).divide(totalSupplyShare);
-
-    item.data = {
-      totalSupplyShare: totalSupplyShare.toSignificant(6),
-      balanceShare: balanceShare.toSignificant(6),
-      totalAsset: totalAsset.toSignificant(6),
-      myAsset: myAsset.toSignificant(6),
-      rewardTokenAddress: token.address
-      // claimedReward:claimedReward.toSignificant(6)
-    };
+    const totalSupplyShare = new BigNumber(totalSupply.toString()).div('1e18').decimalPlaces(6).toNumber();
+    console.log(totalSupplyShare);
+    // 未连接钱包
+    if (!account) {
+      item.data = {
+        totalSupplyShare: totalSupplyShare,
+        balanceShare: '',
+        totalAsset: '',
+        myAsset: '',
+        rewardTokenAddress: token.address
+        // claimedReward:claimedReward.toSignificant(6)
+      };
+    } else {
+      const balancecall = TokenAContract.balanceOf(account);
+      const [balance] = await ethcallProvider.all([balancecall]);
+      // 个人账户xmlamb
+      const balanceShare = new BigNumber(balance.toString()).div('1e18').decimalPlaces(6).toNumber();
+      // 总资产
+      const totalAsset = await useTokenBalance(library, item.address, token);
+      const myAsset = new BigNumber(balanceShare).times(totalAsset.toExact()).div(totalSupplyShare.toString());
+      item.data = {
+        totalSupplyShare: totalSupplyShare,
+        balanceShare: balanceShare,
+        totalAsset: totalAsset.toExact(),
+        myAsset: myAsset,
+        rewardTokenAddress: token.address
+        // claimedReward:claimedReward.toSignificant(6)
+      };
+    }
   }
   return result;
 }

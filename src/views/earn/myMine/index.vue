@@ -52,20 +52,34 @@
           <p class="mb-4">
             {{ item.name }}
           </p>
+
           <div class="point-item">
             <span class="title">{{ $t('myPage.table.stake') }}</span>
-            <span class="value">{{ item.data && item.data.balance }}</span>
+
+            <span v-if="item.kind !== 'depositMLAMB'" class="value">{{ item.data && item.data.balance }}</span>
+            <div v-else class="value">
+              <p>{{ item.data && item.data.balanceShare }} XmLAMB</p>
+              <p class="asset">
+                {{ item.data && item.data.myAsset }} mLAMB
+              </p>
+            </div>
           </div>
           <div class="point-item">
             <span class="title">{{ $t('myPage.table.unclaim') }}</span>
-            <span class="value">{{ item.data && item.data.earned }} {{ item.data && item.data.rewardToken }}</span>
+            <span v-if="item.kind !== 'depositMLAMB'" class="value">{{ item.data && item.data.earned }} {{ item.data && item.data.rewardToken }}</span>
+            <span v-else class="value">--</span>
           </div>
 
           <div class="m-btn-wrapper">
-            <button class="claimBtn m-btn" @click="openClaim(item)">
-              {{ $t('myPage.table.claim') }}
-            </button>
-            <button class="stakeBtn m-btn" @click="openUnstake(item)">
+            <template v-if="item.kind !== 'depositMLAMB'">
+              <button class="claimBtn m-btn" @click="openClaim(item)">
+                {{ $t('myPage.table.claim') }}
+              </button>
+              <button class="stakeBtn m-btn" @click="openUnstake(item)">
+                {{ $t('myPage.table.unstake') }}
+              </button>
+            </template>
+            <button v-else class="m-stake-btn" @click="openUnstakeMLAMB(row)">
               {{ $t('myPage.table.unstake') }}
             </button>
           </div>
@@ -105,12 +119,14 @@ export default {
       this.showLoading = true;
       try {
         const mLambData = await getFarmList(this.ethersprovider, this.ethAddress, this.ethChainID);
-        console.log({mLambData});
+
+        console.log({ mLambData });
         // const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
-        const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)|| [];
+        // const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)|| [];
         // const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
         // await this.getPriceData(scashData, pairListPrice);
+        const data = [];
         this.data = data.concat(mLambData);
       } catch (error) {
         console.log(error);
@@ -234,7 +250,7 @@ export default {
       border: 1px solid #ff41a1;
       color: #ff41a1;
     }
-    .asset{
+    .asset {
       margin-top: 8px;
       font-size: 14px;
       color: rgb(141, 138, 138);

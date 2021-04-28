@@ -121,8 +121,16 @@ export default {
   computed: {
     ...mapState(["ethChainID", "ethAddress", "ethersprovider", "isMobile"]),
     isReady() {
-      return this.ethChainID && this.ethersprovider && this.ethAddress;
+      return this.ethChainID && this.ethersprovider;
     },
+    isConnect() {
+      return this.ethChainID && this.ethersprovider && this.ethAddress;
+    }
+  },
+  watch: {
+    isConnect() {
+      this.getList();
+    }
   },
   methods: {
     openDialog() {

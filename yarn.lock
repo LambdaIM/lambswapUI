@@ -1171,6 +1171,11 @@
   dependencies:
     "@json-rpc-tools/types" "^1.6.1"
 
+"@liquity/lib-ethers@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@liquity/lib-ethers/-/lib-ethers-3.2.2.tgz#a9984b0f9ae00704b92b27593787b9cf270e7d6b"
+  integrity sha512-1lM+pxv3cU1DYO9/eLJUfu+aGFiRxHubD398BthX3kpkSjzDEBiSroPcTrwV5DF7tYcgyn6oI/e2mD4/7h2OMQ==
+
 "@metamask/safe-event-emitter@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz#af577b477c683fad17c619a78208cede06f9605c"

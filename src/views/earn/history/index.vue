@@ -64,6 +64,12 @@
                   {{ row.show.outamountB | format1e18ValueList }} {{ row.show.tokenB }}
                 </p>
               </div>
+
+              <div v-if="row.method_name === 'enter'" class="Amount">
+                <p class="amout">
+                  {{ row.show.outamountA | format1e18ValueList }} {{ row.show.tokenA }}
+                </p>
+              </div>
             </template>
             <template slot="Status" slot-scope="{ row }">
               <div class="Status">
@@ -106,6 +112,7 @@ export default {
         const account = this.ethAddress;
         const data = await readPledgeHistory(chainID, account, this.pageNum, 10);
         this.list = this.list.concat(data.data);
+        console.log(this.list);
       } catch (error) {
         console.log(error);
       } finally {

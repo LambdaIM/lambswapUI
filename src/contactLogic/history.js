@@ -59,6 +59,8 @@ export async function readPledgeHistory(chainID, account, pageNum, showNum) {
       item.show = getRewardformat(item.txs, chainID);
     } else if (item.method_name === 'leave') {
       item.show = leaveFormat(item.txs, chainID);
+    }else if (item.method_name === 'enter') {
+      item.show = enterFormat(item.txs, chainID);
     }
   });
   return data;
@@ -339,6 +341,17 @@ function leaveFormat(item, chainID) {
     poolADDRESS,
     tokenA: tokenNameByaddress(tokenADDRESSA, chainID),
     tokenB: tokenNameByaddress(tokenADDRESSB, chainID)
+  };
+}
+
+function enterFormat(item, chainID) {
+  const outamountA = item[0].amount;
+  const tokenADDRESSA = item[0].amount_token_address;
+  const poolADDRESS = item[0].amount_token_address;
+  return {
+    outamountA,
+    poolADDRESS,
+    tokenA: tokenNameByaddress(tokenADDRESSA, chainID),
   };
 }
 
