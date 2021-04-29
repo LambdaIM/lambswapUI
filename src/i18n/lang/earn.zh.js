@@ -25,7 +25,7 @@ export default {
       t2: '质押 LP，获得挖矿收益'
     },
     card: {
-      apy: '年化收益率(包含空投)',
+      apy: '年化收益率',
       totalStaked: '总锁仓量',
       totalPool: '矿池总价值',
       output: '日产出',

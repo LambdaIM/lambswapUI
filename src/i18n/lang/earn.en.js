@@ -25,7 +25,7 @@ export default {
       t2: 'Stake LP to earn pool rewards.'
     },
     card: {
-      apy: 'APY(Including airdrop)',
+      apy: 'APY',
       totalStaked: 'Total Staked',
       totalPool: 'Total Value of Pool',
       output: 'Daily Output',
