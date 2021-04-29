@@ -43,7 +43,7 @@ export default {
       try {
         const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID);
         const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
-        // console.log({ data });
+        console.log({ data });
         const tempLiquidity = data.filter((item) => item.kind === 'multi');
         // console.log({tempLiquidity});
         const result = [];

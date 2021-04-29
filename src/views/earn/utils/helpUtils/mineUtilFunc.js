@@ -103,7 +103,7 @@ export async function StakingRewardList(library, account, chainID) {
 
 
 export async function StakingRewardListbatch(library, account, chainID) {
-  // console.log({ library, account, chainID });
+  console.log({ library, account, chainID });
   const list = multiSymbolData || [];
   const result = [];
   list.forEach((item) => {
@@ -111,21 +111,18 @@ export async function StakingRewardListbatch(library, account, chainID) {
       result.push(item);
     }
   });
-  // console.log({result});
   let callList = [];
   result.forEach((element) => {
     const TokenAContract = useStakingRewardsContractMulticall(element);
-    console.log({ TokenAContract });
     callList.push(TokenAContract.rewardRate());
     callList.push(TokenAContract.stakingToken());
     callList.push(TokenAContract.totalSupply());
     callList.push(TokenAContract.rewardsToken());
-
   });
   const ethcallProvider = new Provider(library, chainID);
   await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
   const infoList = await ethcallProvider.all(callList);
-  console.log(infoList);
+  console.log({infoList});
 
 
   callList = [];
@@ -223,7 +220,7 @@ export async function getFarmList(library, account, chainID) {
 
     // 总质押xmlamb
     const totalSupplyShare = new BigNumber(totalSupply.toString()).div('1e18').decimalPlaces(6).toNumber();
-    console.log(totalSupplyShare);
+    // console.log(totalSupplyShare);
     // 未连接钱包
     if (!account) {
       item.data = {

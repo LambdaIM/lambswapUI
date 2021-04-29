@@ -143,7 +143,7 @@ export default {
         const library = this.ethersprovider;
         const [result] = await getFarmList(library, account, chainID);
         this.listData = result;
-        console.log({ result });
+        // console.log({ result });
       } catch (error) {
         console.log(error);
       }
