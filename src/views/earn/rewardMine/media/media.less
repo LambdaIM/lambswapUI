@@ -1,40 +1,47 @@
 @media (max-width: 1200px) {
   .multiMine-wrapper {
     padding: 20px 16px;
-    .subTitle{
+
+    .subTitle {
       font-size: 12px;
     }
 
-    .list-wrapper{
-      .list-item-wrapper{
-        .list-item{
+    .list-wrapper {
+      .list-item-wrapper {
+        .list-item {
           padding: 20px 16px;
         }
-        .pc-list-item{
+
+        .pc-list-item {
           display: none;
         }
+
         // 手机端交易对样式
-        .mobile-list-item{
+        .mobile-list-item {
           background: #FFFFFF;
           box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
           border-radius: 12px;
           padding: 20px 16px;
           margin-bottom: 16px;
+
           // 两个图片
-          .m-img-wrapper{
+          .m-img-wrapper {
             margin-bottom: 8px;
             width: 100%;
-            .m-img-box{
+
+            .m-img-box {
               width: 72px;
               height: 48px;
               margin: 0 auto;
               position: relative;
+
               img {
                 position: absolute;
                 max-width: 48px;
                 left: 0;
               }
-              .imgRight{
+
+              .imgRight {
                 position: absolute;
                 left: 24px;
               }
@@ -42,15 +49,18 @@
           }
 
           // 价格信息
-          .m-price-wrapper{
+          .m-price-wrapper {
             margin-bottom: 24px;
-            p{
+
+            p {
               text-align: center;
             }
-            .name{
+
+            .name {
               font-size: 20px;
             }
-            .price{
+
+            .price {
               font-size: 14px;
               color: #8690A8;
             }
@@ -59,9 +69,11 @@
           // 指标信息
           .m-point-wrapper {
             width: 100%;
-            .point-item{
+
+            .point-item {
               margin-bottom: 8px;
               overflow: hidden;
+
               .title {
                 float: left;
                 font-size: 14px;
@@ -69,6 +81,7 @@
                 line-height: 16px;
                 font-weight: 400;
               }
+
               .value {
                 float: right;
                 font-size: 14px;
@@ -81,7 +94,8 @@
           .m-btn-wrapper {
             margin-top: 16px;
             width: 100%;
-            .stakeBtn{
+
+            .stakeBtn {
               width: 100%;
               height: 36px;
               display: flex;
@@ -96,24 +110,65 @@
         }
       }
     }
-
-
   }
+
+
+  .m-mlambPool-wrapper {
+    padding: 20px 16px;
+    .title-wrapper {
+      margin-bottom: 24px;
+    }
+
+    .mlambPool-Mobile {
+      background: #ffffff;
+      box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 20px 16px;
+      margin-bottom: 16px;
+
+      .name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          max-width: 48px;
+          margin-bottom: 8px;
+        }
+      }
+
+      .createBtn {
+        width: 100%;
+        margin-top: 16px;
+      }
+    }
+  }
+
 }
 
 @media (min-width: 1201px) {
   .multiMine-wrapper {
     padding: 32px 44px 44px 44px;
-    .subTitle{
+
+    .subTitle {
       font-size: 16px;
     }
-    .list-wrapper{
-      .list-item{
+
+    .list-wrapper {
+      .list-item {
         padding: 32px 44px;
       }
-      .mobile-list-item{
+
+      .mobile-list-item {
         display: none;
       }
+    }
+  }
+
+  .mlambPool-wrapper {
+    padding: 32px 44px 44px 44px;
+    .mlambPool-content-wrapper {
+      padding: 32px 44px;
     }
   }
 }

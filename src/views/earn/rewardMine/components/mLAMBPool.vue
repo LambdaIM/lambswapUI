@@ -9,7 +9,7 @@
         mLAMB质押
       </div>
     </div>
-    <div class="mlambPool-content-wrapper flex justify-between items-center">
+    <div class="mlambPool-content-wrapper flex justify-items-start items-center">
       <div class="mlambPool-item name">
         <img src="../../../../assets/img/mlamb48.svg" alt="mlambda">
         <span>mLAMB bar</span>
@@ -17,10 +17,10 @@
 
       <div class="mlambPool-item volume">
         <p class="drop-title">
-          APY
+          {{ $t('earn.card.apy') }}
         </p>
         <p class="drop-num">
-          100%
+          --
         </p>
 
         <!-- <p class="tag">
@@ -50,7 +50,7 @@
     <pledgeDialog ref="pledge" />
   </div>
 
-  <div v-else class="mlambPool-wrapper-mobile mb-6">
+  <div v-else class="mlambPool-wrapper m-mlambPool-wrapper mb-6">
     <div class="title-wrapper flex justify-between items-center">
       <div class="left">
         <span class="title">mLAMB</span>
@@ -158,12 +158,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '../media/media.less';
 .mlambPool-wrapper {
   width: 100%;
   background: #ffffff;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
   border-radius: 12px;
-  padding: 32px 44px 44px 44px;
   .title-wrapper {
     .left {
       .title {
@@ -200,13 +200,13 @@ export default {
     background: #ffffff;
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
-    padding: 32px 24px;
     .name {
-      width: 20%;
+      width: 28%;
       display: flex;
       flex-direction: row;
-      justify-self: space-between;
+      justify-content: flex-start;
       align-items: center;
+      margin-right: 24px;
       span {
         margin-left: 28px;
         font-size: 20px;
@@ -215,7 +215,8 @@ export default {
       }
     }
     .volume {
-      width: 20%;
+      width: 22%;
+      margin-right: 24px;
       .drop-num {
         margin-top: 8px;
         font-size: 26px;
@@ -246,40 +247,13 @@ export default {
       }
     }
     .countdown {
-      width: 30%;
+      width: 28%;
       .count {
         margin-top: 14px;
       }
     }
-  }
-}
-.mlambPool-wrapper-mobile {
-  width: 100%;
-  background: #ffffff;
-  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
-  border-radius: 12px;
-  padding: 20px 16px;
-  .title-wrapper {
-    margin-bottom: 24px;
-  }
-  .mlambPool-Mobile {
-    background: #ffffff;
-    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.06);
-    border-radius: 12px;
-    padding: 20px 16px;
-    margin-bottom: 16px;
-    .name {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        max-width: 48px;
-        margin-bottom: 8px;
-      }
-    }
-    .createBtn{
-      width: 100%;
-      margin-top: 16px;
+    .create{
+      margin-left: 50px;
     }
   }
 }

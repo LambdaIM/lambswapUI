@@ -61,9 +61,10 @@ export default {
           }
         };
         await results();
+        console.log({ result });
         this.liquidityData = result;
 
-        this.designatedData = data.filter((item) => item.kind === 'single');
+        // this.designatedData = data.filter((item) => item.kind === 'single');
       } catch (error) {
         console.log(error);
       } finally {
@@ -77,7 +78,6 @@ export default {
       const tokensymbolB = item.symbol[1];
       const pledgeBalance = item && item.data && item.data.totalSupply;
       const pledgeBalanceWei = Web3.utils.toWei(pledgeBalance.toString());
-
       // 匹配读取价格信息
       const pairPriceItem = _.find(pairListPrice, (pairItem) => {
         if (
@@ -89,34 +89,23 @@ export default {
           return pairItem;
         }
       });
-
-      // // 构造价格相关信息
-      // const data = {
-      //   aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
-      //   bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
-      //   price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
-      // };
-      // if(data.aTokenbalance.token.symbol==tokensymbolA){
-      //   obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
-      // }else{
-      //   obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
-      // }
-
       // 构造价格相关信息
       const data = {
         aTokenbalance: pairPriceItem.aTokenbalance(pledgeBalanceWei),
         bTokenbalance: pairPriceItem.bTokenbalance(pledgeBalanceWei),
         price: pairPriceItem.price(tokensymbolA, tokensymbolB).price,
       };
-
+      if (data.aTokenbalance.token.symbol == tokensymbolA) {
+        obj.usdtNum = data.aTokenbalance.multiply(data.price).add(data.bTokenbalance).toSignificant(6);
+      } else {
+        obj.usdtNum = data.bTokenbalance.multiply(data.price).add(data.aTokenbalance).toSignificant(6);
+      }
       obj.price = data.price && data.price.toSignificant(6);
       obj.img1 = getTokenImg(item.symbol[0], this.ethChainID);
       obj.img2 = getTokenImg(item.symbol[1], this.ethChainID);
-
       if (tokensymbolA === 'GOAT' && tokensymbolB === 'LAMB') {
         this.$store.commit('changeScashPrice', obj.price);
       }
-
       this.$store.commit('changeEarnPrice', obj.price);
       return obj;
     },

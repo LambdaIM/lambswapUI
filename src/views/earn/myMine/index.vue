@@ -58,9 +58,9 @@
 
             <span v-if="item.kind !== 'depositMLAMB'" class="value">{{ item.data && item.data.balance }}</span>
             <div v-else class="value">
-              <p>{{ item.data && item.data.balanceShare }} XmLAMB</p>
+              <p>{{ item.data && item.data.balanceShare || 0 }} XmLAMB</p>
               <p class="asset">
-                {{ item.data && item.data.myAsset }} mLAMB
+                {{ item.data && item.data.myAsset || 0 }} mLAMB
               </p>
             </div>
           </div>
@@ -118,15 +118,12 @@ export default {
     async getListData() {
       this.showLoading = true;
       try {
-        const mLambData = await getFarmList(this.ethersprovider, this.ethAddress, this.ethChainID);
-
-        console.log({ mLambData });
-        // const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
-        // const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)|| [];
-        // const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
+        const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
+        const data = await StakingRewardListbatch(this.ethersprovider, this.ethAddress, this.ethChainID)|| [];
+        const [scashData] = data.filter((item) => item.symbol[0] === 'GOAT' && item.symbol[1] === 'LAMB');
         // console.log(scashData);
-        // await this.getPriceData(scashData, pairListPrice);
-        const data = [];
+        await this.getPriceData(scashData, pairListPrice);
+        const mLambData = await getFarmList(this.ethersprovider, this.ethAddress, this.ethChainID);
         this.data = data.concat(mLambData);
       } catch (error) {
         console.log(error);

@@ -107,7 +107,7 @@ export async function StakingRewardListbatch(library, account, chainID) {
   const list = multiSymbolData || [];
   const result = [];
   list.forEach((item) => {
-    if (item.chainId === chainID) {
+    if (item.chainId === chainID && item.kind === 'multi') {
       result.push(item);
     }
   });
@@ -197,7 +197,7 @@ export async function StakingRewardListbatch(library, account, chainID) {
 }
 
 export async function getFarmList(library, account, chainID) {
-  console.log({library, account, chainID});
+  // console.log({library, account, chainID});
   const list = multiSymbolData || [];
   const result = [];
   list.forEach((item) => {
@@ -238,7 +238,7 @@ export async function getFarmList(library, account, chainID) {
       const balanceShare = new BigNumber(balance.toString()).div('1e18').decimalPlaces(6).toNumber();
       // 总资产
       const totalAsset = await useTokenBalance(library, item.address, token);
-      const myAsset = new BigNumber(balanceShare).times(totalAsset.toExact()).div(totalSupplyShare.toString());
+      const myAsset = new BigNumber(balanceShare).times(totalAsset.toExact()).div(totalSupplyShare.toString()).decimalPlaces(6).toNumber();
       item.data = {
         totalSupplyShare: totalSupplyShare,
         balanceShare: balanceShare,
