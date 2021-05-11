@@ -20,7 +20,7 @@
           {{ $t('earn.card.apy') }}
         </p>
         <p class="drop-num">
-          --
+          {{ listData.data && listData.data.apy }}%
         </p>
 
         <!-- <p class="tag">
@@ -33,7 +33,7 @@
           总资产
         </p>
         <p class="mt-1">
-          {{ listData && listData.data && listData.data.totalSupplyShare }} XmLAMB
+          {{ listData && listData.data && listData.data.totalAsset }} mLAMB
         </p>
       </div>
 
@@ -104,10 +104,11 @@
 
 <script>
 // import event from '@/common/js/event';
-import { getFarmList } from "../../utils/helpUtils/mineUtilFunc.js";
-import { mapState } from "vuex";
-const BigNumber = require("bignumber.js");
+import { getFarmList } from '../../utils/helpUtils/mineUtilFunc.js';
+import { mapState } from 'vuex';
+const BigNumber = require('bignumber.js');
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -115,22 +116,22 @@ export default {
     };
   },
   components: {
-    countDown: () => import("@/components/basic/countDown.vue"),
-    pledgeDialog: () => import("../dialog/mlambPledge/mlambPledge.vue"),
+    countDown: () => import('@/components/basic/countDown.vue'),
+    pledgeDialog: () => import('../dialog/mlambPledge/mlambPledge.vue'),
   },
   computed: {
-    ...mapState(["ethChainID", "ethAddress", "ethersprovider", "isMobile"]),
+    ...mapState(['ethChainID', 'ethAddress', 'ethersprovider', 'isMobile']),
     isReady() {
       return this.ethChainID && this.ethersprovider;
     },
     isConnect() {
       return this.ethChainID && this.ethersprovider && this.ethAddress;
-    }
+    },
   },
   watch: {
     isConnect() {
       this.getList();
-    }
+    },
   },
   methods: {
     openDialog() {
@@ -143,13 +144,25 @@ export default {
         const library = this.ethersprovider;
         const [result] = await getFarmList(library, account, chainID);
         this.listData = result;
-        // console.log({ result });
+        console.log({ result });
       } catch (error) {
         console.log(error);
       }
     },
+    async getReward() {
+      try {
+        const lambdata = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
+        console.log({ lambdata });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getAPY() {
+      return '0';
+    }
   },
   mounted() {
+    // this.getReward();
     if (this.isReady) {
       this.getList();
     }
@@ -219,8 +232,8 @@ export default {
       margin-right: 24px;
       .drop-num {
         margin-top: 8px;
-        font-size: 26px;
-        color: #14171c;
+        font-size: 32px;
+        color: #00d075;
         line-height: 30px;
         span {
           font-size: 16px;
@@ -252,7 +265,7 @@ export default {
         margin-top: 14px;
       }
     }
-    .create{
+    .create {
       margin-left: 50px;
     }
   }

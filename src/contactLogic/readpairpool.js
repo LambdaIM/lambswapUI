@@ -213,7 +213,7 @@ export async function readpairpoolPrice(chainID, library,pairdataList){
 
   return pairdataList;
 
-  
+
 
 }
 
@@ -635,21 +635,21 @@ export async function pairList(chainID,library){
     const TokenA = new Token(coinA.chainId, coinA.address, coinA.decimals, coinA.symbol);
     const TokenB = new Token(coinB.chainId, coinB.address, coinB.decimals, coinB.symbol);
     const pairAddress = Pair.getAddress(TokenA, TokenB);
-    console.log(TokenA, TokenB,pairAddress);
+    // console.log(TokenA, TokenB,pairAddress);
 
     const UniswapV2Pair = useIUniswapV2PairABIContractMulticall({address:pairAddress});
 
-    callList.push(UniswapV2Pair.token0()); 
-    callList.push(UniswapV2Pair.token1()); 
-    callList.push(UniswapV2Pair.getReserves()); 
+    callList.push(UniswapV2Pair.token0());
+    callList.push(UniswapV2Pair.token1());
+    callList.push(UniswapV2Pair.getReserves());
 
 
   });
-  
+
   const ethcallProvider = new Provider(library,chainID);
     await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
     const result = await ethcallProvider.all(callList);
-    console.log(result);
+    // console.log(result);
     const pairList = [];
     for (let index = 0; index < result.length; index+=3) {
       const tokrnAddressA = result[index];
@@ -668,11 +668,11 @@ export async function pairList(chainID,library){
 
       const tokens = [TokenA,TokenB];
       const [token0, token1] = tokens[0].sortsBefore(tokens[1]) ? tokens : [tokens[1], tokens[0]];
-    
+
       const pair = new Pair(new TokenAmount(token0, reserve0), new TokenAmount(token1, reserve1));
-      console.log(pair);
+      // console.log(pair);
       pairList.push(pair);
-      
+
     }
 
     return pairList;
@@ -691,7 +691,7 @@ export async function pairListEarn(chainID, library) {
   });
 
 
-  
+
   //  callList.push(TokenContract.balanceOf(account));
 
   const ethcallProvider = new Provider(library, chainID);
@@ -704,7 +704,7 @@ export async function pairListEarn(chainID, library) {
 
     const totalSupplyTokenAmount = new TokenAmount(pairInfo.liquidityToken, totalSupply.toString());
 
-    
+
 
     //  const aToketotalSupply = pairInfo.getLiquidityValue(pairInfo.tokenAmounts[0].token, totalSupplyTokenAmount, totalSupplyTokenAmount, false);
     //  const bToketotalSupply = pairInfo.getLiquidityValue(pairInfo.tokenAmounts[1].token, totalSupplyTokenAmount, totalSupplyTokenAmount, false);
@@ -713,15 +713,15 @@ export async function pairListEarn(chainID, library) {
       const balanceTokenAmount = new TokenAmount(pairInfo.liquidityToken, pledgebalance.toString());
      return pairInfo.getLiquidityValue(pairInfo.tokenAmounts[0].token, totalSupplyTokenAmount, balanceTokenAmount, false);
 
-    }; 
+    };
     const bTokenbalance =(pledgebalance)=>{
       const balanceTokenAmount = new TokenAmount(pairInfo.liquidityToken, pledgebalance.toString());
      return pairInfo.getLiquidityValue(pairInfo.tokenAmounts[1].token, totalSupplyTokenAmount, balanceTokenAmount, false);
-    }; 
+    };
 
     const route = new Route([pairInfo], pairInfo.tokenAmounts[0].token);
     //tokensymbolA, tokensymbolB
-    
+
     const price=(tokensymbolA,tokensymbolB)=>{
       let price;
       const pairprice={};
@@ -742,7 +742,7 @@ export async function pairListEarn(chainID, library) {
 
     };
 
-    
+
 
     resultList.push({
       pairInfo,
@@ -754,12 +754,12 @@ export async function pairListEarn(chainID, library) {
       price,
       // priceinvert: price.invert(),
       // pairprice
-  
+
     });
-    
+
   });
 
-  
+
   //  const  balance = listresult[1];
 
 
@@ -900,9 +900,9 @@ export function getLPName(A,B,chainID){
     return {
       pairName:'--',
       listSymbol: '--',
-    }; 
-    
+    };
+
   }
-  
+
 
 }

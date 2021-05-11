@@ -15,6 +15,8 @@ import { useStakingRewardsContractMulticall, useTokenContractMulticall, mlambBar
 
 import { calculateGasMargin } from "@/contacthelp/utils.js";
 
+import axios from 'axios';
+
 function getTokenInfo(chainID, address) {
   let result;
   _.find(tokenlist.tokens, (item) => {
@@ -122,7 +124,7 @@ export async function StakingRewardListbatch(library, account, chainID) {
   const ethcallProvider = new Provider(library, chainID);
   await ethcallProvider.init(); // Only required when `chainId` is not provided in the `Provider` constructor
   const infoList = await ethcallProvider.all(callList);
-  console.log({infoList});
+  console.log({ infoList });
 
 
   callList = [];
@@ -220,15 +222,42 @@ export async function getFarmList(library, account, chainID) {
 
     // 总质押xmlamb
     const totalSupplyShare = new BigNumber(totalSupply.toString()).div('1e18').decimalPlaces(6).toNumber();
+    const totalAsset = await useTokenBalance(library, item.address, token);
+
+    const mlambData = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
+    const mlambRewardPerYear = mlambData.data.data.PoolSupplierReward / 365;
+    console.log(mlambRewardPerYear);
+
+    const totalSupplyAPY = new BigNumber(totalSupplyShare.toString());
+    const totalAssetAPY = new BigNumber(totalAsset.toExact());
+    const big0 = new BigNumber('0');
+
+    // console.log(totalSupplyAPY.toNumber(),totalAssetAPY.toNumber());
+    let share;
+
+    if (totalSupplyAPY.isEqualTo(big0) || totalAssetAPY.isEqualTo(big0)) {
+      share = new BigNumber('1');
+    } else {
+      share = totalSupplyAPY.div(totalAssetAPY);
+    }
+
+    // console.log(share.toNumber());
+    const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerYear);
+    const allShares = totalAssetAPY.plus(share);
+    const apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100).decimalPlaces(2);
+
+
+    // console.log(apy.toNumber());
     // console.log(totalSupplyShare);
     // 未连接钱包
     if (!account) {
       item.data = {
         totalSupplyShare: totalSupplyShare,
         balanceShare: '',
-        totalAsset: '',
+        totalAsset: totalAsset.toExact(),
         myAsset: '',
-        rewardTokenAddress: token.address
+        rewardTokenAddress: token.address,
+        apy: apy
         // claimedReward:claimedReward.toSignificant(6)
       };
     } else {
@@ -237,14 +266,15 @@ export async function getFarmList(library, account, chainID) {
       // 个人账户xmlamb
       const balanceShare = new BigNumber(balance.toString()).div('1e18').decimalPlaces(6).toNumber();
       // 总资产
-      const totalAsset = await useTokenBalance(library, item.address, token);
+
       const myAsset = new BigNumber(balanceShare).times(totalAsset.toExact()).div(totalSupplyShare.toString()).decimalPlaces(6).toNumber();
       item.data = {
         totalSupplyShare: totalSupplyShare,
         balanceShare: balanceShare,
         totalAsset: totalAsset.toExact(),
         myAsset: myAsset,
-        rewardTokenAddress: token.address
+        rewardTokenAddress: token.address,
+        apy: apy
         // claimedReward:claimedReward.toSignificant(6)
       };
     }

@@ -21,7 +21,6 @@ import { pairListEarn } from '@/contactLogic/readpairpool.js';
 import { getTokenImg } from '@/contactLogic/readbalance.js';
 import Web3 from 'web3';
 import _ from 'underscore';
-import axios from 'axios';
 export default {
   data() {
     return {
@@ -45,8 +44,6 @@ export default {
         const pairListPrice = await pairListEarn(this.ethChainID, this.ethersprovider);
         console.log({ data });
         const tempLiquidity = data.filter((item) => item.kind === 'multi');
-        // const lambdata = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
-        // console.log({lambdata});
         // console.log({tempLiquidity});
         const result = [];
         const results = async () => {
@@ -74,7 +71,7 @@ export default {
       }
     },
     async getPriceData(item, pairListPrice) {
-      console.log('getPriceData');
+      // console.log('getPriceData');
       const obj = {};
       const tokensymbolA = item.symbol[0];
       const tokensymbolB = item.symbol[1];
