@@ -24,12 +24,18 @@ export default {
       t1: 'Liquidity Mining',
       t2: 'Stake LP to earn pool rewards.'
     },
+    combine: {
+      t1: 'Reward Mining',
+      t2: 'Pledge mLAMB'
+    },
     card: {
       apy: 'APY',
       totalStaked: 'Total Staked',
       totalPool: 'Total Value of Pool',
       output: 'Daily Output',
       stake: "Stake",
+      asset: 'Total Assets',
+      stakeBtn: 'stake'
     },
     dialog: {
       stakeDialog: {

@@ -24,12 +24,18 @@ export default {
       t1: '流动性挖矿',
       t2: '质押 LP，获得挖矿收益'
     },
+    combine: {
+      t1: '聚合挖矿',
+      t2: 'mLAMB质押'
+    },
     card: {
       apy: '年化收益率',
       totalStaked: '总锁仓量',
       totalPool: '矿池总价值',
       output: '日产出',
       stake: "质押",
+      asset: '总资产',
+      stakeBtn: '存入资产'
     },
     dialog: {
       stakeDialog: {

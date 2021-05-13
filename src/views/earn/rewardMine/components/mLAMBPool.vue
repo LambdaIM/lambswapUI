@@ -2,17 +2,17 @@
   <div v-if="!isMobile" class="mlambPool-wrapper mb-6">
     <div class="title-wrapper flex justify-between items-center">
       <div class="left">
-        <span class="title">mLAMB</span>
+        <span class="title">{{ $t('earn.combine.t1') }}</span>
         <!-- <span class="next">{{ $t('liquidity.mlambPool.next') }}</span> -->
       </div>
       <div class="right">
-        mLAMB质押
+        {{ $t('earn.combine.t2') }}
       </div>
     </div>
     <div class="mlambPool-content-wrapper flex justify-items-start items-center">
       <div class="mlambPool-item name">
         <img src="../../../../assets/img/mlamb48.svg" alt="mlambda">
-        <span>mLAMB bar</span>
+        <span>mLAMB</span>
       </div>
 
       <div class="mlambPool-item volume">
@@ -30,7 +30,7 @@
 
       <div class="mlambPool-item countdown">
         <p class="drop-title">
-          总资产
+          {{ $t('earn.card.asset') }}
         </p>
         <p class="mt-1">
           {{ listData && listData.data && listData.data.totalAsset }} mLAMB
@@ -39,10 +39,10 @@
 
       <div class="mlambPool-item create">
         <button v-if="ethAddress" class="createBtn" @click="openDialog">
-          存入资产
+          {{ $t('earn.card.stakeBtn') }}
         </button>
         <button v-else class="createBtn disableBtn">
-          存入资产
+          {{ $t('earn.card.stakeBtn') }}
         </button>
       </div>
     </div>
@@ -53,17 +53,17 @@
   <div v-else class="mlambPool-wrapper m-mlambPool-wrapper mb-6">
     <div class="title-wrapper flex justify-between items-center">
       <div class="left">
-        <span class="title">mLAMB</span>
+        <span class="title">{{ $t('earn.combine.t1') }}</span>
         <!-- <span class="next">{{ $t('liquidity.mlambPool.next') }}</span> -->
       </div>
       <div class="right">
-        mLAMB质押
+        {{ $t('earn.combine.t2') }}
       </div>
     </div>
     <div class="mlambPool-Mobile">
       <div class="mlambPool-item name">
         <img src="../../../../assets/img/mlamb48.svg" alt="mlambda">
-        <span>mLAMB bar</span>
+        <span>mLAMB</span>
       </div>
 
       <div class="mlambPool-item volume flex items-center justify-between">
@@ -90,10 +90,10 @@
 
       <div class="mlambPool-item create">
         <button v-if="ethAddress" class="createBtn" @click="openDialog">
-          存入资产
+          {{ $t('earn.card.stakeBtn') }}
         </button>
         <button v-else class="createBtn disableBtn">
-          存入资产
+          {{ $t('earn.card.stakeBtn') }}
         </button>
       </div>
     </div>
@@ -274,7 +274,7 @@ export default {
   font-size: 16px;
   color: #ffffff;
   line-height: 19px;
-  padding: 8px 16px;
+  padding: 8px 40px;
   background: #ff41a1;
   border-radius: 18px;
 }
