@@ -274,7 +274,7 @@ export default {
   font-size: 16px;
   color: #ffffff;
   line-height: 19px;
-  padding: 8px 40px;
+  padding: 8px 25px;
   background: #ff41a1;
   border-radius: 18px;
 }
