@@ -237,9 +237,9 @@ export async function getFarmList(library, account, chainID) {
       mlambReward = config.defaultReward;
     }
 
-    const mlambRewardPerYear = new BigNumber(mlambReward).div(365).times(totalAssetAPY.toString());
+    const mlambRewardPerDay = new BigNumber(mlambReward).div(365).times(totalAssetAPY.toString());
 
-    // console.log(mlambRewardPerYear);
+    console.log(mlambRewardPerDay);
 
     const big0 = new BigNumber('0');
     // console.log(`supplyshare: ${totalSupplyAPY.toString()}, totalAsset: ${totalAssetAPY.toString()}`);
@@ -254,11 +254,12 @@ export async function getFarmList(library, account, chainID) {
     }
 
     // console.log(share.toNumber());
-    const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerYear).toString();
+    const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerDay).toString();
     const allShares = totalAssetAPY.plus(share).toString();
     // console.log(`share: ${share.toString()}`);
     // console.log( `rewards:${rewards.toString()} , allshare: ${allShares.toString()}`);
-    let apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100).decimalPlaces(6);
+
+    let apy = share.times(rewards).div(allShares).minus(1).times(365).times(100).decimalPlaces(2);
 
     console.log(apy.toString());
     const targetNum = new BigNumber('0.000001');

@@ -68,10 +68,10 @@
 
       <div class="mlambPool-item volume flex items-center justify-between">
         <p class="drop-title">
-          APY
+          {{ $t('earn.card.apy') }}
         </p>
         <p class="drop-num">
-          100%
+          {{ listData.data && listData.data.apy }}%
         </p>
 
         <!-- <p class="tag">
@@ -81,7 +81,7 @@
 
       <div class="mlambPool-item countdown flex items-center justify-between">
         <p class="drop-title">
-          总资产
+          {{ $t('earn.card.asset') }}
         </p>
         <p class="mt-1">
           {{ listData && listData.data && listData.data.totalAsset }} XmLAMB
