@@ -43,5 +43,6 @@ export default {
       name: 'BSC Test',
       isBan: true
     },
-  }
+  },
+  defaultReward: 0.08312623156740682
 };

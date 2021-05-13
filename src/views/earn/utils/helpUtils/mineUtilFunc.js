@@ -1,9 +1,10 @@
 import multiSymbolData from "@/constants/earnList.json";
 import tokenlist from "@/constants/token.json";
+import config from "@/config/config.js";
 import { TokenAmount } from "@webfans/uniswapsdk";
 import _ from 'underscore';
 const BigNumber = require('bignumber.js');
-// BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
+BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 
 import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead, useTokenBalance, useTokentotalSupply } from "./allowances.js";
@@ -226,14 +227,22 @@ export async function getFarmList(library, account, chainID) {
     // 总质押mlamb
     const totalAsset = await useTokenBalance(library, item.address, token);
 
-    const mlambData = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
-    const mlambRewardPerYear = mlambData.data.data.PoolSupplierReward / 365;
-    console.log(mlambRewardPerYear);
-
     const totalSupplyAPY = new BigNumber(totalSupplyShare.toString());
     const totalAssetAPY = new BigNumber(totalAsset.toExact());
+    let mlambReward;
+    try {
+      const mlambData = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
+      mlambReward = mlambData.data.data.PoolSupplierReward;
+    } catch (error) {
+      mlambReward = config.defaultReward;
+    }
+
+    const mlambRewardPerYear = new BigNumber(mlambReward).div(365).times(totalAssetAPY.toString());
+
+    // console.log(mlambRewardPerYear);
+
     const big0 = new BigNumber('0');
-    console.log(`supplyshare: ${totalSupplyAPY.toString()}, totalAsset: ${totalAssetAPY.toString()}`);
+    // console.log(`supplyshare: ${totalSupplyAPY.toString()}, totalAsset: ${totalAssetAPY.toString()}`);
 
     // console.log(totalSupplyAPY.toNumber(),totalAssetAPY.toNumber());
     let share;
@@ -247,9 +256,9 @@ export async function getFarmList(library, account, chainID) {
     // console.log(share.toNumber());
     const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerYear).toString();
     const allShares = totalAssetAPY.plus(share).toString();
-    console.log(`share: ${share.toString()}`);
-    console.log( `rewards:${rewards.toString()} , allshare: ${allShares.toString()}`);
-    let apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100);
+    // console.log(`share: ${share.toString()}`);
+    // console.log( `rewards:${rewards.toString()} , allshare: ${allShares.toString()}`);
+    let apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100).decimalPlaces(6);
 
     console.log(apy.toString());
     const targetNum = new BigNumber('0.000001');
