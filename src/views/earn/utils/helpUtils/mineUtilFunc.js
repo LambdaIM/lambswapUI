@@ -3,7 +3,7 @@ import tokenlist from "@/constants/token.json";
 import { TokenAmount } from "@webfans/uniswapsdk";
 import _ from 'underscore';
 const BigNumber = require('bignumber.js');
-BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
+// BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 
 import { useStakingRewardsbalance, useStakingRewardstotalSupply, useStakingRewardsRead, useTokenBalance, useTokentotalSupply } from "./allowances.js";
@@ -220,8 +220,10 @@ export async function getFarmList(library, account, chainID) {
       return item.symbol === token.symbol && item.chainId === token.chainId;
     });
 
-    // 总质押xmlamb
+    // 总质押xmlamb(份额)
     const totalSupplyShare = new BigNumber(totalSupply.toString()).div('1e18').decimalPlaces(6).toNumber();
+
+    // 总质押mlamb
     const totalAsset = await useTokenBalance(library, item.address, token);
 
     const mlambData = await axios.get(`http://explorer.lambdastorage.com/api/proxy/pledgeInfo`);
@@ -231,6 +233,7 @@ export async function getFarmList(library, account, chainID) {
     const totalSupplyAPY = new BigNumber(totalSupplyShare.toString());
     const totalAssetAPY = new BigNumber(totalAsset.toExact());
     const big0 = new BigNumber('0');
+    console.log(`supplyshare: ${totalSupplyAPY.toString()}, totalAsset: ${totalAssetAPY.toString()}`);
 
     // console.log(totalSupplyAPY.toNumber(),totalAssetAPY.toNumber());
     let share;
@@ -242,11 +245,17 @@ export async function getFarmList(library, account, chainID) {
     }
 
     // console.log(share.toNumber());
-    const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerYear);
-    const allShares = totalAssetAPY.plus(share);
-    const apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100).decimalPlaces(2);
+    const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerYear).toString();
+    const allShares = totalAssetAPY.plus(share).toString();
+    console.log(`share: ${share.toString()}`);
+    console.log( `rewards:${rewards.toString()} , allshare: ${allShares.toString()}`);
+    let apy = (share.times(rewards).div(allShares).minus(1)).times(365).times(100);
 
-
+    console.log(apy.toString());
+    const targetNum = new BigNumber('0.000001');
+    if(apy.isLessThan(targetNum)) {
+      apy = `<0.0001`;
+    }
     // console.log(apy.toNumber());
     // console.log(totalSupplyShare);
     // 未连接钱包

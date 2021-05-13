@@ -2,14 +2,79 @@
   <div class="list-wrapper">
     <div class="list-item-wrapper">
       <template v-if="!isMobile">
-        <div v-for="(item, index) in data" :key="index" class="list-item pc-list-item">
-          <div class="name flex justify-start items-center">
-            <div class="img-wrapper">
-              <img :src="item.img2" alt="susd">
-              <img :src="item.img1" alt="susd" class="imgRight">
+        <div v-for="(item, index) in data" :key="index">
+          <div v-if="item.isHide === false" class="list-item pc-list-item">
+            <div class="name flex justify-start items-center">
+              <div class="img-wrapper">
+                <img :src="item.img2" alt="susd">
+                <img :src="item.img1" alt="susd" class="imgRight">
+              </div>
+              <div class="right">
+                <p class="coin">
+                  {{ item.name }}
+                </p>
+                <p v-if="item.kind === 'multi'" class="price">
+                  1 {{ item.symbol && item.symbol[0] }} = {{ item.price | formatNormalValue }}
+                  {{ item.symbol && item.symbol[1] }}
+                </p>
+              </div>
             </div>
-            <div class="right">
-              <p class="coin">
+
+            <div class="apy">
+              <h4>{{ $t('earn.card.apy') }}</h4>
+              <p class="percent">
+                {{
+                  item.data &&
+                    item.data.rewardRate
+                    | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
+                }}%
+              </p>
+            </div>
+
+            <div class="balance">
+              <div class="balance-item">
+                <span class="title">{{ $t('earn.card.totalStaked') }}</span>
+                <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
+              </div>
+              <div class="balance-item">
+                <span class="title">{{ $t('earn.card.totalPool') }}</span>
+                <span v-if="item.kind === 'multi'" class="value">
+                  {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
+                </span>
+                <span v-if="item.kind === 'single'" class="value">
+                  {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
+                </span>
+              </div>
+              <div class="balance-item">
+                <span class="title">{{ $t('earn.card.output') }}</span>
+                <span class="value">{{ item.daynum }} GOAT</span>
+              </div>
+            </div>
+
+            <div class="btn-item">
+              <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
+                {{ $t('earn.card.stake') }}
+              </button>
+              <Buttons v-else width="100px" height="30px" border-radius="18px" class="disableBtn">
+                {{ $t('earn.card.stake') }}
+              </Buttons>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template v-else>
+        <div v-for="(item, index) in data" :key="index + 10">
+          <div v-if="item.isHide === false" class="mobile-list-item">
+            <div class="m-img-wrapper">
+              <div class="m-img-box">
+                <img :src="item.img2" alt="susd">
+                <img :src="item.img1" alt="susd" class="imgRight">
+              </div>
+            </div>
+
+            <div class="m-price-wrapper">
+              <p class="name">
                 {{ item.name }}
               </p>
               <p v-if="item.kind === 'multi'" class="price">
@@ -17,108 +82,47 @@
                 {{ item.symbol && item.symbol[1] }}
               </p>
             </div>
-          </div>
 
-          <div class="apy">
-            <h4>{{ $t('earn.card.apy') }}</h4>
-            <p class="percent">
-              {{
-                item.data &&
-                  item.data.rewardRate
-                  | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
-              }}%
-            </p>
-          </div>
+            <div class="m-point-wrapper">
+              <div class="point-item">
+                <span class="title">{{ $t('earn.card.apy') }}</span>
+                <span class="value text-success">
+                  {{
+                    item.data &&
+                      item.data.rewardRate
+                      | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
+                  }}%
+                </span>
+              </div>
+              <div class="point-item">
+                <span class="title">{{ $t('earn.card.totalStaked') }}</span>
+                <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
+              </div>
 
-          <div class="balance">
-            <div class="balance-item">
-              <span class="title">{{ $t('earn.card.totalStaked') }}</span>
-              <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
-            </div>
-            <div class="balance-item">
-              <span class="title">{{ $t('earn.card.totalPool') }}</span>
-              <span v-if="item.kind === 'multi'" class="value">
-                {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
-              </span>
-              <span v-if="item.kind === 'single'" class="value">
-                {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
-              </span>
-            </div>
-            <div class="balance-item">
-              <span class="title">{{ $t('earn.card.output') }}</span>
-              <span class="value">{{ item.daynum }} GOAT</span>
-            </div>
-          </div>
+              <div class="point-item">
+                <span class="title">{{ $t('earn.card.totalPool') }}</span>
+                <span v-if="item.kind === 'multi'" class="value">
+                  {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
+                </span>
+                <span v-if="item.kind === 'single'" class="value">
+                  {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
+                </span>
+              </div>
 
-          <div class="btn-item">
-            <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
-              {{ $t('earn.card.stake') }}
-            </button>
-            <Buttons v-else width="100px" height="30px" border-radius="18px" class="disableBtn">
-              {{ $t('earn.card.stake') }}
-            </Buttons>
-          </div>
-        </div>
-      </template>
-
-      <template v-else>
-        <div v-for="(item, index) in data" :key="index + 10" class="mobile-list-item">
-          <div class="m-img-wrapper">
-            <div class="m-img-box">
-              <img :src="item.img2" alt="susd">
-              <img :src="item.img1" alt="susd" class="imgRight">
-            </div>
-          </div>
-
-          <div class="m-price-wrapper">
-            <p class="name">
-              {{ item.name }}
-            </p>
-            <p v-if="item.kind === 'multi'" class="price">
-              1 {{ item.symbol && item.symbol[0] }} = {{ item.price | formatNormalValue }}
-              {{ item.symbol && item.symbol[1] }}
-            </p>
-          </div>
-
-          <div class="m-point-wrapper">
-            <div class="point-item">
-              <span class="title">{{ $t('earn.card.apy') }}</span>
-              <span class="value text-success">
-                {{
-                  item.data &&
-                    item.data.rewardRate
-                    | formatReward(365, scashPrice, item.data && item.data.totalSupply, item.poolValue)
-                }}%
-              </span>
-            </div>
-            <div class="point-item">
-              <span class="title">{{ $t('earn.card.totalStaked') }}</span>
-              <span class="value">{{ (item.data && item.data.totalSupply) || 0 }} LP</span>
+              <div class="point-item">
+                <span class="title">{{ $t('earn.card.output') }}</span>
+                <span class="value">{{ item.daynum }} GOAT</span>
+              </div>
             </div>
 
-            <div class="point-item">
-              <span class="title">{{ $t('earn.card.totalPool') }}</span>
-              <span v-if="item.kind === 'multi'" class="value">
-                {{ item.poolValue || '--' }} {{ item.symbol && item.symbol[1] }}
-              </span>
-              <span v-if="item.kind === 'single'" class="value">
-                {{ item.data && (item.data.totalSupply * earnPrice) | formatNormalValue }}
-              </span>
+            <div class="m-btn-wrapper">
+              <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
+                {{ $t('earn.card.stake') }}
+              </button>
+              <button v-else class="stakeBtn disableBtn">
+                {{ $t('earn.card.stake') }}
+              </button>
             </div>
-
-            <div class="point-item">
-              <span class="title">{{ $t('earn.card.output') }}</span>
-              <span class="value">{{ item.daynum }} GOAT</span>
-            </div>
-          </div>
-
-          <div class="m-btn-wrapper">
-            <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
-              {{ $t('earn.card.stake') }}
-            </button>
-            <button v-else class="stakeBtn disableBtn">
-              {{ $t('earn.card.stake') }}
-            </button>
           </div>
         </div>
       </template>
