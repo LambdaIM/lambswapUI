@@ -51,7 +51,7 @@ import { useStakingRewardsContractSigna } from '../../utils/helpUtils/allowances
 import event from '@/common/js/event';
 const BigNumber = require('bignumber.js');
 BigNumber.config({ DECIMAL_PLACES: 6, ROUNDING_MODE: BigNumber.ROUND_DOWN });
-import {  getGasPrice } from '@/contacthelp/ethusdt.js';
+import { getGasPrice } from '@/contacthelp/ethusdt.js';
 export default {
   data() {
     return {
@@ -61,7 +61,7 @@ export default {
       coinName: '',
       extractLoading: false,
       fee: '',
-      rewardToken: ''
+      rewardToken: '',
     };
   },
   methods: {
@@ -110,14 +110,12 @@ export default {
 
         const result = await stakingRewardsContract.getReward({ gasLimit: esGas });
 
-        this.$Notice.success({
-          title: this.$t('notice.n33'),
-        });
+        event.$emit('sendSuccess');
 
         event.$emit('sendtx', [
           result,
           {
-            okinfo: `${this.$t('common.claim')} ${this.claimAmount} ${this.coinName} ${this.$t('notice.n42')}`,
+            okinfo: `${this.$t('common.claim')} ${this.claimAmount} GOAT ${this.$t('notice.n42')}`,
             failinfo: `${this.$t('common.claim')} ${this.coinName} ${this.$t('notice.n43')}`,
           },
         ]);
@@ -128,7 +126,8 @@ export default {
         });
       } finally {
         const timer = setTimeout(() => {
-          (this.openClaimDialog = false), (this.extractLoading = false);
+          this.openClaimDialog = false;
+          this.extractLoading = false;
           clearTimeout(timer);
         }, 1000);
       }
@@ -138,7 +137,7 @@ export default {
     Buttons: () => import('@/components/basic/buttons'),
   },
   computed: {
-    ...mapState(['ethersprovider', 'ethAddress', 'chainTokenPrice', 'web3','scashPrice']),
+    ...mapState(['ethersprovider', 'ethAddress', 'chainTokenPrice', 'web3', 'scashPrice']),
   },
 };
 </script>
@@ -183,9 +182,9 @@ export default {
           font-size: 40px;
           line-height: 47px;
           padding: 16px;
-          caret-color: #FF41A1;
+          caret-color: #ff41a1;
           &:focus {
-            border: 1px solid #FF41A1;
+            border: 1px solid #ff41a1;
             border-radius: 4px;
           }
         }

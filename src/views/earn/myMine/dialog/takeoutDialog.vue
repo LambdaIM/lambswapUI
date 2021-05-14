@@ -82,9 +82,7 @@ export default {
         const esGas = await stakingRewardsContract.estimateGas.exit();
         const result = await stakingRewardsContract.exit({ gasLimit: esGas });
 
-        this.$Notice.success({
-          title: this.$t('notice.n33'),
-        });
+        event.$emit('sendSuccess');
 
         event.$emit('sendtx', [
           result,
