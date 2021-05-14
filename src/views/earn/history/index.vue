@@ -120,8 +120,9 @@ export default {
       }
     },
     selectAddress(val) {
+      console.log({val});
       const [token] = tokenList.tokens.filter((item) => {
-        return item.address === val;
+        return item.address.toLowerCase() === val.toLowerCase();
       });
       return token.name;
     },
