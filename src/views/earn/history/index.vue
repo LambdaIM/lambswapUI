@@ -92,7 +92,10 @@
 import { mapState } from 'vuex';
 import { readPledgeHistory } from '@/contactLogic/history.js';
 import tokenList from '@/constants/token.json';
+import poolList from '@/constants/earnList.json';
 
+const fullToken = tokenList.tokens.concat(poolList);
+// console.log({fullToken});
 export default {
   data() {
     return {
@@ -121,7 +124,7 @@ export default {
     },
     selectAddress(val) {
       console.log({val});
-      const [token] = tokenList.tokens.filter((item) => {
+      const [token] = fullToken.filter((item) => {
         return item.address.toLowerCase() === val.toLowerCase();
       });
       return token.name;
