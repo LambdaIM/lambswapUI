@@ -1,9 +1,9 @@
 <template>
   <div class="content-wapper">
-    <div v-if="showLoading">
+    <!-- <div v-if="showLoading">
       <loading />
-    </div>
-    <div v-else-if="!ethAddress || list.length == 0" class="noData-wapper">
+    </div> -->
+    <div v-if="!ethAddress || list.length == 0" class="noData-wapper">
       <div class="flex flex-col items-center">
         <img src="../../../assets/img/noData.png" alt="noData">
         <p>No Data</p>
@@ -25,10 +25,10 @@
                 <p v-if="row.method_name === 'stake'" class="action">
                   {{ $t('earn.actions.stake') }}
                 </p>
-                <p v-if="row.method_name === 'exit'" class="action">
+                <p v-else-if="row.method_name === 'exit'" class="action">
                   {{ $t('earn.actions.exit') }}
                 </p>
-                <p v-if="row.method_name === 'getReward'" class="action">
+                <p v-else-if="row.method_name === 'getReward'" class="action">
                   {{ $t('earn.actions.getReward') }}
                 </p>
                 <p v-else class="action">
@@ -45,18 +45,18 @@
                   {{ row.show.outamountB | format1e18ValueList }} {{ row.show.tokenB }}
                 </p>
               </div>
-              <div v-if="row.method_name === 'getReward'" class="Amount">
+              <div v-else-if="row.method_name === 'getReward'" class="Amount">
                 <p class="amout">
                   {{ row.show.outamount | format1e18ValueList }} {{ row.show.tokenA }}
                 </p>
               </div>
-              <div v-if="row.method_name === 'stake'" class="Amount">
+              <div v-else-if="row.method_name === 'stake'" class="Amount">
                 <p class="amout">
                   {{ row.show.inamount | format1e18ValueList }} {{ row.show.tokenA }}
                 </p>
               </div>
 
-              <div v-if="row.method_name === 'leave'" class="Amount">
+              <div v-else-if="row.method_name === 'leave'" class="Amount">
                 <p class="amout">
                   {{ row.show.outamountA | format1e18ValueList }} {{ row.show.tokenA }}
                 </p>
@@ -65,7 +65,7 @@
                 </p>
               </div>
 
-              <div v-if="row.method_name === 'enter'" class="Amount">
+              <div v-else-if="row.method_name === 'enter'" class="Amount">
                 <p class="amout">
                   {{ row.show.outamountA | format1e18ValueList }} {{ row.show.tokenA }}
                 </p>
