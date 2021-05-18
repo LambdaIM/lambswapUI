@@ -239,7 +239,7 @@ export async function getFarmList(library, account, chainID) {
 
         const mlambRewardPerDay = new BigNumber(mlambReward).div(365).times(totalAssetAPY.toString());
 
-        console.log(mlambRewardPerDay);
+        console.log(mlambRewardPerDay.toString());
 
         const big0 = new BigNumber('0');
         // console.log(`supplyshare: ${totalSupplyAPY.toString()}, totalAsset: ${totalAssetAPY.toString()}`);
@@ -255,25 +255,28 @@ export async function getFarmList(library, account, chainID) {
 
         // console.log(share.toNumber());
         const rewards = totalAssetAPY.plus(1).plus(mlambRewardPerDay).toString();
-        const allShares = totalAssetAPY.plus(share).toString();
+        const allShares = totalSupplyAPY.plus(share).toString();
         // console.log(`share: ${share.toString()}`);
         // console.log( `rewards:${rewards.toString()} , allshare: ${allShares.toString()}`);
 
         let apy = share.times(rewards).div(allShares).minus(1).times(365).times(100).decimalPlaces(2);
 
-        console.log(apy.toString());
+        console.log('totalSupplyAPY', totalSupplyAPY.toString());
+        console.log('totalAssetAPY', totalAssetAPY.toString());
+        console.log('share', share.toString());
+        console.log('apy', apy.toString());
         const targetNum = new BigNumber('0.000001');
         if (apy.isLessThan(targetNum)) {
             apy = `<0.0001`;
         }
         // console.log(apy.toNumber());
-        // console.log(totalSupplyShare);
+        console.log(totalSupplyShare);
         // 未连接钱包
         if (!account) {
             item.data = {
                 totalSupplyShare: totalSupplyShare,
                 balanceShare: '',
-                totalAsset: totalAsset.toExact(),
+                totalAsset: totalAssetAPY.decimalPlaces(2),
                 myAsset: '',
                 rewardTokenAddress: token.address,
                 apy: apy
@@ -290,7 +293,7 @@ export async function getFarmList(library, account, chainID) {
             item.data = {
                 totalSupplyShare: totalSupplyShare,
                 balanceShare: balanceShare,
-                totalAsset: totalAsset.toExact(),
+                totalAsset: totalAssetAPY.decimalPlaces(2),
                 myAsset: myAsset,
                 rewardTokenAddress: token.address,
                 apy: apy
