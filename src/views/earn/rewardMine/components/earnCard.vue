@@ -52,9 +52,14 @@
             </div>
 
             <div class="btn-item">
-              <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
-                {{ $t('earn.card.stake') }}
-              </button>
+              <template v-if="ethAddress">
+                <button v-if="item.name === 'mLAMB/LAMB LP'" class="stakeBtn disableBtn">
+                  {{ $t('earn.card.expired') }}
+                </button>
+                <button v-else class="stakeBtn" @click="openStake(item)">
+                  {{ $t('earn.card.stake') }}
+                </button>
+              </template>
               <Buttons v-else width="100px" height="30px" border-radius="18px" class="disableBtn">
                 {{ $t('earn.card.stake') }}
               </Buttons>
@@ -116,9 +121,14 @@
             </div>
 
             <div class="m-btn-wrapper">
-              <button v-if="ethAddress" class="stakeBtn" @click="openStake(item)">
-                {{ $t('earn.card.stake') }}
-              </button>
+              <template v-if="ethAddress">
+                <button v-if="item.name === 'mLAMB/LAMB LP'" class="stakeBtn disableBtn">
+                  {{ $t('earn.card.expired') }}
+                </button>
+                <button v-else class="stakeBtn" @click="openStake(item)">
+                  {{ $t('earn.card.stake') }}
+                </button>
+              </template>
               <button v-else class="stakeBtn disableBtn">
                 {{ $t('earn.card.stake') }}
               </button>
