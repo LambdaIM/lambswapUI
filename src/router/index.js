@@ -6,7 +6,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    redirect: '/earn'
+    redirect: '/exchange'
     // component: Home,
   },
   {
@@ -25,12 +25,12 @@ const routes = [
     component: () => import("@/views/swap/Menu.vue"),
     children: [
       {
-        path: "",
+        path: "pool",
         name: "pool",
         component: () => import("@/views/swap/liquidityPool.vue"),
       },
       {
-        path: "swap",
+        path: "",
         name: "swap",
         component: () => import("@/views/swap/swap.vue"),
       },
@@ -50,6 +50,11 @@ const routes = [
         path: "",
         name: "rewardMine",
         component: () => import("@/views/earn/rewardMine/index.vue"),
+      },
+      {
+        path: "pool",
+        name: "pool",
+        component: () => import("@/views/swap/liquidityPool.vue"),
       },
       {
         path: "myMine",

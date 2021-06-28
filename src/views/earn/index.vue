@@ -51,6 +51,10 @@ export default {
           this.$router.push(`/earn/myMine`);
           break;
 
+        case 'pool':
+          this.$router.push(`/earn/pool`);
+          break;
+
         case 'earn-history':
           this.$router.push(`/earn/history`);
           break;
@@ -67,6 +71,10 @@ export default {
         {
           id: 'rewardMine',
           name: this.$t('tabMenu.earn'),
+        },
+        {
+          id: 'pool',
+          name: this.$t('swap.subMenu2'),
         },
         {
           id: 'myMine',

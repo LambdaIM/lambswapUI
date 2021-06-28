@@ -1,7 +1,7 @@
 <template>
   <div class="connect-wrapper">
     <div class="content-wrapper">
-      <div class="menu-wrapper flex justify-between items-center">
+      <!-- <div class="menu-wrapper flex justify-between items-center">
         <div class="switch-wrapper flex justify-start items-center">
           <button
             class="menu-item"
@@ -33,7 +33,7 @@
             {{ $t('check.notice') }}
           </a>
         </div>
-      </div>
+      </div> -->
       <router-view />
     </div>
   </div>
