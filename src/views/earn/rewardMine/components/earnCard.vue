@@ -53,7 +53,7 @@
 
             <div class="btn-item">
               <template v-if="ethAddress">
-                <button v-if="item.name === 'mLAMB/LAMB LP'" class="stakeBtn disableBtn">
+                <button v-if="item.name === 'mLAMB/LAMB LP'" class="whitespace-nowrap stakeBtn disableBtn">
                   {{ $t('earn.card.expired') }}
                 </button>
                 <button v-else class="stakeBtn" @click="openStake(item)">

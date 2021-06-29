@@ -23,28 +23,31 @@
           >{{ $t('header.nav.Docs') }}</a>
           <a
             href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a"
-            class="menu-item"
+            class="menu-item last"
             target="_blank"
           >{{ $t('header.nav.chart') }}</a>
         </div>
       </div>
 
-      <Dropdown v-if="ethChainID" trigger="click" class="AddLambwallet-wrapper" @on-click="addtoken">
-        <div class="AddLambwallet flex items-center">
-          <div class="dot" />
-          <span>{{ $t('header.AddLambwallet') }}</span>
-          <img class="arrow" src="../../assets/img/down.svg" alt="down">
-        </div>
-        <DropdownMenu slot="list" class="list-wrapper">
-          <template v-for="(item, index) in tokenList">
-            <DropdownItem :key="index" class="list-item" :name="index">
-              <img :src="item.imgSrc">
-              <span>{{ item.name }}</span>
-            </DropdownItem>
-          </template>
-        </DropdownMenu>
-      </Dropdown>
+
+
       <div class="connect-wrapper flex justify-between items-center">
+        <Dropdown v-if="ethChainID" trigger="click" class="AddLambwallet-wrapper" @on-click="addtoken">
+          <div class="AddLambwallet flex items-center">
+            <div class="dot" />
+            <span>{{ $t('header.AddLambwallet') }}</span>
+            <img class="arrow" src="../../assets/img/down.svg" alt="down">
+          </div>
+          <DropdownMenu slot="list" class="list-wrapper">
+            <template v-for="(item, index) in tokenList">
+              <DropdownItem :key="index" class="list-item" :name="index">
+                <img :src="item.imgSrc">
+                <span>{{ item.name }}</span>
+              </DropdownItem>
+            </template>
+          </DropdownMenu>
+        </Dropdown>
+
         <Dropdown trigger="click" class="network-wrapper" @on-click="choseNetWork">
           <div class="netWork flex justify-between items-center" :class="getBg">
             <div class="dot" :class="statusVal" />
@@ -494,7 +497,7 @@ export default {
         .menu-item {
           display: inline-block;
           text-align: center;
-          padding: 0px 16px;
+          padding: 0px 8px;
           height: 28px;
           font-size: 16px;
           font-weight: 500;
@@ -511,6 +514,9 @@ export default {
           color: #ffffff;
           line-height: 28px;
         }
+        .last{
+          margin-right: 0px !important;
+        }
       }
     }
     .AddLambwallet-wrapper {
@@ -521,9 +527,11 @@ export default {
           font-weight: 500;
           color: #14171c;
           line-height: 16px;
+          white-space: nowrap;
         }
         img {
-          margin: 0px 8px;
+          margin-left: 4px;
+          margin-right: 16px;
         }
       }
     }

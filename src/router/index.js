@@ -2,114 +2,120 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    redirect: '/exchange'
-    // component: Home,
-  },
-  {
-    path: "/playground",
-    name: "playground",
-    component: () => import("@/views/playground/index.vue"),
-  },
-  {
-    path: "/addpair",
-    name: "addpair",
-    component: () => import("@/views/playground/addpair.vue"),
-  },
-  {
-    path: "/exchange",
-    // name: "exchange",
-    component: () => import("@/views/swap/Menu.vue"),
-    children: [
-      {
-        path: "pool",
-        name: "pool",
-        component: () => import("@/views/swap/liquidityPool.vue"),
-      },
-      {
-        path: "",
-        name: "swap",
-        component: () => import("@/views/swap/swap.vue"),
-      },
-      {
-        path: "history",
-        name: "history",
-        component: () => import("@/views/swap/history.vue")
-      },
-    ]
-  },
-  {
-    path: "/earn",
-    // name: "earn",
-    component: () => import("@/views/earn/index.vue"),
-    children: [
-      {
-        path: "",
-        name: "rewardMine",
-        component: () => import("@/views/earn/rewardMine/index.vue"),
-      },
-      {
-        path: "pool",
-        name: "pool",
-        component: () => import("@/views/swap/liquidityPool.vue"),
-      },
-      {
-        path: "myMine",
-        name: "myMine",
-        component: () => import("@/views/earn/myMine/index.vue"),
-      },
-      {
-        path: "history",
-        name: "earn-history",
-        component: () => import("@/views/earn/history/index.vue")
-      },
-    ]
-  },
+const routes = [{
+        path: "/",
+        name: "Home",
+        redirect: '/exchange'
+            // component: Home,
+    },
+    {
+        path: "/playground",
+        name: "playground",
+        component: () =>
+            import ("@/views/playground/index.vue"),
+    },
+    {
+        path: "/addpair",
+        name: "addpair",
+        component: () =>
+            import ("@/views/playground/addpair.vue"),
+    },
+    {
+        path: "/exchange",
+        // name: "exchange",
+        component: () =>
+            import ("@/views/swap/Menu.vue"),
+        children: [{
+                path: "pool",
+                name: "pool",
+                component: () =>
+                    import ("@/views/swap/liquidityPool.vue"),
+            },
+            {
+                path: "",
+                name: "swap",
+                component: () =>
+                    import ("@/views/swap/swap.vue"),
+            },
+            // {
+            //   path: "history",
+            //   name: "history",
+            //   component: () => import("@/views/swap/history.vue")
+            // },
+        ]
+    },
+    {
+        path: "/earn",
+        // name: "earn",
+        component: () =>
+            import ("@/views/earn/index.vue"),
+        children: [{
+                path: "",
+                name: "rewardMine",
+                component: () =>
+                    import ("@/views/earn/rewardMine/index.vue"),
+            },
+            {
+                path: "pool",
+                name: "pool",
+                component: () =>
+                    import ("@/views/swap/liquidityPool.vue"),
+            },
+            {
+                path: "myMine",
+                name: "myMine",
+                component: () =>
+                    import ("@/views/earn/myMine/index.vue"),
+            },
+            // {
+            //   path: "history",
+            //   name: "earn-history",
+            //   component: () => import("@/views/earn/history/index.vue")
+            // },
+        ]
+    },
 
-  // {
-  //   path: "/buildr",
-  //   // name: "buildr",
-  //   component: () => import("@/views/buildr/index.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       name: "balance",
-  //       component: () => import("@/views/buildr/balance/index.vue"),
-  //     },
-  //     {
-  //       path: "balance",
-  //       name: "balance",
-  //       component: () => import("@/views/buildr/balance/index.vue"),
-  //     },
-  //     {
-  //       path: "create",
-  //       name: "create",
-  //       component: () => import("@/views/buildr/create/index.vue"),
-  //     },
-  //     {
-  //       path: "history",
-  //       name: "history",
-  //       component: () => import("@/views/buildr/history/index.vue")
-  //     },
-  //     {
-  //       path: "guide",
-  //       name: "guide",
-  //       component: () => import("@/views/buildr/guide/guide.vue")
-  //     },
-  //   ]
-  // },
-  // {
-  //   path: "/buildrtest",
-  //   name: "buildrtest",
-  //   component: () => import("@/views/playground/buildr.vue"),
-  // }
+    // {
+    //   path: "/buildr",
+    //   // name: "buildr",
+    //   component: () => import("@/views/buildr/index.vue"),
+    //   children: [
+    //     {
+    //       path: "",
+    //       name: "balance",
+    //       component: () => import("@/views/buildr/balance/index.vue"),
+    //     },
+    //     {
+    //       path: "balance",
+    //       name: "balance",
+    //       component: () => import("@/views/buildr/balance/index.vue"),
+    //     },
+    //     {
+    //       path: "create",
+    //       name: "create",
+    //       component: () => import("@/views/buildr/create/index.vue"),
+    //     },
+    //     {
+    //       path: "history",
+    //       name: "history",
+    //       component: () => import("@/views/buildr/history/index.vue")
+    //     },
+    //     {
+    //       path: "guide",
+    //       name: "guide",
+    //       component: () => import("@/views/buildr/guide/guide.vue")
+    //     },
+    //   ]
+    // },
+    // {
+    //   path: "/buildrtest",
+    //   name: "buildrtest",
+    //   component: () => import("@/views/playground/buildr.vue"),
+    // }
 ];
 
 const router = new VueRouter({
-  routes,
+    routes,
 });
 
 export default router;

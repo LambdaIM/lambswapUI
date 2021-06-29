@@ -55,9 +55,9 @@ export default {
           this.$router.push(`/earn/pool`);
           break;
 
-        case 'earn-history':
-          this.$router.push(`/earn/history`);
-          break;
+        // case 'earn-history':
+        //   this.$router.push(`/earn/history`);
+        //   break;
 
         default:
           this.$router.push(`/earn`);
@@ -80,10 +80,10 @@ export default {
           id: 'myMine',
           name: this.$t('tabMenu.myPage'),
         },
-        {
-          id: 'earn-history',
-          name: this.$t('tabMenu.history'),
-        },
+        // {
+        //   id: 'earn-history',
+        //   name: this.$t('tabMenu.history'),
+        // },
       ];
       return list;
     },
