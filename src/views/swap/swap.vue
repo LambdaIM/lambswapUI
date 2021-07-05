@@ -396,7 +396,13 @@ export default {
       this.pairlistloading = false;
 
       // console.log({ data });
-      this.pairlist = data || [];
+      this.pairlist = _.filter(data,(item)=>{
+        if(item.isHide!=true) {
+          return item;
+        }
+
+      })  || [];
+      
       // const _this = this;
       this.pairlist.forEach((element) => {
         // console.log(element);

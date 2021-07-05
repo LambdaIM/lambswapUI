@@ -21,11 +21,12 @@
     {
         "chainId": 128,
         "isfirst":"true",
+        "isHide": true,
         "pair":["HGT","LAMB"]
     },
     {
         "chainId": 128,
-        
+        "isHide": true,
         "pair":["HGT","GOAT"]
     },
     {
