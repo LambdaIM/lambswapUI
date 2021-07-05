@@ -118,7 +118,8 @@ export async function readpairpool(chainID, library) {
       pairName: `${target.pair[0]}/${target.pair[1]}`,
       listSymbol: target.isfirst=='true'?target.pair[0]:target.pair[1],
       pairSymbols: [element.tokenAmounts[0].token.symbol, element.tokenAmounts[1].token.symbol],
-      configSymbols: [target.pair[0], target.pair[1]]
+      configSymbols: [target.pair[0], target.pair[1]],
+      isHide:target.isHide
 
     });
 
