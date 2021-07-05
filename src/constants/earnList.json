@@ -6,6 +6,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "300",
     "symbol": [
       "mLAMB",
@@ -19,6 +20,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "333",
     "symbol": [
       "GOAT",
@@ -32,6 +34,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": true,
+    "Expired":true,
     "daynum": "50",
     "symbol": [
       "HGT",
@@ -45,6 +48,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "138",
     "symbol": [
       "ETH",
@@ -58,6 +62,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "111",
     "symbol": [
       "FIL",
@@ -71,6 +76,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "167",
     "symbol": [
       "USDT",
