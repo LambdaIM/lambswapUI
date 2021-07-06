@@ -1,4 +1,17 @@
-[
+[{
+  "name": "mLAMB/LAMB LP new",
+  "address": "0x66F15796e3F038b3F3F9805eeeCbe1793F7eb10a",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "isHide": false,
+  "Expired":false,
+  "daynum": "250",
+  "symbol": [
+    "mLAMB",
+    "LAMB"
+  ]
+},
   {
     "name": "mLAMB/LAMB LP",
     "address": "0x972329A641af049f775c256A0E7e48BE142Fa513",
@@ -6,6 +19,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "300",
     "symbol": [
       "mLAMB",
@@ -19,6 +33,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "333",
     "symbol": [
       "GOAT",
@@ -32,6 +47,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": true,
+    "Expired":true,
     "daynum": "50",
     "symbol": [
       "HGT",
@@ -45,6 +61,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "138",
     "symbol": [
       "ETH",
@@ -58,6 +75,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "111",
     "symbol": [
       "FIL",
@@ -71,6 +89,7 @@
     "chainId": 128,
     "kind": "multi",
     "isHide": false,
+    "Expired":true,
     "daynum": "167",
     "symbol": [
       "USDT",
