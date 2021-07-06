@@ -1,4 +1,17 @@
-[
+[{
+  "name": "mLAMB/LAMB LP new",
+  "address": "0x66F15796e3F038b3F3F9805eeeCbe1793F7eb10a",
+  "decimals": 18,
+  "chainId": 128,
+  "kind": "multi",
+  "isHide": false,
+  "Expired":false,
+  "daynum": "250",
+  "symbol": [
+    "mLAMB",
+    "LAMB"
+  ]
+},
   {
     "name": "mLAMB/LAMB LP",
     "address": "0x972329A641af049f775c256A0E7e48BE142Fa513",

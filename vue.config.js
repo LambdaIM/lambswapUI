@@ -3,7 +3,7 @@ if(process.env.NODE_ENV == 'production'){
   historylambswap = 'history.lambswap.fi' ;
   // historylambswap = '59.110.68.178:8080' ;
 }else{
-  historylambswap = '59.110.68.178:8080' ;
+  historylambswap = 'history.lambswap.fi' ;
   // historylambswap = 'history.lambswap.fi' ;
 }
 process.env.VUE_APP_historylambswap= historylambswap;
