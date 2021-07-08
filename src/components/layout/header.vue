@@ -21,11 +21,6 @@
             class="menu-item"
             target="_blank"
           >{{ $t('header.nav.Docs') }}</a>
-          <a
-            href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a"
-            class="menu-item last"
-            target="_blank"
-          >{{ $t('header.nav.chart') }}</a>
         </div>
       </div>
 

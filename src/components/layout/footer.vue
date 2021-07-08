@@ -83,14 +83,6 @@
         <!-- <a href="#">{{ $t('header.nav.Docs') }}</a> -->
         <!-- <p>教程</p> -->
       </div>
-      <div :class="isActive=='quotes'? 'menu-item activeMenu':'menu-item'" @click="activeMenu('quotes')">
-        <img src="../../assets/img/quotes-active.svg" alt="quotes">
-        <img src="../../assets/img/quotes.svg" alt="quotes" class="acitveImg">
-        <!-- <a href="https://info.lambswap.fi/pair/0x3ef407f05ca26a641e3a3d40b4ca0e7622676e1a">{{ $t('header.nav.chart') }}</a> -->
-        <!-- <a href="#">{{ $t('header.nav.chart') }}</a> -->
-        <p>{{ $t('header.nav.chart') }}</p>
-        <!-- <p>行情</p> -->
-      </div>
     </footer>
   </div>
 </template>
