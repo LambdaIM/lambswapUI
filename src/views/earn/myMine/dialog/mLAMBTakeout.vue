@@ -14,7 +14,13 @@
             </div>
           </div>
           <div class="remove-wrapper flex">
-            <input v-model.number="stakeVal" type="number" class="amount-input" @input="handleInput">
+            <input
+              v-model.number="stakeVal"
+              type="number"
+              class="amount-input"
+              pattern="[0-9]*.?[0-9]{0,6}"
+              @input="handleInput"
+            >
           </div>
         </div>
         <div class="price-wrapper">
@@ -61,11 +67,9 @@ export default {
     // 限制Input输入小数点的长度
     handleInput(e) {
       const stringValue = e.target.value.toString();
-      const regex = /^\d*(\.\d{1,6})?$/;
-      if (!stringValue.match(regex) && this.stakeVal !== '') {
-        this.stakeVal = this.previousData;
-      }
-      this.previousData = this.stakeVal;
+      console.log(stringValue);
+      this.stakeVal = stringValue.replace(/\D*(\d*)(\.?)(\d{0,6})\d*/, '$1$2$3');
+      // console.log(this.stakeVal);
     },
     open(data) {
       this.data = {};
@@ -150,7 +154,7 @@ export default {
     Buttons: () => import('@/components/basic/buttons'),
   },
   computed: {
-    ...mapState(['ethersprovider', 'ethAddress','ethChainID']),
+    ...mapState(['ethersprovider', 'ethAddress', 'ethChainID']),
   },
 };
 </script>

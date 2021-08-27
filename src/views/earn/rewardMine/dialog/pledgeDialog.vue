@@ -18,6 +18,7 @@
               v-model.number="pledgeAmount"
               type="number"
               class="amount-input"
+              pattern="[0-9]*.?[0-9]{0,6}"
               @keyup="checkApprove"
               @input="handleInput"
             >

@@ -100,11 +100,7 @@ export default {
         // 限制Input输入小数点的长度
         handleInput(e) {
             const stringValue = e.target.value.toString();
-            const regex = /^\d*(\.\d{1,6})?$/;
-            if (!stringValue.match(regex) && this.pledgeAmount !== '') {
-                this.pledgeAmount = this.previousData;
-            }
-            this.previousData = this.pledgeAmount;
+            this.pledgeAmount = stringValue.replace(/\D*(\d*)(\.?)(\d{0,6})\d*/, '$1$2$3');
         },
 
         // 检查授权

@@ -14,7 +14,14 @@
             </div>
           </div>
           <div class="pledge-wrapper flex">
-            <input v-model.number="pledgeAmount" type="number" class="amount-input" @keyup="checkApprove" @input="handleInput">
+            <input
+              v-model.number="pledgeAmount"
+              type="number"
+              pattern="[0-9]*.?[0-9]{0,6}"
+              class="amount-input"
+              @keyup="checkApprove"
+              @input="handleInput"
+            >
           </div>
 
           <div class="percentage">
