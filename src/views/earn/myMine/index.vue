@@ -79,7 +79,7 @@
                 {{ $t('myPage.table.unstake') }}
               </button>
             </template>
-            <button v-else class="m-stake-btn" @click="openUnstakeMLAMB(row)">
+            <button v-else class="m-stake-btn" @click="openUnstakeMLAMB(item)">
               {{ $t('myPage.table.unstake') }}
             </button>
           </div>
@@ -162,6 +162,7 @@ export default {
       this.$refs.take.open(data);
     },
     openUnstakeMLAMB(data) {
+      console.log(data);
       this.$refs.extractMLAMB.open(data);
     },
   },
