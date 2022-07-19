@@ -1,7 +1,7 @@
 export default {
   defaultChainID: 128,
   walletconnectRPC:{
-    128: "https://http-mainnet-node.huobichain.com",
+    128: "https://hecoapi.terminet.io/rpc",
     256:'https://http-testnet.hecochain.com',
     4:"https://rinkeby.infura.io/v3/0dd2833fd0b9495885ebc1e44323fb82",
     1:"https://rinkeby.infura.io/v3/0dd2833fd0b9495885ebc1e44323fb82"
