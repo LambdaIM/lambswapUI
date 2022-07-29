@@ -11,6 +11,11 @@
     {
         "chainId": 128,
         "isfirst":"true",
+        "pair":["TBB","LAMB"]
+    },
+    {
+        "chainId": 128,
+        "isfirst":"true",
         "pair":["GOAT","LAMB"]
     },
     {
