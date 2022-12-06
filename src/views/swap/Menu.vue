@@ -1,6 +1,12 @@
 <template>
   <div class="connect-wrapper">
     <div class="content-wrapper">
+      <h2 style="text-align: center;font-size: 18px;">
+        {{ $t('swap.bigtip.t1') }}
+      </h2>
+      <div style="font-size: 14px;">
+        {{ $t('swap.bigtip.t2') }}
+      </div>
       <!-- <div class="menu-wrapper flex justify-between items-center">
         <div class="switch-wrapper flex justify-start items-center">
           <button

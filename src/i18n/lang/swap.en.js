@@ -1,5 +1,9 @@
 export default {
   swap: {
+    bigtip:{
+      t1:"This system will be completely shut down after January 5, 2023",
+      t2:"Lambda’s old network has basically completed assets migration. The network is no longer safe enough to protect the security of assets. Please migrate the remaining assets to the new network as soon as possible. All front-end applications of the old network will be deactivated after January 5, 2023. If you have any question, please contact info@lambdastorage.com."
+     },
     subMenu1: "Exchange",
     subMenu2: "Liquidity Pool",
     subMenu3: "History",
